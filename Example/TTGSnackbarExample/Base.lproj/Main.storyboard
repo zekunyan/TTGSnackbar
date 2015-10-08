@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TTGSnackbarExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TTGSnackbar Example" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBW-Zw-kpc">
+                                <rect key="frame" x="8" y="28" width="304" height="40"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="q3q-ER-KUd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TTGSnackbar !" borderStyle="roundedRect" placeholder="Input message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nw8-uo-Ei8">
+                                <rect key="frame" x="96" y="101" width="216" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="oP6-hf-cag"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLn-te-FrQ">
+                                <rect key="frame" x="8" y="216" width="304" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Show"/>
+                                <connections>
+                                    <action selector="show:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Amr-jR-YLf"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qmo-pb-1Vr">
+                                <rect key="frame" x="96" y="139" width="216" height="29"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="FL2-7Q-li9"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Short"/>
+                                    <segment title="Mid"/>
+                                    <segment title="Long"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rL7-Tw-8qy">
+                                <rect key="frame" x="8" y="105" width="80" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="4tB-F0-itg"/>
+                                    <constraint firstAttribute="height" constant="21" id="9Zv-5Z-s5b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Action!" borderStyle="roundedRect" placeholder="Input message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3zb-N3-T0U">
+                                <rect key="frame" x="96" y="175" width="216" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="xwb-Vu-9Rf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWv-fU-xTM">
+                                <rect key="frame" x="8" y="142" width="80" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="bcW-3g-HBl"/>
+                                    <constraint firstAttribute="height" constant="21" id="mDy-91-kdV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0P-ip-8Ax">
+                                <rect key="frame" x="8" y="254" width="304" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Show with action"/>
+                                <connections>
+                                    <action selector="showWithAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RAb-TN-WeP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dc8-QX-iBM">
+                                <rect key="frame" x="8" y="179" width="80" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="5qc-68-B4s"/>
+                                    <constraint firstAttribute="width" constant="80" id="hli-X3-KTi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rL7-Tw-8qy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="27X-Tk-znM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JLn-te-FrQ" secondAttribute="trailing" constant="-8" id="7aO-ee-qjy"/>
+                            <constraint firstItem="3zb-N3-T0U" firstAttribute="leading" secondItem="Dc8-QX-iBM" secondAttribute="trailing" constant="8" id="BH3-uX-Nmj"/>
+                            <constraint firstItem="xBW-Zw-kpc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="ELc-se-ezC"/>
+                            <constraint firstItem="JLn-te-FrQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="FkK-9n-IJh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="T0P-ip-8Ax" secondAttribute="trailing" constant="-8" id="GPb-mS-hCu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xBW-Zw-kpc" secondAttribute="trailing" constant="-8" id="Gm2-fn-bVi"/>
+                            <constraint firstItem="PWv-fU-xTM" firstAttribute="top" secondItem="rL7-Tw-8qy" secondAttribute="bottom" constant="16" id="J1b-8g-Nee"/>
+                            <constraint firstItem="Dc8-QX-iBM" firstAttribute="top" secondItem="PWv-fU-xTM" secondAttribute="bottom" constant="16" id="MNt-H2-OWy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Qmo-pb-1Vr" secondAttribute="trailing" constant="-8" id="MPf-8D-fzh"/>
+                            <constraint firstItem="Dc8-QX-iBM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="N4f-ba-9FP"/>
+                            <constraint firstItem="JLn-te-FrQ" firstAttribute="top" secondItem="3zb-N3-T0U" secondAttribute="bottom" constant="11" id="SFi-C0-2qJ"/>
+                            <constraint firstItem="Qmo-pb-1Vr" firstAttribute="top" secondItem="Nw8-uo-Ei8" secondAttribute="bottom" constant="8" id="Sef-H1-BCw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Nw8-uo-Ei8" secondAttribute="trailing" constant="-8" id="UHQ-fk-Qvs"/>
+                            <constraint firstItem="rL7-Tw-8qy" firstAttribute="top" secondItem="xBW-Zw-kpc" secondAttribute="bottom" constant="37" id="XxV-O9-qVc"/>
+                            <constraint firstItem="Nw8-uo-Ei8" firstAttribute="leading" secondItem="rL7-Tw-8qy" secondAttribute="trailing" constant="8" id="gXl-mi-j15"/>
+                            <constraint firstItem="Qmo-pb-1Vr" firstAttribute="leading" secondItem="PWv-fU-xTM" secondAttribute="trailing" constant="8" id="hrn-nE-qvD"/>
+                            <constraint firstItem="3zb-N3-T0U" firstAttribute="top" secondItem="Qmo-pb-1Vr" secondAttribute="bottom" constant="8" id="lJN-Oc-jyq"/>
+                            <constraint firstItem="xBW-Zw-kpc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="pHh-hk-Kir"/>
+                            <constraint firstItem="T0P-ip-8Ax" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="rhS-vO-HKM"/>
+                            <constraint firstItem="PWv-fU-xTM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="s87-gK-d0u"/>
+                            <constraint firstItem="Nw8-uo-Ei8" firstAttribute="top" secondItem="xBW-Zw-kpc" secondAttribute="bottom" constant="33" id="vJ4-yD-tsG"/>
+                            <constraint firstItem="T0P-ip-8Ax" firstAttribute="top" secondItem="JLn-te-FrQ" secondAttribute="bottom" constant="8" id="w64-40-Njd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3zb-N3-T0U" secondAttribute="trailing" constant="-8" id="yWm-wE-ZYh"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="actionTextField" destination="3zb-N3-T0U" id="dCX-Bg-vkr"/>
+                        <outlet property="durationSegmented" destination="Qmo-pb-1Vr" id="dsi-f1-zjK"/>
+                        <outlet property="messageTextField" destination="Nw8-uo-Ei8" id="Dvw-di-UA7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

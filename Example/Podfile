@@ -1,0 +1,6 @@
+platform :ios, '8.0'
+use_frameworks!
+
+target 'TTGSnackbarExample' do
+    pod "TTGSnackbar", :path => "../"
+end
