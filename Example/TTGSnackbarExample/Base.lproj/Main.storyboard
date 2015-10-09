@@ -37,6 +37,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLn-te-FrQ">
+                                <rect key="frame" x="8" y="261" width="304" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3uE-41-dro"/>
+                                </constraints>
+                                <state key="normal" title="Show"/>
+                                <connections>
+                                    <action selector="show:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Amr-jR-YLf"/>
+                                </connections>
+                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qmo-pb-1Vr">
                                 <rect key="frame" x="96" y="139" width="216" height="29"/>
                                 <animations/>
@@ -80,6 +91,17 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0P-ip-8Ax">
+                                <rect key="frame" x="8" y="299" width="304" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bfd-62-G4r"/>
+                                </constraints>
+                                <state key="normal" title="Show with action"/>
+                                <connections>
+                                    <action selector="showWithAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RAb-TN-WeP"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dc8-QX-iBM">
                                 <rect key="frame" x="8" y="179" width="80" height="21"/>
                                 <animations/>
@@ -112,26 +134,15 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLn-te-FrQ">
-                                <rect key="frame" x="8" y="261" width="304" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27G-2R-7Jg">
+                                <rect key="frame" x="8" y="337" width="304" height="30"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="3uE-41-dro"/>
+                                    <constraint firstAttribute="height" constant="30" id="a4u-eI-CYf"/>
                                 </constraints>
-                                <state key="normal" title="Show"/>
+                                <state key="normal" title="Show with action and dismiss manually"/>
                                 <connections>
-                                    <action selector="show:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Amr-jR-YLf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0P-ip-8Ax">
-                                <rect key="frame" x="8" y="299" width="304" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="bfd-62-G4r"/>
-                                </constraints>
-                                <state key="normal" title="Show with action"/>
-                                <connections>
-                                    <action selector="showWithAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RAb-TN-WeP"/>
+                                    <action selector="showWithActionAndDismissManually:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MSZ-5w-pNQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -149,6 +160,7 @@
                             <constraint firstItem="Dc8-QX-iBM" firstAttribute="top" secondItem="PWv-fU-xTM" secondAttribute="bottom" constant="16" id="MNt-H2-OWy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Qmo-pb-1Vr" secondAttribute="trailing" constant="-8" id="MPf-8D-fzh"/>
                             <constraint firstItem="Dc8-QX-iBM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="N4f-ba-9FP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="27G-2R-7Jg" secondAttribute="trailing" constant="-8" id="PcZ-Af-8eP"/>
                             <constraint firstItem="2rD-KP-VmZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="Pqr-aq-eZ4"/>
                             <constraint firstItem="Qmo-pb-1Vr" firstAttribute="top" secondItem="Nw8-uo-Ei8" secondAttribute="bottom" constant="8" id="Sef-H1-BCw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Nw8-uo-Ei8" secondAttribute="trailing" constant="-8" id="UHQ-fk-Qvs"/>
@@ -156,6 +168,8 @@
                             <constraint firstItem="rL7-Tw-8qy" firstAttribute="top" secondItem="xBW-Zw-kpc" secondAttribute="bottom" constant="37" id="XxV-O9-qVc"/>
                             <constraint firstItem="JLn-te-FrQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="Z1l-3G-V1X"/>
                             <constraint firstItem="JLn-te-FrQ" firstAttribute="top" secondItem="fAa-hC-Qfs" secondAttribute="bottom" constant="18" id="ZaO-k2-pi2"/>
+                            <constraint firstItem="27G-2R-7Jg" firstAttribute="top" secondItem="T0P-ip-8Ax" secondAttribute="bottom" constant="8" id="dTv-4m-W8d"/>
+                            <constraint firstItem="27G-2R-7Jg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="ekt-OU-m4C"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fAa-hC-Qfs" secondAttribute="trailing" constant="-8" id="fkw-Ik-Z9s"/>
                             <constraint firstItem="Nw8-uo-Ei8" firstAttribute="leading" secondItem="rL7-Tw-8qy" secondAttribute="trailing" constant="8" id="gXl-mi-j15"/>
                             <constraint firstItem="Qmo-pb-1Vr" firstAttribute="leading" secondItem="PWv-fU-xTM" secondAttribute="trailing" constant="8" id="hrn-nE-qvD"/>

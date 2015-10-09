@@ -5,7 +5,7 @@ A Swift based implementation of the Android Snackbar for iOS
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 
-![Screenshot](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_1.gif)
+![Screenshot](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_6.gif)
 
 # About
 TTGSnackbar is useful for showing a brief message at the bottom of the screen with an action button.  
@@ -38,12 +38,28 @@ let snackbar = TTGSnackbar.init(message: "Message", duration: TTGSnackbarDuratio
 }      
 snackbar.show()
 ```
-## Dismiss manually
-You can dismiss the snackbar manually by calling `dismiss()` method.
+
+## Show a simple message with a long running action
+![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_5.png)
+```
+let snackbar = TTGSnackbar.init(message: "Message", duration: TTGSnackbarDuration.TTGSnackbarDurationForever, actionText: "Action")
+{ (snackbar) -> Void in
+    NSLog("Click action!")
+}      
+snackbar.show()
+
+// Dismiss manually after 3 seconds
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+    snackbar.dismiss()
+}
+```
 
 # Customization
 ### Message
 `message: String` define the message to diaplay.
+
+### Message text color
+`messageTextColor: UIColor` define the message text color.
 
 ### Display duration
 `duration: TTGSnackbarDuration`define the display duration.

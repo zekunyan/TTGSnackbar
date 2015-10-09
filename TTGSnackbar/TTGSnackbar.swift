@@ -12,6 +12,7 @@ public enum TTGSnackbarDuration: NSTimeInterval {
     case TTGSnackbarDurationShort = 1.0
     case TTGSnackbarDurationMiddle = 3.0
     case TTGSnackbarDurationLong = 5.0
+    case TTGSnackbarDurationForever = 9999999999.0 // Must dismiss manually.
 }
 
 public class TTGSnackbar: UIView {
@@ -37,6 +38,11 @@ public class TTGSnackbar: UIView {
             self.messageLabel.text = message
         }
     }
+    public var messageTextColor: UIColor = UIColor.whiteColor() {
+        didSet {
+            self.messageLabel.textColor = messageTextColor
+        }
+    }
     public var actionText: String = "" {
         didSet {
             self.actionButton.setTitle(actionText, forState: UIControlState.Normal)
@@ -52,6 +58,7 @@ public class TTGSnackbar: UIView {
     private var messageLabel: UILabel!
     private var seperateView: UIView!
     private var actionButton: UIButton!
+    private var activityIndicatorView: UIActivityIndicatorView!
     private var dismissTimer: NSTimer? = nil
     private var bottomMarginConstraint: NSLayoutConstraint? = nil // For snackbar show/Hide animation
     private var actionButtonWidthConstraint: NSLayoutConstraint? = nil // Action button width
@@ -133,7 +140,10 @@ public class TTGSnackbar: UIView {
     }
     
     public func dismiss() {
-        dismissAnimated(true)
+        // On main thread
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.dismissAnimated(true)
+        }
     }
     
     // --Private methods--
@@ -166,6 +176,11 @@ public class TTGSnackbar: UIView {
         seperateView.backgroundColor = UIColor.grayColor()
         self.addSubview(seperateView)
         
+        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.stopAnimating()
+        self.addSubview(activityIndicatorView)
+        
         // Add constraints
         let hConstraints: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
             "H:|-snackbarHorizonMargin-[messageLabel]-[seperateView(1)]-[actionButton]-snackbarHorizonMargin-|",
@@ -195,10 +210,24 @@ public class TTGSnackbar: UIView {
             item: actionButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal,
             toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarActionButtonWidth)
         
+        let vConstraintsForActivityIndicatorView: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|-(2)-[activityIndicatorView]-(2)-|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["activityIndicatorView": activityIndicatorView])
+        
+        let hConstraintsForActivityIndicatorView: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:[activityIndicatorView(activityIndicatorWidth)]-(2)-|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: ["activityIndicatorWidth": TTGSnackbar.snackbarHeight - 4],
+            views: ["activityIndicatorView": activityIndicatorView])
+        
         self.addConstraints(hConstraints)
         self.addConstraints(vConstraintsForMessageLabel)
         self.addConstraints(vConstraintsForSeperateView)
         self.addConstraints(vConstraintsForActionButton)
+        self.addConstraints(vConstraintsForActivityIndicatorView)
+        self.addConstraints(hConstraintsForActivityIndicatorView)
         actionButton.addConstraint(actionButtonWidthConstraint!)
     }
     
@@ -217,6 +246,7 @@ public class TTGSnackbar: UIView {
     
     private func dismissAnimated(animated: Bool) {
         invalidDismissTimer()
+        activityIndicatorView.stopAnimating()
         TTGSnackbar.currentInstance = nil
         
         if animated {
@@ -236,7 +266,17 @@ public class TTGSnackbar: UIView {
     
     // Button action
     func doAction() {
+        // Call action block first
         actionBlock?(snackbar: self)
-        dismissAnimated(true)
+        
+        // Show activity indicator
+        if duration == TTGSnackbarDuration.TTGSnackbarDurationForever && actionButton.hidden == false{
+            actionButton.hidden = true
+            seperateView.hidden = true
+            activityIndicatorView.hidden = false
+            activityIndicatorView.startAnimating()
+        } else {
+            dismissAnimated(true)
+        }
     }
 }
