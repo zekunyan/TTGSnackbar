@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var actionTextField: UITextField!
     @IBOutlet weak var durationSegmented: UISegmentedControl!
+    @IBOutlet weak var outputLabel: UILabel!
     
     let durationTypes = [TTGSnackbarDuration.TTGSnackbarDurationShort, TTGSnackbarDuration.TTGSnackbarDurationMiddle, TTGSnackbarDuration.TTGSnackbarDurationLong]
     
@@ -27,7 +28,7 @@ class ViewController: UIViewController {
     
     @IBAction func showWithAction(sender: UIButton) {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex],
-            actionText: actionTextField.text!, actionBlock: {(TTGSnackbar snackbar) in NSLog("Click action")})
+            actionText: actionTextField.text!, actionBlock: {(TTGSnackbar snackbar) in outputLabel?.text = "Click action !"})
         snackbar.show()
     }
 }
