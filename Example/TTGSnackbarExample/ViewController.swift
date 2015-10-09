@@ -35,7 +35,7 @@ class ViewController: UIViewController {
                 actionText: actionTextField.text!, actionBlock: { (TTGSnackbar snackbar) in outputLabel?.text = "Click action !" })
 
         // Change message text color
-        snackbar.messageTextColor = UIColor.redColor()
+        snackbar.messageTextColor = UIColor.yellowColor()
 
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
@@ -58,6 +58,9 @@ class ViewController: UIViewController {
         snackbar.dismissBlock = {
             (snackbar: TTGSnackbar) -> Void in outputLabel?.text = "Dismiss !"
         }
+        
+        // Change action text color
+        snackbar.actionTextColor = UIColor.yellowColor()
 
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
