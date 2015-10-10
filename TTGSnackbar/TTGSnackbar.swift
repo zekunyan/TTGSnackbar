@@ -9,18 +9,18 @@
 import UIKit
 
 public enum TTGSnackbarDuration: NSTimeInterval {
-    case TTGSnackbarDurationShort = 1.0
-    case TTGSnackbarDurationMiddle = 3.0
-    case TTGSnackbarDurationLong = 5.0
-    case TTGSnackbarDurationForever = 9999999999.0 // Must dismiss manually.
+    case Short = 1.0
+    case Middle = 3.0
+    case Long = 5.0
+    case Forever = 9999999999.0 // Must dismiss manually.
 }
 
 public enum TTGSnackbarAnimationType {
-    case TTGSnackbarAnimationFadeInFadeOut
-    case TTGSnackbarAnimationSlideFromBottomToTop
-    case TTGSnackbarAnimationSlideFromBottomBackToBottom
-    case TTGSnackbarAnimationSlideFromLeftToRight
-    case TTGSnackbarAnimationSlideFromRightToLeft
+    case FadeInFadeOut
+    case SlideFromBottomToTop
+    case SlideFromBottomBackToBottom
+    case SlideFromLeftToRight
+    case SlideFromRightToLeft
 }
 
 public class TTGSnackbar: UIView {
@@ -40,8 +40,8 @@ public class TTGSnackbar: UIView {
     // Public
     public var actionBlock: TTGActionBlock? = nil
     public var dismissBlock: TTGDismissBlock? = nil
-    public var duration: TTGSnackbarDuration = TTGSnackbarDuration.TTGSnackbarDurationShort
-    public var animationType: TTGSnackbarAnimationType = TTGSnackbarAnimationType.TTGSnackbarAnimationSlideFromBottomBackToBottom
+    public var duration: TTGSnackbarDuration = TTGSnackbarDuration.Short
+    public var animationType: TTGSnackbarAnimationType = TTGSnackbarAnimationType.SlideFromBottomBackToBottom
     public var message: String = "" {
         didSet {
             self.messageLabel.text = message
@@ -265,20 +265,20 @@ public class TTGSnackbar: UIView {
         var animationBlock: (() -> Void)? = nil
 
         switch animationType {
-        case .TTGSnackbarAnimationFadeInFadeOut:
+        case .FadeInFadeOut:
             animationBlock = {
                 self.alpha = 0.0
             }
-        case .TTGSnackbarAnimationSlideFromBottomBackToBottom:
+        case .SlideFromBottomBackToBottom:
             bottomMarginConstraint?.constant = TTGSnackbar.snackbarHeight
-        case .TTGSnackbarAnimationSlideFromBottomToTop:
+        case .SlideFromBottomToTop:
             animationBlock = {
                 self.alpha = 0.0
             }
             bottomMarginConstraint?.constant = -TTGSnackbar.snackbarHeight - TTGSnackbar.snackbarBottomMargin
-        case .TTGSnackbarAnimationSlideFromLeftToRight:
+        case .SlideFromLeftToRight:
             centerXConstraint?.constant = superview!.bounds.width
-        case .TTGSnackbarAnimationSlideFromRightToLeft:
+        case .SlideFromRightToLeft:
             centerXConstraint?.constant = -superview!.bounds.width
         }
 
@@ -300,27 +300,27 @@ public class TTGSnackbar: UIView {
         var animationBlock: (() -> Void)? = nil
 
         switch animationType {
-        case .TTGSnackbarAnimationFadeInFadeOut:
+        case .FadeInFadeOut:
             bottomMarginConstraint?.constant = -TTGSnackbar.snackbarBottomMargin
             self.layoutIfNeeded()
             self.alpha = 0.0
             animationBlock = {
                 self.alpha = 1.0
             }
-        case .TTGSnackbarAnimationSlideFromBottomBackToBottom, .TTGSnackbarAnimationSlideFromBottomToTop:
+        case .SlideFromBottomBackToBottom, .SlideFromBottomToTop:
             // Init
             bottomMarginConstraint?.constant = TTGSnackbar.snackbarHeight
             self.layoutIfNeeded()
             // Animation
             bottomMarginConstraint?.constant = -TTGSnackbar.snackbarBottomMargin
-        case .TTGSnackbarAnimationSlideFromLeftToRight:
+        case .SlideFromLeftToRight:
             // Init
             centerXConstraint?.constant = -superview!.bounds.width
             bottomMarginConstraint?.constant = -TTGSnackbar.snackbarBottomMargin
             self.layoutIfNeeded()
             // Animation
             centerXConstraint?.constant = 0
-        case .TTGSnackbarAnimationSlideFromRightToLeft:
+        case .SlideFromRightToLeft:
             // Init
             centerXConstraint?.constant = superview!.bounds.width
             bottomMarginConstraint?.constant = -TTGSnackbar.snackbarBottomMargin
@@ -346,7 +346,7 @@ public class TTGSnackbar: UIView {
         actionBlock?(snackbar: self)
 
         // Show activity indicator
-        if duration == TTGSnackbarDuration.TTGSnackbarDurationForever && actionButton.hidden == false {
+        if duration == TTGSnackbarDuration.Forever && actionButton.hidden == false {
             actionButton.hidden = true
             seperateView.hidden = true
             activityIndicatorView.hidden = false

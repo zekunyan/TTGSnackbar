@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputLabel: UILabel!
     @IBOutlet weak var animationTypeSegmented: UISegmentedControl!
 
-    let durationTypes = [TTGSnackbarDuration.TTGSnackbarDurationShort, TTGSnackbarDuration.TTGSnackbarDurationMiddle, TTGSnackbarDuration.TTGSnackbarDurationLong]
-    let animationTypes = [TTGSnackbarAnimationType.TTGSnackbarAnimationSlideFromBottomBackToBottom, TTGSnackbarAnimationType.TTGSnackbarAnimationFadeInFadeOut, TTGSnackbarAnimationType.TTGSnackbarAnimationSlideFromLeftToRight]
+    let durationTypes = [TTGSnackbarDuration.Short, TTGSnackbarDuration.Middle, TTGSnackbarDuration.Long]
+    let animationTypes = [TTGSnackbarAnimationType.SlideFromBottomBackToBottom, TTGSnackbarAnimationType.FadeInFadeOut, TTGSnackbarAnimationType.SlideFromLeftToRight]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
 
     @IBAction func showWithActionAndDismissManually(sender: UIButton) {
         outputLabel?.text = "";
-        let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: TTGSnackbarDuration.TTGSnackbarDurationForever,
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: TTGSnackbarDuration.Forever,
                 actionText: actionTextField.text!) {
             (TTGSnackbar snackbar) in
 
