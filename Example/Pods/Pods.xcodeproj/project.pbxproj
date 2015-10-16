@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6BB5FEB559F0D80AE3374B990110C585 /* PBXContainerItemProxy */ = {
+		574E4041A13668017586366962B1DE8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -37,9 +37,9 @@
 		3AA7D742CE5C8553102D9D33EC1D5F01 /* TTGSnackbar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTGSnackbar-umbrella.h"; sourceTree = "<group>"; };
 		413BE958A7AE5E593967429865B9EE23 /* Pods-TTGSnackbarExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TTGSnackbarExample-acknowledgements.markdown"; sourceTree = "<group>"; };
 		473D65D39AA5A0F28E87967211F89457 /* TTGSnackbar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TTGSnackbar.xcconfig; sourceTree = "<group>"; };
-		72CAC42B69194C0B175E2CB9576E5254 /* TTGSnackbar-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "TTGSnackbar-Private.xcconfig"; sourceTree = "<group>"; };
 		72E01DCD83EC9592312F79506B285EE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		7D750BDA6513C22173C565E349CF4696 /* TTGSnackbar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = TTGSnackbar.modulemap; sourceTree = "<group>"; };
+		81A7C06E087F524E26B751195F60EFBE /* TTGSnackbar-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "TTGSnackbar-Private.xcconfig"; sourceTree = "<group>"; };
 		8B4E7B6C9086485F8D63B13776182B90 /* Pods-TTGSnackbarExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TTGSnackbarExample-dummy.m"; sourceTree = "<group>"; };
 		945FB10E69AD0791D3927C5F0FB147A2 /* Pods-TTGSnackbarExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TTGSnackbarExample-frameworks.sh"; sourceTree = "<group>"; };
 		96556C00ED8C463E608CCF070317D3A8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 				96556C00ED8C463E608CCF070317D3A8 /* Info.plist */,
 				7D750BDA6513C22173C565E349CF4696 /* TTGSnackbar.modulemap */,
 				473D65D39AA5A0F28E87967211F89457 /* TTGSnackbar.xcconfig */,
-				72CAC42B69194C0B175E2CB9576E5254 /* TTGSnackbar-Private.xcconfig */,
+				81A7C06E087F524E26B751195F60EFBE /* TTGSnackbar-Private.xcconfig */,
 				9F73400DC99CA651EA51E539169DACD7 /* TTGSnackbar-dummy.m */,
 				E8AF085C6517BA414D55B0E7CB45B1C7 /* TTGSnackbar-prefix.pch */,
 				3AA7D742CE5C8553102D9D33EC1D5F01 /* TTGSnackbar-umbrella.h */,
@@ -211,7 +211,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				42F129C6E314C4FDBD5506D395B5AC24 /* PBXTargetDependency */,
+				2B3C3F3A16DF490C9D302565D90F1956 /* PBXTargetDependency */,
 			);
 			name = "Pods-TTGSnackbarExample";
 			productName = "Pods-TTGSnackbarExample";
@@ -283,23 +283,23 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		42F129C6E314C4FDBD5506D395B5AC24 /* PBXTargetDependency */ = {
+		2B3C3F3A16DF490C9D302565D90F1956 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TTGSnackbar;
 			target = 19F7F019C1EA89B6CEA56DC59E46C5C7 /* TTGSnackbar */;
-			targetProxy = 6BB5FEB559F0D80AE3374B990110C585 /* PBXContainerItemProxy */;
+			targetProxy = 574E4041A13668017586366962B1DE8F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0BFB5921CB2D69265DCE3766D3E094D9 /* Debug */ = {
+		3DDF46AFCC7F36C5070750DB3AED7D15 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72CAC42B69194C0B175E2CB9576E5254 /* TTGSnackbar-Private.xcconfig */;
+			baseConfigurationReference = 81A7C06E087F524E26B751195F60EFBE /* TTGSnackbar-Private.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 0.2.0;
+				CURRENT_PROJECT_VERSION = 0.2.1;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 0.2.0;
+				DYLIB_COMPATIBILITY_VERSION = 0.2.1;
 				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -319,33 +319,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		4CD8C539E231D13192D3C6A2ABB35C40 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72CAC42B69194C0B175E2CB9576E5254 /* TTGSnackbar-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 0.2.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 0.2.0;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/TTGSnackbar/TTGSnackbar-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TTGSnackbar/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/TTGSnackbar/TTGSnackbar.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = TTGSnackbar;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		A16BBBD12D1D5A249ECD0D6ECCE9AAC8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -414,6 +387,33 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
+		};
+		AE35F4DB7FDB991D22F28207D0A7C60E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81A7C06E087F524E26B751195F60EFBE /* TTGSnackbar-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.2.1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 0.2.1;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/TTGSnackbar/TTGSnackbar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TTGSnackbar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/TTGSnackbar/TTGSnackbar.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = TTGSnackbar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		CAD0B5FFE8A7D2186C922B86C44204B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -503,8 +503,8 @@
 		CF71553642796B7D3BD2F574948CB182 /* Build configuration list for PBXNativeTarget "TTGSnackbar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0BFB5921CB2D69265DCE3766D3E094D9 /* Debug */,
-				4CD8C539E231D13192D3C6A2ABB35C40 /* Release */,
+				3DDF46AFCC7F36C5070750DB3AED7D15 /* Debug */,
+				AE35F4DB7FDB991D22F28207D0A7C60E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
