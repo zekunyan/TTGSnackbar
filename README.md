@@ -88,7 +88,7 @@ public typealias TTGDismissBlock = (snackbar: TTGSnackbar) -> Void
 ### Animation type
 `animationType: TTGSnackbarAnimationType` define the style of snackbar when it show and dismiss.  
 
-`TTGSnackbarAnimationType` : `FadeInFadeOut`, `SlideFromBottomToTop`, `SlideFromBottomBackToBottom`, `SlideFromLeftToRight`, and `SlideFromRightToLeft`.
+`TTGSnackbarAnimationType` : `FadeInFadeOut`, `SlideFromBottomToTop`, `SlideFromBottomBackToBottom`, `SlideFromLeftToRight`,  `SlideFromRightToLeft` and `Flip`.
 
 The default value of `animationType` is `SlideFromBottomBackToBottom`, which is the same as Snackbar in Android.
 
