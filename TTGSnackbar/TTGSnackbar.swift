@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Darwin
 
 public enum TTGSnackbarDuration: NSTimeInterval {
     case Short = 1.0
@@ -21,6 +22,7 @@ public enum TTGSnackbarAnimationType {
     case SlideFromBottomBackToBottom
     case SlideFromLeftToRight
     case SlideFromRightToLeft
+    case Flip
 }
 
 public class TTGSnackbar: UIView {
@@ -280,6 +282,10 @@ public class TTGSnackbar: UIView {
             centerXConstraint?.constant = superview!.bounds.width
         case .SlideFromRightToLeft:
             centerXConstraint?.constant = -superview!.bounds.width
+        case .Flip:
+            animationBlock = {
+                self.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI_2), 1, 0, 0)
+            }
         }
 
         self.setNeedsLayout()
@@ -327,12 +333,21 @@ public class TTGSnackbar: UIView {
             self.layoutIfNeeded()
             // Animation
             centerXConstraint?.constant = 0
+        case .Flip:
+            // Init
+            bottomMarginConstraint?.constant = -TTGSnackbar.snackbarBottomMargin
+            self.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI_2), 1, 0, 0)
+            self.layoutIfNeeded()
+            // Animation
+            animationBlock = {
+                self.layer.transform = CATransform3DMakeRotation(0, 1, 0, 0)
+            }
         }
 
         self.setNeedsLayout()
 
         UIView.animateWithDuration(TTGSnackbar.snackbarAnimationDuration,
-                delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions.CurveEaseInOut,
+                delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.CurveEaseInOut,
                 animations: {
                     () -> Void in
                     animationBlock?()

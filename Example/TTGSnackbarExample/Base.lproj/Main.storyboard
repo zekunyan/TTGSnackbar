@@ -135,7 +135,7 @@
                                     <action selector="showWithActionAndDismissManually:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MSZ-5w-pNQ"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GaD-qt-sQn">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GaD-qt-sQn">
                                 <rect key="frame" x="96" y="213" width="220" height="29"/>
                                 <animations/>
                                 <constraints>
@@ -145,6 +145,7 @@
                                     <segment title="Bottom"/>
                                     <segment title="Fade"/>
                                     <segment title="Left Right"/>
+                                    <segment title="Flip"/>
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rD-KP-VmZ">
