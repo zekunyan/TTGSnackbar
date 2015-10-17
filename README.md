@@ -5,7 +5,7 @@ A Swift based implementation of the Android Snackbar for iOS
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 
-![Screenshot](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_1.gif?refresh)
+![Screenshot](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_7.gif)
 
 # About
 TTGSnackbar is useful for showing a brief message at the bottom of the screen with an action button.  
@@ -15,6 +15,9 @@ It disappears after a timeout or after user click the action button.
 # Installation
 The recommended way is to use CocoaPods.   
 ```
+platform :ios, '8.0'
+use_frameworks!
+
 pod 'TTGSnackbar'
 ```  
 And you need to import the module.  
