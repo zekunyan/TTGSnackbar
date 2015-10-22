@@ -9,6 +9,17 @@
 import UIKit
 import Darwin
 
+// MARK: -
+// MARK: Enum
+
+/**
+Snackbar display duration types.
+
+- Short:   1 second
+- Middle:  3 seconds
+- Long:    5 seconds
+- Forever: Not dismiss automatically. Must be dismissed manually.
+*/
 public enum TTGSnackbarDuration: NSTimeInterval {
     case Short = 1.0
     case Middle = 3.0
@@ -16,6 +27,16 @@ public enum TTGSnackbarDuration: NSTimeInterval {
     case Forever = 9999999999.0 // Must dismiss manually.
 }
 
+/**
+Snackbar animation types.
+
+- FadeInFadeOut:               Fade in to show and fade out to dismiss.
+- SlideFromBottomToTop:        Slide from the bottom of screen to show and slide up to dismiss.
+- SlideFromBottomBackToBottom: Slide from the bottom of screen to show and slide back to bottom to dismiss.
+- SlideFromLeftToRight:        Slide from the left to show and slide to rigth to dismiss.
+- SlideFromRightToLeft:        Slide from the right to show and slide to left to dismiss.
+- Flip:                        Flip to show and dismiss.
+*/
 public enum TTGSnackbarAnimationType {
     case FadeInFadeOut
     case SlideFromBottomToTop
@@ -26,58 +47,106 @@ public enum TTGSnackbarAnimationType {
 }
 
 public class TTGSnackbar: UIView {
-    // Current instance
+    // MARK: -
+    // MARK: Class property.
+    
+    /// Current instance of Snackbar.
     private static var currentInstance: TTGSnackbar? = nil
-    // Constant
+    
+    /// Animation duration.
     private static let snackbarAnimationDuration: NSTimeInterval = 0.3
+    
+    /// Snackbar height.
     private static let snackbarHeight: CGFloat = 44
+    
+    /// Snackbar margin to the bottom of screen.
     private static let snackbarBottomMargin: CGFloat = 4
+    
+    /// Snackbar margin to the left and right.
     private static let snackbarHorizonMargin: CGFloat = 4
+    
+    /// Snackbar action button width.
     private static let snackbarActionButtonWidth: CGFloat = 64
 
-    // Callback block type
+    // MARK: -
+    // MARK: Typealias
+    
+    /// Action callback closure definition.
     public typealias TTGActionBlock = (snackbar:TTGSnackbar) -> Void
+    
+    /// Dismiss callback closure definition.
     public typealias TTGDismissBlock = (snackbar:TTGSnackbar) -> Void
 
-    // Public
+    // MARK: -
+    // MARK: Public property.
+    
+    /// Action callback.
     public var actionBlock: TTGActionBlock? = nil
+    
+    /// Dismiss callback.
     public var dismissBlock: TTGDismissBlock? = nil
+    
+    /// Snackbar display duration. Default is Short - 1 second.
     public var duration: TTGSnackbarDuration = TTGSnackbarDuration.Short
+    
+    /// Snackbar animation type. Default is SlideFromBottomBackToBottom.
     public var animationType: TTGSnackbarAnimationType = TTGSnackbarAnimationType.SlideFromBottomBackToBottom
+    
+    /// Main text shown on the snackbar.
     public var message: String = "" {
         didSet {
             self.messageLabel.text = message
         }
     }
+    
+    /// Message text color. Default is white.
     public var messageTextColor: UIColor = UIColor.whiteColor() {
         didSet {
             self.messageLabel.textColor = messageTextColor
         }
     }
+    
+    /// Action button title.
     public var actionText: String = "" {
         didSet {
             self.actionButton.setTitle(actionText, forState: UIControlState.Normal)
         }
     }
+    
+    /// Action button title color. Default is white.
     public var actionTextColor: UIColor = UIColor.whiteColor() {
         didSet {
             actionButton.setTitleColor(actionTextColor, forState: UIControlState.Normal)
         }
     }
 
-    // Private
+    // MARK: -
+    // MARK: Private property.
+    
     private var messageLabel: UILabel!
     private var seperateView: UIView!
     private var actionButton: UIButton!
     private var activityIndicatorView: UIActivityIndicatorView!
+    
+    /// Timer to dismiss the snackbar.
     private var dismissTimer: NSTimer? = nil
 
+    // Constraints.
     private var centerXConstraint: NSLayoutConstraint? = nil
     private var bottomMarginConstraint: NSLayoutConstraint? = nil
     private var actionButtonWidthConstraint: NSLayoutConstraint? = nil
-    // Action button width
 
-    // --Public init--
+    // MARK: -
+    // MARK: Init
+    
+    /**
+    Show a single message like a Toast.
+    
+    - parameter message:  Message text.
+    - parameter duration: Duration type.
+    
+    - returns: Void
+    */
     public init(message: String, duration: TTGSnackbarDuration) {
         super.init(frame: CGRectMake(0, 0, 0, 0))
         self.duration = duration
@@ -85,6 +154,16 @@ public class TTGSnackbar: UIView {
         configure()
     }
 
+    /**
+    Show a message with action button.
+    
+    - parameter message:     Message text.
+    - parameter duration:    Duration type.
+    - parameter actionText:  Action button title.
+    - parameter actionBlock: Action callback closure.
+    
+    - returns: Void
+    */
     public init(message: String, duration: TTGSnackbarDuration, actionText: String, actionBlock: TTGActionBlock) {
         super.init(frame: CGRectMake(0, 0, 0, 0))
         self.duration = duration
@@ -98,7 +177,12 @@ public class TTGSnackbar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // --Public methods--
+    // MARK: -
+    // MARK: Public methods.
+    
+    /**
+    Show the snackbar.
+    */
     public func show() {
         // Only show once
         if self.superview != nil {
@@ -147,6 +231,9 @@ public class TTGSnackbar: UIView {
         }
     }
 
+    /**
+    Dismiss the snackbar manually.
+    */
     public func dismiss() {
         // On main thread
         dispatch_async(dispatch_get_main_queue()) {
@@ -155,7 +242,12 @@ public class TTGSnackbar: UIView {
         }
     }
 
-    // --Private methods--
+    // MARK: -
+    // MARK: Private methods.
+    
+    /**
+    Init configuration.
+    */
     private func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor.init(white: 0, alpha: 0.8)
@@ -240,11 +332,19 @@ public class TTGSnackbar: UIView {
         actionButton.addConstraint(actionButtonWidthConstraint!)
     }
 
+    /**
+    Invalid the dismiss timer.
+    */
     private func invalidDismissTimer() {
         dismissTimer?.invalidate()
         dismissTimer = nil
     }
 
+    /**
+    Get the current top viewController.
+    
+    - returns: current top viewController instance or nil.
+    */
     private func getTopViewController() -> UIViewController? {
         var topController: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController
         while topController?.presentedViewController != nil {
@@ -253,6 +353,11 @@ public class TTGSnackbar: UIView {
         return topController
     }
 
+    /**
+    Dismiss.
+    
+    - parameter animated: If dismiss with animation.
+    */
     private func dismissAnimated(animated: Bool) {
         invalidDismissTimer()
         activityIndicatorView.stopAnimating()
@@ -302,6 +407,9 @@ public class TTGSnackbar: UIView {
         }
     }
 
+    /**
+    Show.
+    */
     private func showWithAnimation() {
         var animationBlock: (() -> Void)? = nil
 
@@ -355,7 +463,9 @@ public class TTGSnackbar: UIView {
                 }, completion: nil)
     }
 
-    // Button action
+    /**
+    Action button.
+    */
     func doAction() {
         // Call action block first
         actionBlock?(snackbar: self)
