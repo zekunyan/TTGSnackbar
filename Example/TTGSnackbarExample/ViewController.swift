@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     @IBAction func showWithAction(sender: UIButton) {
         outputLabel?.text = "";
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex],
-                actionText: actionTextField.text!, actionBlock: { (TTGSnackbar snackbar) in outputLabel?.text = "Click action !" })
+                actionText: actionTextField.text!, actionBlock: { (TTGSnackbar snackbar) in self.outputLabel?.text = "Click action !" })
 
         // Change message text color
         snackbar.messageTextColor = UIColor.yellowColor()
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
 
         // Add dismiss callback
         snackbar.dismissBlock = {
-            (snackbar: TTGSnackbar) -> Void in outputLabel?.text = "Dismiss !"
+            (snackbar: TTGSnackbar) -> Void in self.outputLabel?.text = "Dismiss !"
         }
         
         // Change action text color

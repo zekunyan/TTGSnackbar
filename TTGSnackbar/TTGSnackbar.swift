@@ -50,9 +50,6 @@ public class TTGSnackbar: UIView {
     // MARK: -
     // MARK: Class property.
     
-    /// Current instance of Snackbar.
-    private static var currentInstance: TTGSnackbar? = nil
-    
     /// Animation duration.
     private static let snackbarAnimationDuration: NSTimeInterval = 0.3
     
@@ -188,12 +185,6 @@ public class TTGSnackbar: UIView {
         if self.superview != nil {
             return
         }
-
-        // Dismiss last bar
-        TTGSnackbar.currentInstance?.dismissAnimated(false)
-
-        // Save current show instance
-        TTGSnackbar.currentInstance = self
 
         // Create dismiss timer
         dismissTimer = NSTimer.scheduledTimerWithTimeInterval(duration.rawValue, target: self, selector: "dismiss", userInfo: nil, repeats: false)
@@ -361,7 +352,6 @@ public class TTGSnackbar: UIView {
     private func dismissAnimated(animated: Bool) {
         invalidDismissTimer()
         activityIndicatorView.stopAnimating()
-        TTGSnackbar.currentInstance = nil
 
         if !animated {
             dismissBlock?(snackbar: self)
