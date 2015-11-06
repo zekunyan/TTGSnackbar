@@ -13,13 +13,24 @@ It appears above all other elements on screen and only one can be displayed at a
 It disappears after a timeout or after user click the action button.
 
 # Installation
-The recommended way is to use CocoaPods.   
-```
+### CocoaPods
+You can use [Cocoapods](http://cocoapods.org) to install `TTGSnackbar` by adding it to your `Podfile`:
+
+```ruby
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'TTGSnackbar'
-```  
+pod "TTGSnackbar"
+```
+
+### Carthage
+You can use [Carthage](https://github.com/Carthage/Carthage) to install `TTGSnackbar` by adding it to your `Cartfile`:
+```
+github "zekunyan/TTGSnackbar"
+```
+
+### Import
+
 And you need to import the module.  
 ```
 import TTGSnackbar
