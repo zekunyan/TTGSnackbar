@@ -110,6 +110,13 @@ public class TTGSnackbar: UIView {
         }
     }
     
+    /// Message text alignment. Default is Left
+	public dynamic var messageTextAlign: NSTextAlignment = .Left {
+		didSet {
+			self.messageLabel.textAlignment = messageTextAlign
+		}
+	}
+    
     /// Action button title.
     public dynamic var actionText: String = "" {
         didSet {
