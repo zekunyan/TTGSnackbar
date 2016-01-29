@@ -102,6 +102,13 @@ public class TTGSnackbar: UIView {
             self.messageLabel.textColor = messageTextColor
         }
     }
+ 
+    /// Message text font. Default is Bold system font (14).
+    public var messageTextFont: UIFont = UIFont.boldSystemFontOfSize(14) {
+        didSet {
+            self.messageLabel.font = messageTextFont
+        }
+    }
     
     /// Action button title.
     public var actionText: String = "" {
@@ -116,7 +123,7 @@ public class TTGSnackbar: UIView {
             actionButton.setTitleColor(actionTextColor, forState: UIControlState.Normal)
         }
     }
-
+    
     // MARK: -
     // MARK: Private property.
     
