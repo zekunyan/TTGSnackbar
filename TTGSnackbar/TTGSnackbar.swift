@@ -97,28 +97,28 @@ public class TTGSnackbar: UIView {
     }
     
     /// Message text color. Default is white.
-    public var messageTextColor: UIColor = UIColor.whiteColor() {
+    public dynamic var messageTextColor: UIColor = UIColor.whiteColor() {
         didSet {
             self.messageLabel.textColor = messageTextColor
         }
     }
  
     /// Message text font. Default is Bold system font (14).
-    public var messageTextFont: UIFont = UIFont.boldSystemFontOfSize(14) {
+    public dynamic var messageTextFont: UIFont = UIFont.boldSystemFontOfSize(14) {
         didSet {
             self.messageLabel.font = messageTextFont
         }
     }
     
     /// Action button title.
-    public var actionText: String = "" {
+    public dynamic var actionText: String = "" {
         didSet {
             self.actionButton.setTitle(actionText, forState: UIControlState.Normal)
         }
     }
     
     /// Action button title color. Default is white.
-    public var actionTextColor: UIColor = UIColor.whiteColor() {
+    public dynamic var actionTextColor: UIColor = UIColor.whiteColor() {
         didSet {
             actionButton.setTitleColor(actionTextColor, forState: UIControlState.Normal)
         }
