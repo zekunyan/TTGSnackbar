@@ -14,7 +14,7 @@ It disappears after a timeout or after user click the action button.
 
 # Installation
 ### CocoaPods
-You can use [Cocoapods](http://cocoapods.org) to install `TTGSnackbar` by adding it to your `Podfile`:
+You can use [CocoaPods](http://cocoapods.org) to install `TTGSnackbar` by adding it to your `Podfile`:
 
 ```ruby
 platform :ios, '8.0'
