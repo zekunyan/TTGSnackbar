@@ -184,6 +184,27 @@ public class TTGSnackbar: UIView {
         configure()
     }
 
+    /**
+    Show a custom message with action button.
+     
+    - parameter message:          Message text.
+    - parameter duration:         Duration type.
+    - parameter actionText:       Action button title.
+    - parameter messageFont:      Message label font.
+    - parameter actionButtonFont: Action button font.
+    - parameter actionBlock:      Action callback closure.
+
+    - returns: Void
+    */
+    public init(message: String, duration: TTGSnackbarDuration, actionText: String, messageFont: UIFont, actionButtonFont: UIFont, actionBlock: TTGActionBlock) {
+        super.init(frame: CGRectMake(0, 0, 0, 0))
+        self.duration = duration
+        self.message = message
+        self.actionText = actionText
+        self.actionBlock = actionBlock
+        configure(messageFont, actionButtonFont: actionButtonFont)
+    }
+
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -251,9 +272,16 @@ public class TTGSnackbar: UIView {
     // MARK: Private methods.
     
     /**
-    Init configuration.
+    Default init configuration.
     */
     private func configure() {
+        self.configure(UIFont.systemFontOfSize(14), actionButtonFont: UIFont.boldSystemFontOfSize(14))
+    }
+
+    /**
+    Init configuration.
+    */
+    private func configure(messageFont: UIFont, actionButtonFont: UIFont) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor.init(white: 0, alpha: 0.8)
         self.layer.cornerRadius = 4
@@ -262,8 +290,10 @@ public class TTGSnackbar: UIView {
         messageLabel = UILabel()
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.textColor = UIColor.whiteColor()
-        messageLabel.font = UIFont.systemFontOfSize(14)
+        messageLabel.font = messageFont
         messageLabel.backgroundColor = UIColor.clearColor()
+        messageLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        messageLabel.numberOfLines = 2
         messageLabel.textAlignment = NSTextAlignment.Left
         messageLabel.text = message
         self.addSubview(messageLabel)
@@ -271,7 +301,7 @@ public class TTGSnackbar: UIView {
         actionButton = UIButton()
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.backgroundColor = UIColor.clearColor()
-        actionButton.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
+        actionButton.titleLabel?.font = actionButtonFont
         actionButton.setTitle(actionText, forState: UIControlState.Normal)
         actionButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         actionButton.addTarget(self, action: Selector("doAction"), forControlEvents: UIControlEvents.TouchUpInside)
