@@ -69,21 +69,27 @@ snackbar.show()
 
 # Customization
 ### Message
-`message: String` define the message to diaplay.
+`message: String` defines the message to diaplay.
 
 ### Message text color
-`messageTextColor: UIColor` define the message text color.
+`messageTextColor: UIColor` defines the message text color.
+
+### Message text font
+`messageTextFont: UIFont` defines the message text font.
 
 ### Display duration
-`duration: TTGSnackbarDuration`define the display duration.  
+`duration: TTGSnackbarDuration`defines the display duration.  
 `TTGSnackbarDuration` : `Short`, `Middle`, `Long` and `Forever`.  
 When you set `Forever`, the snackbar will show an activity indicator after user click the action button and you must dismiss the snackbar manually.
 
 ### Action title
-`actionText: String` define the action button title.
+`actionText: String` defines the action button title.
 
 ### Action title color
-`actionTextColor: UIColor` define the action button title color.
+`actionTextColor: UIColor` defines the action button title color.
+
+### Action title font
+`actionTextFont: UIFont` defines the action button title font.
 
 ### Action callback
 `actionBlock: TTGActionBlock?` will be called when user click the action button.
@@ -100,7 +106,7 @@ public typealias TTGDismissBlock = (snackbar: TTGSnackbar) -> Void
 ```
 
 ### Animation type
-`animationType: TTGSnackbarAnimationType` define the style of snackbar when it show and dismiss.  
+`animationType: TTGSnackbarAnimationType` defines the style of snackbar when it show and dismiss.  
 
 `TTGSnackbarAnimationType` : `FadeInFadeOut`, `SlideFromBottomToTop`, `SlideFromBottomBackToBottom`, `SlideFromLeftToRight`,  `SlideFromRightToLeft` and `Flip`.
 
