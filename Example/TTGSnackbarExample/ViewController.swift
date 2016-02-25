@@ -25,6 +25,11 @@ class ViewController: UIViewController {
 
     @IBAction func show(sender: UIButton) {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
+        
+        // Change message text font and color
+        snackbar.messageTextColor = UIColor.yellowColor()
+        snackbar.messageTextFont = UIFont.boldSystemFontOfSize(18)
+        
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
@@ -34,8 +39,9 @@ class ViewController: UIViewController {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex],
                 actionText: actionTextField.text!, actionBlock: { (TTGSnackbar snackbar) in self.outputLabel?.text = "Click action !" })
 
-        // Change message text color
-        snackbar.messageTextColor = UIColor.yellowColor()
+        // Change action text font and color
+        snackbar.actionTextColor = UIColor.grayColor()
+        snackbar.actionTextFont = UIFont.italicSystemFontOfSize(16)
 
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
@@ -58,9 +64,6 @@ class ViewController: UIViewController {
         snackbar.dismissBlock = {
             (snackbar: TTGSnackbar) -> Void in self.outputLabel?.text = "Dismiss !"
         }
-        
-        // Change action text color
-        snackbar.actionTextColor = UIColor.yellowColor()
 
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
