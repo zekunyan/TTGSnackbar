@@ -131,6 +131,8 @@ public class TTGSnackbar: UIView {
             if height < 44 {
                 height = 44
             }
+            heightConstraint?.constant = height
+            self.layoutIfNeeded()
         }
     }
 
@@ -195,6 +197,7 @@ public class TTGSnackbar: UIView {
     private var dismissTimer: NSTimer? = nil
 
     // Constraints.
+    private var heightConstraint: NSLayoutConstraint? = nil
     private var leftMarginConstraint: NSLayoutConstraint? = nil
     private var rightMarginConstraint: NSLayoutConstraint? = nil
     private var bottomMarginConstraint: NSLayoutConstraint? = nil
@@ -290,7 +293,7 @@ public class TTGSnackbar: UIView {
             superView.addSubview(self)
 
             // Snackbar height constraint
-            let heightConstraint: NSLayoutConstraint = NSLayoutConstraint.init(item: self, attribute: .Height,
+            heightConstraint = NSLayoutConstraint.init(item: self, attribute: .Height,
                     relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: height)
 
             // Left margin constraint
@@ -311,7 +314,7 @@ public class TTGSnackbar: UIView {
             rightMarginConstraint?.priority = 999
 
             // Add constraints
-            self.addConstraint(heightConstraint)
+            self.addConstraint(heightConstraint!)
             superView.addConstraint(leftMarginConstraint!)
             superView.addConstraint(rightMarginConstraint!)
             superView.addConstraint(bottomMarginConstraint!)
