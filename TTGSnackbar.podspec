@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "TTGSnackbar"
   s.module_name  = "TTGSnackbar"
-  s.version      = "0.3.0"
+  s.version      = "0.4.0"
   s.summary      = "A Swift based implementation of the Android Snackbar for iOS. Show simple message and action button like a Toast."
 
   s.description  = <<-DESC
