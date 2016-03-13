@@ -82,10 +82,10 @@ public class TTGSnackbar: UIView {
     /// Snackbar animation type. Default is SlideFromBottomBackToBottom.
     public var animationType: TTGSnackbarAnimationType = TTGSnackbarAnimationType.SlideFromBottomBackToBottom
 
-    /// Show and hide animation duration
+    /// Show and hide animation duration. Default is 0.3
     public var animationDuration: NSTimeInterval = 0.3
 
-    /// Corner radius: [0, height / 2]
+    /// Corner radius: [0, height / 2]. Default is 4
     public var cornerRadius: CGFloat = 4 {
         didSet {
             if cornerRadius > height / 2 {
@@ -101,7 +101,7 @@ public class TTGSnackbar: UIView {
         }
     }
 
-    /// Left margin
+    /// Left margin. Default is 4
     public var leftMargin: CGFloat = 4 {
         didSet {
             leftMarginConstraint?.constant = leftMargin
@@ -109,7 +109,7 @@ public class TTGSnackbar: UIView {
         }
     }
 
-    /// Right margin
+    /// Right margin. Default is 4
     public var rightMargin: CGFloat = 4 {
         didSet {
             rightMarginConstraint?.constant = -rightMargin
@@ -117,7 +117,7 @@ public class TTGSnackbar: UIView {
         }
     }
 
-    /// Bottom margin
+    /// Bottom margin. Default is 4
     public var bottomMargin: CGFloat = 4 {
         didSet {
             bottomMarginConstraint?.constant = -bottomMargin
@@ -125,7 +125,7 @@ public class TTGSnackbar: UIView {
         }
     }
 
-    /// Height: [44, +]
+    /// Height: [44, +]. Default is 44
     public var height: CGFloat = 44 {
         didSet {
             if height < 44 {
