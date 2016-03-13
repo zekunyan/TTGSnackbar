@@ -112,5 +112,17 @@ public typealias TTGDismissBlock = (snackbar: TTGSnackbar) -> Void
 
 The default value of `animationType` is `SlideFromBottomBackToBottom`, which is the same as Snackbar in Android.
 
+### Animation duration
+`animationDuration: NSTimeInterval` defines the duration of show and hide animation.
+
+### Margins
+`leftMargin: CGFloat`, `rightMargin: CGFloat` and `bottomMargin: CGFloat` define the margins of snackbar.
+
+### Snackbar height
+`height: CGFloat` defines the height of snackbar.
+
+### Corner radius
+`cornerRadius: CGFloat` defines the corner radius of snackbar.
+
 # Contact me
 zekunyan@163.com
