@@ -30,6 +30,9 @@ class ViewController: UIViewController {
         snackbar.messageTextColor = UIColor.yellowColor()
         snackbar.messageTextFont = UIFont.boldSystemFontOfSize(18)
         
+        // Change animation duration
+        snackbar.animationDuration = 0.5
+        
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
@@ -42,6 +45,16 @@ class ViewController: UIViewController {
         // Change action text font and color
         snackbar.actionTextColor = UIColor.grayColor()
         snackbar.actionTextFont = UIFont.italicSystemFontOfSize(16)
+        
+        // Change left and right margin
+        snackbar.leftMargin = 12
+        snackbar.rightMargin = 12
+        
+        // Change bottom margin
+        snackbar.bottomMargin = 12
+        
+        // Change corner radius
+        snackbar.cornerRadius = 8
 
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
