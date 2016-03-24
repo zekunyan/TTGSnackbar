@@ -52,11 +52,11 @@ public class TTGSnackbar: UIView {
     // MARK: -
     // MARK: Class property.
 
-    /// Snackbar action button width.
-    private static let snackbarActionButtonWidth: CGFloat = 64
+    /// Snackbar action button max width.
+    private static let snackbarActionButtonMaxWidth: CGFloat = 64
 
-    /// Snackbar horizon margin
-    private static let snackbarHorizonMargin: CGFloat = 4
+    /// Snackbar action button min width.
+    private static let snackbarActionButtonMinWidth: CGFloat = 44
 
     // MARK: -
     // MARK: Typealias
@@ -72,6 +72,9 @@ public class TTGSnackbar: UIView {
 
     /// Action callback.
     public var actionBlock: TTGActionBlock? = nil
+
+    /// Second action block
+    public var secondActionBlock: TTGActionBlock? = nil;
 
     /// Dismiss callback.
     public var dismissBlock: TTGDismissBlock? = nil
@@ -171,10 +174,24 @@ public class TTGSnackbar: UIView {
         }
     }
 
+    /// Second action button title.
+    public dynamic var secondActionText: String = "" {
+        didSet {
+            self.secondActionButton.setTitle(secondActionText, forState: UIControlState.Normal)
+        }
+    }
+
     /// Action button title color. Default is white.
     public dynamic var actionTextColor: UIColor = UIColor.whiteColor() {
         didSet {
             actionButton.setTitleColor(actionTextColor, forState: UIControlState.Normal)
+        }
+    }
+
+    /// Second action button title color. Default is white.
+    public dynamic var secondActionTextColor: UIColor = UIColor.whiteColor() {
+        didSet {
+            secondActionButton.setTitleColor(secondActionTextColor, forState: UIControlState.Normal)
         }
     }
 
@@ -185,12 +202,20 @@ public class TTGSnackbar: UIView {
         }
     }
 
+    /// Second action text font. Default is Bold system font (14).
+    public dynamic var secondActionTextFont: UIFont = UIFont.boldSystemFontOfSize(14) {
+        didSet {
+            self.secondActionButton.titleLabel?.font = secondActionTextFont
+        }
+    }
+
     // MARK: -
     // MARK: Private property.
 
     private var messageLabel: UILabel!
     private var seperateView: UIView!
     private var actionButton: UIButton!
+    private var secondActionButton: UIButton!
     private var activityIndicatorView: UIActivityIndicatorView!
 
     /// Timer to dismiss the snackbar.
@@ -202,6 +227,7 @@ public class TTGSnackbar: UIView {
     private var rightMarginConstraint: NSLayoutConstraint? = nil
     private var bottomMarginConstraint: NSLayoutConstraint? = nil
     private var actionButtonWidthConstraint: NSLayoutConstraint? = nil
+    private var secondActionButtonWidthConstraint: NSLayoutConstraint? = nil
 
     // MARK: -
     // MARK: Init
@@ -215,7 +241,7 @@ public class TTGSnackbar: UIView {
     - returns: Void
     */
     public init(message: String, duration: TTGSnackbarDuration) {
-        super.init(frame: CGRectMake(0, 0, 0, 0))
+        super.init(frame: CGRectMake(0, 0, 320, height))
         self.duration = duration
         self.message = message
         configure()
@@ -232,7 +258,7 @@ public class TTGSnackbar: UIView {
     - returns: Void
     */
     public init(message: String, duration: TTGSnackbarDuration, actionText: String, actionBlock: TTGActionBlock) {
-        super.init(frame: CGRectMake(0, 0, 0, 0))
+        super.init(frame: CGRectMake(0, 0, 320, height))
         self.duration = duration
         self.message = message
         self.actionText = actionText
@@ -253,7 +279,7 @@ public class TTGSnackbar: UIView {
     - returns: Void
     */
     public init(message: String, duration: TTGSnackbarDuration, actionText: String, messageFont: UIFont, actionTextFont: UIFont, actionBlock: TTGActionBlock) {
-        super.init(frame: CGRectMake(0, 0, 0, 0))
+        super.init(frame: CGRectMake(0, 0, 320, height))
         self.duration = duration
         self.message = message
         self.actionText = actionText
@@ -284,8 +310,12 @@ public class TTGSnackbar: UIView {
 
         // Show or hide action button
         actionButton.hidden = actionText.isEmpty || actionBlock == nil
+        secondActionButton.hidden = secondActionText.isEmpty || secondActionBlock == nil
         seperateView.hidden = actionButton.hidden
-        actionButtonWidthConstraint?.constant = actionButton.hidden ? 0 : TTGSnackbar.snackbarActionButtonWidth
+        actionButtonWidthConstraint?.constant = actionButton.hidden ? 0 : (secondActionButton.hidden ? TTGSnackbar.snackbarActionButtonMaxWidth : TTGSnackbar.snackbarActionButtonMinWidth)
+        secondActionButtonWidthConstraint?.constant = secondActionButton.hidden ? 0 : (actionButton.hidden ? TTGSnackbar.snackbarActionButtonMaxWidth : TTGSnackbar.snackbarActionButtonMinWidth)
+        
+        self.layoutIfNeeded()
 
         // Find current stop viewcontroller
         if let topController = getTopViewController() {
@@ -362,10 +392,21 @@ public class TTGSnackbar: UIView {
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.backgroundColor = UIColor.clearColor()
         actionButton.titleLabel?.font = actionTextFont
+        actionButton.titleLabel?.adjustsFontSizeToFitWidth = true
         actionButton.setTitle(actionText, forState: .Normal)
-        actionButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        actionButton.addTarget(self, action: Selector("doAction"), forControlEvents: .TouchUpInside)
+        actionButton.setTitleColor(actionTextColor, forState: .Normal)
+        actionButton.addTarget(self, action: Selector("doAction:"), forControlEvents: .TouchUpInside)
         self.addSubview(actionButton)
+
+        secondActionButton = UIButton()
+        secondActionButton.translatesAutoresizingMaskIntoConstraints = false
+        secondActionButton.backgroundColor = UIColor.clearColor()
+        secondActionButton.titleLabel?.font = secondActionTextFont
+        secondActionButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        secondActionButton.setTitle(secondActionText, forState: .Normal)
+        secondActionButton.setTitleColor(secondActionTextColor, forState: .Normal)
+        secondActionButton.addTarget(self, action: Selector("doAction:"), forControlEvents: .TouchUpInside)
+        self.addSubview(secondActionButton)
 
         seperateView = UIView()
         seperateView.translatesAutoresizingMaskIntoConstraints = false
@@ -379,52 +420,65 @@ public class TTGSnackbar: UIView {
 
         // Add constraints
         let hConstraints: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
-        "H:|-snackbarHorizonMargin-[messageLabel]-[seperateView(1)]-[actionButton]-snackbarHorizonMargin-|",
+        "H:|-4-[messageLabel]-2-[seperateView(0.5)]-2-[actionButton]-0-[secondActionButton]-4-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
-                metrics: ["snackbarHorizonMargin": TTGSnackbar.snackbarHorizonMargin],
-                views: ["messageLabel": messageLabel, "seperateView": seperateView, "actionButton": actionButton])
+                metrics: nil,
+                views: ["messageLabel": messageLabel, "seperateView": seperateView, "actionButton": actionButton, "secondActionButton": secondActionButton])
 
         let vConstraintsForMessageLabel: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
-        "V:|-[messageLabel]-|",
+        "V:|-0-[messageLabel]-0-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
                 views: ["messageLabel": messageLabel])
 
         let vConstraintsForSeperateView: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
-        "V:|-[seperateView]-|",
+        "V:|-4-[seperateView]-4-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
                 views: ["seperateView": seperateView])
 
         let vConstraintsForActionButton: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
-        "V:|-[actionButton]-|",
+        "V:|-0-[actionButton]-0-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
                 views: ["actionButton": actionButton])
 
+        let vConstraintsForSecondActionButton: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
+        "V:|-0-[secondActionButton]-0-|",
+                options: NSLayoutFormatOptions(rawValue: 0),
+                metrics: nil,
+                views: ["secondActionButton": secondActionButton])
+
         actionButtonWidthConstraint = NSLayoutConstraint.init(
         item: actionButton, attribute: .Width, relatedBy: .Equal,
-                toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarActionButtonWidth)
+                toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarActionButtonMinWidth)
+
+        secondActionButtonWidthConstraint = NSLayoutConstraint.init(
+        item: secondActionButton, attribute: .Width, relatedBy: .Equal,
+                toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarActionButtonMinWidth)
 
         let vConstraintsForActivityIndicatorView: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
-        "V:|-(2)-[activityIndicatorView]-(2)-|",
+        "V:|-2-[activityIndicatorView]-2-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
                 views: ["activityIndicatorView": activityIndicatorView])
 
         let hConstraintsForActivityIndicatorView: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
-        "H:[activityIndicatorView(activityIndicatorWidth)]-(2)-|",
+        "H:[activityIndicatorView(activityIndicatorWidth)]-2-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: ["activityIndicatorWidth": height - 4],
                 views: ["activityIndicatorView": activityIndicatorView])
 
+        actionButton.addConstraint(actionButtonWidthConstraint!)
+        secondActionButton.addConstraint(secondActionButtonWidthConstraint!)
+        
         self.addConstraints(hConstraints)
         self.addConstraints(vConstraintsForMessageLabel)
         self.addConstraints(vConstraintsForSeperateView)
         self.addConstraints(vConstraintsForActionButton)
+        self.addConstraints(vConstraintsForSecondActionButton)
         self.addConstraints(vConstraintsForActivityIndicatorView)
         self.addConstraints(hConstraintsForActivityIndicatorView)
-        actionButton.addConstraint(actionButtonWidthConstraint!)
     }
 
     /**
@@ -557,13 +611,14 @@ public class TTGSnackbar: UIView {
     /**
     Action button.
     */
-    func doAction() {
+    func doAction(button: UIButton) {
         // Call action block first
-        actionBlock?(snackbar: self)
+        button == actionButton ? actionBlock?(snackbar: self) : secondActionBlock?(snackbar: self)
 
         // Show activity indicator
         if duration == .Forever && actionButton.hidden == false {
             actionButton.hidden = true
+            secondActionButton.hidden = true
             seperateView.hidden = true
             activityIndicatorView.hidden = false
             activityIndicatorView.startAnimating()

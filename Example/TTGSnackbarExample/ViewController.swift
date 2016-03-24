@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     @IBAction func showWithAction(sender: UIButton) {
         outputLabel?.text = "";
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex],
-                actionText: actionTextField.text!, actionBlock: { (TTGSnackbar snackbar) in self.outputLabel?.text = "Click action !" })
+                actionText: actionTextField.text!, actionBlock: { (snackbar) in self.outputLabel?.text = "Click action !" })
 
         // Change action text font and color
         snackbar.actionTextColor = UIColor.grayColor()
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         snackbar.bottomMargin = 12
         
         // Change corner radius
-        snackbar.cornerRadius = 8
+        snackbar.cornerRadius = 2
 
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         outputLabel?.text = "";
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: TTGSnackbarDuration.Forever,
                 actionText: actionTextField.text!) {
-            (TTGSnackbar snackbar) in
+            (snackbar) in
 
             // Dismiss manually after 3 seconds
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
@@ -81,6 +81,22 @@ class ViewController: UIViewController {
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
-
+    
+    @IBAction func showWithTwoActions(sender: UIButton) {
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: "Two actions !", duration: durationTypes[durationSegmented.selectedSegmentIndex])
+        
+        // Action 1
+        snackbar.actionText = "Yes"
+        snackbar.actionTextColor = UIColor.greenColor()
+        snackbar.actionBlock = { (snackbar) in self.outputLabel?.text = "Click Yes !"}
+        
+        // Action 2
+        snackbar.secondActionText = "No"
+        snackbar.secondActionTextColor = UIColor.yellowColor()
+        snackbar.secondActionBlock = { (snackbar) in self.outputLabel?.text = "Click No !"}
+        
+        snackbar.show()
+    }
+    
 }
 
