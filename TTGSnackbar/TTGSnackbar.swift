@@ -306,7 +306,7 @@ public class TTGSnackbar: UIView {
         }
 
         // Create dismiss timer
-        dismissTimer = NSTimer.scheduledTimerWithTimeInterval(duration.rawValue, target: self, selector: "dismiss", userInfo: nil, repeats: false)
+        dismissTimer = NSTimer.scheduledTimerWithTimeInterval(duration.rawValue, target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
 
         // Show or hide action button
         actionButton.hidden = actionText.isEmpty || actionBlock == nil
@@ -395,7 +395,7 @@ public class TTGSnackbar: UIView {
         actionButton.titleLabel?.adjustsFontSizeToFitWidth = true
         actionButton.setTitle(actionText, forState: .Normal)
         actionButton.setTitleColor(actionTextColor, forState: .Normal)
-        actionButton.addTarget(self, action: Selector("doAction:"), forControlEvents: .TouchUpInside)
+        actionButton.addTarget(self, action: #selector(doAction(_:)), forControlEvents: .TouchUpInside)
         self.addSubview(actionButton)
 
         secondActionButton = UIButton()
@@ -405,7 +405,7 @@ public class TTGSnackbar: UIView {
         secondActionButton.titleLabel?.adjustsFontSizeToFitWidth = true
         secondActionButton.setTitle(secondActionText, forState: .Normal)
         secondActionButton.setTitleColor(secondActionTextColor, forState: .Normal)
-        secondActionButton.addTarget(self, action: Selector("doAction:"), forControlEvents: .TouchUpInside)
+        secondActionButton.addTarget(self, action: #selector(doAction(_:)), forControlEvents: .TouchUpInside)
         self.addSubview(secondActionButton)
 
         seperateView = UIView()
