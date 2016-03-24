@@ -5,7 +5,7 @@ A Swift based implementation of the Android Snackbar for iOS
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 
-![Screenshot](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_7.gif)
+![Screenshot](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_8.gif)
 
 # About
 TTGSnackbar is useful for showing a brief message at the bottom of the screen with an action button.  
@@ -13,6 +13,10 @@ It appears above all other elements on screen and only one can be displayed at a
 It disappears after a timeout or after user click the action button.
 
 # Installation
+### Requirement
+Swift 2.2  
+iOS 8+
+
 ### CocoaPods
 You can use [CocoaPods](http://cocoapods.org) to install `TTGSnackbar` by adding it to your `Podfile`:
 
@@ -40,13 +44,13 @@ import TTGSnackbar
 ## Show a simple message
 ![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_2.png)
 ```
-let snackbar = TTGSnackbar.init(message: "Message", duration: TTGSnackbarDuration.Short)
+let snackbar = TTGSnackbar.init(message: "Message", duration: .Short)
 snackbar.show()
 ```
 ## Show a simple message with an action button
 ![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_3.png)
 ```
-let snackbar = TTGSnackbar.init(message: "Message", duration: TTGSnackbarDuration.Middle, actionText: "Action")
+let snackbar = TTGSnackbar.init(message: "Message", duration: .Middle, actionText: "Action")
 { (snackbar) -> Void in
     NSLog("Click action!")
 }      
@@ -56,7 +60,7 @@ snackbar.show()
 ## Show a simple message with a long running action
 ![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_5.png)
 ```
-let snackbar = TTGSnackbar.init(message: "Message", duration: TTGSnackbarDuration.Forever, actionText: "Action")
+let snackbar = TTGSnackbar.init(message: "Message", duration: .Forever, actionText: "Action")
 { (snackbar) -> Void in
     NSLog("Click action!")
     // Dismiss manually after 3 seconds
@@ -64,6 +68,24 @@ let snackbar = TTGSnackbar.init(message: "Message", duration: TTGSnackbarDuratio
         snackbar.dismiss()
     }
 }      
+snackbar.show()
+```
+
+## Show a simple message with two action buttons
+![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_9.png)
+```
+let snackbar: TTGSnackbar = TTGSnackbar.init(message: "Two actions !", duration: .Long)
+
+// Action 1
+snackbar.actionText = "Yes"
+snackbar.actionTextColor = UIColor.greenColor()
+snackbar.actionBlock = { (snackbar) in NSLog("Click Yes !") }
+
+// Action 2
+snackbar.secondActionText = "No"
+snackbar.secondActionTextColor = UIColor.yellowColor()
+snackbar.secondActionBlock = { (snackbar) in NSLog("Click No !") }
+
 snackbar.show()
 ```
 
@@ -96,6 +118,14 @@ When you set `Forever`, the snackbar will show an activity indicator after user 
 ```
 // TTGActionBlock definition.
 public typealias TTGActionBlock = (snackbar: TTGSnackbar) -> Void
+```
+
+### Second action title, color, font and callback
+```
+secondActionText: String  
+secondActionTextColor: UIColor  
+secondActionTextFont: UIFont  
+secondActionBlock: TTGActionBlock?
 ```
 
 ### Dismiss callback
