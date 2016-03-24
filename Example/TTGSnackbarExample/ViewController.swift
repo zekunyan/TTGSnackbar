@@ -95,6 +95,7 @@ class ViewController: UIViewController {
         snackbar.secondActionTextColor = UIColor.yellowColor()
         snackbar.secondActionBlock = { (snackbar) in self.outputLabel?.text = "Click No !"}
         
+        snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
     
