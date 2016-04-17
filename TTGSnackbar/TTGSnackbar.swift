@@ -314,12 +314,11 @@ public class TTGSnackbar: UIView {
         seperateView.hidden = actionButton.hidden
         actionButtonWidthConstraint?.constant = actionButton.hidden ? 0 : (secondActionButton.hidden ? TTGSnackbar.snackbarActionButtonMaxWidth : TTGSnackbar.snackbarActionButtonMinWidth)
         secondActionButtonWidthConstraint?.constant = secondActionButton.hidden ? 0 : (actionButton.hidden ? TTGSnackbar.snackbarActionButtonMaxWidth : TTGSnackbar.snackbarActionButtonMinWidth)
-        
+
         self.layoutIfNeeded()
 
-        // Find current stop viewcontroller
-        if let topController = getTopViewController() {
-            let superView: UIView = topController.view
+        // Get windows to show
+        if let superView = UIApplication.sharedApplication().keyWindow {
             superView.addSubview(self)
 
             // Snackbar height constraint
@@ -351,6 +350,8 @@ public class TTGSnackbar: UIView {
 
             // Show 
             showWithAnimation()
+        } else {
+            fatalError("TTGSnackbar needs a keyWindows to display.")
         }
     }
 
@@ -471,7 +472,7 @@ public class TTGSnackbar: UIView {
 
         actionButton.addConstraint(actionButtonWidthConstraint!)
         secondActionButton.addConstraint(secondActionButtonWidthConstraint!)
-        
+
         self.addConstraints(hConstraints)
         self.addConstraints(vConstraintsForMessageLabel)
         self.addConstraints(vConstraintsForSeperateView)
@@ -487,19 +488,6 @@ public class TTGSnackbar: UIView {
     private func invalidDismissTimer() {
         dismissTimer?.invalidate()
         dismissTimer = nil
-    }
-
-    /**
-    Get the current top viewController.
-    
-    - returns: current top viewController instance or nil.
-    */
-    private func getTopViewController() -> UIViewController? {
-        var topController: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController
-        while topController?.presentedViewController != nil {
-            topController = topController?.presentedViewController
-        }
-        return topController
     }
 
     /**
