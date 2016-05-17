@@ -25,7 +25,7 @@ import Darwin
     case Short = 1
     case Middle = 3
     case Long = 5
-    case Forever = 9999999999 // Must dismiss manually.
+    case Forever = 2147483647 // Must dismiss manually.
 }
 
 /**
