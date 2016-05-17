@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '043576FB7555917F964B4AEA'
-               BlueprintName = 'TTGSnackbar'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'TTGSnackbar.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A87CA625D26442877FEF36E7A8BEEC48"
+               BlueprintName = "TTGSnackbar"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "TTGSnackbar.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
