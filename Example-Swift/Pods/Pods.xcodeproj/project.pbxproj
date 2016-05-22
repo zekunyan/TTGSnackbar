@@ -13,7 +13,7 @@
 		<key>0200032212F0B8ED9A0501B0D0EAB2CE</key>
 		<dict>
 			<key>fileRef</key>
-			<string>297E1D477AE806FEE09197833B6B7D31</string>
+			<string>939216D1911D8935213BD4DDB6EEA191</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -123,22 +123,6 @@
 			<key>targetProxy</key>
 			<string>0C8D0EF73BC5DE3330B7DAF1658276BC</string>
 		</dict>
-		<key>0F663895AA6D343CDC0DF4D899CCB4D4</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>7BA23A919A801523109133D47AC41971</string>
-				<string>76F8E05145BA5495E9F48738E3468298</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>TTGSnackbar</string>
-			<key>path</key>
-			<string>../..</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>0F8FA95337B864F2DCE178B5261B2341</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -191,6 +175,46 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>1926B7D69DDE74D5F24A28230BBEA41C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>TTGSnackbar.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1B0862F47C781A029D0FFF33D15B7A12</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TTGSnackbar-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1D79B666FB4906E7DE44653CB7A8CE18</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>24E07D5F09D7D30A76AA3573B4C2E047</string>
+				<string>D83A454BDDF0141D81DF391EADD781E7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>TTGSnackbar</string>
+			<key>path</key>
+			<string>../..</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>22B0551BC6B292EACA350B532130E0C6</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -202,29 +226,36 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>23ED3ACFF23491BA74AC107355EE107C</key>
+		<key>237E94C0EF96E25F74C537B60AD19891</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>TTGSnackbar-umbrella.h</string>
+			<string>TTGSnackbar-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>297E1D477AE806FEE09197833B6B7D31</key>
+		<key>24E07D5F09D7D30A76AA3573B4C2E047</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>DF50855D6E36C4E2271FBFA5BE4BA9F9</string>
+				<string>1926B7D69DDE74D5F24A28230BBEA41C</string>
+				<string>B989243DD68C841B142414CBFB869A42</string>
+				<string>237E94C0EF96E25F74C537B60AD19891</string>
+				<string>1B0862F47C781A029D0FFF33D15B7A12</string>
+				<string>FD6E460D29E03170CB47AFBD5E695F51</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
 			<key>path</key>
-			<string>TTGSnackbar.h</string>
+			<string>Example-Swift/Pods/Target Support Files/TTGSnackbar</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -337,7 +368,7 @@
 		<key>68A1715C7BA90A990149E7AA4109BB2B</key>
 		<dict>
 			<key>fileRef</key>
-			<string>23ED3ACFF23491BA74AC107355EE107C</string>
+			<string>FD6E460D29E03170CB47AFBD5E695F51</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -347,55 +378,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>76F8E05145BA5495E9F48738E3468298</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>297E1D477AE806FEE09197833B6B7D31</string>
-				<string>8A95BABFAB16ABD7E03A4651714D5441</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>TTGSnackbar</string>
-			<key>path</key>
-			<string>TTGSnackbar</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7BA23A919A801523109133D47AC41971</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BDE05451AAB679EDCE30CA0A094B6478</string>
-				<string>C2C6859E4F29091A6ED7EFBF25F32942</string>
-				<string>E108EC6895A4228277439E0A58B0410F</string>
-				<string>7BCCE4A3B287F1219152C5892DB86976</string>
-				<string>A6F3DA9F48D0ED73E34122D600358ED0</string>
-				<string>23ED3ACFF23491BA74AC107355EE107C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>Example/Pods/Target Support Files/TTGSnackbar</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7BCCE4A3B287F1219152C5892DB86976</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>TTGSnackbar-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>7CDABD31B94415AB6402154A3DE8DE18</key>
 		<dict>
@@ -457,7 +439,7 @@
 		<key>86248542B1FD639289FBD1D5FC2ABA4D</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>E108EC6895A4228277439E0A58B0410F</string>
+			<string>B989243DD68C841B142414CBFB869A42</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -576,19 +558,6 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>8A95BABFAB16ABD7E03A4651714D5441</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>TTGSnackbar.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>8D105C6BF8693B8100506AE90DED25E5</key>
 		<dict>
 			<key>fileRef</key>
@@ -615,6 +584,19 @@
 			<string>PBXHeadersBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
+		</dict>
+		<key>939216D1911D8935213BD4DDB6EEA191</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TTGSnackbar.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>945FB10E69AD0791D3927C5F0FB147A2</key>
 		<dict>
@@ -645,7 +627,7 @@
 		<key>9D5067D25C4B18358B867541C227DB12</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>E108EC6895A4228277439E0A58B0410F</string>
+			<string>B989243DD68C841B142414CBFB869A42</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -697,19 +679,6 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Release</string>
-		</dict>
-		<key>A6F3DA9F48D0ED73E34122D600358ED0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TTGSnackbar-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>A70CDAD61F90AC503C7D04CC22DA2923</key>
 		<dict>
@@ -809,6 +778,19 @@
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
+		<key>A89680BA97C927CBE471EFC7F0453273</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TTGSnackbar.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>A991E2C2943E4A96ED8AADA6E84B48C6</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -826,7 +808,7 @@
 		<dict>
 			<key>children</key>
 			<array>
-				<string>0F663895AA6D343CDC0DF4D899CCB4D4</string>
+				<string>1D79B666FB4906E7DE44653CB7A8CE18</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -835,10 +817,23 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>B989243DD68C841B142414CBFB869A42</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>TTGSnackbar.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>BA1EDB6DFE0EC4F281D5E63A2B47F3B4</key>
 		<dict>
 			<key>fileRef</key>
-			<string>8A95BABFAB16ABD7E03A4651714D5441</string>
+			<string>A89680BA97C927CBE471EFC7F0453273</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -886,23 +881,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>BDE05451AAB679EDCE30CA0A094B6478</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>BEB98C56F3ECA2A906181B218E952F4B</key>
 		<dict>
 			<key>fileRef</key>
-			<string>7BCCE4A3B287F1219152C5892DB86976</string>
+			<string>237E94C0EF96E25F74C537B60AD19891</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -931,17 +913,6 @@
 			<string>PBXSourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
-		</dict>
-		<key>C2C6859E4F29091A6ED7EFBF25F32942</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>TTGSnackbar.modulemap</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>C3CA7CCB2461E6E788F8F9C829224999</key>
 		<dict>
@@ -1009,12 +980,41 @@
 				<string>A87CA625D26442877FEF36E7A8BEEC48</string>
 			</array>
 		</dict>
+		<key>D83A454BDDF0141D81DF391EADD781E7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>939216D1911D8935213BD4DDB6EEA191</string>
+				<string>A89680BA97C927CBE471EFC7F0453273</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>TTGSnackbar</string>
+			<key>path</key>
+			<string>TTGSnackbar</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>DC9AD4528216B3CE7AC15F1AB98E8EE6</key>
 		<dict>
 			<key>fileRef</key>
 			<string>16AAEE9B808D50ACF38217764AEF8196</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>DF50855D6E36C4E2271FBFA5BE4BA9F9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>E0479117920B09C0A6D433281E4DEF91</key>
 		<dict>
@@ -1029,19 +1029,6 @@
 			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
-		</dict>
-		<key>E108EC6895A4228277439E0A58B0410F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>TTGSnackbar.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>F0DB743E374EB745EC679277EE1F4787</key>
 		<dict>
@@ -1151,6 +1138,19 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Release</string>
+		</dict>
+		<key>FD6E460D29E03170CB47AFBD5E695F51</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TTGSnackbar-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

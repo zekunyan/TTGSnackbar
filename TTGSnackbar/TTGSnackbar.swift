@@ -233,7 +233,16 @@ public class TTGSnackbar: UIView {
     private var secondActionButtonWidthConstraint: NSLayoutConstraint? = nil
 
     // MARK: -
-    // MARK: Init
+    // MARK: Default init
+
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    public override init(frame: CGRect) {
+        super.init(frame: TTGSnackbar.snackbarDefaultFrame)
+        configure()
+    }
 
     /**
      Default init
@@ -301,18 +310,12 @@ public class TTGSnackbar: UIView {
         self.actionTextFont = actionTextFont
         configure()
     }
+}
 
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+// MARK: -
+// MARK: Show methods.
 
-    public override init(frame: CGRect) {
-        super.init(frame: TTGSnackbar.snackbarDefaultFrame)
-        configure()
-    }
-
-    // MARK: -
-    // MARK: Public methods.
+public extension TTGSnackbar {
 
     /**
      Show the snackbar.
@@ -374,6 +377,61 @@ public class TTGSnackbar: UIView {
     }
 
     /**
+     Show.
+     */
+    private func showWithAnimation() {
+        var animationBlock: (() -> Void)? = nil
+        let superViewWidth = CGRectGetWidth((superview?.frame)!)
+
+        switch animationType {
+        case .FadeInFadeOut:
+            self.alpha = 0.0
+            self.layoutIfNeeded()
+            // Animation
+            animationBlock = {
+                self.alpha = 1.0
+            }
+        case .SlideFromBottomBackToBottom, .SlideFromBottomToTop:
+            bottomMarginConstraint?.constant = height
+            self.layoutIfNeeded()
+        case .SlideFromLeftToRight:
+            leftMarginConstraint?.constant = leftMargin - superViewWidth
+            rightMarginConstraint?.constant = -rightMargin - superViewWidth
+            bottomMarginConstraint?.constant = -bottomMargin
+            self.layoutIfNeeded()
+        case .SlideFromRightToLeft:
+            leftMarginConstraint?.constant = leftMargin + superViewWidth
+            rightMarginConstraint?.constant = -rightMargin + superViewWidth
+            bottomMarginConstraint?.constant = -bottomMargin
+            self.layoutIfNeeded()
+        case .Flip:
+            self.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI_2), 1, 0, 0)
+            self.layoutIfNeeded()
+            // Animation
+            animationBlock = {
+                self.layer.transform = CATransform3DMakeRotation(0, 1, 0, 0)
+            }
+        }
+
+        // Final state
+        bottomMarginConstraint?.constant = -bottomMargin
+        leftMarginConstraint?.constant = leftMargin
+        rightMarginConstraint?.constant = -rightMargin
+
+        UIView.animateWithDuration(animationDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .CurveEaseInOut,
+                animations: {
+                    () -> Void in
+                    animationBlock?()
+                    self.layoutIfNeeded()
+                }, completion: nil)
+    }
+}
+
+// MARK: -
+// MARK: Dismiss methods.
+
+public extension TTGSnackbar {
+    /**
      Dismiss the snackbar manually.
      */
     public func dismiss() {
@@ -384,13 +442,76 @@ public class TTGSnackbar: UIView {
         }
     }
 
-    // MARK: -
-    // MARK: Private methods.
+    /**
+     Dismiss.
+     
+     - parameter animated: If dismiss with animation.
+     */
+    private func dismissAnimated(animated: Bool) {
+        invalidDismissTimer()
+        activityIndicatorView.stopAnimating()
+
+        let superViewWidth = CGRectGetWidth((superview?.frame)!)
+
+        if !animated {
+            dismissBlock?(snackbar: self)
+            self.removeFromSuperview()
+            return
+        }
+
+        var animationBlock: (() -> Void)? = nil
+
+        switch animationType {
+        case .FadeInFadeOut:
+            animationBlock = {
+                self.alpha = 0.0
+            }
+        case .SlideFromBottomBackToBottom:
+            bottomMarginConstraint?.constant = height
+        case .SlideFromBottomToTop:
+            animationBlock = {
+                self.alpha = 0.0
+            }
+            bottomMarginConstraint?.constant = -height - bottomMargin
+        case .SlideFromLeftToRight:
+            leftMarginConstraint?.constant = leftMargin + superViewWidth
+            rightMarginConstraint?.constant = -rightMargin + superViewWidth
+        case .SlideFromRightToLeft:
+            leftMarginConstraint?.constant = leftMargin - superViewWidth
+            rightMarginConstraint?.constant = -rightMargin - superViewWidth
+        case .Flip:
+            animationBlock = {
+                self.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI_2), 1, 0, 0)
+            }
+        }
+
+        self.setNeedsLayout()
+        UIView.animateWithDuration(animationDuration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.2, options: .CurveEaseIn,
+                animations: {
+                    () -> Void in
+                    animationBlock?()
+                    self.layoutIfNeeded()
+                }) {
+            (finished) -> Void in
+            self.dismissBlock?(snackbar: self)
+            self.removeFromSuperview()
+        }
+    }
 
     /**
-     Init configuration.
+     Invalid the dismiss timer.
      */
-    private func configure() {
+    private func invalidDismissTimer() {
+        dismissTimer?.invalidate()
+        dismissTimer = nil
+    }
+}
+
+// MARK: -
+// MARK: Init configuration.
+
+private extension TTGSnackbar {
+    func configure() {
         // Clear subViews
         for subView in self.subviews {
             subView.removeFromSuperview()
@@ -504,125 +625,18 @@ public class TTGSnackbar: UIView {
         self.addConstraints(vConstraintsForActivityIndicatorView)
         self.addConstraints(hConstraintsForActivityIndicatorView)
     }
+}
 
-    /**
-     Invalid the dismiss timer.
-     */
-    private func invalidDismissTimer() {
-        dismissTimer?.invalidate()
-        dismissTimer = nil
-    }
+// MARK: -
+// MARK: Actions
 
+private extension TTGSnackbar {
     /**
-     Dismiss.
+     Action button callback
      
-     - parameter animated: If dismiss with animation.
+     - parameter button: action button
      */
-    private func dismissAnimated(animated: Bool) {
-        invalidDismissTimer()
-        activityIndicatorView.stopAnimating()
-
-        let superViewWidth = CGRectGetWidth((superview?.frame)!)
-
-        if !animated {
-            dismissBlock?(snackbar: self)
-            self.removeFromSuperview()
-            return
-        }
-
-        var animationBlock: (() -> Void)? = nil
-
-        switch animationType {
-        case .FadeInFadeOut:
-            animationBlock = {
-                self.alpha = 0.0
-            }
-        case .SlideFromBottomBackToBottom:
-            bottomMarginConstraint?.constant = height
-        case .SlideFromBottomToTop:
-            animationBlock = {
-                self.alpha = 0.0
-            }
-            bottomMarginConstraint?.constant = -height - bottomMargin
-        case .SlideFromLeftToRight:
-            leftMarginConstraint?.constant = leftMargin + superViewWidth
-            rightMarginConstraint?.constant = -rightMargin + superViewWidth
-        case .SlideFromRightToLeft:
-            leftMarginConstraint?.constant = leftMargin - superViewWidth
-            rightMarginConstraint?.constant = -rightMargin - superViewWidth
-        case .Flip:
-            animationBlock = {
-                self.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI_2), 1, 0, 0)
-            }
-        }
-
-        self.setNeedsLayout()
-        UIView.animateWithDuration(animationDuration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.2, options: .CurveEaseIn,
-                animations: {
-                    () -> Void in
-                    animationBlock?()
-                    self.layoutIfNeeded()
-                }) {
-            (finished) -> Void in
-            self.dismissBlock?(snackbar: self)
-            self.removeFromSuperview()
-        }
-    }
-
-    /**
-     Show.
-     */
-    private func showWithAnimation() {
-        var animationBlock: (() -> Void)? = nil
-        let superViewWidth = CGRectGetWidth((superview?.frame)!)
-
-        switch animationType {
-        case .FadeInFadeOut:
-            self.alpha = 0.0
-            self.layoutIfNeeded()
-            // Animation
-            animationBlock = {
-                self.alpha = 1.0
-            }
-        case .SlideFromBottomBackToBottom, .SlideFromBottomToTop:
-            bottomMarginConstraint?.constant = height
-            self.layoutIfNeeded()
-        case .SlideFromLeftToRight:
-            leftMarginConstraint?.constant = leftMargin - superViewWidth
-            rightMarginConstraint?.constant = -rightMargin - superViewWidth
-            bottomMarginConstraint?.constant = -bottomMargin
-            self.layoutIfNeeded()
-        case .SlideFromRightToLeft:
-            leftMarginConstraint?.constant = leftMargin + superViewWidth
-            rightMarginConstraint?.constant = -rightMargin + superViewWidth
-            bottomMarginConstraint?.constant = -bottomMargin
-            self.layoutIfNeeded()
-        case .Flip:
-            self.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI_2), 1, 0, 0)
-            self.layoutIfNeeded()
-            // Animation
-            animationBlock = {
-                self.layer.transform = CATransform3DMakeRotation(0, 1, 0, 0)
-            }
-        }
-
-        // Final state
-        bottomMarginConstraint?.constant = -bottomMargin
-        leftMarginConstraint?.constant = leftMargin
-        rightMarginConstraint?.constant = -rightMargin
-
-        UIView.animateWithDuration(animationDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .CurveEaseInOut,
-                animations: {
-                    () -> Void in
-                    animationBlock?()
-                    self.layoutIfNeeded()
-                }, completion: nil)
-    }
-
-    /**
-     Action button.
-     */
-    func doAction(button: UIButton) {
+    @objc func doAction(button: UIButton) {
         // Call action block first
         button == actionButton ? actionBlock?(snackbar: self) : secondActionBlock?(snackbar: self)
 
