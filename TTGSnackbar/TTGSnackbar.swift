@@ -45,7 +45,6 @@ import Darwin
     case SlideFromBottomBackToBottom
     case SlideFromLeftToRight
     case SlideFromRightToLeft
-    case Flip
 }
 
 public class TTGSnackbar: UIView {
@@ -404,13 +403,6 @@ public extension TTGSnackbar {
             rightMarginConstraint?.constant = -rightMargin + superViewWidth
             bottomMarginConstraint?.constant = -bottomMargin
             self.layoutIfNeeded()
-        case .Flip:
-            self.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI_2), 1, 0, 0)
-            self.layoutIfNeeded()
-            // Animation
-            animationBlock = {
-                self.layer.transform = CATransform3DMakeRotation(0, 1, 0, 0)
-            }
         }
 
         // Final state
@@ -479,10 +471,6 @@ public extension TTGSnackbar {
         case .SlideFromRightToLeft:
             leftMarginConstraint?.constant = leftMargin - superViewWidth
             rightMarginConstraint?.constant = -rightMargin - superViewWidth
-        case .Flip:
-            animationBlock = {
-                self.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI_2), 1, 0, 0)
-            }
         }
 
         self.setNeedsLayout()

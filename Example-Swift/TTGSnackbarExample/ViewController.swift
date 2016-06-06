@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputLabel: UILabel!
     @IBOutlet weak var animationTypeSegmented: UISegmentedControl!
 
-    let durationTypes = [TTGSnackbarDuration.Short, TTGSnackbarDuration.Middle, TTGSnackbarDuration.Long]
-    let animationTypes = [TTGSnackbarAnimationType.SlideFromBottomBackToBottom, TTGSnackbarAnimationType.FadeInFadeOut, TTGSnackbarAnimationType.SlideFromLeftToRight, TTGSnackbarAnimationType.Flip]
+    let durationTypes: [TTGSnackbarDuration] = [.Short, .Middle, .Long]
+    let animationTypes: [TTGSnackbarAnimationType] = [.SlideFromBottomBackToBottom, .FadeInFadeOut, .SlideFromLeftToRight]
 
     override func viewDidLoad() {
         super.viewDidLoad()
