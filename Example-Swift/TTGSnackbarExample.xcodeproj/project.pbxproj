@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		364A56CD90820911453E7004 /* Pods_TTGSnackbarExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B81739B556AFE5345E070D /* Pods_TTGSnackbarExample.framework */; };
+		4EA75401FA1454E0FD3537C7 /* Pods_TTGSnackbarExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C8FFBEFC60A2A841323DD7 /* Pods_TTGSnackbarExample.framework */; };
 		F4DECB541BC2ADEE00C7E3AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DECB531BC2ADEE00C7E3AB /* AppDelegate.swift */; };
 		F4DECB561BC2ADEE00C7E3AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DECB551BC2ADEE00C7E3AB /* ViewController.swift */; };
 		F4DECB591BC2ADEE00C7E3AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4DECB571BC2ADEE00C7E3AB /* Main.storyboard */; };
@@ -16,9 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A7B81739B556AFE5345E070D /* Pods_TTGSnackbarExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TTGSnackbarExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD08BC5575E9B1035D59F9AC /* Pods-TTGSnackbarExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTGSnackbarExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTGSnackbarExample/Pods-TTGSnackbarExample.release.xcconfig"; sourceTree = "<group>"; };
-		E0345AADC991DEE89E90AA64 /* Pods-TTGSnackbarExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTGSnackbarExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TTGSnackbarExample/Pods-TTGSnackbarExample.debug.xcconfig"; sourceTree = "<group>"; };
+		14C8FFBEFC60A2A841323DD7 /* Pods_TTGSnackbarExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TTGSnackbarExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		213806270AB24C7438425868 /* Pods-TTGSnackbarExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTGSnackbarExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTGSnackbarExample/Pods-TTGSnackbarExample.release.xcconfig"; sourceTree = "<group>"; };
+		25CDCD9414D82C0C7F512295 /* Pods-TTGSnackbarExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTGSnackbarExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TTGSnackbarExample/Pods-TTGSnackbarExample.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DECB501BC2ADEE00C7E3AB /* TTGSnackbarExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTGSnackbarExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4DECB531BC2ADEE00C7E3AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4DECB551BC2ADEE00C7E3AB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,26 +33,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				364A56CD90820911453E7004 /* Pods_TTGSnackbarExample.framework in Frameworks */,
+				4EA75401FA1454E0FD3537C7 /* Pods_TTGSnackbarExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		126BEB6810BB7CD70ABF549F /* Frameworks */ = {
+		459FDE62E4D9680032698462 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A7B81739B556AFE5345E070D /* Pods_TTGSnackbarExample.framework */,
+				14C8FFBEFC60A2A841323DD7 /* Pods_TTGSnackbarExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		53685B5E30C252FF8A5A6677 /* Pods */ = {
+		59E3A48323B8826B53E6E948 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E0345AADC991DEE89E90AA64 /* Pods-TTGSnackbarExample.debug.xcconfig */,
-				CD08BC5575E9B1035D59F9AC /* Pods-TTGSnackbarExample.release.xcconfig */,
+				25CDCD9414D82C0C7F512295 /* Pods-TTGSnackbarExample.debug.xcconfig */,
+				213806270AB24C7438425868 /* Pods-TTGSnackbarExample.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -62,8 +62,8 @@
 			children = (
 				F4DECB521BC2ADEE00C7E3AB /* TTGSnackbarExample */,
 				F4DECB511BC2ADEE00C7E3AB /* Products */,
-				53685B5E30C252FF8A5A6677 /* Pods */,
-				126BEB6810BB7CD70ABF549F /* Frameworks */,
+				59E3A48323B8826B53E6E948 /* Pods */,
+				459FDE62E4D9680032698462 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,12 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4DECB621BC2ADEE00C7E3AB /* Build configuration list for PBXNativeTarget "TTGSnackbarExample" */;
 			buildPhases = (
-				92F2DB5A4F74F29062E4B292 /* Check Pods Manifest.lock */,
+				CE17AA0F06C85A3186601F1D /* [CP] Check Pods Manifest.lock */,
 				F4DECB4C1BC2ADEE00C7E3AB /* Sources */,
 				F4DECB4D1BC2ADEE00C7E3AB /* Frameworks */,
 				F4DECB4E1BC2ADEE00C7E3AB /* Resources */,
-				F80D8077D8E364A29892F514 /* Embed Pods Frameworks */,
-				17DBF505C7FC67BBB3ECCCDD /* Copy Pods Resources */,
+				E41E02AE56B2904D630B4841 /* [CP] Embed Pods Frameworks */,
+				96D984F2113D6A363ABE2926 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -157,14 +157,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		17DBF505C7FC67BBB3ECCCDD /* Copy Pods Resources */ = {
+		96D984F2113D6A363ABE2926 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,14 +172,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TTGSnackbarExample/Pods-TTGSnackbarExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		92F2DB5A4F74F29062E4B292 /* Check Pods Manifest.lock */ = {
+		CE17AA0F06C85A3186601F1D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,14 +187,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F80D8077D8E364A29892F514 /* Embed Pods Frameworks */ = {
+		E41E02AE56B2904D630B4841 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,7 +319,7 @@
 		};
 		F4DECB631BC2ADEE00C7E3AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0345AADC991DEE89E90AA64 /* Pods-TTGSnackbarExample.debug.xcconfig */;
+			baseConfigurationReference = 25CDCD9414D82C0C7F512295 /* Pods-TTGSnackbarExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TTGSnackbarExample/Info.plist;
@@ -332,7 +332,7 @@
 		};
 		F4DECB641BC2ADEE00C7E3AB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD08BC5575E9B1035D59F9AC /* Pods-TTGSnackbarExample.release.xcconfig */;
+			baseConfigurationReference = 213806270AB24C7438425868 /* Pods-TTGSnackbarExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TTGSnackbarExample/Info.plist;

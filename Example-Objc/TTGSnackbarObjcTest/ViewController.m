@@ -20,6 +20,7 @@
     TTGSnackbar* snackbar = [[TTGSnackbar alloc] initWithMessage:@"TTGSnackbar by tutuge" duration:TTGSnackbarDurationLong actionText:@"Done" actionBlock:^(TTGSnackbar* snackbar) {
         NSLog(@"Press done.");
     }];
+    snackbar.icon = [UIImage imageNamed:@"emoji_cool_small"];
     [snackbar show];
 }
 
