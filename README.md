@@ -89,6 +89,17 @@ snackbar.secondActionBlock = { (snackbar) in NSLog("Click No !") }
 snackbar.show()
 ```
 
+## Show a simple message with an icon image
+![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_10.jpg)
+```
+let snackbar: TTGSnackbar = TTGSnackbar.init(message: "Two actions !", duration: .Long)
+
+// Add icon image
+snackbar.icon = UIImage.init(named: "emoji_cool_small")
+
+snackbar.show()
+```
+
 # Customization
 ### Message
 `message: String` defines the message to diaplay.
@@ -138,7 +149,7 @@ public typealias TTGDismissBlock = (snackbar: TTGSnackbar) -> Void
 ### Animation type
 `animationType: TTGSnackbarAnimationType` defines the style of snackbar when it show and dismiss.  
 
-`TTGSnackbarAnimationType` : `FadeInFadeOut`, `SlideFromBottomToTop`, `SlideFromBottomBackToBottom`, `SlideFromLeftToRight`,  `SlideFromRightToLeft` and `Flip`.
+`TTGSnackbarAnimationType` : `FadeInFadeOut`, `SlideFromBottomToTop`, `SlideFromBottomBackToBottom`, `SlideFromLeftToRight` and `SlideFromRightToLeft`.
 
 The default value of `animationType` is `SlideFromBottomBackToBottom`, which is the same as Snackbar in Android.
 
@@ -153,6 +164,12 @@ The default value of `animationType` is `SlideFromBottomBackToBottom`, which is 
 
 ### Corner radius
 `cornerRadius: CGFloat` defines the corner radius of snackbar.
+
+### Icon image
+`icon: UIImage` defines the icon image.
+
+### Icon image content mode
+`iconContentMode: UIViewContentMode` defines the content mode of icon imageView.
 
 # Contact me
 zekunyan@163.com

@@ -60,6 +60,9 @@ public class TTGSnackbar: UIView {
     /// Snackbar action button min width.
     private static let snackbarActionButtonMinWidth: CGFloat = 44
 
+    /// Snackbar icon imageView default width
+    private static let snackbarIconImageViewWidth: CGFloat = 32
+
     // MARK: -
     // MARK: Typealias
 
@@ -76,7 +79,7 @@ public class TTGSnackbar: UIView {
     public dynamic var actionBlock: TTGActionBlock? = nil
 
     /// Second action block
-    public dynamic var secondActionBlock: TTGActionBlock? = nil;
+    public dynamic var secondActionBlock: TTGActionBlock? = nil
 
     /// Dismiss callback.
     public dynamic var dismissBlock: TTGDismissBlock? = nil
@@ -144,42 +147,42 @@ public class TTGSnackbar: UIView {
     /// Main text shown on the snackbar.
     public dynamic var message: String = "" {
         didSet {
-            self.messageLabel.text = message
+            messageLabel.text = message
         }
     }
 
     /// Message text color. Default is white.
     public dynamic var messageTextColor: UIColor = UIColor.whiteColor() {
         didSet {
-            self.messageLabel.textColor = messageTextColor
+            messageLabel.textColor = messageTextColor
         }
     }
 
     /// Message text font. Default is Bold system font (14).
     public dynamic var messageTextFont: UIFont = UIFont.boldSystemFontOfSize(14) {
         didSet {
-            self.messageLabel.font = messageTextFont
+            messageLabel.font = messageTextFont
         }
     }
 
     /// Message text alignment. Default is left
     public dynamic var messageTextAlign: NSTextAlignment = .Left {
         didSet {
-            self.messageLabel.textAlignment = messageTextAlign
+            messageLabel.textAlignment = messageTextAlign
         }
     }
 
     /// Action button title.
     public dynamic var actionText: String = "" {
         didSet {
-            self.actionButton.setTitle(actionText, forState: UIControlState.Normal)
+            actionButton.setTitle(actionText, forState: UIControlState.Normal)
         }
     }
 
     /// Second action button title.
     public dynamic var secondActionText: String = "" {
         didSet {
-            self.secondActionButton.setTitle(secondActionText, forState: UIControlState.Normal)
+            secondActionButton.setTitle(secondActionText, forState: UIControlState.Normal)
         }
     }
 
@@ -200,20 +203,35 @@ public class TTGSnackbar: UIView {
     /// Action text font. Default is Bold system font (14).
     public dynamic var actionTextFont: UIFont = UIFont.boldSystemFontOfSize(14) {
         didSet {
-            self.actionButton.titleLabel?.font = actionTextFont
+            actionButton.titleLabel?.font = actionTextFont
         }
     }
 
     /// Second action text font. Default is Bold system font (14).
     public dynamic var secondActionTextFont: UIFont = UIFont.boldSystemFontOfSize(14) {
         didSet {
-            self.secondActionButton.titleLabel?.font = secondActionTextFont
+            secondActionButton.titleLabel?.font = secondActionTextFont
+        }
+    }
+
+    /// Icon image
+    public dynamic var icon: UIImage? = nil {
+        didSet {
+            iconImageView.image = icon
+        }
+    }
+
+    /// Icon image content 
+    public dynamic var iconContentMode: UIViewContentMode = .Center {
+        didSet {
+            iconImageView.contentMode = iconContentMode
         }
     }
 
     // MARK: -
     // MARK: Private property.
 
+    private var iconImageView: UIImageView!
     private var messageLabel: UILabel!
     private var seperateView: UIView!
     private var actionButton: UIButton!
@@ -228,6 +246,7 @@ public class TTGSnackbar: UIView {
     private var leftMarginConstraint: NSLayoutConstraint? = nil
     private var rightMarginConstraint: NSLayoutConstraint? = nil
     private var bottomMarginConstraint: NSLayoutConstraint? = nil
+    private var iconImageViewWidthConstraint: NSLayoutConstraint? = nil
     private var actionButtonWidthConstraint: NSLayoutConstraint? = nil
     private var secondActionButtonWidthConstraint: NSLayoutConstraint? = nil
 
@@ -329,9 +348,11 @@ public extension TTGSnackbar {
         dismissTimer = NSTimer.scheduledTimerWithTimeInterval((NSTimeInterval)(duration.rawValue), target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
 
         // Show or hide action button
+        iconImageView.hidden = icon == nil
         actionButton.hidden = actionText.isEmpty || actionBlock == nil
         secondActionButton.hidden = secondActionText.isEmpty || secondActionBlock == nil
         seperateView.hidden = actionButton.hidden
+        iconImageViewWidthConstraint?.constant = iconImageView.hidden ? 0 : TTGSnackbar.snackbarIconImageViewWidth
         actionButtonWidthConstraint?.constant = actionButton.hidden ? 0 : (secondActionButton.hidden ? TTGSnackbar.snackbarActionButtonMaxWidth : TTGSnackbar.snackbarActionButtonMinWidth)
         secondActionButtonWidthConstraint?.constant = secondActionButton.hidden ? 0 : (actionButton.hidden ? TTGSnackbar.snackbarActionButtonMaxWidth : TTGSnackbar.snackbarActionButtonMinWidth)
 
@@ -510,6 +531,12 @@ private extension TTGSnackbar {
         self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
 
+        iconImageView = UIImageView()
+        iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        iconImageView.backgroundColor = UIColor.clearColor()
+        iconImageView.contentMode = iconContentMode
+        self.addSubview(iconImageView)
+
         messageLabel = UILabel()
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.textColor = UIColor.whiteColor()
@@ -553,10 +580,16 @@ private extension TTGSnackbar {
 
         // Add constraints
         let hConstraints: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
-        "H:|-4-[messageLabel]-2-[seperateView(0.5)]-2-[actionButton]-0-[secondActionButton]-4-|",
+        "H:|-2-[iconImageView]-2-[messageLabel]-2-[seperateView(0.5)]-2-[actionButton]-0-[secondActionButton]-4-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
-                views: ["messageLabel": messageLabel, "seperateView": seperateView, "actionButton": actionButton, "secondActionButton": secondActionButton])
+                views: ["iconImageView": iconImageView, "messageLabel": messageLabel, "seperateView": seperateView, "actionButton": actionButton, "secondActionButton": secondActionButton])
+
+        let vConstraintsForIconImageView: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
+        "V:|-2-[iconImageView]-2-|",
+                options: NSLayoutFormatOptions(rawValue: 0),
+                metrics: nil,
+                views: ["iconImageView": iconImageView])
 
         let vConstraintsForMessageLabel: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
         "V:|-0-[messageLabel]-0-|",
@@ -582,6 +615,10 @@ private extension TTGSnackbar {
                 metrics: nil,
                 views: ["secondActionButton": secondActionButton])
 
+        iconImageViewWidthConstraint = NSLayoutConstraint.init(
+        item: iconImageView, attribute: .Width, relatedBy: .Equal,
+                toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarIconImageViewWidth)
+
         actionButtonWidthConstraint = NSLayoutConstraint.init(
         item: actionButton, attribute: .Width, relatedBy: .Equal,
                 toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarActionButtonMinWidth)
@@ -602,10 +639,12 @@ private extension TTGSnackbar {
                 metrics: ["activityIndicatorWidth": height - 4],
                 views: ["activityIndicatorView": activityIndicatorView])
 
+        iconImageView.addConstraint(iconImageViewWidthConstraint!)
         actionButton.addConstraint(actionButtonWidthConstraint!)
         secondActionButton.addConstraint(secondActionButtonWidthConstraint!)
 
         self.addConstraints(hConstraints)
+        self.addConstraints(vConstraintsForIconImageView)
         self.addConstraints(vConstraintsForMessageLabel)
         self.addConstraints(vConstraintsForSeperateView)
         self.addConstraints(vConstraintsForActionButton)

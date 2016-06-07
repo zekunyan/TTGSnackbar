@@ -99,5 +99,14 @@ class ViewController: UIViewController {
         snackbar.show()
     }
     
+    @IBAction func showWithIconImage(sender: UIButton) {
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
+        
+        // Add icon image
+        snackbar.icon = UIImage.init(named: "emoji_cool_small")
+        
+        snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
+        snackbar.show()
+    }
 }
 
