@@ -542,7 +542,7 @@ private extension TTGSnackbar {
         messageLabel.textColor = UIColor.whiteColor()
         messageLabel.font = messageTextFont
         messageLabel.backgroundColor = UIColor.clearColor()
-        messageLabel.lineBreakMode = .ByCharWrapping
+        messageLabel.lineBreakMode = .ByWordWrapping
         messageLabel.numberOfLines = 2
         messageLabel.textAlignment = .Left
         messageLabel.text = message
