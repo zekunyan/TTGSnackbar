@@ -45,6 +45,8 @@ import Darwin
     case SlideFromBottomBackToBottom
     case SlideFromLeftToRight
     case SlideFromRightToLeft
+    case SlideFromTopToBottom
+    case SlideFromTopBackToTop
 }
 
 public class TTGSnackbar: UIView {
@@ -125,10 +127,18 @@ public class TTGSnackbar: UIView {
         }
     }
 
-    /// Bottom margin. Default is 4
+    /// Bottom margin. Default is 4, only work when snackbar is at bottom
     public dynamic var bottomMargin: CGFloat = 4 {
         didSet {
             bottomMarginConstraint?.constant = -bottomMargin
+            self.layoutIfNeeded()
+        }
+    }
+    
+    /// Top margin. Default is 4, only work when snackbar is at top
+    public dynamic var topMargin: CGFloat = 4 {
+        didSet {
+            topMarginConstraint?.constant = topMargin
             self.layoutIfNeeded()
         }
     }
@@ -246,6 +256,7 @@ public class TTGSnackbar: UIView {
     private var leftMarginConstraint: NSLayoutConstraint? = nil
     private var rightMarginConstraint: NSLayoutConstraint? = nil
     private var bottomMarginConstraint: NSLayoutConstraint? = nil
+    private var topMarginConstraint: NSLayoutConstraint? = nil
     private var iconImageViewWidthConstraint: NSLayoutConstraint? = nil
     private var actionButtonWidthConstraint: NSLayoutConstraint? = nil
     private var secondActionButtonWidthConstraint: NSLayoutConstraint? = nil
@@ -376,19 +387,27 @@ public extension TTGSnackbar {
 
             // Bottom margin constraint
             bottomMarginConstraint = NSLayoutConstraint.init(item: self, attribute: .Bottom,
-                    relatedBy: .Equal, toItem: superview, attribute: .Bottom, multiplier: 1, constant: -bottomMargin)
+                    relatedBy: .Equal, toItem: superView, attribute: .Bottom, multiplier: 1, constant: -bottomMargin)
+            
+            // Top margin constraint
+            topMarginConstraint = NSLayoutConstraint.init(item: self, attribute: .Top, relatedBy: .Equal, toItem: superView, attribute: .Top, multiplier: 1, constant: topMargin)
 
             // Avoid the "UIView-Encapsulated-Layout-Height" constraint conflicts
             // http://stackoverflow.com/questions/25059443/what-is-nslayoutconstraint-uiview-encapsulated-layout-height-and-how-should-i
             leftMarginConstraint?.priority = 999
             rightMarginConstraint?.priority = 999
-
+            topMarginConstraint?.priority = 999
+            bottomMarginConstraint?.priority = 999
+            
             // Add constraints
             self.addConstraint(heightConstraint!)
             superView.addConstraint(leftMarginConstraint!)
             superView.addConstraint(rightMarginConstraint!)
             superView.addConstraint(bottomMarginConstraint!)
+            superView.addConstraint(topMarginConstraint!)
 
+            topMarginConstraint?.active = false
+            
             // Show
             showWithAnimation()
         } else {
@@ -424,10 +443,16 @@ public extension TTGSnackbar {
             rightMarginConstraint?.constant = -rightMargin + superViewWidth
             bottomMarginConstraint?.constant = -bottomMargin
             self.layoutIfNeeded()
+        case .SlideFromTopBackToTop, .SlideFromTopToBottom:
+            bottomMarginConstraint?.active = false
+            topMarginConstraint?.active = true
+            topMarginConstraint?.constant = -height
+            self.layoutIfNeeded()
         }
 
         // Final state
         bottomMarginConstraint?.constant = -bottomMargin
+        topMarginConstraint?.constant = topMargin
         leftMarginConstraint?.constant = leftMargin
         rightMarginConstraint?.constant = -rightMargin
 
@@ -492,6 +517,12 @@ public extension TTGSnackbar {
         case .SlideFromRightToLeft:
             leftMarginConstraint?.constant = leftMargin - superViewWidth
             rightMarginConstraint?.constant = -rightMargin - superViewWidth
+        case .SlideFromTopToBottom:
+            topMarginConstraint?.active = false
+            bottomMarginConstraint?.active = true
+            bottomMarginConstraint?.constant = height
+        case .SlideFromTopBackToTop:
+            topMarginConstraint?.constant = -height
         }
 
         self.setNeedsLayout()
