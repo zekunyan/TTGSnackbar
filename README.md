@@ -150,7 +150,7 @@ public typealias TTGDismissBlock = (snackbar: TTGSnackbar) -> Void
 ### Animation type
 `animationType: TTGSnackbarAnimationType` defines the style of snackbar when it show and dismiss.  
 
-`TTGSnackbarAnimationType` : `FadeInFadeOut`, `SlideFromBottomToTop`, `SlideFromBottomBackToBottom`, `SlideFromLeftToRight` and `SlideFromRightToLeft`.
+`TTGSnackbarAnimationType` : `FadeInFadeOut`, `SlideFromBottomToTop`, `SlideFromBottomBackToBottom`, `SlideFromLeftToRight`,  `SlideFromRightToLeft`, `SlideFromTopToBottom` and `SlideFromTopBackToTop`.
 
 The default value of `animationType` is `SlideFromBottomBackToBottom`, which is the same as Snackbar in Android.
 
@@ -158,7 +158,7 @@ The default value of `animationType` is `SlideFromBottomBackToBottom`, which is 
 `animationDuration: NSTimeInterval` defines the duration of show and hide animation.
 
 ### Margins
-`leftMargin: CGFloat`, `rightMargin: CGFloat` and `bottomMargin: CGFloat` define the margins of snackbar.
+`leftMargin: CGFloat`, `rightMargin: CGFloat`, `topMargin: CGFloat` and `bottomMargin: CGFloat` define the margins of snackbar.
 
 ### Snackbar height
 `height: CGFloat` defines the height of snackbar.
