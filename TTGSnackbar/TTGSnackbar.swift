@@ -625,7 +625,7 @@ private extension TTGSnackbar {
                 metrics: nil,
                 views: ["iconImageView": iconImageView, "messageLabel": messageLabel, "seperateView": seperateView, "actionButton": actionButton, "secondActionButton": secondActionButton])
 
-        leftPaddingConstraint = NSLayoutConstraint.init(item: iconImageView, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant: leftPadding)
+        leftPaddingConstraint = NSLayoutConstraint.init(item: iconImageView, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant: leftPadding)
         
         let vConstraintsForIconImageView: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
         "V:|-2-[iconImageView]-2-|",
