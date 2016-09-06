@@ -26,6 +26,9 @@ class ViewController: UIViewController {
     @IBAction func show(sender: UIButton) {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
+        // Change the left padding
+        // snackbar.leftPadding = 15
+        
         // Change message text font and color
         snackbar.messageTextColor = UIColor.yellowColor()
         snackbar.messageTextFont = UIFont.boldSystemFontOfSize(18)

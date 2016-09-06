@@ -142,6 +142,14 @@ public class TTGSnackbar: UIView {
             self.layoutIfNeeded()
         }
     }
+    
+    /// Left padding. Default is 2
+    public dynamic var leftPadding: CGFloat = 2 {
+        didSet {
+            leftPaddingConstraint?.constant = leftPadding
+            self.layoutIfNeeded()
+        }
+    }
 
     /// Height: [44, +]. Default is 44
     public dynamic var height: CGFloat = 44 {
@@ -257,6 +265,7 @@ public class TTGSnackbar: UIView {
     private var rightMarginConstraint: NSLayoutConstraint? = nil
     private var bottomMarginConstraint: NSLayoutConstraint? = nil
     private var topMarginConstraint: NSLayoutConstraint? = nil
+    private var leftPaddingConstraint: NSLayoutConstraint? = nil
     private var iconImageViewWidthConstraint: NSLayoutConstraint? = nil
     private var actionButtonWidthConstraint: NSLayoutConstraint? = nil
     private var secondActionButtonWidthConstraint: NSLayoutConstraint? = nil
@@ -611,11 +620,13 @@ private extension TTGSnackbar {
 
         // Add constraints
         let hConstraints: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
-        "H:|-2-[iconImageView]-2-[messageLabel]-2-[seperateView(0.5)]-2-[actionButton]-0-[secondActionButton]-4-|",
+        "H:|-2@500-[iconImageView]-2-[messageLabel]-2-[seperateView(0.5)]-2-[actionButton]-0-[secondActionButton]-4-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
                 views: ["iconImageView": iconImageView, "messageLabel": messageLabel, "seperateView": seperateView, "actionButton": actionButton, "secondActionButton": secondActionButton])
 
+        leftPaddingConstraint = NSLayoutConstraint.init(item: iconImageView, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant: leftPadding)
+        
         let vConstraintsForIconImageView: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat(
         "V:|-2-[iconImageView]-2-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
@@ -675,6 +686,7 @@ private extension TTGSnackbar {
         secondActionButton.addConstraint(secondActionButtonWidthConstraint!)
 
         self.addConstraints(hConstraints)
+        self.addConstraint(leftPaddingConstraint!)
         self.addConstraints(vConstraintsForIconImageView)
         self.addConstraints(vConstraintsForMessageLabel)
         self.addConstraints(vConstraintsForSeperateView)
