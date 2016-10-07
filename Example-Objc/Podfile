@@ -1,6 +1,0 @@
-platform :ios, '8.0'
-use_frameworks!
-
-target 'TTGSnackbarObjcTest' do
-    pod "TTGSnackbar", :path => "../"
-end

@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'TTGSnackbar_Example' do
+  pod 'TTGSnackbar', :path => '../'
+
+  target 'TTGSnackbar_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

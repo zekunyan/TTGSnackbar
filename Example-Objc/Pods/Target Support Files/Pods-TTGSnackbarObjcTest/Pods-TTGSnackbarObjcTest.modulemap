@@ -1,6 +1,0 @@
-framework module Pods_TTGSnackbarObjcTest {
-  umbrella header "Pods-TTGSnackbarObjcTest-umbrella.h"
-
-  export *
-  module * { export * }
-}

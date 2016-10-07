@@ -6,25 +6,23 @@ A Swift based implementation of the Android Snackbar for iOS
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 
-![Screenshot](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_8.gif)
+![Screenshot](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_example.gif)
 
 # About
-TTGSnackbar is useful for showing a brief message at the bottom of the screen with an action button.  
-It appears above all other elements on screen and only one can be displayed at a time.  
+TTGSnackbar is useful for showing a brief message at bottom or top of the screen with one or two action button.  
+It appears above all other elements on screen.  
 It disappears after a timeout or after user click the action button.
 
 # Installation
 ### Requirement
-Swift 2.2  
+Swift 3  
+Xcode 8  
 iOS 8+
 
 ### CocoaPods
 You can use [CocoaPods](http://cocoapods.org) to install `TTGSnackbar` by adding it to your `Podfile`:
 
 ```ruby
-platform :ios, '8.0'
-use_frameworks!
-
 pod "TTGSnackbar"
 ```
 
