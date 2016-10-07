@@ -11,4 +11,4 @@ before_install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 - pod install --project-directory=Example-Swift
 script:
-- set -o pipefail && xcodebuild clean build -workspace Example-Swift/TTGSnackbarExample.xcworkspace -scheme TTGSnackbarExample -sdk iphonesimulator10.0 -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+- set -o pipefail && xcodebuild clean build -workspace Example-Swift/TTGSnackbarExample.xcworkspace -scheme TTGSnackbarExample -sdk iphonesimulator10.0 -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
