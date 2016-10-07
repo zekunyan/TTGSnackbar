@@ -7,6 +7,7 @@ language: objective-c
 cache: cocoapods
 podfile: Example-Swift/Podfile
 before_install:
+- rvm get head || true
 - gem install cocoapods # Since Travis is not always on latest version
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 - pod install --project-directory=Example-Swift
