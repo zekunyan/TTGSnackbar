@@ -1,6 +1,0 @@
-framework module Pods_TTGSnackbarExample {
-  umbrella header "Pods-TTGSnackbarExample-umbrella.h"
-
-  export *
-  module * { export * }
-}
