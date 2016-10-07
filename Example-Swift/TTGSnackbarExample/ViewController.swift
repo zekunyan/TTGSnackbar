@@ -16,22 +16,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputLabel: UILabel!
     @IBOutlet weak var animationTypeSegmented: UISegmentedControl!
 
-    let durationTypes: [TTGSnackbarDuration] = [.Short, .Middle, .Long]
-    let animationTypes: [TTGSnackbarAnimationType] = [.SlideFromBottomBackToBottom, .FadeInFadeOut, .SlideFromLeftToRight]
+    let durationTypes: [TTGSnackbarDuration] = [.short, .middle, .long]
+    let animationTypes: [TTGSnackbarAnimationType] = [.slideFromBottomBackToBottom, .fadeInFadeOut, .slideFromLeftToRight, .slideFromTopBackToTop]
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
-    @IBAction func show(sender: UIButton) {
+    @IBAction func show(_ sender: UIButton) {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Change the left padding
         snackbar.leftPadding = 15
         
         // Change message text font and color
-        snackbar.messageTextColor = UIColor.yellowColor()
-        snackbar.messageTextFont = UIFont.boldSystemFontOfSize(18)
+        snackbar.messageTextColor = UIColor.yellow
+        snackbar.messageTextFont = UIFont.boldSystemFont(ofSize: 18)
         
         // Change animation duration
         snackbar.animationDuration = 0.5
@@ -40,14 +40,14 @@ class ViewController: UIViewController {
         snackbar.show()
     }
 
-    @IBAction func showWithAction(sender: UIButton) {
+    @IBAction func showWithAction(_ sender: UIButton) {
         outputLabel?.text = "";
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex],
                 actionText: actionTextField.text!, actionBlock: { (snackbar) in self.outputLabel?.text = "Click action !" })
 
         // Change action text font and color
-        snackbar.actionTextColor = UIColor.grayColor()
-        snackbar.actionTextFont = UIFont.italicSystemFontOfSize(16)
+        snackbar.actionTextColor = UIColor.gray
+        snackbar.actionTextFont = UIFont.italicSystemFont(ofSize: 16)
         
         // Change left and right margin
         snackbar.leftMargin = 12
@@ -63,14 +63,14 @@ class ViewController: UIViewController {
         snackbar.show()
     }
 
-    @IBAction func showWithActionAndDismissManually(sender: UIButton) {
+    @IBAction func showWithActionAndDismissManually(_ sender: UIButton) {
         outputLabel?.text = "";
-        let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: TTGSnackbarDuration.Forever,
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: TTGSnackbarDuration.forever,
                 actionText: actionTextField.text!) {
             (snackbar) in
 
             // Dismiss manually after 3 seconds
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
                 () -> Void in
                 snackbar.dismiss()
             }
@@ -85,24 +85,24 @@ class ViewController: UIViewController {
         snackbar.show()
     }
     
-    @IBAction func showWithTwoActions(sender: UIButton) {
+    @IBAction func showWithTwoActions(_ sender: UIButton) {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: "Two actions !", duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Action 1
         snackbar.actionText = "Yes"
-        snackbar.actionTextColor = UIColor.greenColor()
+        snackbar.actionTextColor = UIColor.green
         snackbar.actionBlock = { (snackbar) in self.outputLabel?.text = "Click Yes !"}
         
         // Action 2
         snackbar.secondActionText = "No"
-        snackbar.secondActionTextColor = UIColor.yellowColor()
+        snackbar.secondActionTextColor = UIColor.yellow
         snackbar.secondActionBlock = { (snackbar) in self.outputLabel?.text = "Click No !"}
         
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
     
-    @IBAction func showWithIconImage(sender: UIButton) {
+    @IBAction func showWithIconImage(_ sender: UIButton) {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Add icon image
