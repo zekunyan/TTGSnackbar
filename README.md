@@ -41,13 +41,13 @@ import TTGSnackbar
 
 # Usage
 ## Show a simple message
-![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_2.png)
+![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_1.png)
 ```
 let snackbar = TTGSnackbar.init(message: "Message", duration: .Short)
 snackbar.show()
 ```
 ## Show a simple message with an action button
-![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_3.png)
+![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_2.png)
 ```
 let snackbar = TTGSnackbar.init(message: "Message", duration: .Middle, actionText: "Action")
 { (snackbar) -> Void in
@@ -57,7 +57,7 @@ snackbar.show()
 ```
 
 ## Show a simple message with a long running action
-![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_5.png)
+![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_3.png)
 ```
 let snackbar = TTGSnackbar.init(message: "Message", duration: .Forever, actionText: "Action")
 { (snackbar) -> Void in
@@ -71,7 +71,7 @@ snackbar.show()
 ```
 
 ## Show a simple message with two action buttons
-![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_9.png)
+![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_4.png)
 ```
 let snackbar: TTGSnackbar = TTGSnackbar.init(message: "Two actions !", duration: .Long)
 
@@ -89,7 +89,7 @@ snackbar.show()
 ```
 
 ## Show a simple message with an icon image
-![Example](http://7nj2iz.com1.z0.glb.clouddn.com/TTGSnackbar_10.jpg)
+![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_5.jpg)
 ```
 let snackbar: TTGSnackbar = TTGSnackbar.init(message: "Two actions !", duration: .Long)
 
