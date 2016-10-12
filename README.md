@@ -5,6 +5,7 @@ A Swift based implementation of the Android Snackbar for iOS
 [![Version](https://img.shields.io/cocoapods/v/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
+[![Swift3](https://img.shields.io/badge/Swift-3-orange.svg)](https://developer.apple.com/swift)
 
 ![Screenshot](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_example.gif)
 
@@ -169,6 +170,9 @@ The default value of `animationType` is `SlideFromBottomBackToBottom`, which is 
 
 ### Icon image content mode
 `iconContentMode: UIViewContentMode` defines the content mode of icon imageView.
+
+### Custom container view
+`containerView: UIView` defines the custom container(super) view for snackbar to show.
 
 # Contact me
 zekunyan@163.com
