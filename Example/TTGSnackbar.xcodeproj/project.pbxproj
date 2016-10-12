@@ -15,6 +15,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		9914D18FA591028496939F6C /* Pods_TTGSnackbar_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F7ABD353050192D73D7747 /* Pods_TTGSnackbar_Example.framework */; };
+		BFE73A871DAE994A006BCA4C /* ShowInCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE73A861DAE994A006BCA4C /* ShowInCustomViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		9889FDEBE0D1FEAB809545E3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		AE386374700F70BAECB30374 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		BE935B4F277FA7BA1E658F17 /* Pods-TTGSnackbar_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTGSnackbar_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTGSnackbar_Tests/Pods-TTGSnackbar_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		BFE73A861DAE994A006BCA4C /* ShowInCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowInCustomViewController.swift; sourceTree = "<group>"; };
 		C6C9949C1D4CDB0E5417997C /* Pods-TTGSnackbar_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTGSnackbar_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TTGSnackbar_Tests/Pods-TTGSnackbar_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		DC45051B2EE6D4807F9ACFB1 /* Pods-TTGSnackbar_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTGSnackbar_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTGSnackbar_Example/Pods-TTGSnackbar_Example.release.xcconfig"; sourceTree = "<group>"; };
 		FFE6F4198DD6169A55C29283 /* TTGSnackbar.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TTGSnackbar.podspec; path = ../TTGSnackbar.podspec; sourceTree = "<group>"; };
@@ -94,10 +96,11 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				BFE73A861DAE994A006BCA4C /* ShowInCustomViewController.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for TTGSnackbar";
@@ -365,6 +368,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				BFE73A871DAE994A006BCA4C /* ShowInCustomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

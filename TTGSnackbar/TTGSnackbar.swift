@@ -245,6 +245,9 @@ open class TTGSnackbar: UIView {
             iconImageView.contentMode = iconContentMode
         }
     }
+    
+    /// Custom container view
+    open dynamic var containerView: UIView?
 
     // MARK: -
     // MARK: Private property.
@@ -378,8 +381,8 @@ public extension TTGSnackbar {
 
         self.layoutIfNeeded()
 
-        // Get windows to show
-        if let superView = UIApplication.shared.keyWindow {
+        // Get super view to show
+        if let superView = containerView ?? UIApplication.shared.keyWindow {
             superView.addSubview(self)
 
             // Snackbar height constraint
