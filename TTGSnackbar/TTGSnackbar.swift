@@ -466,7 +466,7 @@ public extension TTGSnackbar {
         leftMarginConstraint?.constant = leftMargin
         rightMarginConstraint?.constant = -rightMargin
 
-        UIView.animate(withDuration: animationDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions(),
+        UIView.animate(withDuration: animationDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .allowUserInteraction,
                 animations: {
                     () -> Void in
                     animationBlock?()
@@ -496,6 +496,11 @@ public extension TTGSnackbar {
      - parameter animated: If dismiss with animation.
      */
     fileprivate func dismissAnimated(_ animated: Bool) {
+        // If the dismiss timer is nil, snackbar is dismissing or not ready to dismiss.
+        if dismissTimer == nil {
+            return
+        }
+        
         invalidDismissTimer()
         activityIndicatorView.stopAnimating()
 
