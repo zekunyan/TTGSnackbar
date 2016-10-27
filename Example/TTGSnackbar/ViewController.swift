@@ -59,6 +59,9 @@ class ViewController: UIViewController {
         // Change corner radius
         snackbar.cornerRadius = 2
         
+        // Change separate line back color
+        snackbar.separateViewBackgroundColor = .yellow
+        
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }

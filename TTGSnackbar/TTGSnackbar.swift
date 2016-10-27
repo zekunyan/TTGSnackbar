@@ -249,12 +249,19 @@ open class TTGSnackbar: UIView {
     /// Custom container view
     open dynamic var containerView: UIView?
 
+    /// SeparateView background color
+    open dynamic var separateViewBackgroundColor: UIColor = UIColor.gray {
+        didSet {
+            separateView.backgroundColor = separateViewBackgroundColor
+        }
+    }
+
     // MARK: -
     // MARK: Private property.
 
     fileprivate var iconImageView: UIImageView!
     fileprivate var messageLabel: UILabel!
-    fileprivate var seperateView: UIView!
+    fileprivate var separateView: UIView!
     fileprivate var actionButton: UIButton!
     fileprivate var secondActionButton: UIButton!
     fileprivate var activityIndicatorView: UIActivityIndicatorView!
@@ -374,7 +381,7 @@ public extension TTGSnackbar {
         iconImageView.isHidden = icon == nil
         actionButton.isHidden = actionText.isEmpty || actionBlock == nil
         secondActionButton.isHidden = secondActionText.isEmpty || secondActionBlock == nil
-        seperateView.isHidden = actionButton.isHidden
+        separateView.isHidden = actionButton.isHidden
         iconImageViewWidthConstraint?.constant = iconImageView.isHidden ? 0 : TTGSnackbar.snackbarIconImageViewWidth
         actionButtonWidthConstraint?.constant = actionButton.isHidden ? 0 : (secondActionButton.isHidden ? TTGSnackbar.snackbarActionButtonMaxWidth : TTGSnackbar.snackbarActionButtonMinWidth)
         secondActionButtonWidthConstraint?.constant = secondActionButton.isHidden ? 0 : (actionButton.isHidden ? TTGSnackbar.snackbarActionButtonMaxWidth : TTGSnackbar.snackbarActionButtonMinWidth)
@@ -614,10 +621,10 @@ private extension TTGSnackbar {
         secondActionButton.addTarget(self, action: #selector(doAction(_:)), for: .touchUpInside)
         self.addSubview(secondActionButton)
 
-        seperateView = UIView()
-        seperateView.translatesAutoresizingMaskIntoConstraints = false
-        seperateView.backgroundColor = UIColor.gray
-        self.addSubview(seperateView)
+        separateView = UIView()
+        separateView.translatesAutoresizingMaskIntoConstraints = false
+        separateView.backgroundColor = separateViewBackgroundColor
+        self.addSubview(separateView)
 
         activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
@@ -629,7 +636,7 @@ private extension TTGSnackbar {
         withVisualFormat: "H:|-2@500-[iconImageView]-2-[messageLabel]-2-[seperateView(0.5)]-2-[actionButton]-0-[secondActionButton]-4-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
-                views: ["iconImageView": iconImageView, "messageLabel": messageLabel, "seperateView": seperateView, "actionButton": actionButton, "secondActionButton": secondActionButton])
+                views: ["iconImageView": iconImageView, "messageLabel": messageLabel, "seperateView": separateView, "actionButton": actionButton, "secondActionButton": secondActionButton])
 
         leftPaddingConstraint = NSLayoutConstraint.init(item: iconImageView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: leftPadding)
         
@@ -649,7 +656,7 @@ private extension TTGSnackbar {
         withVisualFormat: "V:|-4-[seperateView]-4-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
-                views: ["seperateView": seperateView])
+                views: ["seperateView": separateView])
 
         let vConstraintsForActionButton: [NSLayoutConstraint] = NSLayoutConstraint.constraints(
         withVisualFormat: "V:|-0-[actionButton]-0-|",
@@ -720,7 +727,7 @@ private extension TTGSnackbar {
         if duration == .forever && actionButton.isHidden == false {
             actionButton.isHidden = true
             secondActionButton.isHidden = true
-            seperateView.isHidden = true
+            separateView.isHidden = true
             activityIndicatorView.isHidden = false
             activityIndicatorView.startAnimating()
         } else {
