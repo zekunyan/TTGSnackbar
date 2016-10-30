@@ -6,9 +6,12 @@ A Swift based implementation of the Android Snackbar for iOS
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Swift3](https://img.shields.io/badge/Swift-3-orange.svg)](https://developer.apple.com/swift)
-
 [![Apps Using](https://img.shields.io/badge/Apps%20Using-%3E%20416-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 [![Total Download](https://img.shields.io/badge/Total%20Download-%3E%2020329-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
+
+![Screenshot](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/screen_shot.png)
+
+# Gif
 
 ![Screenshot](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_example.gif)
 
@@ -103,6 +106,20 @@ snackbar.icon = UIImage.init(named: "emoji_cool_small")
 snackbar.show()
 ```
 
+## Show custom content view in snackbar
+![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_6.png)
+```
+let snackbar: TTGSnackbar = TTGSnackbar.init(message: "", duration: .Long)
+
+// Get custom content view
+let customContentView = UINib.init(nibName: "CustomView", bundle:Bundle.main).instantiate(withOwner: nil, options: nil).first as! UIView?
+
+// Set custom content view
+snackbar.customContentView = customContentView
+
+snackbar.show()
+```
+
 # Customization
 ### Message
 `message: String` defines the message to diaplay.
@@ -160,7 +177,10 @@ The default value of `animationType` is `SlideFromBottomBackToBottom`, which is 
 `animationDuration: NSTimeInterval` defines the duration of show and hide animation.
 
 ### Margins
-`leftMargin: CGFloat`, `rightMargin: CGFloat`, `topMargin: CGFloat` and `bottomMargin: CGFloat` define the margins of snackbar.
+`leftMargin: CGFloat`, `rightMargin: CGFloat`, `topMargin: CGFloat` and `bottomMargin: CGFloat` defines the margins of snackbar
+
+### Padding (Content inset)
+`contentInset: UIEdgeInsets` defines the padding(content inset) of content in the snackbar. Default is `UIEdgeInsets.init(top: 0, left: 4, bottom: 0, right: 4)`.
 
 ### Snackbar height
 `height: CGFloat` defines the height of snackbar.
@@ -174,8 +194,14 @@ The default value of `animationType` is `SlideFromBottomBackToBottom`, which is 
 ### Icon image content mode
 `iconContentMode: UIViewContentMode` defines the content mode of icon imageView.
 
-### Custom container view
+### [New!] Custom container view
 `containerView: UIView` defines the custom container(super) view for snackbar to show.
+
+### [New!] Custom content view
+`customContentView: UIView?` defines the custom content view to show in the snackbar.
+
+### Separator line view background color
+`separateViewBackgroundColor: UIColor = UIColor.gray` defines the separator line color.
 
 # Contact me
 zekunyan@163.com
