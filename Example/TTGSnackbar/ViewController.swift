@@ -26,8 +26,11 @@ class ViewController: UIViewController {
     @IBAction func show(_ sender: UIButton) {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
-        // Change the left padding
-        snackbar.leftPadding = 15
+        // Change the content padding inset
+        snackbar.contentInset = UIEdgeInsets.init(top: 4, left: 8, bottom: 4, right: 8)
+        
+        // Change the snackbar height
+        snackbar.height = 48
         
         // Change message text font and color
         snackbar.messageTextColor = UIColor.yellow
@@ -37,6 +40,7 @@ class ViewController: UIViewController {
         snackbar.animationDuration = 0.5
         
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
+        
         snackbar.show()
     }
     
@@ -47,7 +51,7 @@ class ViewController: UIViewController {
         
         // Change action text font and color
         snackbar.actionTextColor = UIColor.gray
-        snackbar.actionTextFont = UIFont.italicSystemFont(ofSize: 16)
+        snackbar.actionTextFont = UIFont.boldSystemFont(ofSize: 16)
         
         // Change left and right margin
         snackbar.leftMargin = 12
@@ -112,6 +116,27 @@ class ViewController: UIViewController {
         snackbar.icon = UIImage.init(named: "emoji_cool_small")
         
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
+        snackbar.show()
+    }
+    
+    @IBAction func showCustomContentView(_ sender: UIButton) {
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: "", duration: durationTypes[durationSegmented.selectedSegmentIndex])
+        
+        // Change the content padding inset
+        snackbar.contentInset = UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
+        
+        // Change animation duration
+        snackbar.animationDuration = 0.5
+        
+        // Animation type
+        snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
+        
+        // Get custom content view
+        let customContentView = UINib.init(nibName: "CustomView", bundle:Bundle.main).instantiate(withOwner: nil, options: nil).first as! UIView?
+        customContentView?.layer.masksToBounds = true
+        customContentView?.layer.cornerRadius = 4
+        snackbar.customContentView = customContentView
+        
         snackbar.show()
     }
 }
