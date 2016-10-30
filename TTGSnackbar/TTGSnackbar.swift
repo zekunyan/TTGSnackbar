@@ -408,13 +408,13 @@ public extension TTGSnackbar {
         self.addSubview(finalContentView!)
         finalContentView?.translatesAutoresizingMaskIntoConstraints = false
         
-        contentViewTopConstraint = NSLayoutConstraint.init(item: finalContentView, attribute: .top, relatedBy: .equal,
+        contentViewTopConstraint = NSLayoutConstraint.init(item: finalContentView!, attribute: .top, relatedBy: .equal,
                                                            toItem: self, attribute: .top, multiplier: 1, constant: contentInset.top)
-        contentViewBottomConstraint = NSLayoutConstraint.init(item: finalContentView, attribute: .bottom, relatedBy: .equal,
+        contentViewBottomConstraint = NSLayoutConstraint.init(item: finalContentView!, attribute: .bottom, relatedBy: .equal,
                                                               toItem: self, attribute: .bottom, multiplier: 1, constant: -contentInset.bottom)
-        contentViewLeftConstraint = NSLayoutConstraint.init(item: finalContentView, attribute: .left, relatedBy: .equal,
+        contentViewLeftConstraint = NSLayoutConstraint.init(item: finalContentView!, attribute: .left, relatedBy: .equal,
                                                             toItem: self, attribute: .left, multiplier: 1, constant: contentInset.left)
-        contentViewRightConstraint = NSLayoutConstraint.init(item: finalContentView, attribute: .right, relatedBy: .equal,
+        contentViewRightConstraint = NSLayoutConstraint.init(item: finalContentView!, attribute: .right, relatedBy: .equal,
                                                              toItem: self, attribute: .right, multiplier: 1, constant: -contentInset.right)
         
         self.addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])

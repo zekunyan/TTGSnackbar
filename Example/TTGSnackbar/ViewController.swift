@@ -33,8 +33,11 @@ class ViewController: UIViewController {
         snackbar.height = 48
         
         // Change message text font and color
-        snackbar.messageTextColor = UIColor.yellow
+        snackbar.messageTextColor = UIColor(red:0.22, green:0.29, blue:0.36, alpha:1.00)
         snackbar.messageTextFont = UIFont.boldSystemFont(ofSize: 18)
+        
+        // Change snackbar background color
+        snackbar.backgroundColor = UIColor(red:0.30, green:0.72, blue:0.53, alpha:1.00)
         
         // Change animation duration
         snackbar.animationDuration = 0.5
