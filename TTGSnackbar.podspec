@@ -1,11 +1,12 @@
 Pod::Spec.new do |s|
   s.name         = "TTGSnackbar"
   s.module_name  = "TTGSnackbar"
-  s.version      = "1.2.4"
-  s.summary      = "A Swift based implementation of the Android Snackbar for iOS. Show simple message and action button like a Toast."
+  s.version      = "1.3.0"
+  s.summary      = "A Swift based implementation of the Android Snackbar for iOS. Show simple message and action button or custom view like a Toast."
 
   s.description  = <<-DESC
                    TTGSnackbar is useful for showing a brief message at the bottom of the screen with an action button.
+                   It also supports showing icon image, two action buttons or custom content view.
                    It appears above all other elements on screen and only one can be displayed at a time.
                    It disappears after a timeout or after user click the action button.
                    DESC
