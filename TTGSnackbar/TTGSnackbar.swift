@@ -405,8 +405,8 @@ public extension TTGSnackbar {
         
         // Content View
         let finalContentView = customContentView ?? contentView
-        self.addSubview(finalContentView!)
         finalContentView?.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(finalContentView!)
         
         contentViewTopConstraint = NSLayoutConstraint.init(item: finalContentView!, attribute: .top, relatedBy: .equal,
                                                            toItem: self, attribute: .top, multiplier: 1, constant: contentInset.top)
@@ -418,22 +418,28 @@ public extension TTGSnackbar {
                                                              toItem: self, attribute: .right, multiplier: 1, constant: -contentInset.right)
         
         self.addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
-        self.layoutIfNeeded()
 
         // Get super view to show
         if let superView = containerView ?? UIApplication.shared.keyWindow {
             superView.addSubview(self)
 
             // Snackbar height constraint
-            height = customContentView != nil ? (customContentView?.bounds.size.height)! + contentInset.top + contentInset.bottom : height
+            var trueHeight: CGFloat = height
+            if let trueContentView = customContentView {
+                trueHeight = trueContentView.bounds.size.height + contentInset.top + contentInset.bottom
+            }
+            
             heightConstraint = NSLayoutConstraint.init(item: self, attribute: .height,
-                    relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
+                    relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: trueHeight)
             
             // Snackbar width constraint
+            var trueWidth: CGFloat = UIScreen.main.bounds.size.width - leftMargin - rightMargin
+            if let trueContentView = customContentView {
+                trueWidth = trueContentView.bounds.size.width + contentInset.left + contentInset.right
+            }
+            
             widthConstraint = NSLayoutConstraint.init(item: self, attribute: .width,
-                    relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1,
-                    constant: customContentView != nil ? (customContentView?.bounds.size.width)! + contentInset.left + contentInset.right :
-                        UIScreen.main.bounds.size.width - leftMargin - rightMargin)
+                    relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: trueWidth)
 
             // Left margin constraint
             leftMarginConstraint = NSLayoutConstraint.init(item: self, attribute: .left,
@@ -499,7 +505,7 @@ public extension TTGSnackbar {
                 self.alpha = 1.0
             }
         case .slideFromBottomBackToBottom, .slideFromBottomToTop:
-            bottomMarginConstraint?.constant = height
+            bottomMarginConstraint?.constant = (heightConstraint?.constant)!
         case .slideFromLeftToRight:
             leftMarginConstraint?.constant = leftMargin - superViewWidth
             rightMarginConstraint?.constant = -rightMargin - superViewWidth
@@ -513,7 +519,7 @@ public extension TTGSnackbar {
         case .slideFromTopBackToTop, .slideFromTopToBottom:
             bottomMarginConstraint?.isActive = false
             topMarginConstraint?.isActive = true
-            topMarginConstraint?.constant = -height
+            topMarginConstraint?.constant = -(heightConstraint?.constant)!
         }
         
         // Update init state
@@ -580,12 +586,12 @@ public extension TTGSnackbar {
                 self.alpha = 0.0
             }
         case .slideFromBottomBackToBottom:
-            bottomMarginConstraint?.constant = height
+            bottomMarginConstraint?.constant = (heightConstraint?.constant)!
         case .slideFromBottomToTop:
             animationBlock = {
                 self.alpha = 0.0
             }
-            bottomMarginConstraint?.constant = -height - bottomMargin
+            bottomMarginConstraint?.constant = -(heightConstraint?.constant)! - bottomMargin
         case .slideFromLeftToRight:
             leftMarginConstraint?.constant = leftMargin + superViewWidth
             rightMarginConstraint?.constant = -rightMargin + superViewWidth
@@ -597,9 +603,9 @@ public extension TTGSnackbar {
         case .slideFromTopToBottom:
             topMarginConstraint?.isActive = false
             bottomMarginConstraint?.isActive = true
-            bottomMarginConstraint?.constant = height
+            bottomMarginConstraint?.constant = (heightConstraint?.constant)!
         case .slideFromTopBackToTop:
-            topMarginConstraint?.constant = -height
+            topMarginConstraint?.constant = -(heightConstraint?.constant)!
         }
 
         self.setNeedsLayout()
