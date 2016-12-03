@@ -122,7 +122,7 @@ snackbar.show()
 
 # Customization
 ### Message
-`message: String` defines the message to diaplay.
+`message: String` defines the message to diaplay. **Support multi line text.**
 
 ### Message text color
 `messageTextColor: UIColor` defines the message text color.
@@ -200,8 +200,20 @@ The default value of `animationType` is `SlideFromBottomBackToBottom`, which is 
 ### [New!] Custom content view
 `customContentView: UIView?` defines the custom content view to show in the snackbar.
 
-### Separator line view background color
+### [New!] Separator line view background color
 `separateViewBackgroundColor: UIColor = UIColor.gray` defines the separator line color.
+
+### ActivityIndicatorViewStyle
+`activityIndicatorViewStyle: UIActivityIndicatorViewStyle` defines the activityIndicatorViewStyle in snackbar.
+
+### ActivityIndicatorView color
+`activityIndicatorViewColor: UIColor` defines the activityIndicatorView color in snackbar.
+
+### Animation SpringWithDamping
+`animationSpringWithDamping: CGFloat` defines the spring animation damping value. Default is 0.7.
+
+### Animation initialSpringVelocity
+`animationInitialSpringVelocity: CGFloat` defines the spring animation initial velocity. Default is 5.
 
 # Contact me
 zekunyan@163.com
