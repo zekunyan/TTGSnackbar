@@ -27,10 +27,11 @@ class ViewController: UIViewController {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Change the content padding inset
-        snackbar.contentInset = UIEdgeInsets.init(top: 4, left: 8, bottom: 4, right: 8)
+        snackbar.contentInset = UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
         
-        // Change the snackbar height
-        snackbar.height = 48
+        // Change margin
+        snackbar.leftMargin = 8
+        snackbar.rightMargin = 8
         
         // Change message text font and color
         snackbar.messageTextColor = UIColor(red:0.22, green:0.29, blue:0.36, alpha:1.00)
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
         // Change animation duration
         snackbar.animationDuration = 0.5
         
+        // Animation type
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         
         snackbar.show()
