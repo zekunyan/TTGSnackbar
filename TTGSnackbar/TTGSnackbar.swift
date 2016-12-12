@@ -418,10 +418,11 @@ public extension TTGSnackbar {
 
         // Show or hide action button
         iconImageView.isHidden = icon == nil
-        separateView.isHidden = actionButton.isHidden
         
         actionButton.isHidden = actionText.isEmpty || actionBlock == nil
         secondActionButton.isHidden = secondActionText.isEmpty || secondActionBlock == nil
+        
+        separateView.isHidden = actionButton.isHidden
         
         iconImageViewWidthConstraint?.constant = iconImageView.isHidden ?
             0 : TTGSnackbar.snackbarIconImageViewWidth
