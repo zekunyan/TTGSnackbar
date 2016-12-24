@@ -688,7 +688,13 @@ private extension TTGSnackbar {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor.init(white: 0, alpha: 0.8)
         self.layer.cornerRadius = cornerRadius
-        self.layer.masksToBounds = true
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+        
+        self.layer.shadowOpacity = 0.4
+        self.layer.shadowRadius = 2
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
         
         contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
