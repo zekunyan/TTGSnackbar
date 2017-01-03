@@ -182,9 +182,6 @@ The default value of `animationType` is `SlideFromBottomBackToBottom`, which is 
 ### Padding (Content inset)
 `contentInset: UIEdgeInsets` defines the padding(content inset) of content in the snackbar. Default is `UIEdgeInsets.init(top: 0, left: 4, bottom: 0, right: 4)`.
 
-### Snackbar height
-`height: CGFloat` defines the height of snackbar.
-
 ### Corner radius
 `cornerRadius: CGFloat` defines the corner radius of snackbar.
 
