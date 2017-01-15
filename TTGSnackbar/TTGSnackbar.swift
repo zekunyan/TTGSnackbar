@@ -228,7 +228,7 @@ open class TTGSnackbar: UIView {
         }
     }
     
-    /// Action button text number of lines. Default is 2
+    /// Action button text number of lines. Default is 1
     open dynamic var actionTextNumberOfLines = 1 {
         didSet {
             actionButton.titleLabel?.numberOfLines = actionTextNumberOfLines

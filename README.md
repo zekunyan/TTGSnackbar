@@ -144,6 +144,12 @@ When you set `Forever`, the snackbar will show an activity indicator after user 
 ### Action title font
 `actionTextFont: UIFont` defines the action button title font.
 
+### Action max width
+`actionMaxWidth: CGFloat` defines the action button max width. Min is 44.
+
+### Action text number of lines
+`actionTextNumberOfLines` defines the number of lines of action button title. Default is 1.
+
 ### Action callback
 `actionBlock: TTGActionBlock?` will be called when user click the action button.
 ```
