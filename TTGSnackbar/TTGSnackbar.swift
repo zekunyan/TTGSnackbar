@@ -229,7 +229,7 @@ open class TTGSnackbar: UIView {
     }
     
     /// Action button text number of lines. Default is 1
-    open dynamic var actionTextNumberOfLines = 1 {
+    open dynamic var actionTextNumberOfLines: Int = 1 {
         didSet {
             actionButton.titleLabel?.numberOfLines = actionTextNumberOfLines
             secondActionButton.titleLabel?.numberOfLines = actionTextNumberOfLines
@@ -532,7 +532,7 @@ public extension TTGSnackbar {
     fileprivate func showWithAnimation() {
         var animationBlock: (() -> Void)? = nil
         let superViewWidth = (superview?.frame)!.width
-        let snackbarHeight = getSuitableHeightForCurrentContent()
+        let snackbarHeight = systemLayoutSizeFitting(.init(width: superViewWidth - leftMargin - rightMargin, height: TTGSnackbar.snackbarMinHeight)).height
 
         switch animationType {
             
@@ -884,20 +884,5 @@ private extension TTGSnackbar {
     @objc func onScreenRotateNotification() {
         messageLabel.preferredMaxLayoutWidth = messageLabel.frame.size.width
         layoutIfNeeded()
-    }
-}
-
-// MARK: -
-// MARK: Calculate Height
-
-private extension TTGSnackbar {
-    func getSuitableHeightForCurrentContent() -> CGFloat {
-        let tmpWidthConstraint = NSLayoutConstraint.init(item: self, attribute: .width, relatedBy: .equal,
-                                                         toItem: nil, attribute: .notAnAttribute, multiplier: 1,
-                                                         constant: (superview?.frame.size.width)! - leftMargin - rightMargin)
-        self.addConstraint(tmpWidthConstraint)
-        let snackbarHeight = self.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-        self.removeConstraint(tmpWidthConstraint)
-        return snackbarHeight
     }
 }
