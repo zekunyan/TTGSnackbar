@@ -148,7 +148,7 @@ When you set `Forever`, the snackbar will show an activity indicator after user 
 `actionMaxWidth: CGFloat` defines the action button max width. Min is 44.
 
 ### Action text number of lines
-`actionTextNumberOfLines` defines the number of lines of action button title. Default is 1.
+`actionTextNumberOfLines: Int` defines the number of lines of action button title. Default is 1.
 
 ### Action callback
 `actionBlock: TTGActionBlock?` will be called when user click the action button.
