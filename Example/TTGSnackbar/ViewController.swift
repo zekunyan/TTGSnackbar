@@ -58,6 +58,9 @@ class ViewController: UIViewController {
         snackbar.actionTextColor = UIColor.gray
         snackbar.actionTextFont = UIFont.boldSystemFont(ofSize: 16)
         
+        // Change action max width
+        snackbar.actionMaxWidth = 80
+        
         // Change left and right margin
         snackbar.leftMargin = 12
         snackbar.rightMargin = 12
@@ -98,7 +101,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showWithTwoActions(_ sender: UIButton) {
-        let snackbar: TTGSnackbar = TTGSnackbar.init(message: "Two actions !", duration: durationTypes[durationSegmented.selectedSegmentIndex])
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Action 1
         snackbar.actionText = "Yes"
