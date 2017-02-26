@@ -6,8 +6,8 @@ A Swift based implementation of the Android Snackbar for iOS
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Swift3](https://img.shields.io/badge/Swift-3-orange.svg)](https://developer.apple.com/swift)
-[![Apps Using](https://img.shields.io/badge/Apps%20Using-%3E%20416-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
-[![Total Download](https://img.shields.io/badge/Total%20Download-%3E%2020329-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
+[![Apps Using](https://img.shields.io/badge/Apps%20Using-%3E%20787-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
+[![Total Download](https://img.shields.io/badge/Total%20Download-%3E%2036,840-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 
 ![Screenshot](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/screen_shot.png)
 
