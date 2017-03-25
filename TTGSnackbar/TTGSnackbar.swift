@@ -432,8 +432,9 @@ public extension TTGSnackbar {
         }
 
         // Create dismiss timer
-        dismissTimer = Timer.scheduledTimer(timeInterval: (TimeInterval)(duration.rawValue),
-                                            target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
+        dismissTimer = Timer.init(timeInterval: (TimeInterval)(duration.rawValue),
+                                  target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
+        RunLoop.main.add(dismissTimer!, forMode: .commonModes)
 
         // Show or hide action button
         iconImageView.isHidden = icon == nil
