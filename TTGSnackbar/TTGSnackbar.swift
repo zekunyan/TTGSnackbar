@@ -9,16 +9,15 @@
 import UIKit
 import Darwin
 
-// MARK: -
-// MARK: Enum
+// MARK: - Enum
 
 /**
  Snackbar display duration types.
  
- - Short:   1 second
- - Middle:  3 seconds
- - Long:    5 seconds
- - Forever: Not dismiss automatically. Must be dismissed manually.
+ - short:   1 second
+ - middle:  3 seconds
+ - long:    5 seconds
+ - forever: Not dismiss automatically. Must be dismissed manually.
  */
 
 @objc public enum TTGSnackbarDuration: Int {
@@ -31,12 +30,13 @@ import Darwin
 /**
  Snackbar animation types.
  
- - FadeInFadeOut:               Fade in to show and fade out to dismiss.
- - SlideFromBottomToTop:        Slide from the bottom of screen to show and slide up to dismiss.
- - SlideFromBottomBackToBottom: Slide from the bottom of screen to show and slide back to bottom to dismiss.
- - SlideFromLeftToRight:        Slide from the left to show and slide to rigth to dismiss.
- - SlideFromRightToLeft:        Slide from the right to show and slide to left to dismiss.
- - Flip:                        Flip to show and dismiss.
+ - fadeInFadeOut:               Fade in to show and fade out to dismiss.
+ - slideFromBottomToTop:        Slide from the bottom of screen to show and slide up to dismiss.
+ - slideFromBottomBackToBottom: Slide from the bottom of screen to show and slide back to bottom to dismiss.
+ - slideFromLeftToRight:        Slide from the left to show and slide to rigth to dismiss.
+ - slideFromRightToLeft:        Slide from the right to show and slide to left to dismiss.
+ - slideFromTopToBottom:        Slide from the top of screen to show and slide down to dismiss.
+ - slideFromTopBackToTop:       Slide from the top of screen to show and slide back to top to dismiss.
  */
 
 @objc public enum TTGSnackbarAnimationType: Int {
@@ -50,8 +50,7 @@ import Darwin
 }
 
 open class TTGSnackbar: UIView {
-    // MARK: -
-    // MARK: Class property.
+    // MARK: - Class property.
 
     /// Snackbar default frame
     fileprivate static let snackbarDefaultFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 44)
@@ -62,8 +61,7 @@ open class TTGSnackbar: UIView {
     /// Snackbar icon imageView default width
     fileprivate static let snackbarIconImageViewWidth: CGFloat = 32
 
-    // MARK: -
-    // MARK: Typealias
+    // MARK: - Typealias.
 
     /// Action callback closure definition.
     public typealias TTGActionBlock = (_ snackbar:TTGSnackbar) -> Void
@@ -71,8 +69,7 @@ open class TTGSnackbar: UIView {
     /// Dismiss callback closure definition.
     public typealias TTGDismissBlock = (_ snackbar:TTGSnackbar) -> Void
 
-    // MARK: -
-    // MARK: Public property.
+    // MARK: - Public property.
 
     /// Action callback.
     open dynamic var actionBlock: TTGActionBlock? = nil
@@ -290,8 +287,7 @@ open class TTGSnackbar: UIView {
     /// Animation initialSpringVelocity
     open dynamic var animationInitialSpringVelocity: CGFloat = 5
 
-    // MARK: -
-    // MARK: Private property.
+    // MARK: - Private property.
 
     fileprivate var contentView: UIView!
     fileprivate var iconImageView: UIImageView!
@@ -320,15 +316,13 @@ open class TTGSnackbar: UIView {
     fileprivate var contentViewRightConstraint: NSLayoutConstraint? = nil
     fileprivate var contentViewTopConstraint: NSLayoutConstraint? = nil
     fileprivate var contentViewBottomConstraint: NSLayoutConstraint? = nil
-    
-    // MARK: -
-    // MARK: Deinit
+
+    // MARK: - Deinit
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    // MARK: -
-    // MARK: Default init
+    // MARK: - Default init
 
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -417,8 +411,7 @@ open class TTGSnackbar: UIView {
     }
 }
 
-// MARK: -
-// MARK: Show methods.
+// MARK: - Show methods.
 
 public extension TTGSnackbar {
 
@@ -586,8 +579,7 @@ public extension TTGSnackbar {
     }
 }
 
-// MARK: -
-// MARK: Dismiss methods.
+// MARK: - Dismiss methods.
 
 public extension TTGSnackbar {
     
@@ -687,8 +679,7 @@ public extension TTGSnackbar {
     }
 }
 
-// MARK: -
-// MARK: Init configuration.
+// MARK: - Init configuration.
 
 private extension TTGSnackbar {
     
@@ -851,8 +842,7 @@ private extension TTGSnackbar {
     }
 }
 
-// MARK: -
-// MARK: Actions
+// MARK: - Actions
 
 private extension TTGSnackbar {
     
@@ -878,8 +868,7 @@ private extension TTGSnackbar {
     }
 }
 
-// MARK: -
-// MARK: Rotation notification
+// MARK: - Rotation notification
 
 private extension TTGSnackbar {
     @objc func onScreenRotateNotification() {
