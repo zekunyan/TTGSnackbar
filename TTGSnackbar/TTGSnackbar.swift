@@ -75,16 +75,16 @@ open class TTGSnackbar: UIView {
     // MARK: - Public property.
  
     /// Tap callback
-    public var onTapBlock: TTGActionBlock?
+    open dynamic var onTapBlock: TTGActionBlock?
     
     /// Swipe callback
-    public var onSwipeBlock: TTGSwipeBlock?
+    open dynamic var onSwipeBlock: TTGSwipeBlock?
  
     /// A property to make the snackbar auto dismiss on Swipe Gesture
-    public var shouldDismissOnSwipe: Bool = false
+    open dynamic var shouldDismissOnSwipe: Bool = false
  
     /// a property to enable left and right margin when using customContentView
-    public var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
+    open dynamic var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
 
     /// Action callback.
     open dynamic var actionBlock: TTGActionBlock? = nil
@@ -926,13 +926,13 @@ private extension TTGSnackbar {
      
         if self.shouldDismissOnSwipe {
             if gesture.direction == .right {
-                snackbar.animationType = .slideFromLeftToRight
+                self.animationType = .slideFromLeftToRight
             } else if gesture.direction == .left {
-                snackbar.animationType = .slideFromRightToLeft
+                self.animationType = .slideFromRightToLeft
             } else if gesture.direction == .up {
-                snackbar.animationType = .slideFromTopBackToTop
+                self.animationType = .slideFromTopBackToTop
             } else if gesture.direction == .down {
-                snackbar.animationType = .slideFromTopBackToTop
+                self.animationType = .slideFromTopBackToTop
             }
             self.dismiss()
         }
