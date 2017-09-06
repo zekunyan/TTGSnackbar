@@ -79,6 +79,9 @@ open class TTGSnackbar: UIView {
     
     /// Swipe callback
     public var onSwipeBlock: TTGSwipeBlock?
+ 
+    /// a property to enable left and right margin when using customContentView
+    public var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
 
     /// Action callback.
     open dynamic var actionBlock: TTGActionBlock? = nil
@@ -518,8 +521,8 @@ public extension TTGSnackbar {
 
             // Active or deactive
             topMarginConstraint?.isActive = false // For top animation
-            leftMarginConstraint?.isActive = customContentView == nil
-            rightMarginConstraint?.isActive = customContentView == nil
+            leftMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
+            rightMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
             centerXConstraint?.isActive = customContentView != nil
             
             // Show
