@@ -370,6 +370,21 @@ open class TTGSnackbar: UIView {
         configure()
     }
 
+     /**
+     Show a customContentView like a Toast
+     
+     - parameter customContentView: Custom View to be shown.
+     - parameter duration: Duration type.
+     
+     - returns: TTGSnackbar instance
+     */
+    public init(customContentView: UIView, duration: TTGSnackbarDuration) {
+        super.init(frame: TTGSnackbar.snackbarDefaultFrame)
+        self.duration = duration
+        self.customContentView = customContentView
+        configure()
+    }
+
     /**
      Show a message with action button.
      
