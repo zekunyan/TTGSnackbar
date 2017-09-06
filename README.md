@@ -110,19 +110,50 @@ snackbar.icon = UIImage(named: "emoji_cool_small")
 snackbar.show()
 ```
 
-## Show custom content view in snackbar
+## [Improved!] Show custom content view in snackbar
 ![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_6.png)
 ```
-let snackbar = TTGSnackbar(message: "", duration: .long)
-
-// Get custom content view
+// Instantiate the custom content view
 let customContentView = UINib(nibName: "CustomView", bundle:Bundle.main).instantiate(withOwner: nil, options: nil).first as! UIView?
 
-// Set custom content view
-snackbar.customContentView = customContentView
+// Initialize the snackbar with the custom content view
+let snackbar = TTGSnackbar(customContentView: customContentView, duration: .long)
 
 snackbar.show()
 ```
+
+## [New!] Make use of the Gesture recognizers in snackbar
+![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_5.jpg)
+```
+let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
+
+// Add icon image
+snackbar.icon = UIImage(named: "emoji_cool_small")
+
+// Add the gesture recognizer callbacks
+ssnackbar.onTapBlock = { snackbar in
+    snackbar.dismiss()
+}
+
+snackbar.onSwipeBlock = { (snackbar, direction) in
+    
+    // Change the animation type to simulate being dismissed in that direction
+    if direction == .right {
+        snackbar.animationType = .slideFromLeftToRight
+    } else if direction == .left {
+        snackbar.animationType = .slideFromRightToLeft
+    } else if direction == .up {
+        snackbar.animationType = .slideFromTopBackToTop
+    } else if direction == .down {
+        snackbar.animationType = .slideFromTopBackToTop
+    }
+    
+    snackbar.dismiss()
+}
+
+snackbar.show()
+```
+
 
 # Customization
 ### Message
@@ -176,6 +207,27 @@ secondActionBlock: TTGActionBlock?
 public typealias TTGDismissBlock = (snackbar: TTGSnackbar) -> Void
 ```
 
+### [New!] On Tap Gesture callback
+`onTapBlock: TTGActionBlock` will be called when the user taps the snackbar.
+```
+// TTGActionBlock definition.
+public typealias TTGActionBlock = (snackbar: TTGSnackbar) -> Void
+```
+
+### [New!] On Swipe Gesture callback
+`onSwipeBlock: TTGSwipeBlock` will be called when the user swipes on the snackbar
+```
+/// Swipe gesture callback closure
+public typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizerDirection) -> Void
+```
+
+### [New!] Auto Dismissal using Swipe Gestures
+`shouldDismissOnSwipe: Bool` will determine if the snackbar will automatically be dismissed when it's swiped
+```
+/// A property to make the snackbar auto dismiss on Swipe Gesture
+public var shouldDismissOnSwipe: Bool = false
+```
+
 ### Animation type
 `animationType: TTGSnackbarAnimationType` defines the style of snackbar when it show and dismiss.  
 
@@ -188,6 +240,13 @@ The default value of `animationType` is `slideFromBottomBackToBottom`, which is 
 
 ### Margins
 `leftMargin: CGFloat`, `rightMargin: CGFloat`, `topMargin: CGFloat` and `bottomMargin: CGFloat` defines the margins of snackbar
+
+### [New!] Custom Content View to follow left and right margins
+`shouldActivateLeftAndRightMarginOnCustomContentView: Bool` will activate the left and right margins if using a `customContentView`
+```
+/// a property to enable left and right margin when using customContentView
+public var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
+```
 
 ### Padding (Content inset)
 `contentInset: UIEdgeInsets` defines the padding(content inset) of content in the snackbar. Default is `UIEdgeInsets.init(top: 0, left: 4, bottom: 0, right: 4)`.
