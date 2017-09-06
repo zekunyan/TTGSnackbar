@@ -70,7 +70,7 @@ open class TTGSnackbar: UIView {
     public typealias TTGDismissBlock = (_ snackbar:TTGSnackbar) -> Void
  
     /// Swipe gesture callback closure
-    typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizerDirection) -> Void
+    public typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizerDirection) -> Void
 
     // MARK: - Public property.
  
@@ -890,7 +890,7 @@ private extension TTGSnackbar {
     }
  
      /// tap callback
-    func didTapSelf() {
+    @objc func didTapSelf() {
         self.onTapBlock?(self)
     }
     
@@ -900,7 +900,7 @@ private extension TTGSnackbar {
      - parameter gesture: the gesture that is sent to the user
      */
 
-    func didSwipeSelf(_ gesture: UISwipeGestureRecognizer) {
+    @objc func didSwipeSelf(_ gesture: UISwipeGestureRecognizer) {
         self.onSwipeBlock?(self, gesture.direction)
     }
 }
