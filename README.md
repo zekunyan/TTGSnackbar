@@ -221,6 +221,20 @@ public typealias TTGActionBlock = (snackbar: TTGSnackbar) -> Void
 public typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizerDirection) -> Void
 ```
 
+###
+`shouldDismissOnSwipe: Bool` will determine if the snackbar will automatically be dismissed when it's swiped
+```
+/// A property to make the snackbar auto dismiss on Swipe Gesture
+public var shouldDismissOnSwipe: Bool = false
+```
+
+###
+`shouldActivateLeftAndRightMarginOnCustomContentView: Bool` will activate the left and right margins if using a `customContentView`
+```
+/// a property to enable left and right margin when using customContentView
+public var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
+```
+
 ### Animation type
 `animationType: TTGSnackbarAnimationType` defines the style of snackbar when it show and dismiss.  
 
