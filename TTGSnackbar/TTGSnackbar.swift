@@ -68,8 +68,17 @@ open class TTGSnackbar: UIView {
 
     /// Dismiss callback closure definition.
     public typealias TTGDismissBlock = (_ snackbar:TTGSnackbar) -> Void
+ 
+    /// Swipe gesture callback closure
+    typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizerDirection) -> Void
 
     // MARK: - Public property.
+ 
+    /// Tap callback
+    public var onTapBlock: TTGActionBlock?
+    
+    /// Swipe callback
+    public var onSwipeBlock: TTGSwipeBlock?
 
     /// Action callback.
     open dynamic var actionBlock: TTGActionBlock? = nil
@@ -839,6 +848,19 @@ private extension TTGSnackbar {
         actionButton.setContentCompressionResistancePriority(999, for: .horizontal)
         secondActionButton.setContentHuggingPriority(998, for: .horizontal)
         secondActionButton.setContentCompressionResistancePriority(999, for: .horizontal)
+     
+        // add gesture recognizers
+        // tap gesture
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapSelf)))
+        
+        self.isUserInteractionEnabled = true
+        
+        // swipe gestures
+        [UISwipeGestureRecognizerDirection.up, .down, .left, .right].forEach { (direction) in
+            let gesture = UISwipeGestureRecognizer(target: self, action: #selector(self.didSwipeSelf(_:)))
+            gesture.direction = direction
+            self.addGestureRecognizer(gesture)
+        }
     }
 }
 
@@ -865,6 +887,21 @@ private extension TTGSnackbar {
         } else {
             dismissAnimated(true)
         }
+    }
+ 
+     /// tap callback
+    func didTapSelf() {
+        self.onTapBlock?(self)
+    }
+    
+    /**
+     Action button callback
+     
+     - parameter gesture: the gesture that is sent to the user
+     */
+
+    func didSwipeSelf(_ gesture: UISwipeGestureRecognizer) {
+        self.onSwipeBlock?(self, gesture.direction)
     }
 }
 
