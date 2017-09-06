@@ -80,6 +80,9 @@ open class TTGSnackbar: UIView {
     /// Swipe callback
     public var onSwipeBlock: TTGSwipeBlock?
  
+    /// A property to make the snackbar auto dismiss on Swipe Gesture
+    public var shouldDismissOnSwipe: Bool = false
+ 
     /// a property to enable left and right margin when using customContentView
     public var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
 
@@ -920,6 +923,19 @@ private extension TTGSnackbar {
 
     @objc func didSwipeSelf(_ gesture: UISwipeGestureRecognizer) {
         self.onSwipeBlock?(self, gesture.direction)
+     
+        if self.shouldDismissOnSwipe {
+            if gesture.direction == .right {
+                snackbar.animationType = .slideFromLeftToRight
+            } else if gesture.direction == .left {
+                snackbar.animationType = .slideFromRightToLeft
+            } else if gesture.direction == .up {
+                snackbar.animationType = .slideFromTopBackToTop
+            } else if gesture.direction == .down {
+                snackbar.animationType = .slideFromTopBackToTop
+            }
+            self.dismiss()
+        }
     }
 }
 
