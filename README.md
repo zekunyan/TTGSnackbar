@@ -124,6 +124,39 @@ snackbar.customContentView = customContentView
 snackbar.show()
 ```
 
+## Make use of the Gesture recognizers in snackbar
+![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_5.jpg)
+```
+let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
+
+// Add icon image
+snackbar.icon = UIImage(named: "emoji_cool_small")
+
+// Add the gesture recognizer callbacks
+ssnackbar.onTapBlock = { snackbar in
+    snackbar.dismiss()
+}
+
+snackbar.onSwipeBlock = { (snackbar, direction) in
+    
+    // Change the animation type to simulate being dismissed in that direction
+    if direction == .right {
+        snackbar.animationType = .slideFromLeftToRight
+    } else if direction == .left {
+        snackbar.animationType = .slideFromRightToLeft
+    } else if direction == .up {
+        snackbar.animationType = .slideFromTopBackToTop
+    } else if direction == .down {
+        snackbar.animationType = .slideFromTopBackToTop
+    }
+    
+    snackbar.dismiss()
+}
+
+snackbar.show()
+```
+
+
 # Customization
 ### Message
 `message: String` defines the message to display. **Supports multi line text.**
@@ -174,6 +207,20 @@ secondActionBlock: TTGActionBlock?
 ```
 // TTGDismissBlock definition.
 public typealias TTGDismissBlock = (snackbar: TTGSnackbar) -> Void
+```
+
+### On Tap Gesture callback
+`onTapBlock: TTGActionBlock` will be called when the user taps the snackbar.
+```
+// TTGActionBlock definition.
+public typealias TTGActionBlock = (snackbar: TTGSnackbar) -> Void
+```
+
+### On Swipe Gesture callback
+`onSwipeBlock: TTGSwipeBlock` will be called when the user swipes on the snackbar
+```
+/// Swipe gesture callback closure
+public typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizerDirection) -> Void
 ```
 
 ### Animation type
