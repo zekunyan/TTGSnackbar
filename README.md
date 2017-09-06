@@ -113,13 +113,11 @@ snackbar.show()
 ## Show custom content view in snackbar
 ![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_6.png)
 ```
-let snackbar = TTGSnackbar(message: "", duration: .long)
-
-// Get custom content view
+// Instantiate the custom content view
 let customContentView = UINib(nibName: "CustomView", bundle:Bundle.main).instantiate(withOwner: nil, options: nil).first as! UIView?
 
-// Set custom content view
-snackbar.customContentView = customContentView
+// Initialize the snackbar with the custom content view
+let snackbar = TTGSnackbar(customContentView: customContentView, duration: .long)
 
 snackbar.show()
 ```
