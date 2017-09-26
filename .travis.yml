@@ -1,4 +1,4 @@
-osx_image: xcode8
+osx_image: xcode9
 language: objective-c
 cache: cocoapods
 podfile: Example/Podfile
@@ -9,4 +9,4 @@ script:
 - set -o pipefail
 - xcodebuild -version
 - xcodebuild -showsdks
-- xcodebuild clean build -workspace Example/TTGSnackbar.xcworkspace -scheme TTGSnackbar-Example -sdk iphonesimulator10.0 -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
+- xcodebuild clean build -workspace Example/TTGSnackbar.xcworkspace -scheme TTGSnackbar-Example -sdk iphonesimulator11.0 -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
