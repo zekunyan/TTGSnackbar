@@ -1,9 +1,9 @@
 {
   "name": "TTGSnackbar",
   "module_name": "TTGSnackbar",
-  "version": "1.2.1",
-  "summary": "A Swift based implementation of the Android Snackbar for iOS. Show simple message and action button like a Toast.",
-  "description": "TTGSnackbar is useful for showing a brief message at the bottom of the screen with an action button.\nIt appears above all other elements on screen and only one can be displayed at a time.\nIt disappears after a timeout or after user click the action button.",
+  "version": "1.5.3",
+  "summary": "A Swift based implementation of the Android Snackbar for iOS. Show simple message and action button or custom view like a Toast.",
+  "description": "TTGSnackbar is useful for showing a brief message at the bottom of the screen with an action button.\nIt also supports showing icon image, two action buttons or custom content view.\nIt appears above all other elements on screen and only one can be displayed at a time.\nIt disappears after a timeout or after user click the action button.",
   "homepage": "https://github.com/zekunyan/TTGSnackbar",
   "license": {
     "type": "MIT",
@@ -18,7 +18,7 @@
   },
   "source": {
     "git": "https://github.com/zekunyan/TTGSnackbar.git",
-    "tag": "1.2.1"
+    "tag": "1.5.3"
   },
   "source_files": "TTGSnackbar/**/*.{h,swift}",
   "requires_arc": true

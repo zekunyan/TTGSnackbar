@@ -523,11 +523,11 @@ public extension TTGSnackbar {
 
             // Avoid the "UIView-Encapsulated-Layout-Height" constraint conflicts
             // http://stackoverflow.com/questions/25059443/what-is-nslayoutconstraint-uiview-encapsulated-layout-height-and-how-should-i
-            leftMarginConstraint?.priority = UILayoutPriority(rawValue: 999)
-            rightMarginConstraint?.priority = UILayoutPriority(rawValue: 999)
-            topMarginConstraint?.priority = UILayoutPriority(rawValue: 999)
-            bottomMarginConstraint?.priority = UILayoutPriority(rawValue: 999)
-            centerXConstraint?.priority = UILayoutPriority(rawValue: 999)
+            leftMarginConstraint?.priority = UILayoutPriority(999)
+            rightMarginConstraint?.priority = UILayoutPriority(999)
+            topMarginConstraint?.priority = UILayoutPriority(999)
+            bottomMarginConstraint?.priority = UILayoutPriority(999)
+            centerXConstraint?.priority = UILayoutPriority(999)
             
             // Add constraints
             superView.addConstraint(leftMarginConstraint!)
@@ -862,13 +862,13 @@ private extension TTGSnackbar {
         contentView.addConstraint(vConstraintForActivityIndicatorView)
         contentView.addConstraints(hConstraintsForActivityIndicatorView)
         
-        messageLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .vertical)
-        messageLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .vertical)
+        messageLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .vertical)
+        messageLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
         
-        actionButton.setContentHuggingPriority(UILayoutPriority(rawValue: 998), for: .horizontal)
-        actionButton.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 999), for: .horizontal)
-        secondActionButton.setContentHuggingPriority(UILayoutPriority(rawValue: 998), for: .horizontal)
-        secondActionButton.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 999), for: .horizontal)
+        actionButton.setContentHuggingPriority(UILayoutPriority(998), for: .horizontal)
+        actionButton.setContentCompressionResistancePriority(UILayoutPriority(999), for: .horizontal)
+        secondActionButton.setContentHuggingPriority(UILayoutPriority(998), for: .horizontal)
+        secondActionButton.setContentCompressionResistancePriority(UILayoutPriority(999), for: .horizontal)
      
         // add gesture recognizers
         // tap gesture
