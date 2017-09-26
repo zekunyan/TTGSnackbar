@@ -21,9 +21,14 @@ It appears above all other elements on screen.
 It disappears after a timeout or after user click the action button.
 
 # Installation
-### Requirement
+### Swift 3 - Version 1.5.3
 Swift 3  
 Xcode 8  
+iOS 8+
+
+### Requirement
+Swift 4  
+Xcode 9  
 iOS 8+
 
 ### CocoaPods
