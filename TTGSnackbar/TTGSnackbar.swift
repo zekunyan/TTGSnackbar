@@ -195,6 +195,13 @@ open class TTGSnackbar: UIView {
         }
     }
 
+    /// Action button image.
+    @objc open dynamic var actionIcon: UIImage? = nil {
+        didSet {
+            actionButton.setImage(actionIcon, for: UIControlState())
+        }
+    }
+
     /// Second action button title.
     @objc open dynamic var secondActionText: String = "" {
         didSet {
@@ -462,7 +469,7 @@ public extension TTGSnackbar {
         // Show or hide action button
         iconImageView.isHidden = icon == nil
         
-        actionButton.isHidden = actionText.isEmpty || actionBlock == nil
+        actionButton.isHidden = (actionIcon == nil || actionText.isEmpty) == false || actionBlock == nil
         secondActionButton.isHidden = secondActionText.isEmpty || secondActionBlock == nil
         
         separateView.isHidden = actionButton.isHidden

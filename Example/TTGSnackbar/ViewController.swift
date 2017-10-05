@@ -126,7 +126,18 @@ class ViewController: UIViewController {
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
-    
+
+    @IBAction func showWithActionIconImage(_ sender: UIButton) {
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
+        
+        // Add action icon image
+        snackbar.actionIcon = UIImage.init(named: "emoji_cool_small")
+        snackbar.actionBlock = { (snackbar) in self.outputLabel?.text = "Click icon !"}
+        
+        snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
+        snackbar.show()
+    }
+
     @IBAction func showCustomContentView(_ sender: UIButton) {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: "", duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
