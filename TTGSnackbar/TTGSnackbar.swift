@@ -509,9 +509,15 @@ public extension TTGSnackbar {
                 toItem: superView, attribute: .right, multiplier: 1, constant: -rightMargin)
 
             // Bottom margin constraint
-            bottomMarginConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .bottom, relatedBy: .equal,
-                toItem: superView, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
+            if #available(iOS 11.0, *) {
+                bottomMarginConstraint = NSLayoutConstraint.init(
+                    item: self, attribute: .bottom, relatedBy: .equal,
+                    toItem: superView.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
+            } else {
+                bottomMarginConstraint = NSLayoutConstraint.init(
+                    item: self, attribute: .bottom, relatedBy: .equal,
+                    toItem: superView, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
+            }
             
             // Top margin constraint
             topMarginConstraint = NSLayoutConstraint.init(
