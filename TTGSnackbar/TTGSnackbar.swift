@@ -499,14 +499,26 @@ public extension TTGSnackbar {
             superView.addSubview(self)
             
             // Left margin constraint
-            leftMarginConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .left, relatedBy: .equal,
-                toItem: superView, attribute: .left, multiplier: 1, constant: leftMargin)
+            if #available(iOS 11.0, *) {
+                leftMarginConstraint = NSLayoutConstraint.init(
+                    item: self, attribute: .left, relatedBy: .equal,
+                    toItem: superView.safeAreaLayoutGuide, attribute: .left, multiplier: 1, constant: leftMargin)
+            } else {
+                leftMarginConstraint = NSLayoutConstraint.init(
+                    item: self, attribute: .left, relatedBy: .equal,
+                    toItem: superView, attribute: .left, multiplier: 1, constant: leftMargin)
+            }
 
             // Right margin constraint
-            rightMarginConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .right, relatedBy: .equal,
-                toItem: superView, attribute: .right, multiplier: 1, constant: -rightMargin)
+            if #available(iOS 11.0, *) {
+                rightMarginConstraint = NSLayoutConstraint.init(
+                    item: self, attribute: .right, relatedBy: .equal,
+                    toItem: superView.safeAreaLayoutGuide, attribute: .right, multiplier: 1, constant: -rightMargin)
+            } else {
+                rightMarginConstraint = NSLayoutConstraint.init(
+                    item: self, attribute: .right, relatedBy: .equal,
+                    toItem: superView, attribute: .right, multiplier: 1, constant: -rightMargin)
+            }
 
             // Bottom margin constraint
             if #available(iOS 11.0, *) {
@@ -520,9 +532,15 @@ public extension TTGSnackbar {
             }
             
             // Top margin constraint
-            topMarginConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .top, relatedBy: .equal,
-                toItem: superView, attribute: .top, multiplier: 1, constant: topMargin)
+            if #available(iOS 11.0, *) {
+                topMarginConstraint = NSLayoutConstraint.init(
+                    item: self, attribute: .top, relatedBy: .equal,
+                    toItem: superView.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: topMargin)
+            } else {
+                topMarginConstraint = NSLayoutConstraint.init(
+                    item: self, attribute: .top, relatedBy: .equal,
+                    toItem: superView, attribute: .top, multiplier: 1, constant: topMargin)
+            }
             
             // Center X constraint
             centerXConstraint = NSLayoutConstraint.init(
@@ -653,6 +671,11 @@ public extension TTGSnackbar {
 
         let superViewWidth = (superview?.frame)!.width
         let snackbarHeight = frame.size.height
+        var safeAreaInsets = UIEdgeInsets.zero
+        
+        if #available(iOS 11.0, *) {
+            safeAreaInsets = self.superview?.safeAreaInsets ?? UIEdgeInsets.zero;
+        }
 
         if !animated {
             dismissBlock?(self)
@@ -670,7 +693,7 @@ public extension TTGSnackbar {
             }
             
         case .slideFromBottomBackToBottom:
-            bottomMarginConstraint?.constant = snackbarHeight
+            bottomMarginConstraint?.constant = snackbarHeight + safeAreaInsets.bottom
             
         case .slideFromBottomToTop:
             animationBlock = {
@@ -679,22 +702,22 @@ public extension TTGSnackbar {
             bottomMarginConstraint?.constant = -snackbarHeight - bottomMargin
             
         case .slideFromLeftToRight:
-            leftMarginConstraint?.constant = leftMargin + superViewWidth
-            rightMarginConstraint?.constant = -rightMargin + superViewWidth
+            leftMarginConstraint?.constant = leftMargin + superViewWidth + safeAreaInsets.left
+            rightMarginConstraint?.constant = -rightMargin + superViewWidth - safeAreaInsets.right
             centerXConstraint?.constant = superViewWidth
             
         case .slideFromRightToLeft:
-            leftMarginConstraint?.constant = leftMargin - superViewWidth
-            rightMarginConstraint?.constant = -rightMargin - superViewWidth
+            leftMarginConstraint?.constant = leftMargin - superViewWidth + safeAreaInsets.left
+            rightMarginConstraint?.constant = -rightMargin - superViewWidth - safeAreaInsets.right
             centerXConstraint?.constant = -superViewWidth
             
         case .slideFromTopToBottom:
             topMarginConstraint?.isActive = false
             bottomMarginConstraint?.isActive = true
-            bottomMarginConstraint?.constant = snackbarHeight
+            bottomMarginConstraint?.constant = snackbarHeight + safeAreaInsets.bottom
             
         case .slideFromTopBackToTop:
-            topMarginConstraint?.constant = -snackbarHeight
+            topMarginConstraint?.constant = -snackbarHeight - safeAreaInsets.top
         }
 
         setNeedsLayout()
