@@ -373,7 +373,7 @@ open class TTGSnackbar: UIView {
      
      - returns: TTGSnackbar instance
      */
-    public init(message: String, duration: TTGSnackbarDuration) {
+    @objc public init(message: String, duration: TTGSnackbarDuration) {
         super.init(frame: TTGSnackbar.snackbarDefaultFrame)
         self.duration = duration
         self.message = message
@@ -455,7 +455,7 @@ public extension TTGSnackbar {
     /**
      Show the snackbar.
      */
-    public func show() {
+    @objc public func show() {
         // Only show once
         if superview != nil {
             return
