@@ -782,6 +782,7 @@ private extension TTGSnackbar {
         contentView.addSubview(iconImageView)
 
         messageLabel = UILabel()
+        messageLabel.accessibilityIdentifier = "messageLabel"
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.textColor = UIColor.white
         messageLabel.font = messageTextFont
@@ -793,6 +794,7 @@ private extension TTGSnackbar {
         contentView.addSubview(messageLabel)
 
         actionButton = UIButton()
+        actionButton.accessibilityIdentifier = "actionButton"
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.backgroundColor = UIColor.clear
         actionButton.contentEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 4)
@@ -805,6 +807,7 @@ private extension TTGSnackbar {
         contentView.addSubview(actionButton)
 
         secondActionButton = UIButton()
+        secondActionButton.accessibilityIdentifier = "secondActionButton"
         secondActionButton.translatesAutoresizingMaskIntoConstraints = false
         secondActionButton.backgroundColor = UIColor.clear
         secondActionButton.contentEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 4)
