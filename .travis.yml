@@ -5,3 +5,4 @@ script:
 - xcodebuild -version
 - xcodebuild -showsdks
 - xcodebuild clean build -project TTGSnackbarExample/TTGSnackbarExample.xcodeproj -scheme TTGSnackbarExample -sdk iphonesimulator12.0 -destination 'platform=iOS Simulator,name=iPhone X,OS=12.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
+- xcodebuild clean build -workspace TTGSnackbarOCExample/TTGSnackbarOCExample.xcworkspace -scheme TTGSnackbarOCExample -sdk iphonesimulator12.0 -destination 'platform=iOS Simulator,name=iPhone X,OS=12.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
