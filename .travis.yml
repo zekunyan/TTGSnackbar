@@ -1,5 +1,7 @@
 osx_image: xcode10
 language: objective-c
-xcode_project: TTGSnackbarExample/TTGSnackbarExample.xcodeproj
-xcode_scheme: TTGSnackbarExample
-xcode_destination: platform=iOS Simulator,OS=12,name=iPhone XR
+script:
+- set -o pipefail
+- xcodebuild -version
+- xcodebuild -showsdks
+- xcodebuild clean build -project TTGSnackbarExample/TTGSnackbarExample.xcodeproj -scheme TTGSnackbarExample -sdk iphonesimulator12.0 -destination 'platform=iOS Simulator,name=iPhone X,OS=12.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty

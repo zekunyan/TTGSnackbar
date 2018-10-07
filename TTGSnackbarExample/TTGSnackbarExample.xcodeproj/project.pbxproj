@@ -15,7 +15,18 @@
 		BFA489042169C003009A2265 /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA489032169C003009A2265 /* CustomView.xib */; };
 		BFA489082169DD9A009A2265 /* TTGSnackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA489072169DD9A009A2265 /* TTGSnackbar.swift */; };
 		BFA4890A2169DEA9009A2265 /* ShowInCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA489092169DEA9009A2265 /* ShowInCustomViewController.swift */; };
+		BFA489122169E3E2009A2265 /* TTGSnackbarExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA489112169E3E2009A2265 /* TTGSnackbarExampleTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BFA489142169E3E2009A2265 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFA488E62169BE2B009A2265 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFA488ED2169BE2B009A2265;
+			remoteInfo = TTGSnackbarExample;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		BFA488EE2169BE2B009A2265 /* TTGSnackbarExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTGSnackbarExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,10 +40,20 @@
 		BFA489062169DD9A009A2265 /* TTGSnackbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGSnackbar.h; sourceTree = "<group>"; };
 		BFA489072169DD9A009A2265 /* TTGSnackbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTGSnackbar.swift; sourceTree = "<group>"; };
 		BFA489092169DEA9009A2265 /* ShowInCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInCustomViewController.swift; sourceTree = "<group>"; };
+		BFA4890F2169E3E2009A2265 /* TTGSnackbarExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TTGSnackbarExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFA489112169E3E2009A2265 /* TTGSnackbarExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTGSnackbarExampleTests.swift; sourceTree = "<group>"; };
+		BFA489132169E3E2009A2265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BFA488EB2169BE2B009A2265 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFA4890C2169E3E2009A2265 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				BFA488F02169BE2B009A2265 /* TTGSnackbarExample */,
+				BFA489102169E3E2009A2265 /* TTGSnackbarExampleTests */,
 				BFA488EF2169BE2B009A2265 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				BFA488EE2169BE2B009A2265 /* TTGSnackbarExample.app */,
+				BFA4890F2169E3E2009A2265 /* TTGSnackbarExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,6 +107,15 @@
 			path = ../../TTGSnackbar;
 			sourceTree = "<group>";
 		};
+		BFA489102169E3E2009A2265 /* TTGSnackbarExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				BFA489112169E3E2009A2265 /* TTGSnackbarExampleTests.swift */,
+				BFA489132169E3E2009A2265 /* Info.plist */,
+			);
+			path = TTGSnackbarExampleTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,6 +136,24 @@
 			productReference = BFA488EE2169BE2B009A2265 /* TTGSnackbarExample.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BFA4890E2169E3E2009A2265 /* TTGSnackbarExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFA489182169E3E2009A2265 /* Build configuration list for PBXNativeTarget "TTGSnackbarExampleTests" */;
+			buildPhases = (
+				BFA4890B2169E3E2009A2265 /* Sources */,
+				BFA4890C2169E3E2009A2265 /* Frameworks */,
+				BFA4890D2169E3E2009A2265 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFA489152169E3E2009A2265 /* PBXTargetDependency */,
+			);
+			name = TTGSnackbarExampleTests;
+			productName = TTGSnackbarExampleTests;
+			productReference = BFA4890F2169E3E2009A2265 /* TTGSnackbarExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -116,6 +166,10 @@
 				TargetAttributes = {
 					BFA488ED2169BE2B009A2265 = {
 						CreatedOnToolsVersion = 10.0;
+					};
+					BFA4890E2169E3E2009A2265 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = BFA488ED2169BE2B009A2265;
 					};
 				};
 			};
@@ -133,6 +187,7 @@
 			projectRoot = "";
 			targets = (
 				BFA488ED2169BE2B009A2265 /* TTGSnackbarExample */,
+				BFA4890E2169E3E2009A2265 /* TTGSnackbarExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -146,6 +201,13 @@
 				BFA489042169C003009A2265 /* CustomView.xib in Resources */,
 				BFA488F92169BE2D009A2265 /* Assets.xcassets in Resources */,
 				BFA488F72169BE2B009A2265 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFA4890D2169E3E2009A2265 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +225,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFA4890B2169E3E2009A2265 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFA489122169E3E2009A2265 /* TTGSnackbarExampleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BFA489152169E3E2009A2265 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFA488ED2169BE2B009A2265 /* TTGSnackbarExample */;
+			targetProxy = BFA489142169E3E2009A2265 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BFA488F52169BE2B009A2265 /* Main.storyboard */ = {
@@ -341,6 +419,46 @@
 			};
 			name = Release;
 		};
+		BFA489162169E3E2009A2265 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TTGSnackbarExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tutuge.TTGSnackbarExampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TTGSnackbarExample.app/TTGSnackbarExample";
+			};
+			name = Debug;
+		};
+		BFA489172169E3E2009A2265 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TTGSnackbarExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tutuge.TTGSnackbarExampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TTGSnackbarExample.app/TTGSnackbarExample";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -358,6 +476,15 @@
 			buildConfigurations = (
 				BFA489012169BE2D009A2265 /* Debug */,
 				BFA489022169BE2D009A2265 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFA489182169E3E2009A2265 /* Build configuration list for PBXNativeTarget "TTGSnackbarExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFA489162169E3E2009A2265 /* Debug */,
+				BFA489172169E3E2009A2265 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
