@@ -17,8 +17,8 @@ Pod::Spec.new do |s|
   s.author             = { "zekunyan" => "zekunyan@163.com" }
   s.social_media_url   = "http://tutuge.me"
 
-  s.platform     = :ios, "8.0"
-  s.ios.deployment_target     = '8.0'
+  s.platform     = :ios, "9.0"
+  s.ios.deployment_target     = '9.0'
   s.source       = { :git => "https://github.com/zekunyan/TTGSnackbar.git", :tag => s.version.to_s }
   s.source_files = "TTGSnackbar/**/*.{h,swift}"
   s.requires_arc = true
