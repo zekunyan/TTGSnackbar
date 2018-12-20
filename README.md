@@ -163,7 +163,7 @@ snackbar.show()
 
 # Customization
 ### Message
-`message: String` defines the message to display. **Supports multi line text.**
+`message: String` defines the message to display. **Supports multi line text.** **Supports updating on the fly.** 
 
 ### Message text color
 `messageTextColor: UIColor` defines the message text color.
