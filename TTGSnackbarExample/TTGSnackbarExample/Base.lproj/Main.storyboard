@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XQZ-8W-PNa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XQZ-8W-PNa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,7 +29,7 @@
         <!--View Controller-->
         <scene sceneID="LQU-TG-YSA">
             <objects>
-                <viewController id="8Uj-WJ-Z9C" customClass="ViewController" customModule="TTGSnackbar_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8Uj-WJ-Z9C" customClass="ViewController" customModule="TTGSnackbarExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kUj-8T-ctD"/>
                         <viewControllerLayoutGuide type="bottom" id="VQ0-yF-yyG"/>
@@ -53,7 +53,7 @@
                                     <constraint firstAttribute="height" constant="30" id="S52-qX-5CT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnP-1Z-6JZ">
                                 <rect key="frame" x="8" y="310" width="359" height="30"/>
@@ -92,7 +92,7 @@
                                     <constraint firstAttribute="height" constant="30" id="tfO-FY-QE3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ku-kG-Fn8">
                                 <rect key="frame" x="8" y="164" width="80" height="21"/>
@@ -299,7 +299,7 @@
         <!--Show In Custom View Controller-->
         <scene sceneID="be8-zO-2dX">
             <objects>
-                <viewController id="adl-5z-F1J" customClass="ShowInCustomViewController" customModule="TTGSnackbar_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="adl-5z-F1J" customClass="ShowInCustomViewController" customModule="TTGSnackbarExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RyQ-lw-YLX"/>
                         <viewControllerLayoutGuide type="bottom" id="XPS-hv-bc9"/>

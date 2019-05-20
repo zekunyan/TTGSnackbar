@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func show(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Change the content padding inset
@@ -49,6 +51,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showWithAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         outputLabel?.text = "";
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex],
                                                      actionText: actionTextField.text!, actionBlock: { (snackbar) in self.outputLabel?.text = "Click action !" })
@@ -78,6 +82,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showWithActionAndDismissManually(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         outputLabel?.text = "";
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: TTGSnackbarDuration.forever,
                                                      actionText: actionTextField.text!) {
@@ -100,6 +106,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showWithTwoActions(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Action 1
@@ -117,6 +125,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showWithIconImage(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Add icon image
@@ -127,6 +137,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showWithActionIconImage(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: messageTextField.text!, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Add action icon image
@@ -138,6 +150,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showCustomContentView(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: "", duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
         // Change the content padding inset

@@ -322,6 +322,10 @@ open class TTGSnackbar: UIView {
     /// Timer to dismiss the snackbar.
     fileprivate var dismissTimer: Timer? = nil
     
+    /// Keyboard mark
+    fileprivate var keyboardIsShown: Bool = false
+    fileprivate var keyboardHeight: CGFloat = 0
+    
     // Constraints.
     fileprivate var leftMarginConstraint: NSLayoutConstraint? = nil
     fileprivate var rightMarginConstraint: NSLayoutConstraint? = nil
@@ -455,7 +459,7 @@ public extension TTGSnackbar {
     /**
      Show the snackbar.
      */
-    @objc public func show() {
+    @objc func show() {
         // Only show once
         if superview != nil {
             return
@@ -647,7 +651,7 @@ public extension TTGSnackbar {
     /**
      Dismiss the snackbar manually.
      */
-    @objc public func dismiss() {
+    @objc func dismiss() {
         // On main thread
         DispatchQueue.main.async {
             () -> Void in
@@ -758,6 +762,10 @@ private extension TTGSnackbar {
         // Notification
         NotificationCenter.default.addObserver(self, selector: #selector(onScreenRotateNotification),
                                                name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardHide(_:)),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
         
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.init(white: 0, alpha: 0.8)
@@ -986,3 +994,45 @@ private extension TTGSnackbar {
         layoutIfNeeded()
     }
 }
+
+// MARK: - Keyboard notification
+
+private extension TTGSnackbar {
+    @objc func onKeyboardShow(_ notification: Notification?) {
+        if keyboardIsShown {
+            return
+        }
+        keyboardIsShown = true
+        
+        guard let keyboardFrame = notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        
+        if #available(iOS 11.0, *) {
+            keyboardHeight = keyboardFrame.cgRectValue.height - self.safeAreaInsets.bottom
+        } else {
+            keyboardHeight = keyboardFrame.cgRectValue.height
+        }
+        
+        keyboardHeight += 8
+        bottomMargin += keyboardHeight
+        
+        UIView.animate(withDuration: 0.3) {
+            self.superview?.layoutIfNeeded()
+        }
+    }
+    
+    @objc func onKeyboardHide(_ notification: Notification?) {
+        if !keyboardIsShown {
+            return
+        }
+        keyboardIsShown = false
+        
+        bottomMargin -= keyboardHeight
+        
+        UIView.animate(withDuration: 0.3) {
+            self.superview?.layoutIfNeeded()
+        }
+    }
+}
+

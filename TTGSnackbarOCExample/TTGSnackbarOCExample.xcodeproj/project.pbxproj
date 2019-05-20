@@ -123,7 +123,7 @@
 		BFA4897C2169F2D1009A2265 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = tutuge;
 				TargetAttributes = {
 					BFA489832169F2D1009A2265 = {
@@ -350,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06BC0FA7DE8E9B05F013377F /* Pods-TTGSnackbarOCExample.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -369,6 +370,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A558BD0718E021EAF8F28B49 /* Pods-TTGSnackbarOCExample.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
