@@ -187,7 +187,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TTGSnackbarOCExample/Pods-TTGSnackbarOCExample-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TTGSnackbarOCExample/Pods-TTGSnackbarOCExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -196,7 +196,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TTGSnackbarOCExample/Pods-TTGSnackbarOCExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TTGSnackbarOCExample/Pods-TTGSnackbarOCExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
