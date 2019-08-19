@@ -123,7 +123,7 @@
 		BFA4897C2169F2D1009A2265 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = tutuge;
 				TargetAttributes = {
 					BFA489832169F2D1009A2265 = {
