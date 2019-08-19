@@ -1,0 +1,16 @@
+PODS:
+  - TTGSnackbar (1.8.0)
+
+DEPENDENCIES:
+  - TTGSnackbar (from `../`)
+
+EXTERNAL SOURCES:
+  TTGSnackbar:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  TTGSnackbar: fc964b6a71a0d7f670afb63d5e7e75f39c8189e8
+
+PODFILE CHECKSUM: 897d973fcf782ff3d2224cac272c9f43b8d79fe4
+
+COCOAPODS: 1.6.2

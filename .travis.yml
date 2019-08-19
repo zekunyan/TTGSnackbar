@@ -1,12 +1,8 @@
-osx_image: xcode8
+osx_image: xcode10.2
 language: objective-c
-cache: cocoapods
-podfile: Example/Podfile
-before_install:
-- gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
-- pod install --project-directory=Example
 script:
 - set -o pipefail
 - xcodebuild -version
 - xcodebuild -showsdks
-- xcodebuild clean build -workspace Example/TTGSnackbar.xcworkspace -scheme TTGSnackbar-Example -sdk iphonesimulator10.0 -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
+- xcodebuild clean build -project TTGSnackbarExample/TTGSnackbarExample.xcodeproj -scheme TTGSnackbarExample -sdk iphonesimulator12.2 -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
+- xcodebuild clean build -workspace TTGSnackbarOCExample/TTGSnackbarOCExample.xcworkspace -scheme TTGSnackbarOCExample -sdk iphonesimulator12.2 -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty

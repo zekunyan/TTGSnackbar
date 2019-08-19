@@ -5,7 +5,7 @@ A Swift based implementation of the Android Snackbar for iOS
 [![Version](https://img.shields.io/cocoapods/v/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
-[![Swift3](https://img.shields.io/badge/Swift-3-orange.svg)](https://developer.apple.com/swift)
+[![Swift4](https://img.shields.io/badge/Swift-4-orange.svg)](https://developer.apple.com/swift)
 [![Apps Using](https://img.shields.io/badge/Apps%20Using-%3E%20787-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 [![Total Download](https://img.shields.io/badge/Total%20Download-%3E%2036,840-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 
@@ -21,7 +21,13 @@ It appears above all other elements on screen.
 It disappears after a timeout or after user click the action button.
 
 # Installation
-### Requirement
+
+### Swift 4
+Swift 4  
+Xcode 9  
+iOS 8+
+
+### Swift 3 - Version 1.5.3
 Swift 3  
 Xcode 8  
 iOS 8+
@@ -157,7 +163,7 @@ snackbar.show()
 
 # Customization
 ### Message
-`message: String` defines the message to display. **Supports multi line text.**
+`message: String` defines the message to display. **Supports multi line text.** **Supports updating on the fly.** 
 
 ### Message text color
 `messageTextColor: UIColor` defines the message text color.
