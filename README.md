@@ -22,13 +22,18 @@ It disappears after a timeout or after user click the action button.
 
 # Installation
 
-### Swift 4
-Swift 4  
+### Swift 5
+Version 1.8.0
 Xcode 9  
 iOS 8+
 
-### Swift 3 - Version 1.5.3
-Swift 3  
+### Swift 4
+Version 1.6.0
+Xcode 9  
+iOS 8+
+
+### Swift 3 
+Version 1.5.3
 Xcode 8  
 iOS 8+
 
