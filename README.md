@@ -180,6 +180,15 @@ let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
 TTGSnackbarManager.show(snackbar)
 ```
 
+`TTGSnackbarManager` uses the `dismissBlock` property of a snackbar, if you still need to use it you can use the `dismissBlock` parameter of `TTGSnackbarManager.show(_: TTGSnackbar, dismissBlock: @escaping TTGDismissBlock)` Example:
+
+```swift 
+let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
+TTGSnackbarManager.show(snackbar) {
+    // Some dismiss block here
+}
+```
+
 # Customization
 
 ### Message
