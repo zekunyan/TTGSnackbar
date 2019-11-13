@@ -53,13 +53,13 @@ open class TTGSnackbar: UIView {
     // MARK: - Class property.
     
     /// Snackbar default frame
-    fileprivate static let snackbarDefaultFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 44)
+    public static var snackbarDefaultFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 44)
     
     /// Snackbar min height
-    fileprivate static let snackbarMinHeight: CGFloat = 44
+    public static var snackbarMinHeight: CGFloat = 44
     
     /// Snackbar icon imageView default width
-    fileprivate static let snackbarIconImageViewWidth: CGFloat = 32
+    public static var snackbarIconImageViewWidth: CGFloat = 32
     
     // MARK: - Typealias.
     
