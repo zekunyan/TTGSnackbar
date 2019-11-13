@@ -23,7 +23,7 @@ It disappears after a timeout or after user click the action button.
 # Installation
 
 ### Swift 5
-Version 1.8.0
+Version 1.9.0
 Xcode 9  
 iOS 8+
 
