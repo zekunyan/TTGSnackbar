@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19353AE6234D71AA00F3F699 /* TTGSnackbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19353AE4234D715200F3F699 /* TTGSnackbarManager.swift */; };
 		54C6BBC2CE4A21E95A19DC044B9F2E83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		7C364237F96CE5614C683FA1072612FD /* TTGSnackbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D179A61A4F86257BFE0FCC361DF4093 /* TTGSnackbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		909203DE7793F36799CA87967F6501FA /* Pods-TTGSnackbarOCExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D093E3323DACC2BDACE3E6A620760FC2 /* Pods-TTGSnackbarOCExample-dummy.m */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		1645DEC8042A12B52583199A475F8633 /* Pods-TTGSnackbarOCExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TTGSnackbarOCExample-umbrella.h"; sourceTree = "<group>"; };
-		19353AE4234D715200F3F699 /* TTGSnackbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTGSnackbarManager.swift; sourceTree = "<group>"; };
 		195F66B3F54A28DA5FB570AB35891C86 /* TTGSnackbar.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = TTGSnackbar.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1D36A72078EE1D6F864E3489A0EF3110 /* TTGSnackbar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTGSnackbar-umbrella.h"; sourceTree = "<group>"; };
 		2317CE9BABFED6C844748F0AC4A47422 /* TTGSnackbar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TTGSnackbar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +112,6 @@
 			children = (
 				3D179A61A4F86257BFE0FCC361DF4093 /* TTGSnackbar.h */,
 				2A96B979A45FACEB8272041540453460 /* TTGSnackbar.swift */,
-				19353AE4234D715200F3F699 /* TTGSnackbarManager.swift */,
 				CF33ECE7E9AA97102773CF4622E01C9A /* Pod */,
 				E22563D251548E8BEB14EFF6ADF6ACE0 /* Support Files */,
 			);
@@ -306,7 +303,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1C6D20B347D4948A86762F527954EAF /* TTGSnackbar-dummy.m in Sources */,
-				19353AE6234D71AA00F3F699 /* TTGSnackbarManager.swift in Sources */,
 				F79ED8A1D0EA6F2015A546A4FE4B81A7 /* TTGSnackbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

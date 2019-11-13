@@ -1,8 +1,8 @@
-osx_image: xcode10.2
+osx_image: xcode11.1
 language: objective-c
 script:
 - set -o pipefail
 - xcodebuild -version
 - xcodebuild -showsdks
-- xcodebuild clean build -project TTGSnackbarExample/TTGSnackbarExample.xcodeproj -scheme TTGSnackbarExample -sdk iphonesimulator12.2 -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
-- xcodebuild clean build -workspace TTGSnackbarOCExample/TTGSnackbarOCExample.xcworkspace -scheme TTGSnackbarOCExample -sdk iphonesimulator12.2 -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
+- xcodebuild clean build -project TTGSnackbarExample/TTGSnackbarExample.xcodeproj -scheme TTGSnackbarExample -sdk iphonesimulator13.1 -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=13.1' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
+- xcodebuild clean build -workspace TTGSnackbarOCExample/TTGSnackbarOCExample.xcworkspace -scheme TTGSnackbarOCExample -sdk iphonesimulator13.1 -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=13.1' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_SPECIFIER="" PROVISIONING_PROFILE="" | xcpretty
