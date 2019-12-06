@@ -130,6 +130,13 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Image background color. Default is clear.
+    @objc open dynamic var imageBackgroundColor: UIColor = UIColor.clear {
+        didSet {
+            iconImageView.backgroundColor = imageBackgroundColor
+        }
+    }
+    
     /// Left margin. Default is 4
     @objc open dynamic var leftMargin: CGFloat = 4 {
         didSet {
