@@ -284,6 +284,13 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Icon tint color
+    @objc open dynamic var iconTint: UIColor? = .black {
+        didSet {
+            iconImageView.tintColor = iconTint
+        }
+    }
+    
     /// Icon image content
     @objc open dynamic var iconContentMode: UIView.ContentMode = .center {
         didSet {
