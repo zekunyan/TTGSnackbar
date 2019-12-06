@@ -116,6 +116,20 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Border Color of snackbar. Default is black
+    @objc open dynamic var borderColor: UIColor = .black {
+        didSet {
+            layer.borderColor = borderColor.cgColor
+        }
+    }
+    
+    /// Border width of snackbar. Default is 1
+    @objc open dynamic var borderWidth: Int = 1 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
     /// Left margin. Default is 4
     @objc open dynamic var leftMargin: CGFloat = 4 {
         didSet {
