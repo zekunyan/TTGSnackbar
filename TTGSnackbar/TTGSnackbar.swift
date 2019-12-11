@@ -801,6 +801,9 @@ private extension TTGSnackbar {
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
         
+        layer.borderColor = borderColor?.cgColor
+        layer.masksToBounds = true
+        layer.borderWidth = borderWidth
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 2
         layer.shadowColor = UIColor.black.cgColor
@@ -815,8 +818,9 @@ private extension TTGSnackbar {
         let iconImageView = UIImageView()
         self.iconImageView = iconImageView
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        iconImageView.backgroundColor = UIColor.clear
+        iconImageView.backgroundColor = iconBackgroundColor
         iconImageView.contentMode = iconContentMode
+        iconImageView.tintColor = iconTint
         contentView.addSubview(iconImageView)
         
         let messageLabel = UILabel()
