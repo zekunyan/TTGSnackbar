@@ -116,6 +116,27 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Border color of snackbar. Default is clear.
+    @objc open dynamic var borderColor: UIColor? = .clear {
+        didSet {
+            layer.borderColor = borderColor?.cgColor
+        }
+    }
+    
+    /// Border width of snackbar. Default is 1.
+    @objc open dynamic var borderWidth: CGFloat = 1 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
+    /// Icon background color. Default is clear.
+    @objc open dynamic var iconBackgroundColor: UIColor? = .clear {
+        didSet {
+            iconImageView.backgroundColor = imageBackgroundColor
+        }
+    }
+    
     /// Left margin. Default is 4
     @objc open dynamic var leftMargin: CGFloat = 4 {
         didSet {
@@ -260,6 +281,13 @@ open class TTGSnackbar: UIView {
     @objc open dynamic var icon: UIImage? = nil {
         didSet {
             iconImageView.image = icon
+        }
+    }
+    
+    /// Icon tint color
+    @objc open dynamic var iconTint: UIColor! = .clear {
+        didSet {
+            iconImageView.tintColor = iconTint
         }
     }
     
