@@ -133,7 +133,7 @@ open class TTGSnackbar: UIView {
     /// Icon background color. Default is clear.
     @objc open dynamic var iconBackgroundColor: UIColor? = .clear {
         didSet {
-            iconImageView.backgroundColor = imageBackgroundColor
+            iconImageView.backgroundColor = iconBackgroundColor
         }
     }
     
