@@ -133,7 +133,7 @@ open class TTGSnackbar: UIView {
     /// Icon background color. Default is clear.
     @objc open dynamic var iconBackgroundColor: UIColor? = .clear {
         didSet {
-            iconImageView.backgroundColor = imageBackgroundColor
+            iconImageView.backgroundColor = iconBackgroundColor
         }
     }
     
@@ -285,9 +285,9 @@ open class TTGSnackbar: UIView {
     }
     
     /// Icon tint color
-    @objc open dynamic var iconTint: UIColor! = .clear {
+    @objc open dynamic var iconTintColor: UIColor! = .clear {
         didSet {
-            iconImageView.tintColor = iconTint
+            iconImageView.tintColor = iconTintColor
         }
     }
     
