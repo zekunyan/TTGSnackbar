@@ -304,6 +304,17 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Icon masked to left bounds
+    @objc open dynamic var isIconMasked: Bool = false {
+        didSet {
+            iconImageView.layer.cornerRadius = cornerRadius
+            if #available(iOS 11.0, *) {
+                iconImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+            }
+            iconImageView.layer.masksToBounds = isIconMasked
+        }
+    }
+    
     /// Custom container view
     @objc open dynamic var containerView: UIView?
     
