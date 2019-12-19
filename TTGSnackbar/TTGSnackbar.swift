@@ -58,9 +58,6 @@ open class TTGSnackbar: UIView {
     /// Snackbar min height
     public static var snackbarMinHeight: CGFloat = 44
     
-    /// Snackbar icon imageView default width
-    public static var snackbarIconImageViewWidth: CGFloat = 32
-    
     // MARK: - Typealias.
     
     /// Action callback closure definition.
@@ -298,6 +295,15 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Icon width
+    @objc open dynamic var iconImageViewWidth: CGFloat = 32 {
+        didSet {
+            iconImageViewWidth = iconImageViewWidth < 32 ? 32 : iconImageViewWidth
+            iconImageViewWidthConstraint?.constant = iconImageView.isHidden ? 0 : iconImageViewWidth
+            layoutIfNeeded()
+        }
+    }
+    
     /// Custom container view
     @objc open dynamic var containerView: UIView?
     
@@ -506,7 +512,7 @@ public extension TTGSnackbar {
         
         separateView.isHidden = actionButton.isHidden
         
-        iconImageViewWidthConstraint?.constant = iconImageView.isHidden ? 0 : TTGSnackbar.snackbarIconImageViewWidth
+        iconImageViewWidthConstraint?.constant = iconImageView.isHidden ? 0 : iconImageViewWidth
         actionButtonMaxWidthConstraint?.constant = actionButton.isHidden ? 0 : actionMaxWidth
         secondActionButtonMaxWidthConstraint?.constant = secondActionButton.isHidden ? 0 : actionMaxWidth
         
@@ -911,7 +917,7 @@ private extension TTGSnackbar {
         
         iconImageViewWidthConstraint = NSLayoutConstraint.init(
             item: iconImageView, attribute: .width, relatedBy: .equal,
-            toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarIconImageViewWidth)
+            toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: iconImageViewWidth)
         
         actionButtonMaxWidthConstraint = NSLayoutConstraint.init(
             item: actionButton, attribute: .width, relatedBy: .lessThanOrEqual,
