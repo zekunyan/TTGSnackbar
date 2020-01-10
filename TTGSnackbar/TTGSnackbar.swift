@@ -113,6 +113,13 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Snackbar min height
+    @objc open dynamic var snackbarMin1Height: CGFloat = 44 {
+        didSet {
+            snackbarMinHeight = snackbarMin1Height
+        }
+    }
+    
     /// Border color of snackbar. Default is clear.
     @objc open dynamic var borderColor: UIColor? = .clear {
         didSet {
