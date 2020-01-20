@@ -274,6 +274,13 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Icon Imageview
+    @objc open dynamic var iconView: UIImageView {
+        get {
+            return iconImageView
+        }
+    }
+    
     /// Icon image content
     @objc open dynamic var iconContentMode: UIView.ContentMode = .center {
         didSet {
