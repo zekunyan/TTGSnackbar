@@ -334,6 +334,16 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Message Title
+    @objc open dynamic var title: String {
+        get {
+            return self.message
+        }
+        set {
+            self.message = newValue
+        }
+    }
+    
     /// ActivityIndicatorView color
     @objc open dynamic var activityIndicatorViewColor: UIColor {
         get {
@@ -453,7 +463,7 @@ open class TTGSnackbar: UIView {
     public init(message: String, duration: TTGSnackbarDuration, actionText: String, actionBlock: @escaping TTGActionBlock) {
         super.init(frame: TTGSnackbar.snackbarDefaultFrame)
         self.duration = duration
-        self.message = message
+//        self.message = message
         self.actionText = actionText
         self.actionBlock = actionBlock
         configure()
