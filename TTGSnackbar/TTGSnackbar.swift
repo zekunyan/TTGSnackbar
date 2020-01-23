@@ -49,6 +49,35 @@ import Darwin
     case slideFromTopBackToTop
 }
 
+extension UIColor {
+  @objc class open dynamic var ttgDefaultText : UIColor {
+    if #available(iOS 13, *) {
+      // Meaning It's white in lighter mode and black in dark mode.
+      return UIColor.systemBackground
+    } else {
+      return UIColor.white
+    }
+  }
+
+  @objc class open dynamic var ttgDefaultBackground : UIColor {
+    if #available(iOS 13, *) {
+      // Meaning It's black in lighter mode and white in dark mode.
+      return UIColor.label.withAlphaComponent(0.8)
+    } else {
+      return UIColor.init(white: 0, alpha: 0.8)
+    }
+  }
+
+  @objc class open dynamic var ttgDefaultShadow : UIColor {
+    if #available(iOS 13, *) {
+      // Meaning It's black in lighter mode and white in dark mode.
+      return UIColor.label
+    } else {
+      return UIColor.black
+    }
+  }
+}
+
 open class TTGSnackbar: UIView {
     // MARK: - Class property.
     
@@ -179,7 +208,7 @@ open class TTGSnackbar: UIView {
     }
     
     /// Message text color. Default is white.
-    @objc open dynamic var messageTextColor: UIColor = UIColor.white {
+    @objc open dynamic var messageTextColor: UIColor = UIColor.ttgDefaultText {
         didSet {
             messageLabel.textColor = messageTextColor
         }
@@ -221,14 +250,14 @@ open class TTGSnackbar: UIView {
     }
     
     /// Action button title color. Default is white.
-    @objc open dynamic var actionTextColor: UIColor = UIColor.white {
+    @objc open dynamic var actionTextColor: UIColor = UIColor.ttgDefaultText {
         didSet {
             actionButton.setTitleColor(actionTextColor, for: UIControl.State())
         }
     }
     
     /// Second action button title color. Default is white.
-    @objc open dynamic var secondActionTextColor: UIColor = UIColor.white {
+    @objc open dynamic var secondActionTextColor: UIColor = UIColor.ttgDefaultText {
         didSet {
             secondActionButton.setTitleColor(secondActionTextColor, for: UIControl.State())
         }
@@ -311,7 +340,7 @@ open class TTGSnackbar: UIView {
     @objc open dynamic var customContentView: UIView?
     
     /// SeparateView background color
-    @objc open dynamic var separateViewBackgroundColor: UIColor = UIColor.gray {
+    @objc open dynamic var separateViewBackgroundColor: UIColor = UIColor.systemGray {
         didSet {
             separateView.backgroundColor = separateViewBackgroundColor
         }
@@ -802,14 +831,14 @@ private extension TTGSnackbar {
                                                name: UIResponder.keyboardWillHideNotification, object: nil)
         
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor.init(white: 0, alpha: 0.8)
+        backgroundColor = UIColor.ttgDefaultBackground
         layer.cornerRadius = cornerRadius
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
         
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 2
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = UIColor.ttgDefaultShadow.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 2)
         
         let contentView = UIView()
@@ -829,7 +858,7 @@ private extension TTGSnackbar {
         self.messageLabel = messageLabel
         messageLabel.accessibilityIdentifier = "messageLabel"
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.textColor = UIColor.white
+        messageLabel.textColor = UIColor.ttgDefaultText
         messageLabel.font = messageTextFont
         messageLabel.backgroundColor = UIColor.clear
         messageLabel.lineBreakMode = .byTruncatingTail
