@@ -614,6 +614,11 @@ public extension TTGSnackbar {
             
             // Show
             showWithAnimation()
+
+            // Accessibility announcement.
+            if UIAccessibility.isVoiceOverRunning {
+              UIAccessibility.post(notification: .announcement, argument: self.message)
+            }
         } else {
             fatalError("TTGSnackbar needs a keyWindows to display.")
         }
