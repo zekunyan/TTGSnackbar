@@ -562,94 +562,104 @@ public extension TTGSnackbar {
         addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
         
         // Get super view to show
-        if let superView = containerView ?? UIApplication.shared.delegate?.window ?? UIApplication.shared.keyWindow {
-            superView.addSubview(self)
-            
-            // Left margin constraint
-            if #available(iOS 11.0, *) {
-                leftMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .leading, relatedBy: .equal,
-                    toItem: superView.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: leftMargin)
-            } else {
-                leftMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .leading, relatedBy: .equal,
-                    toItem: superView, attribute: .leading, multiplier: 1, constant: leftMargin)
-            }
-            
-            // Right margin constraint
-            if #available(iOS 11.0, *) {
-                rightMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .trailing, relatedBy: .equal,
-                    toItem: superView.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -rightMargin)
-            } else {
-                rightMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .trailing, relatedBy: .equal,
-                    toItem: superView, attribute: .trailing, multiplier: 1, constant: -rightMargin)
-            }
-            
-            // Bottom margin constraint
-            if #available(iOS 11.0, *) {
-                bottomMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .bottom, relatedBy: .equal,
-                    toItem: superView.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
-            } else {
-                bottomMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .bottom, relatedBy: .equal,
-                    toItem: superView, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
-            }
-            
-            // Top margin constraint
-            if #available(iOS 11.0, *) {
-                topMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .top, relatedBy: .equal,
-                    toItem: superView.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: topMargin)
-            } else {
-                topMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .top, relatedBy: .equal,
-                    toItem: superView, attribute: .top, multiplier: 1, constant: topMargin)
-            }
-            
-            // Center X constraint
-            centerXConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .centerX, relatedBy: .equal,
-                toItem: superView, attribute: .centerX, multiplier: 1, constant: 0)
-            
-            // Min height constraint
-            let minHeightConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .height, relatedBy: .greaterThanOrEqual,
-                toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarMinHeight)
-            
-            // Avoid the "UIView-Encapsulated-Layout-Height" constraint conflicts
-            // http://stackoverflow.com/questions/25059443/what-is-nslayoutconstraint-uiview-encapsulated-layout-height-and-how-should-i
-            leftMarginConstraint?.priority = UILayoutPriority(999)
-            rightMarginConstraint?.priority = UILayoutPriority(999)
-            topMarginConstraint?.priority = UILayoutPriority(999)
-            bottomMarginConstraint?.priority = UILayoutPriority(999)
-            centerXConstraint?.priority = UILayoutPriority(999)
-            
-            // Add constraints
-            superView.addConstraint(leftMarginConstraint!)
-            superView.addConstraint(rightMarginConstraint!)
-            superView.addConstraint(bottomMarginConstraint!)
-            superView.addConstraint(topMarginConstraint!)
-            superView.addConstraint(centerXConstraint!)
-            superView.addConstraint(minHeightConstraint)
-            
-            // Active or deactive
-            topMarginConstraint?.isActive = false // For top animation
-            leftMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
-            rightMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
-            centerXConstraint?.isActive = customContentView != nil
-            
-            // Show
-            showWithAnimation()
+        var superview: UIView & UIWindow
 
-            // Accessibility announcement.
-            if UIAccessibility.isVoiceOverRunning {
-              UIAccessibility.post(notification: .announcement, argument: self.message)
-            }
-        } else {
+        if (containerView != nil) {
+            superview = containerView
+        } else if (UIApplication.shared.delegate?.window != nil) {
+            superview = UIApplication.shared.delegate?.window
+        } else if (UIApplication.shared.keyWindow != nil) {
+            superview = UIApplication.shared.keyWindow
+        }
+        
+        guard let superview = superview else {
             fatalError("TTGSnackbar needs a keyWindows to display.")
+        }
+        
+        superView.addSubview(self)
+        
+        // Left margin constraint
+        if #available(iOS 11.0, *) {
+            leftMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .leading, relatedBy: .equal,
+                toItem: superView.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: leftMargin)
+        } else {
+            leftMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .leading, relatedBy: .equal,
+                toItem: superView, attribute: .leading, multiplier: 1, constant: leftMargin)
+        }
+        
+        // Right margin constraint
+        if #available(iOS 11.0, *) {
+            rightMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .trailing, relatedBy: .equal,
+                toItem: superView.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -rightMargin)
+        } else {
+            rightMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .trailing, relatedBy: .equal,
+                toItem: superView, attribute: .trailing, multiplier: 1, constant: -rightMargin)
+        }
+        
+        // Bottom margin constraint
+        if #available(iOS 11.0, *) {
+            bottomMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .bottom, relatedBy: .equal,
+                toItem: superView.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
+        } else {
+            bottomMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .bottom, relatedBy: .equal,
+                toItem: superView, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
+        }
+        
+        // Top margin constraint
+        if #available(iOS 11.0, *) {
+            topMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .top, relatedBy: .equal,
+                toItem: superView.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: topMargin)
+        } else {
+            topMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .top, relatedBy: .equal,
+                toItem: superView, attribute: .top, multiplier: 1, constant: topMargin)
+        }
+        
+        // Center X constraint
+        centerXConstraint = NSLayoutConstraint.init(
+            item: self, attribute: .centerX, relatedBy: .equal,
+            toItem: superView, attribute: .centerX, multiplier: 1, constant: 0)
+        
+        // Min height constraint
+        let minHeightConstraint = NSLayoutConstraint.init(
+            item: self, attribute: .height, relatedBy: .greaterThanOrEqual,
+            toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarMinHeight)
+        
+        // Avoid the "UIView-Encapsulated-Layout-Height" constraint conflicts
+        // http://stackoverflow.com/questions/25059443/what-is-nslayoutconstraint-uiview-encapsulated-layout-height-and-how-should-i
+        leftMarginConstraint?.priority = UILayoutPriority(999)
+        rightMarginConstraint?.priority = UILayoutPriority(999)
+        topMarginConstraint?.priority = UILayoutPriority(999)
+        bottomMarginConstraint?.priority = UILayoutPriority(999)
+        centerXConstraint?.priority = UILayoutPriority(999)
+        
+        // Add constraints
+        superView.addConstraint(leftMarginConstraint!)
+        superView.addConstraint(rightMarginConstraint!)
+        superView.addConstraint(bottomMarginConstraint!)
+        superView.addConstraint(topMarginConstraint!)
+        superView.addConstraint(centerXConstraint!)
+        superView.addConstraint(minHeightConstraint)
+        
+        // Active or deactive
+        topMarginConstraint?.isActive = false // For top animation
+        leftMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
+        rightMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
+        centerXConstraint?.isActive = customContentView != nil
+        
+        // Show
+        showWithAnimation()
+
+        // Accessibility announcement.
+        if UIAccessibility.isVoiceOverRunning {
+          UIAccessibility.post(notification: .announcement, argument: self.message)
         }
     }
     
