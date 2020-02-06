@@ -562,7 +562,7 @@ public extension TTGSnackbar {
         addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
         
         // Get super view to show
-        if let superView = containerView ?? UIApplication.shared.delegate?.window ?? UIApplication.shared.keyWindow {
+        if let superView = containerView ?? (UIApplication.shared.delegate?.window ?? nil) ?? UIApplication.shared.keyWindow {
             superView.addSubview(self)
             
             // Left margin constraint
