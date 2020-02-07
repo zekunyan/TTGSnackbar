@@ -113,10 +113,10 @@ open class TTGSnackbar: UIView {
         }
     }
     
-    /// Snackbar min height
-    @objc open dynamic var snackbarMin1Height: CGFloat = 44 {
-        didSet {
-            snackbarMinHeight = snackbarMin1Height
+    /// Icon Imageview
+    @objc open dynamic var iconView: UIImageView {
+        get {
+            return iconImageView
         }
     }
     
@@ -308,17 +308,6 @@ open class TTGSnackbar: UIView {
             iconImageViewWidth = iconImageViewWidth < 32 ? 32 : iconImageViewWidth
             iconImageViewWidthConstraint?.constant = iconImageView.isHidden ? 0 : iconImageViewWidth
             layoutIfNeeded()
-        }
-    }
-    
-    /// Icon masked to left bounds
-    @objc open dynamic var isIconMasked: Bool = false {
-        didSet {
-            iconImageView.layer.cornerRadius = cornerRadius
-            if #available(iOS 11.0, *) {
-                iconImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-            }
-            iconImageView.layer.masksToBounds = isIconMasked
         }
     }
     
