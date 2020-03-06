@@ -570,8 +570,8 @@ public extension TTGSnackbar {
             currentWindow = UIApplication.shared.windows.filter({$0.windowScene?.activationState == .foregroundActive}).first!
         }
         
-        // Get super view to show        
-        if let superView = containerView ?? (UIApplication.shared.delegate?.window ?? nil) ?? UIApplication.shared.keyWindow {
+        // Get super view to show
+        if let superView = containerView ?? currentWindow {
             superView.addSubview(self)
             
             // Left margin constraint
