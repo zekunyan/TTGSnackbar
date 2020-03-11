@@ -82,10 +82,10 @@ open class TTGSnackbar: UIView {
     // MARK: - Class property.
     
     /// Snackbar default frame
-    public static var snackbarDefaultFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 44)
+    @objc public static var snackbarDefaultFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 44)
     
     /// Snackbar min height
-    public static var snackbarMinHeight: CGFloat = 44
+    @objc public static var snackbarMinHeight: CGFloat = 44
     
     // MARK: - Typealias.
     
@@ -109,7 +109,7 @@ open class TTGSnackbar: UIView {
     /// A property to make the snackbar auto dismiss on Swipe Gesture
     @objc open dynamic var shouldDismissOnSwipe: Bool = false
     
-    /// a property to enable left and right margin when using customContentView
+    /// A property to enable left and right margin when using customContentView
     @objc open dynamic var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
     
     /// Action callback.
@@ -121,7 +121,7 @@ open class TTGSnackbar: UIView {
     /// Dismiss callback.
     @objc open dynamic var dismissBlock: TTGDismissBlock? = nil
     
-    /// Snackbar display duration. Default is Short - 1 second.
+    /// Snackbar display duration. Default is Short = 1 second.
     @objc open dynamic var duration: TTGSnackbarDuration = TTGSnackbarDuration.short
     
     /// Snackbar animation type. Default is SlideFromBottomBackToBottom.
@@ -133,10 +133,7 @@ open class TTGSnackbar: UIView {
     /// Corner radius: [0, height / 2]. Default is 4
     @objc open dynamic var cornerRadius: CGFloat = 4 {
         didSet {
-            if cornerRadius < 0 {
-                cornerRadius = 0
-            }
-            
+            cornerRadius = max(cornerRadius, 0)
             layer.cornerRadius = cornerRadius
             layer.masksToBounds = true
         }
@@ -156,18 +153,10 @@ open class TTGSnackbar: UIView {
         }
     }
     
-    /// Left margin. Default is 4
-    @objc open dynamic var leftMargin: CGFloat = 4 {
+    /// Top margin. Default is 4, only work when snackbar is at top
+    @objc open dynamic var topMargin: CGFloat = 4 {
         didSet {
-            leftMarginConstraint?.constant = leftMargin
-            superview?.layoutIfNeeded()
-        }
-    }
-    
-    /// Right margin. Default is 4
-    @objc open dynamic var rightMargin: CGFloat = 4 {
-        didSet {
-            rightMarginConstraint?.constant = -rightMargin
+            topMarginConstraint?.constant = topMargin
             superview?.layoutIfNeeded()
         }
     }
@@ -180,10 +169,18 @@ open class TTGSnackbar: UIView {
         }
     }
     
-    /// Top margin. Default is 4, only work when snackbar is at top
-    @objc open dynamic var topMargin: CGFloat = 4 {
+    /// Left margin. Default is 4
+    @objc open dynamic var leftMargin: CGFloat = 4 {
         didSet {
-            topMarginConstraint?.constant = topMargin
+            leftMarginConstraint?.constant = leftMargin
+            superview?.layoutIfNeeded()
+        }
+    }
+    
+    /// Right margin. Default is 4
+    @objc open dynamic var rightMargin: CGFloat = 4 {
+        didSet {
+            rightMarginConstraint?.constant = -rightMargin
             superview?.layoutIfNeeded()
         }
     }
@@ -280,7 +277,7 @@ open class TTGSnackbar: UIView {
     /// Action button max width, min = 44
     @objc open dynamic var actionMaxWidth: CGFloat = 64 {
         didSet {
-            actionMaxWidth = actionMaxWidth < 44 ? 44 : actionMaxWidth
+            actionMaxWidth = max(actionMaxWidth, 44)
             actionButtonMaxWidthConstraint?.constant = actionButton.isHidden ? 0 : actionMaxWidth
             secondActionButtonMaxWidthConstraint?.constant = secondActionButton.isHidden ? 0 : actionMaxWidth
             layoutIfNeeded()
@@ -327,7 +324,7 @@ open class TTGSnackbar: UIView {
     /// Icon width
     @objc open dynamic var iconImageViewWidth: CGFloat = 32 {
         didSet {
-            iconImageViewWidth = iconImageViewWidth < 32 ? 32 : iconImageViewWidth
+            iconImageViewWidth = max(iconImageViewWidth, 32)
             iconImageViewWidthConstraint?.constant = iconImageView.isHidden ? 0 : iconImageViewWidth
             layoutIfNeeded()
         }
@@ -369,7 +366,7 @@ open class TTGSnackbar: UIView {
     /// Animation SpringWithDamping. Default is 0.7
     @objc open dynamic var animationSpringWithDamping: CGFloat = 0.7
     
-    /// Animation initialSpringVelocity
+    /// Animation initialSpringVelocity. Default is 5
     @objc open dynamic var animationInitialSpringVelocity: CGFloat = 5
     
     // MARK: - Private property.
