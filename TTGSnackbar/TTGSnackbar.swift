@@ -197,6 +197,9 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Main text label
+    @objc fileprivate(set) open dynamic var messageLabel: UILabel!
+    
     /// Main text shown on the snackbar.
     @objc open dynamic var message: String = "" {
         didSet {
@@ -225,6 +228,9 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Action button
+    @objc fileprivate(set) open dynamic var actionButton: UIButton!
+    
     /// Action button title.
     @objc open dynamic var actionText: String = "" {
         didSet {
@@ -239,10 +245,20 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Second action button
+    @objc fileprivate(set) open dynamic var secondActionButton: UIButton!
+    
     /// Second action button title.
     @objc open dynamic var secondActionText: String = "" {
         didSet {
             secondActionButton.setTitle(secondActionText, for: UIControl.State())
+        }
+    }
+    
+    /// Second action button image.
+    @objc open dynamic var secondActionIcon: UIImage? = nil {
+        didSet {
+            secondActionButton.setImage(secondActionIcon, for: UIControl.State())
         }
     }
     
@@ -274,7 +290,7 @@ open class TTGSnackbar: UIView {
         }
     }
     
-    /// Action button max width, min = 44
+    /// All action button max width, min = 44
     @objc open dynamic var actionMaxWidth: CGFloat = 64 {
         didSet {
             actionMaxWidth = max(actionMaxWidth, 44)
@@ -284,7 +300,7 @@ open class TTGSnackbar: UIView {
         }
     }
     
-    /// Action button text number of lines. Default is 1
+    /// All action button text number of lines. Default is 1
     @objc open dynamic var actionTextNumberOfLines: Int = 1 {
         didSet {
             actionButton.titleLabel?.numberOfLines = actionTextNumberOfLines
@@ -292,6 +308,9 @@ open class TTGSnackbar: UIView {
             layoutIfNeeded()
         }
     }
+    
+    /// Icon imageView
+    @objc fileprivate(set) open dynamic var iconImageView: UIImageView!
     
     /// Icon image
     @objc open dynamic var icon: UIImage? = nil {
@@ -343,6 +362,9 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// ActivityIndicatorView
+    @objc fileprivate(set) open dynamic var activityIndicatorView: UIActivityIndicatorView!
+    
     /// ActivityIndicatorViewStyle
     @objc open dynamic var activityIndicatorViewStyle: UIActivityIndicatorView.Style {
         get {
@@ -372,12 +394,7 @@ open class TTGSnackbar: UIView {
     // MARK: - Private property.
     
     fileprivate var contentView: UIView!
-    fileprivate var iconImageView: UIImageView!
-    fileprivate var messageLabel: UILabel!
     fileprivate var separateView: UIView!
-    fileprivate var actionButton: UIButton!
-    fileprivate var secondActionButton: UIButton!
-    fileprivate var activityIndicatorView: UIActivityIndicatorView!
     
     /// Timer to dismiss the snackbar.
     fileprivate var dismissTimer: Timer? = nil
