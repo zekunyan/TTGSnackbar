@@ -575,14 +575,8 @@ public extension TTGSnackbar {
         
         addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
         
-        
-        //Get current Window
-        var currentWindow: UIWindow! = UIApplication.shared.delegate?.window ?? UIApplication.shared.keyWindow
-        
-        // Fetching window for iOS 13
-        if #available(iOS 13.0, *) {
-            currentWindow = UIApplication.shared.windows.filter({$0.windowScene?.activationState == .foregroundActive}).first!
-        }
+        // Get current window
+        let currentWindow: UIWindow! = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         
         // Get super view to show
         if let superView = containerView ?? currentWindow {
