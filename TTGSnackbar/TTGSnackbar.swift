@@ -576,7 +576,7 @@ public extension TTGSnackbar {
         addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
         
         // Get current window
-        let currentWindow: UIWindow! = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let currentWindow: UIWindow? = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         
         // Get super view to show
         if let superView = containerView ?? currentWindow {
@@ -666,7 +666,7 @@ public extension TTGSnackbar {
               UIAccessibility.post(notification: .announcement, argument: self.message)
             }
         } else {
-            fatalError("TTGSnackbar needs a keyWindows to display.")
+            debugPrint("TTGSnackbar needs a keyWindows to display.")
         }
     }
     
@@ -751,7 +751,7 @@ public extension TTGSnackbar {
      */
     fileprivate func dismissAnimated(_ animated: Bool) {
         // If the dismiss timer is nil, snackbar is dismissing or not ready to dismiss.
-        if dismissTimer == nil {
+        if dismissTimer == nil || superview == nil {
             return
         }
         
