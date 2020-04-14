@@ -200,6 +200,13 @@ open class TTGSnackbar: UIView {
         }
     }
     
+    /// Label content inset. Default is (0, 0, 0, 0)
+    @objc open dynamic var messageContentInset: UIEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0) {
+        didSet {
+            messageLabel.contentInset = messageContentInset
+        }
+    }
+    
     /// Main text shown on the snackbar.
     @objc open dynamic var message: String = "" {
         didSet {
@@ -376,7 +383,7 @@ open class TTGSnackbar: UIView {
     
     fileprivate var contentView: UIView!
     fileprivate var iconImageView: UIImageView!
-    fileprivate var messageLabel: UILabel!
+    fileprivate var messageLabel: TTGSnackbarLabel!
     fileprivate var separateView: UIView!
     fileprivate var actionButton: UIButton!
     fileprivate var secondActionButton: UIButton!
@@ -859,7 +866,7 @@ private extension TTGSnackbar {
         iconImageView.contentMode = iconContentMode
         contentView.addSubview(iconImageView)
         
-        let messageLabel = UILabel()
+        let messageLabel = TTGSnackbarLabel()
         self.messageLabel = messageLabel
         messageLabel.accessibilityIdentifier = "messageLabel"
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -1111,3 +1118,22 @@ private extension TTGSnackbar {
     }
 }
 
+fileprivate class TTGSnackbarLabel: UILabel {
+    
+    @objc open dynamic var contentInset: UIEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0) {
+        didSet {
+            drawText(in: self.frame)
+        }
+    }
+    
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: contentInset))
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: size.width + contentInset.left + contentInset.right,
+                      height: size.height + contentInset.top + contentInset.bottom)
+    }
+    
+}
