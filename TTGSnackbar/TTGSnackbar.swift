@@ -205,7 +205,7 @@ open class TTGSnackbar: UIView {
     }
     
     /// Main text label
-    @objc fileprivate(set) dynamic var messageLabel: TTGSnackbarLabel!
+    @objc fileprivate(set) open dynamic var messageLabel: TTGSnackbarLabel!
     
     /// Main text shown on the snackbar.
     @objc open dynamic var message: String = "" {
@@ -1135,7 +1135,7 @@ private extension TTGSnackbar {
     }
 }
 
-internal class TTGSnackbarLabel: UILabel {
+open class TTGSnackbarLabel: UILabel {
     
     @objc open dynamic var contentInset: UIEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0) {
         didSet {
@@ -1143,11 +1143,11 @@ internal class TTGSnackbarLabel: UILabel {
         }
     }
     
-    override func drawText(in rect: CGRect) {
+    override open func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: contentInset))
     }
     
-    override var intrinsicContentSize: CGSize {
+    override open var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
         return CGSize(width: size.width + contentInset.left + contentInset.right,
                       height: size.height + contentInset.top + contentInset.bottom)
