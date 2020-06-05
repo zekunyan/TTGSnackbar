@@ -112,6 +112,11 @@ open class TTGSnackbar: UIView {
     /// A property to enable left and right margin when using customContentView
     @objc open dynamic var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
     
+    /// A property to allow for disabling the use of "Safe Area Layout Guides" on newer OS devices.
+    /// The purpose of this is to allow the a snackbar to extend under the "Swipe Up for Home" area
+    /// on iPhone X and newer devices.
+    @objc open dynamic var shouldHonorSafeAreaLayoutGuides: Bool = true
+    
     /// Action callback.
     @objc open dynamic var actionBlock: TTGActionBlock? = nil
     
@@ -589,50 +594,33 @@ public extension TTGSnackbar {
         if let superView = containerView ?? currentWindow {
             superView.addSubview(self)
             
+            var relativeToItem:Any = superView as Any;
+            if #available(iOS 11.0, *) {
+                if shouldHonorSafeAreaLayoutGuides {
+                    relativeToItem = superView.safeAreaLayoutGuide as Any
+                }
+            }
+            
             // Left margin constraint
-            if #available(iOS 11.0, *) {
-                leftMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .leading, relatedBy: .equal,
-                    toItem: superView.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: leftMargin)
-            } else {
-                leftMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .leading, relatedBy: .equal,
-                    toItem: superView, attribute: .leading, multiplier: 1, constant: leftMargin)
-            }
-            
+            leftMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .leading, relatedBy: .equal,
+                toItem: relativeToItem, attribute: .leading, multiplier: 1, constant: leftMargin)
+
             // Right margin constraint
-            if #available(iOS 11.0, *) {
-                rightMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .trailing, relatedBy: .equal,
-                    toItem: superView.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -rightMargin)
-            } else {
-                rightMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .trailing, relatedBy: .equal,
-                    toItem: superView, attribute: .trailing, multiplier: 1, constant: -rightMargin)
-            }
-            
+            rightMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .trailing, relatedBy: .equal,
+                toItem: relativeToItem, attribute: .trailing, multiplier: 1, constant: -rightMargin)
+
             // Bottom margin constraint
-            if #available(iOS 11.0, *) {
-                bottomMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .bottom, relatedBy: .equal,
-                    toItem: superView.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
-            } else {
-                bottomMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .bottom, relatedBy: .equal,
-                    toItem: superView, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
-            }
-            
+            bottomMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .bottom, relatedBy: .equal,
+                toItem: relativeToItem, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
+
             // Top margin constraint
-            if #available(iOS 11.0, *) {
-                topMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .top, relatedBy: .equal,
-                    toItem: superView.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: topMargin)
-            } else {
-                topMarginConstraint = NSLayoutConstraint.init(
-                    item: self, attribute: .top, relatedBy: .equal,
-                    toItem: superView, attribute: .top, multiplier: 1, constant: topMargin)
-            }
-            
+            topMarginConstraint = NSLayoutConstraint.init(
+                item: self, attribute: .top, relatedBy: .equal,
+                toItem: relativeToItem, attribute: .top, multiplier: 1, constant: topMargin)
+
             // Center X constraint
             centerXConstraint = NSLayoutConstraint.init(
                 item: self, attribute: .centerX, relatedBy: .equal,
