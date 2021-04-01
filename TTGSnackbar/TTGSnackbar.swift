@@ -588,7 +588,9 @@ public extension TTGSnackbar {
         addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
         
         // Get current window
-        let currentWindow: UIWindow? = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        var currentWindow: UIWindow? = UIApplication.shared.keyWindow
+        currentWindow = currentWindow ?? UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        currentWindow = currentWindow ?? UIApplication.shared.windows.first
         
         // Get super view to show
         if let superView = containerView ?? currentWindow {
