@@ -47,6 +47,8 @@ class ViewController: UIViewController {
         // Animation type
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         
+        snackbar.snackbarMaxWidth = 400
+        
         snackbar.show()
     }
     
@@ -77,6 +79,7 @@ class ViewController: UIViewController {
         // Change separate line back color
         snackbar.separateViewBackgroundColor = .yellow
         
+        snackbar.snackbarMaxWidth = 400
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
@@ -101,6 +104,7 @@ class ViewController: UIViewController {
             (snackbar: TTGSnackbar) -> Void in self.outputLabel?.text = "Dismiss !"
         }
         
+        snackbar.snackbarMaxWidth = 400
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
@@ -120,6 +124,7 @@ class ViewController: UIViewController {
         snackbar.secondActionTextColor = UIColor.yellow
         snackbar.secondActionBlock = { (snackbar) in self.outputLabel?.text = "Click No !"}
         
+        snackbar.snackbarMaxWidth = 400
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
@@ -132,6 +137,7 @@ class ViewController: UIViewController {
         // Add icon image
         snackbar.icon = UIImage.init(named: "emoji_cool_small")
         
+        snackbar.snackbarMaxWidth = 400
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
@@ -145,6 +151,7 @@ class ViewController: UIViewController {
         snackbar.actionIcon = UIImage.init(named: "emoji_cool_small")
         snackbar.actionBlock = { (snackbar) in self.outputLabel?.text = "Click icon !"}
         
+        snackbar.snackbarMaxWidth = 400
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
         snackbar.show()
     }
@@ -169,6 +176,7 @@ class ViewController: UIViewController {
         customContentView?.layer.cornerRadius = 4
         snackbar.customContentView = customContentView
         
+        snackbar.snackbarMaxWidth = 400
         snackbar.show()
     }
 }
