@@ -682,7 +682,11 @@ public extension TTGSnackbar {
      */
     fileprivate func showWithAnimation() {
         var animationBlock: (() -> Void)? = nil
-        let superViewWidth = snackbarMaxWidth <= 0 ? (superview?.frame)!.width : snackbarMaxWidth
+        let currentSuperViewWidth = (superview?.frame)!.width
+        var superViewWidth = snackbarMaxWidth <= 0 ? currentSuperViewWidth : snackbarMaxWidth
+        if superViewWidth > currentSuperViewWidth{
+            superViewWidth = currentSuperViewWidth
+        }
         let snackbarHeight = systemLayoutSizeFitting(.init(width: superViewWidth - leftMargin - rightMargin, height: TTGSnackbar.snackbarMinHeight)).height
         
         switch animationType {
