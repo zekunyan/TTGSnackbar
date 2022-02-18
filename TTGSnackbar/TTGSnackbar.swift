@@ -86,7 +86,7 @@ open class TTGSnackbar: UIView {
     
     /// Snackbar min height
     @objc public static var snackbarMinHeight: CGFloat = 44
-    
+        
     // MARK: - Typealias.
     
     /// Action callback closure definition.
@@ -143,6 +143,9 @@ open class TTGSnackbar: UIView {
             layer.masksToBounds = true
         }
     }
+    
+    /// Snackbar max width, default full width
+    @objc open dynamic var snackbarMaxWidth: CGFloat = -1 // Less than 0 is unused
     
     /// Border color of snackbar. Default is clear.
     @objc open dynamic var borderColor: UIColor? = .clear {
@@ -612,6 +615,7 @@ public extension TTGSnackbar {
             rightMarginConstraint = NSLayoutConstraint.init(
                 item: self, attribute: .trailing, relatedBy: .equal,
                 toItem: relativeToItem, attribute: .trailing, multiplier: 1, constant: -rightMargin)
+            
 
             // Bottom margin constraint
             bottomMarginConstraint = NSLayoutConstraint.init(
@@ -642,8 +646,17 @@ public extension TTGSnackbar {
             centerXConstraint?.priority = UILayoutPriority(999)
             
             // Add constraints
-            superView.addConstraint(leftMarginConstraint!)
-            superView.addConstraint(rightMarginConstraint!)
+            if snackbarMaxWidth > 0{
+                centerXConstraint?.isActive = true
+
+            } else {
+                superView.addConstraint(leftMarginConstraint!)
+                superView.addConstraint(rightMarginConstraint!)
+                leftMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
+                rightMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
+                centerXConstraint?.isActive = customContentView != nil
+            }
+            
             superView.addConstraint(bottomMarginConstraint!)
             superView.addConstraint(topMarginConstraint!)
             superView.addConstraint(centerXConstraint!)
@@ -651,9 +664,6 @@ public extension TTGSnackbar {
             
             // Active or deactive
             topMarginConstraint?.isActive = false // For top animation
-            leftMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
-            rightMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
-            centerXConstraint?.isActive = customContentView != nil
             
             // Show
             showWithAnimation()
@@ -672,7 +682,11 @@ public extension TTGSnackbar {
      */
     fileprivate func showWithAnimation() {
         var animationBlock: (() -> Void)? = nil
-        let superViewWidth = (superview?.frame)!.width
+        let currentSuperViewWidth = (superview?.frame)!.width
+        var superViewWidth = snackbarMaxWidth <= 0 ? currentSuperViewWidth : snackbarMaxWidth
+        if superViewWidth > currentSuperViewWidth{
+            superViewWidth = currentSuperViewWidth
+        }
         let snackbarHeight = systemLayoutSizeFitting(.init(width: superViewWidth - leftMargin - rightMargin, height: TTGSnackbar.snackbarMinHeight)).height
         
         switch animationType {

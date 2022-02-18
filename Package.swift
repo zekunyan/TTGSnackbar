@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "TTGSnackbar",
-    platforms: [.iOS(.v9)],
+    platforms: [.iOS(.v91)],
     products: [
         .library(name: "TTGSnackbar", targets: ["TTGSnackbar"])
     ],
