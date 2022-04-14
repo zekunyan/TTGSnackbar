@@ -1163,3 +1163,66 @@ open class TTGSnackbarLabel: UILabel {
     }
     
 }
+
+// MARK: TTGSnackbarManager
+open class TTGSnackbarManager{
+    static let shared = TTGSnackbarManager()
+    private init(){}
+    
+    /// Queue to hold stacked snackBars
+    private var queuedSnackbars: [TTGSnackbar] = []
+    
+    /// Currently active snackbar
+    private var activeSnackbar: TTGSnackbar?
+    
+    /// Shows and queues for showing (if necesarrry) passed snackbars
+    @objc func show(snackbar: TTGSnackbar, completion: (() -> ())? = nil){
+        
+        // Inline function to add the queuing and management of snackbars
+        func addDismissBlock(){
+            snackbar.dismissBlock = { (asb: TTGSnackbar) -> Void in
+                
+                // queue management
+                if !self.queuedSnackbars.isEmpty {
+                    // pop the queue ... FIFO
+                    self.activeSnackbar = self.queuedSnackbars[0]
+                    self.queuedSnackbars.removeFirst()
+                } else {
+                    // we have no more snackbars in the queue, we are done
+                    self.activeSnackbar = nil
+                }
+                
+                completion?()
+                
+                // since the activeSnackbar is displayed and dismissed and we have popped the queuedSnackbars to the activeSnackbar
+                // show it
+                self.activeSnackbar?.show()
+            }
+        }
+        
+        if(self.activeSnackbar == nil){
+            // we have no active snackbar
+            activeSnackbar = snackbar // save currently active snackbar
+            addDismissBlock() // add dismiss block
+            snackbar.show() // show snackbar
+        } else {
+            // we have an active snackbar
+            
+            // append this snackbar request to the queue
+            self.queuedSnackbars.append(snackbar)
+            
+            // grab the dismiss code for the currently active snackbar
+            let activeSnackbarDismissBlock = self.activeSnackbar?.dismissBlock
+            
+            // create a new dismissblock so we can show this snackbar once the currently active one has completed
+            activeSnackbar?.dismissBlock = { (activeSnackbar: TTGSnackbar) -> Void in
+                
+                // add our dismiss code, as stated in readme.md this manager takes over the snackbar dismissBlock
+                addDismissBlock()
+                
+                // call the dismissBlock that was active prior to us replacing it with func above
+                activeSnackbarDismissBlock?(snackbar)
+            }
+        }
+    }
+}

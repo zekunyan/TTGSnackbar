@@ -171,4 +171,94 @@ class ViewController: UIViewController {
         
         snackbar.show()
     }
+    
+    @IBAction func showSnackbarManager(_ sender: UIButton){
+        self.view.endEditing(true)
+        
+        let sb1 = snackbarManagerSimpleMessageExample(message: "Snackbar messsage 1")
+        let sb2 = snackbarManagerSimpleMessageExample(message: "Snackbar messsage 2")
+        
+        let sba1 = snackbarManagerMessageWithActionExample(message: "Snackbar action 1")
+        let sba2 = snackbarManagerMessageWithActionExample(message: "Snackbar action 2")
+        let sba3 = snackbarManagerMessageWithActionExample(message: "Snackbar action 3")
+        let sba4 = snackbarManagerMessageWithActionExample(message: "Snackbar action 4")
+        
+        
+        TTGSnackbarManager.shared.show(snackbar: sba1){
+            self.outputLabel.text = "Snackbar 1 was dismissed."
+        }
+        TTGSnackbarManager.shared.show(snackbar: sba2){
+            self.outputLabel.text = "Snackbar 2 was dismissed."
+        }
+        TTGSnackbarManager.shared.show(snackbar: sba3){
+            self.outputLabel.text = "Snackbar 3 was dismissed."
+        }
+        TTGSnackbarManager.shared.show(snackbar: sba4){
+            self.outputLabel.text = "Snackbar 4 was dismissed."
+        }
+        TTGSnackbarManager.shared.show(snackbar: sb1){
+            self.outputLabel.text = "Snackbar 5 was dismissed."
+        }
+        TTGSnackbarManager.shared.show(snackbar: sb2){
+            self.outputLabel.text = "Snackbar 6 was dismissed."
+        }
+    }
+    
+    private func snackbarManagerSimpleMessageExample(message: String) -> TTGSnackbar{
+        
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: message, duration: durationTypes[durationSegmented.selectedSegmentIndex])
+        
+        // Change the content padding inset
+        snackbar.contentInset = UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
+        
+        // Change margin
+        snackbar.leftMargin = 8
+        snackbar.rightMargin = 8
+        
+        // Change message text font and color
+        snackbar.messageTextColor = UIColor(red:0.22, green:0.29, blue:0.36, alpha:1.00)
+        snackbar.messageTextFont = UIFont.boldSystemFont(ofSize: 18)
+        
+        // Change snackbar background color
+        snackbar.backgroundColor = UIColor(red:0.30, green:0.72, blue:0.53, alpha:1.00)
+        
+        // Change animation duration
+        snackbar.animationDuration = 0.5
+        
+        // Animation type
+        snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
+        
+        return snackbar
+    }
+    
+    private func snackbarManagerMessageWithActionExample(message: String) -> TTGSnackbar{
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: message, duration: durationTypes[durationSegmented.selectedSegmentIndex],
+                                                     actionText: actionTextField.text!, actionBlock: { (snackbar) in
+                self.outputLabel?.text = "Click action! " + message }
+        )
+        
+        // Change action text font and color
+        snackbar.actionTextColor = UIColor.gray
+        snackbar.actionTextFont = UIFont.boldSystemFont(ofSize: 16)
+        
+        // Change action max width
+        snackbar.actionMaxWidth = 80
+        
+        // Change left and right margin
+        snackbar.leftMargin = 12
+        snackbar.rightMargin = 12
+        
+        // Change bottom margin
+        snackbar.bottomMargin = 12
+        
+        // Change corner radius
+        snackbar.cornerRadius = 2
+        
+        // Change separate line back color
+        snackbar.separateViewBackgroundColor = .yellow
+        
+        snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
+        
+        return snackbar
+    }
 }
