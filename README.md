@@ -227,6 +227,9 @@ secondActionTextFont: UIFont
 secondActionBlock: TTGActionBlock?
 ```
 
+### Snackbar MaxWidth
+`snackbarMaxWidth: CGFloat` will set the max width of the snackbar if on larger devices you don not want it full width. Default is -1 which is denotes full-width.
+
 ### Dismiss callback
 `dismissBlock: TTGDismissBlock?` will be called when snackbar  dismiss automatically or when user click action button to dismiss the snackbar.
 ```
