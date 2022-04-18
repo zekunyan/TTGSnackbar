@@ -168,6 +168,18 @@ snackbar.onSwipeBlock = { (snackbar, direction) in
 
 snackbar.show()
 ```
+## [New!] Automatic handling of Showing one Snackbar at a time 
+
+`TTGSnackbarManager` can handle automatically showing and replacing the presented Snackbars at your screen.
+
+**Note**:
+```swift 
+let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
+TTGSnackbarManager.show(snackbar)
+```
+
+`TTGSnackbarManager` uses the `dismissBlock` property of a snackbar, it does not replace any functionality that you add to the snackbar, rather it just adds its own code to the existing block.
+
 
 # Customization
 
