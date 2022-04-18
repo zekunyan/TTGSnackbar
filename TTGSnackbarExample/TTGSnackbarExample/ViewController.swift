@@ -184,24 +184,18 @@ class ViewController: UIViewController {
         let sba4 = snackbarManagerMessageWithActionExample(message: "Snackbar action 4")
         
         
-        TTGSnackbarManager.shared.show(snackbar: sba1){
-            self.outputLabel.text = "Snackbar 1 was dismissed."
-        }
-        TTGSnackbarManager.shared.show(snackbar: sba2){
-            self.outputLabel.text = "Snackbar 2 was dismissed."
-        }
-        TTGSnackbarManager.shared.show(snackbar: sba3){
-            self.outputLabel.text = "Snackbar 3 was dismissed."
-        }
-        TTGSnackbarManager.shared.show(snackbar: sba4){
-            self.outputLabel.text = "Snackbar 4 was dismissed."
-        }
-        TTGSnackbarManager.shared.show(snackbar: sb1){
-            self.outputLabel.text = "Snackbar 5 was dismissed."
-        }
-        TTGSnackbarManager.shared.show(snackbar: sb2){
-            self.outputLabel.text = "Snackbar 6 was dismissed."
-        }
+        TTGSnackbarManager.shared.show(snackbar: sba1)
+        
+        TTGSnackbarManager.shared.show(snackbar: sba2)
+        
+        TTGSnackbarManager.shared.show(snackbar: sba3)
+        
+        TTGSnackbarManager.shared.show(snackbar: sba4)
+        
+        TTGSnackbarManager.shared.show(snackbar: sb1)
+        
+        TTGSnackbarManager.shared.show(snackbar: sb2)
+        
     }
     
     private func snackbarManagerSimpleMessageExample(message: String) -> TTGSnackbar{
@@ -224,6 +218,10 @@ class ViewController: UIViewController {
         
         // Change animation duration
         snackbar.animationDuration = 0.5
+        
+        snackbar.dismissBlock = { (asb: TTGSnackbar) -> Void in
+            self.outputLabel?.text = "\(message) dismissed."
+        }
         
         // Animation type
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
@@ -253,6 +251,10 @@ class ViewController: UIViewController {
         
         // Change corner radius
         snackbar.cornerRadius = 2
+                
+        snackbar.dismissBlock = { (asb: TTGSnackbar) -> Void in
+            self.outputLabel?.text = "\(message) dismissed."
+        }
         
         // Change separate line back color
         snackbar.separateViewBackgroundColor = .yellow

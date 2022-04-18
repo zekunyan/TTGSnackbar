@@ -1176,27 +1176,28 @@ open class TTGSnackbarManager{
     private var activeSnackbar: TTGSnackbar?
     
     /// Shows and queues for showing (if necesarrry) passed snackbars
-    @objc func show(snackbar: TTGSnackbar, completion: (() -> ())? = nil){
+    @objc func show(snackbar: TTGSnackbar){
         
         // Inline function to add the queuing and management of snackbars
         func addDismissBlock(){
+            let existingSnackbarDismiss = snackbar.dismissBlock
             snackbar.dismissBlock = { (asb: TTGSnackbar) -> Void in
                 
                 // queue management
                 if !self.queuedSnackbars.isEmpty {
                     // pop the queue ... FIFO
-                    self.activeSnackbar = self.queuedSnackbars[0]
-                    self.queuedSnackbars.removeFirst()
+                    self.activeSnackbar = self.queuedSnackbars.removeFirst()
                 } else {
                     // we have no more snackbars in the queue, we are done
                     self.activeSnackbar = nil
                 }
                 
-                completion?()
-                
+                existingSnackbarDismiss?(snackbar)
+                                
                 // since the activeSnackbar is displayed and dismissed and we have popped the queuedSnackbars to the activeSnackbar
                 // show it
                 self.activeSnackbar?.show()
+                
             }
         }
         
