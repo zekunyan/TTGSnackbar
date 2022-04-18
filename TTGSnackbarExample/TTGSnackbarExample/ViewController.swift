@@ -178,10 +178,11 @@ class ViewController: UIViewController {
         let sb1 = snackbarManagerSimpleMessageExample(message: "Snackbar messsage 1")
         let sb2 = snackbarManagerSimpleMessageExample(message: "Snackbar messsage 2")
         
-        let sba1 = snackbarManagerMessageWithActionExample(message: "Snackbar action 1")
-        let sba2 = snackbarManagerMessageWithActionExample(message: "Snackbar action 2")
-        let sba3 = snackbarManagerMessageWithActionExample(message: "Snackbar action 3")
-        let sba4 = snackbarManagerMessageWithActionExample(message: "Snackbar action 4")
+        let sba1 = snackbarManagerMessageWithActionExample(message: "Snackbar 1-action 1")
+        let sba2 = snackbarManagerMessageWithActionExample(message: "Snackbar 1-action 2")
+        
+        let sba3 = snackbarManagerMessageWithTwoActionsExample(message: "Snackbar 2-action 3")
+        let sba4 = snackbarManagerMessageWithTwoActionsExample(message: "Snackbar 2-action 4")
         
         
         TTGSnackbarManager.shared.show(snackbar: sba1)
@@ -198,7 +199,7 @@ class ViewController: UIViewController {
         
     }
     
-    private func snackbarManagerSimpleMessageExample(message: String) -> TTGSnackbar{
+    private func snackbarManagerSimpleMessageExample(message: String) -> TTGSnackbar {
         
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: message, duration: durationTypes[durationSegmented.selectedSegmentIndex])
         
@@ -229,7 +230,7 @@ class ViewController: UIViewController {
         return snackbar
     }
     
-    private func snackbarManagerMessageWithActionExample(message: String) -> TTGSnackbar{
+    private func snackbarManagerMessageWithActionExample(message: String) -> TTGSnackbar {
         let snackbar: TTGSnackbar = TTGSnackbar.init(message: message, duration: durationTypes[durationSegmented.selectedSegmentIndex],
                                                      actionText: actionTextField.text!, actionBlock: { (snackbar) in
                 self.outputLabel?.text = "Click action! " + message }
@@ -260,6 +261,29 @@ class ViewController: UIViewController {
         snackbar.separateViewBackgroundColor = .yellow
         
         snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
+        
+        return snackbar
+    }
+    
+    private func snackbarManagerMessageWithTwoActionsExample(message: String) -> TTGSnackbar {
+        
+        let snackbar: TTGSnackbar = TTGSnackbar.init(message: message, duration: durationTypes[durationSegmented.selectedSegmentIndex])
+        
+        // Action 1
+        snackbar.actionText = "Yes"
+        snackbar.actionTextColor = UIColor.green
+        snackbar.actionBlock = { (snackbar) in self.outputLabel?.text = "Click Yes !"}
+        
+        // Action 2
+        snackbar.secondActionText = "No"
+        snackbar.secondActionTextColor = UIColor.yellow
+        snackbar.secondActionBlock = { (snackbar) in self.outputLabel?.text = "Click No !"}
+        
+        snackbar.animationType = animationTypes[animationTypeSegmented!.selectedSegmentIndex]
+                
+        snackbar.dismissBlock = { (asb: TTGSnackbar) -> Void in
+            self.outputLabel?.text = "\(message) dismissed."
+        }
         
         return snackbar
     }
