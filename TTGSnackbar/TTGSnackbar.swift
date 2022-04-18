@@ -1171,58 +1171,57 @@ open class TTGSnackbarManager{
     
     /// Queue to hold stacked snackBars
     private var queuedSnackbars: [TTGSnackbar] = []
-    
-    /// Currently active snackbar
-    private var activeSnackbar: TTGSnackbar?
-    
+        
     /// Shows and queues for showing (if necesarrry) passed snackbars
     @objc func show(snackbar: TTGSnackbar){
         
         // Inline function to add the queuing and management of snackbars
         func addDismissBlock(){
             let existingSnackbarDismiss = snackbar.dismissBlock
-            snackbar.dismissBlock = { (asb: TTGSnackbar) -> Void in
+            snackbar.dismissBlock = { ( _ : TTGSnackbar) -> Void in
+                var nextSnackbar: TTGSnackbar?
                 
                 // queue management
-                if !self.queuedSnackbars.isEmpty {
+                if self.queuedSnackbars.count > 1 {
                     // pop the queue ... FIFO
-                    self.activeSnackbar = self.queuedSnackbars.removeFirst()
-                } else {
-                    // we have no more snackbars in the queue, we are done
-                    self.activeSnackbar = nil
+                    nextSnackbar = self.queuedSnackbars[1]
                 }
                 
                 existingSnackbarDismiss?(snackbar)
                                 
                 // since the activeSnackbar is displayed and dismissed and we have popped the queuedSnackbars to the activeSnackbar
                 // show it
-                self.activeSnackbar?.show()
-                
+                nextSnackbar?.show()
+                self.queuedSnackbars.removeFirst()
             }
         }
+                
+        // append this snackbar request to the queue
+        self.queuedSnackbars.append(snackbar)
         
-        if(self.activeSnackbar == nil){
-            // we have no active snackbar
-            activeSnackbar = snackbar // save currently active snackbar
+        if(self.queuedSnackbars.count <= 1){
+            // we have no active snackbar, the only one in the queue is this one
+            
             addDismissBlock() // add dismiss block
             snackbar.show() // show snackbar
+            
         } else {
-            // we have an active snackbar
+            // we have an active snackbar, active snackbar is always self.queuedSnackbars[0]
             
-            // append this snackbar request to the queue
-            self.queuedSnackbars.append(snackbar)
-            
+            // active is always [0] grab it
+            let activeSnackbar = self.queuedSnackbars[0]
+                                    
             // grab the dismiss code for the currently active snackbar
-            let activeSnackbarDismissBlock = self.activeSnackbar?.dismissBlock
+            let activeSnackbarDismissBlock = activeSnackbar.dismissBlock
             
-            // create a new dismissblock so we can show this snackbar once the currently active one has completed
-            activeSnackbar?.dismissBlock = { (activeSnackbar: TTGSnackbar) -> Void in
+            // create a new dismissblock so we can show the newly queued snackbar once the currently active one has completed
+            activeSnackbar.dismissBlock = { ( _ : TTGSnackbar) -> Void in
                 
                 // add our dismiss code, as stated in readme.md this manager takes over the snackbar dismissBlock
                 addDismissBlock()
                 
                 // call the dismissBlock that was active prior to us replacing it with func above
-                activeSnackbarDismissBlock?(snackbar)
+                activeSnackbarDismissBlock?(activeSnackbar)
             }
         }
     }
