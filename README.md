@@ -178,6 +178,15 @@ let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
 TTGSnackbarManager.show(snackbar)
 ```
 
+```objc
+TTGSnackbar *bar = [[TTGSnackbar alloc] initWithMessage:@"Bar1" duration:TTGSnackbarDurationMiddle];
+[bar setDismissBlock:^(TTGSnackbar * snackBar) {
+	//whatever
+}];
+[[TTGSnackbarManager shared] showWithSnackbar: bar];
+```
+
+
 `TTGSnackbarManager` uses the `dismissBlock` property of a snackbar, it does not replace any functionality that you add to the snackbar, rather it just adds its own code to the existing block.
 
 
