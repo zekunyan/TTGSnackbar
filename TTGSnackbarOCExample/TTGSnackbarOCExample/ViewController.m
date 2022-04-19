@@ -37,13 +37,13 @@
     TTGSnackbar *bar2 = [self createSnackbar:@"TTGSnackbar - 2"];
     TTGSnackbar *bar3 = [self createSnackbar:@"TTGSnackbar - 3"];
 
-    [[TTGSnackbarManager shared] showWithSnackbar: bar1];
-    [[TTGSnackbarManager shared] showWithSnackbar: bar2];
-    [[TTGSnackbarManager shared] showWithSnackbar: bar3];
+    [[TTGSnackbarManager shared] showSnackbar: bar1];
+    [[TTGSnackbarManager shared] showSnackbar: bar2];
+    [[TTGSnackbarManager shared] showSnackbar: bar3];
 }
 
 - (TTGSnackbar*)createSnackbar:(NSString*)message {
-    TTGSnackbar *bar = [[TTGSnackbar alloc] initWithMessage:message duration:TTGSnackbarDurationMiddle];
+    TTGSnackbar *bar = [[TTGSnackbar alloc] initWithMessage:message duration:TTGSnackbarDurationShort];
     [bar setDismissBlock:^(TTGSnackbar * snackBar) {
         [self.ActivityLabel setText: [message stringByAppendingString:@" :Dismissed"]];
     }];

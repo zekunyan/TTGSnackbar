@@ -1173,7 +1173,7 @@ open class TTGSnackbarManager : NSObject {
     private var queuedSnackbars: [TTGSnackbar] = []
         
     /// Shows and queues for showing (if necesarrry) passed snackbars
-    @objc public func show(snackbar: TTGSnackbar) {
+    @objc(showSnackbar:) public func show(snackbar: TTGSnackbar) {
         
         // Inline function to add the queuing and management of snackbars
         // ****************************************************************
