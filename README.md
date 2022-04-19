@@ -168,6 +168,18 @@ snackbar.onSwipeBlock = { (snackbar, direction) in
 
 snackbar.show()
 ```
+## [New!] Automatic handling of Showing one Snackbar at a time 
+
+`TTGSnackbarManager` can handle automatically showing and replacing the presented Snackbars at your screen.
+
+**Note**:
+```swift 
+let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
+TTGSnackbarManager.show(snackbar)
+```
+
+`TTGSnackbarManager` uses the `dismissBlock` property of a snackbar, it does not replace any functionality that you add to the snackbar, rather it just adds its own code to the existing block.
+
 
 # Customization
 
@@ -214,6 +226,9 @@ secondActionTextColor: UIColor
 secondActionTextFont: UIFont  
 secondActionBlock: TTGActionBlock?
 ```
+
+### Snackbar MaxWidth
+`snackbarMaxWidth: CGFloat` will set the max width of the snackbar if on larger devices you don not want it full width. Default is -1 which is denotes full-width.
 
 ### Dismiss callback
 `dismissBlock: TTGDismissBlock?` will be called when snackbar  dismiss automatically or when user click action button to dismiss the snackbar.
