@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XQZ-8W-PNa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XQZ-8W-PNa">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -223,8 +223,8 @@
                                     <action selector="showCustomContentView:" destination="8Uj-WJ-Z9C" eventType="touchUpInside" id="goR-vb-6ff"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYM-r6-jXa">
-                                <rect key="frame" x="8" y="585" width="359" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYM-r6-jXa">
+                                <rect key="frame" x="8" y="594" width="359" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="vHb-ms-7FA"/>
                                 </constraints>
@@ -246,8 +246,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="AjE-Uq-aKg" secondAttribute="trailing" constant="-8" id="56d-5b-BGZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gMe-Wu-gAy" secondAttribute="trailing" constant="-8" id="64B-Cc-7am"/>
                             <constraint firstAttribute="trailingMargin" secondItem="02x-xq-Z8A" secondAttribute="trailing" constant="-8" id="6sz-qe-bcf"/>
-                            <constraint firstItem="PYM-r6-jXa" firstAttribute="top" secondItem="Cgv-An-8Gq" secondAttribute="bottom" constant="-1" id="71G-eK-fak"/>
+                            <constraint firstItem="PYM-r6-jXa" firstAttribute="top" secondItem="Cgv-An-8Gq" secondAttribute="bottom" constant="8" id="71G-eK-fak"/>
                             <constraint firstItem="AjE-Uq-aKg" firstAttribute="top" secondItem="RnP-1Z-6JZ" secondAttribute="bottom" constant="8" id="7XH-aX-10o"/>
+                            <constraint firstItem="PYM-r6-jXa" firstAttribute="leading" secondItem="PSR-oO-KeB" secondAttribute="leading" constant="8" id="8vZ-7j-Aat"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Tgx-3D-a8s" secondAttribute="trailing" constant="-12" id="9i5-NT-yJM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eme-Ew-gn8" secondAttribute="trailing" constant="-8" id="AwI-IA-tdS"/>
                             <constraint firstItem="4Ku-kG-Fn8" firstAttribute="leading" secondItem="PSR-oO-KeB" secondAttribute="leadingMargin" constant="-8" id="Bsn-MS-k40"/>
@@ -276,6 +277,7 @@
                             <constraint firstItem="02x-xq-Z8A" firstAttribute="leading" secondItem="LhW-TT-vC9" secondAttribute="trailing" constant="8" id="bDp-ic-tOS"/>
                             <constraint firstItem="LhW-TT-vC9" firstAttribute="leading" secondItem="PSR-oO-KeB" secondAttribute="leadingMargin" constant="-8" id="blh-Cm-wSa"/>
                             <constraint firstItem="RnP-1Z-6JZ" firstAttribute="top" secondItem="02x-xq-Z8A" secondAttribute="bottom" constant="8" id="cue-UX-xCB"/>
+                            <constraint firstAttribute="trailing" secondItem="PYM-r6-jXa" secondAttribute="trailing" constant="8" id="dId-Qt-BXU"/>
                             <constraint firstItem="Tgx-3D-a8s" firstAttribute="top" secondItem="eme-Ew-gn8" secondAttribute="bottom" constant="8" id="dip-3F-G3o"/>
                             <constraint firstItem="WSs-Ub-4gg" firstAttribute="leading" secondItem="PSR-oO-KeB" secondAttribute="leadingMargin" constant="-8" id="eS9-oQ-gtt"/>
                             <constraint firstItem="0ug-aR-fi0" firstAttribute="leading" secondItem="nII-WO-0nb" secondAttribute="trailing" constant="8" id="egJ-hP-ewK"/>
