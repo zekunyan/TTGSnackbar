@@ -1165,15 +1165,15 @@ open class TTGSnackbarLabel: UILabel {
 }
 
 // MARK: TTGSnackbarManager
-open class TTGSnackbarManager {
-    static let shared = TTGSnackbarManager()
-    private init() {}
+open class TTGSnackbarManager : NSObject {
+    @objc public static let shared = TTGSnackbarManager()
+    private override init() {}
     
     /// Queue to hold stacked snackBars
     private var queuedSnackbars: [TTGSnackbar] = []
         
     /// Shows and queues for showing (if necesarrry) passed snackbars
-    @objc func show(snackbar: TTGSnackbar) {
+    @objc public func show(snackbar: TTGSnackbar) {
         
         // Inline function to add the queuing and management of snackbars
         // ****************************************************************
