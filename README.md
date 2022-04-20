@@ -172,11 +172,23 @@ snackbar.show()
 
 `TTGSnackbarManager` can handle automatically showing and replacing the presented Snackbars at your screen.
 
-**Note**:
+### **Usage**:
+
+**Swift**
 ```swift 
 let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
 TTGSnackbarManager.show(snackbar)
 ```
+
+**Objective-c**
+```objective-c
+TTGSnackbar *bar = [[TTGSnackbar alloc] initWithMessage:@"Bar1" duration:TTGSnackbarDurationMiddle];
+[bar setDismissBlock:^(TTGSnackbar * snackBar) {
+	//whatever you want for dismiss
+}];
+[[TTGSnackbarManager shared] showSnackbar: bar];
+```
+
 
 `TTGSnackbarManager` uses the `dismissBlock` property of a snackbar, it does not replace any functionality that you add to the snackbar, rather it just adds its own code to the existing block.
 
