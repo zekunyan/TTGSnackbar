@@ -561,10 +561,11 @@ public extension TTGSnackbar {
             return
         }
         
-        // Create dismiss timer
+        // Determine the final display duration
         var timeInterval = duration == .custom ? customDuration : (TimeInterval)(duration.rawValue)
         timeInterval = max(timeInterval, (TimeInterval)(TTGSnackbarDuration.short.rawValue))
         
+        // Create dismiss timer
         dismissTimer = Timer.init(timeInterval: timeInterval, target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
         RunLoop.main.add(dismissTimer!, forMode: .common)
         
