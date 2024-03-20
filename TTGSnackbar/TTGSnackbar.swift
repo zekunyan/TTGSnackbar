@@ -25,6 +25,7 @@ import Darwin
     case middle = 3
     case long = 5
     case forever = 2147483647 // Must dismiss manually.
+    case custom = -1 // Must set customDuration
 }
 
 /**
@@ -128,6 +129,9 @@ open class TTGSnackbar: UIView {
     
     /// Snackbar display duration. Default is Short = 1 second.
     @objc open dynamic var duration: TTGSnackbarDuration = TTGSnackbarDuration.short
+    
+    /// Snackbar custom display duration (Unit: second). Default is -1 which means invalid.
+    @objc open dynamic var customDuration: TimeInterval = -1
     
     /// Snackbar animation type. Default is SlideFromBottomBackToBottom.
     @objc open dynamic var animationType: TTGSnackbarAnimationType = TTGSnackbarAnimationType.slideFromBottomBackToBottom
@@ -558,8 +562,10 @@ public extension TTGSnackbar {
         }
         
         // Create dismiss timer
-        dismissTimer = Timer.init(timeInterval: (TimeInterval)(duration.rawValue),
-                                  target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
+        var timeInterval = duration == .custom ? customDuration : (TimeInterval)(duration.rawValue)
+        timeInterval = max(timeInterval, (TimeInterval)(TTGSnackbarDuration.short.rawValue))
+        
+        dismissTimer = Timer.init(timeInterval: timeInterval, target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
         RunLoop.main.add(dismissTimer!, forMode: .common)
         
         // Show or hide action button
