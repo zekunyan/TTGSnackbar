@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 import PackageDescription
 
 let package = Package(
@@ -10,6 +10,7 @@ let package = Package(
     targets: [
         .target(
             name: "TTGSnackbar",
+            dependencies: [],
             path: "TTGSnackbar",
             resources: [.copy("PrivacyInfo.xcprivacy")]
         )
