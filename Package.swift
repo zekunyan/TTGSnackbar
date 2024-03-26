@@ -8,6 +8,11 @@ let package = Package(
         .library(name: "TTGSnackbar", targets: ["TTGSnackbar"])
     ],
     targets: [
-        .target(name: "TTGSnackbar", path: "TTGSnackbar")
-    ]
+        .target(
+            name: "TTGSnackbar",
+            path: "TTGSnackbar",
+            resources: [.copy("PrivacyInfo.xcprivacy")]
+        )
+    ],
+    swiftLanguageVersions: [.v5]
 )

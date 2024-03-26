@@ -23,4 +23,5 @@ Pod::Spec.new do |s|
   s.source_files = "TTGSnackbar/**/*.{h,swift}"
   s.requires_arc = true
   s.swift_version = '5.0'
+  s.resource_bundles = {"TTGSnackbar" => ["TTGSnackbar/PrivacyInfo.xcprivacy"]}
 end
