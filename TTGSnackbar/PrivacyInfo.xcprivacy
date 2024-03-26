@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   PrivacyInfo.xcprivacy
+   
+
+   Created by h on 3/26/24.
+   Copyright (c) 2024 ___ORGANIZATIONNAME___. All rights reserved.
+-->
+<plist version="1.0">
+    <dict>
+        <key>NSPrivacyTracking</key>
+        <false/>
+        <key>NSPrivacyCollectedDataTypes</key>
+        <array/>
+        <key>NSPrivacyTrackingDomains</key>
+        <array/>
+        <key>NSPrivacyAccessedAPITypes</key>
+        <array/>
+    </dict>
+</plist>
