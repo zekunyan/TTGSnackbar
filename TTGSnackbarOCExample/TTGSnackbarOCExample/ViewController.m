@@ -62,6 +62,8 @@ typedef void (^TTGDemoBlock)(void);
 
     self.messageField = [self textFieldWithPlaceholder:@"Message" text:@"TTGSnackbar says hello"];
     self.actionField = [self textFieldWithPlaceholder:@"Action" text:@"Undo"];
+    self.messageField.accessibilityIdentifier = @"demo.messageField";
+    self.actionField.accessibilityIdentifier = @"demo.actionField";
     [stackView addArrangedSubview:self.messageField];
     [stackView addArrangedSubview:self.actionField];
 
@@ -71,6 +73,7 @@ typedef void (^TTGDemoBlock)(void);
     self.customContainerView.layer.cornerRadius = 14;
     self.customContainerView.layer.borderWidth = 1;
     self.customContainerView.layer.borderColor = UIColor.separatorColor.CGColor;
+    self.customContainerView.accessibilityIdentifier = @"demo.customContainer";
     [self.customContainerView.heightAnchor constraintEqualToConstant:120].active = YES;
 
     UILabel *containerLabel = [[UILabel alloc] init];
@@ -86,6 +89,7 @@ typedef void (^TTGDemoBlock)(void);
     [stackView addArrangedSubview:self.customContainerView];
 
     self.outputLabel = [[UILabel alloc] init];
+    self.outputLabel.accessibilityIdentifier = @"demo.outputLabel";
     self.outputLabel.text = @"Run a demo to see callbacks here.";
     self.outputLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     self.outputLabel.textColor = UIColor.secondaryLabelColor;
@@ -96,6 +100,8 @@ typedef void (^TTGDemoBlock)(void);
     [self.demos enumerateObjectsUsingBlock:^(NSDictionary *demo, NSUInteger index, BOOL *stop) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.tag = index;
+        NSString *identifier = [[[[demo[@"title"] lowercaseString] stringByReplacingOccurrencesOfString:@" / " withString:@"-"] stringByReplacingOccurrencesOfString:@" + " withString:@"-"] stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+        button.accessibilityIdentifier = [@"demo." stringByAppendingString:identifier];
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         button.titleLabel.numberOfLines = 0;
         button.titleLabel.textAlignment = NSTextAlignmentLeft;

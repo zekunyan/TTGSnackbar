@@ -71,6 +71,8 @@ class ViewController: UIViewController {
 
         configureTextField(messageField, placeholder: "Message", text: "TTGSnackbar says hello")
         configureTextField(actionField, placeholder: "Action", text: "Undo")
+        messageField.accessibilityIdentifier = "demo.messageField"
+        actionField.accessibilityIdentifier = "demo.actionField"
         stackView.addArrangedSubview(messageField)
         stackView.addArrangedSubview(actionField)
 
@@ -79,6 +81,7 @@ class ViewController: UIViewController {
         customContainerView.layer.cornerRadius = 14
         customContainerView.layer.borderWidth = 1
         customContainerView.layer.borderColor = UIColor.separator.cgColor
+        customContainerView.accessibilityIdentifier = "demo.customContainer"
         customContainerView.heightAnchor.constraint(equalToConstant: 120).isActive = true
         let containerLabel = UILabel()
         containerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -92,6 +95,7 @@ class ViewController: UIViewController {
         ])
         stackView.addArrangedSubview(customContainerView)
 
+        output.accessibilityIdentifier = "demo.outputLabel"
         output.text = "Run a demo to see callbacks here."
         output.font = .preferredFont(forTextStyle: .footnote)
         output.textColor = .secondaryLabel
@@ -108,6 +112,10 @@ class ViewController: UIViewController {
             configuration.baseBackgroundColor = .systemBlue
             configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12)
             button.configuration = configuration
+            button.accessibilityIdentifier = "demo." + demo.title.lowercased()
+                .replacingOccurrences(of: " / ", with: "-")
+                .replacingOccurrences(of: " + ", with: "-")
+                .replacingOccurrences(of: " ", with: "-")
             button.contentHorizontalAlignment = .leading
             button.addAction(UIAction { [weak self] _ in
                 self?.view.endEditing(true)

@@ -23,10 +23,18 @@
 		54668DC1B787FDCC63EB1F15 /* TTGSnackbarViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A156F92894003AAFCC2749D /* TTGSnackbarViewSetup.swift */; };
 		BFA4890A2169DEA9009A2265 /* ShowInCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA489092169DEA9009A2265 /* ShowInCustomViewController.swift */; };
 		BFA489122169E3E2009A2265 /* TTGSnackbarExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA489112169E3E2009A2265 /* TTGSnackbarExampleTests.swift */; };
+		DAA28A378645D8B54F4843B7 /* TTGSnackbarExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E978E1B47E56A415ACABCD /* TTGSnackbarExampleUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		BFA489142169E3E2009A2265 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFA488E62169BE2B009A2265 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFA488ED2169BE2B009A2265;
+			remoteInfo = TTGSnackbarExample;
+		};
+		F5C20EBB837906B145C1465C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFA488E62169BE2B009A2265 /* Project object */;
 			proxyType = 1;
@@ -57,6 +65,9 @@
 		BFA4890F2169E3E2009A2265 /* TTGSnackbarExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TTGSnackbarExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA489112169E3E2009A2265 /* TTGSnackbarExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTGSnackbarExampleTests.swift; sourceTree = "<group>"; };
 		BFA489132169E3E2009A2265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21E978E1B47E56A415ACABCD /* TTGSnackbarExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTGSnackbarExampleUITests.swift; sourceTree = "<group>"; };
+		200C5F92C575B8F1D4CFEE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB67216014473B95CFFF8D3D /* TTGSnackbarExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TTGSnackbarExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +85,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		688F579E1781CE8254452A21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -82,6 +100,7 @@
 			children = (
 				BFA488F02169BE2B009A2265 /* TTGSnackbarExample */,
 				BFA489102169E3E2009A2265 /* TTGSnackbarExampleTests */,
+				F1D1BE9C65B32C2C888BC77F /* TTGSnackbarExampleUITests */,
 				BFA488EF2169BE2B009A2265 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,6 +110,7 @@
 			children = (
 				BFA488EE2169BE2B009A2265 /* TTGSnackbarExample.app */,
 				BFA4890F2169E3E2009A2265 /* TTGSnackbarExampleTests.xctest */,
+				FB67216014473B95CFFF8D3D /* TTGSnackbarExampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,6 +157,15 @@
 			path = TTGSnackbarExampleTests;
 			sourceTree = "<group>";
 		};
+		F1D1BE9C65B32C2C888BC77F /* TTGSnackbarExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				21E978E1B47E56A415ACABCD /* TTGSnackbarExampleUITests.swift */,
+				200C5F92C575B8F1D4CFEE50 /* Info.plist */,
+			);
+			path = TTGSnackbarExampleUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -175,6 +204,24 @@
 			productReference = BFA4890F2169E3E2009A2265 /* TTGSnackbarExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		10B1101595875083C068FE47 /* TTGSnackbarExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC061802EEF4E6A152691540 /* Build configuration list for PBXNativeTarget "TTGSnackbarExampleUITests" */;
+			buildPhases = (
+				4F8DE07980DE7190D8DF6C5F /* Sources */,
+				688F579E1781CE8254452A21 /* Frameworks */,
+				7FF048114BBCFAF7D21F0E23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4E94D7923D98316D10541355 /* PBXTargetDependency */,
+			);
+			name = TTGSnackbarExampleUITests;
+			productName = TTGSnackbarExampleUITests;
+			productReference = FB67216014473B95CFFF8D3D /* TTGSnackbarExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -211,6 +258,7 @@
 			targets = (
 				BFA488ED2169BE2B009A2265 /* TTGSnackbarExample */,
 				BFA4890E2169E3E2009A2265 /* TTGSnackbarExampleTests */,
+				10B1101595875083C068FE47 /* TTGSnackbarExampleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -228,6 +276,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BFA4890D2169E3E2009A2265 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FF048114BBCFAF7D21F0E23 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -263,6 +318,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4F8DE07980DE7190D8DF6C5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAA28A378645D8B54F4843B7 /* TTGSnackbarExampleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -270,6 +333,11 @@
 			isa = PBXTargetDependency;
 			target = BFA488ED2169BE2B009A2265 /* TTGSnackbarExample */;
 			targetProxy = BFA489142169E3E2009A2265 /* PBXContainerItemProxy */;
+		};
+		4E94D7923D98316D10541355 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFA488ED2169BE2B009A2265 /* TTGSnackbarExample */;
+			targetProxy = F5C20EBB837906B145C1465C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -491,6 +559,44 @@
 			};
 			name = Release;
 		};
+		6019A6FB967191D8853887CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TTGSnackbarExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tutuge.TTGSnackbarExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TTGSnackbarExample;
+			};
+			name = Debug;
+		};
+		D6470E3AFEB97727F1E990CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TTGSnackbarExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tutuge.TTGSnackbarExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TTGSnackbarExample;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -517,6 +623,15 @@
 			buildConfigurations = (
 				BFA489162169E3E2009A2265 /* Debug */,
 				BFA489172169E3E2009A2265 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC061802EEF4E6A152691540 /* Build configuration list for PBXNativeTarget "TTGSnackbarExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6019A6FB967191D8853887CD /* Debug */,
+				D6470E3AFEB97727F1E990CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

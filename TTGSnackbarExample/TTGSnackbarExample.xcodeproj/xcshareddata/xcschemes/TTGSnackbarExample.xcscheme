@@ -38,6 +38,16 @@
                ReferencedContainer = "container:TTGSnackbarExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "10B1101595875083C068FE47"
+               BuildableName = "TTGSnackbarExampleUITests.xctest"
+               BlueprintName = "TTGSnackbarExampleUITests"
+               ReferencedContainer = "container:TTGSnackbarExample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
