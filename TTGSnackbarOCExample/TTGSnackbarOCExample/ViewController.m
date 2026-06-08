@@ -36,36 +36,51 @@ typedef void (^TTGDemoBlock)(void);
     }
     self.view.backgroundColor = UIColor.systemBackgroundColor;
 
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:scrollView];
+    UIView *headerContainer = [[UIView alloc] init];
+    headerContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    headerContainer.backgroundColor = UIColor.systemBackgroundColor;
+    headerContainer.layer.shadowColor = UIColor.blackColor.CGColor;
+    headerContainer.layer.shadowOpacity = 0.08;
+    headerContainer.layer.shadowRadius = 10;
+    headerContainer.layer.shadowOffset = CGSizeMake(0, 3);
+    [self.view addSubview:headerContainer];
 
-    UIStackView *stackView = [[UIStackView alloc] init];
-    stackView.translatesAutoresizingMaskIntoConstraints = NO;
-    stackView.axis = UILayoutConstraintAxisVertical;
-    stackView.spacing = 12;
-    [scrollView addSubview:stackView];
+    UIStackView *headerStackView = [[UIStackView alloc] init];
+    headerStackView.translatesAutoresizingMaskIntoConstraints = NO;
+    headerStackView.axis = UILayoutConstraintAxisVertical;
+    headerStackView.spacing = 6;
+    [headerContainer addSubview:headerStackView];
+
+    UIScrollView *listScrollView = [[UIScrollView alloc] init];
+    listScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:listScrollView];
+
+    UIStackView *listStackView = [[UIStackView alloc] init];
+    listStackView.translatesAutoresizingMaskIntoConstraints = NO;
+    listStackView.axis = UILayoutConstraintAxisVertical;
+    listStackView.spacing = 12;
+    [listScrollView addSubview:listStackView];
 
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"TTGSnackbar Feature Gallery";
-    titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleLargeTitle];
+    titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle2];
     titleLabel.adjustsFontForContentSizeCategory = YES;
     titleLabel.numberOfLines = 0;
-    [stackView addArrangedSubview:titleLabel];
+    [headerStackView addArrangedSubview:titleLabel];
 
     UILabel *subtitleLabel = [[UILabel alloc] init];
     subtitleLabel.text = @"Objective-C demo: the same feature set is mirrored in the Swift example. Edit the message/action text, then run any scenario below.";
     subtitleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     subtitleLabel.textColor = UIColor.secondaryLabelColor;
     subtitleLabel.numberOfLines = 0;
-    [stackView addArrangedSubview:subtitleLabel];
+    [headerStackView addArrangedSubview:subtitleLabel];
 
     self.messageField = [self textFieldWithPlaceholder:@"Message" text:@"TTGSnackbar says hello"];
     self.actionField = [self textFieldWithPlaceholder:@"Action" text:@"Undo"];
     self.messageField.accessibilityIdentifier = @"demo.messageField";
     self.actionField.accessibilityIdentifier = @"demo.actionField";
-    [stackView addArrangedSubview:self.messageField];
-    [stackView addArrangedSubview:self.actionField];
+    [headerStackView addArrangedSubview:self.messageField];
+    [headerStackView addArrangedSubview:self.actionField];
 
     self.customContainerView = [[UIView alloc] init];
     self.customContainerView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -74,7 +89,7 @@ typedef void (^TTGDemoBlock)(void);
     self.customContainerView.layer.borderWidth = 1;
     self.customContainerView.layer.borderColor = UIColor.separatorColor.CGColor;
     self.customContainerView.accessibilityIdentifier = @"demo.customContainer";
-    [self.customContainerView.heightAnchor constraintEqualToConstant:120].active = YES;
+    [self.customContainerView.heightAnchor constraintEqualToConstant:76].active = YES;
 
     UILabel *containerLabel = [[UILabel alloc] init];
     containerLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -86,7 +101,7 @@ typedef void (^TTGDemoBlock)(void);
         [containerLabel.centerXAnchor constraintEqualToAnchor:self.customContainerView.centerXAnchor],
         [containerLabel.centerYAnchor constraintEqualToAnchor:self.customContainerView.centerYAnchor]
     ]];
-    [stackView addArrangedSubview:self.customContainerView];
+    [headerStackView addArrangedSubview:self.customContainerView];
 
     self.outputLabel = [[UILabel alloc] init];
     self.outputLabel.accessibilityIdentifier = @"demo.outputLabel";
@@ -94,38 +109,33 @@ typedef void (^TTGDemoBlock)(void);
     self.outputLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     self.outputLabel.textColor = UIColor.secondaryLabelColor;
     self.outputLabel.numberOfLines = 0;
-    [stackView addArrangedSubview:self.outputLabel];
+    [headerStackView addArrangedSubview:self.outputLabel];
     self.ActivityLabel = self.outputLabel;
 
     [self.demos enumerateObjectsUsingBlock:^(NSDictionary *demo, NSUInteger index, BOOL *stop) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.tag = index;
-        NSString *identifier = [[[[demo[@"title"] lowercaseString] stringByReplacingOccurrencesOfString:@" / " withString:@"-"] stringByReplacingOccurrencesOfString:@" + " withString:@"-"] stringByReplacingOccurrencesOfString:@" " withString:@"-"];
-        button.accessibilityIdentifier = [@"demo." stringByAppendingString:identifier];
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        button.titleLabel.numberOfLines = 0;
-        button.titleLabel.textAlignment = NSTextAlignmentLeft;
-        button.backgroundColor = UIColor.systemBlueColor;
-        button.tintColor = UIColor.whiteColor;
-        button.layer.cornerRadius = 10;
-        button.contentEdgeInsets = UIEdgeInsetsMake(10, 12, 10, 12);
-        NSString *title = [NSString stringWithFormat:@"%lu. %@\n%@", (unsigned long)index + 1, demo[@"title"], demo[@"details"]];
-        [button setTitle:title forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(runDemo:) forControlEvents:UIControlEventTouchUpInside];
-        [stackView addArrangedSubview:button];
+        [listStackView addArrangedSubview:[self demoButtonForDemo:demo index:index]];
     }];
 
     UILayoutGuide *safeArea = self.view.safeAreaLayoutGuide;
     [NSLayoutConstraint activateConstraints:@[
-        [scrollView.topAnchor constraintEqualToAnchor:safeArea.topAnchor],
-        [scrollView.leadingAnchor constraintEqualToAnchor:safeArea.leadingAnchor],
-        [scrollView.trailingAnchor constraintEqualToAnchor:safeArea.trailingAnchor],
-        [scrollView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [headerContainer.topAnchor constraintEqualToAnchor:safeArea.topAnchor],
+        [headerContainer.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [headerContainer.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
 
-        [stackView.topAnchor constraintEqualToAnchor:scrollView.contentLayoutGuide.topAnchor constant:20],
-        [stackView.leadingAnchor constraintEqualToAnchor:scrollView.frameLayoutGuide.leadingAnchor constant:16],
-        [stackView.trailingAnchor constraintEqualToAnchor:scrollView.frameLayoutGuide.trailingAnchor constant:-16],
-        [stackView.bottomAnchor constraintEqualToAnchor:scrollView.contentLayoutGuide.bottomAnchor constant:-32]
+        [headerStackView.topAnchor constraintEqualToAnchor:headerContainer.topAnchor constant:8],
+        [headerStackView.leadingAnchor constraintEqualToAnchor:safeArea.leadingAnchor constant:16],
+        [headerStackView.trailingAnchor constraintEqualToAnchor:safeArea.trailingAnchor constant:-16],
+        [headerStackView.bottomAnchor constraintEqualToAnchor:headerContainer.bottomAnchor constant:-8],
+
+        [listScrollView.topAnchor constraintEqualToAnchor:headerContainer.bottomAnchor],
+        [listScrollView.leadingAnchor constraintEqualToAnchor:safeArea.leadingAnchor],
+        [listScrollView.trailingAnchor constraintEqualToAnchor:safeArea.trailingAnchor],
+        [listScrollView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+
+        [listStackView.topAnchor constraintEqualToAnchor:listScrollView.contentLayoutGuide.topAnchor constant:10],
+        [listStackView.leadingAnchor constraintEqualToAnchor:listScrollView.frameLayoutGuide.leadingAnchor constant:16],
+        [listStackView.trailingAnchor constraintEqualToAnchor:listScrollView.frameLayoutGuide.trailingAnchor constant:-16],
+        [listStackView.bottomAnchor constraintEqualToAnchor:listScrollView.contentLayoutGuide.bottomAnchor constant:-32]
     ]];
 }
 
@@ -138,10 +148,163 @@ typedef void (^TTGDemoBlock)(void);
     return textField;
 }
 
+- (UIButton *)demoButtonForDemo:(NSDictionary *)demo index:(NSUInteger)index {
+    UIColor *accentColor = [self demoAccentColorAtIndex:index];
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.tag = index;
+    NSString *identifier = [[[[demo[@"title"] lowercaseString] stringByReplacingOccurrencesOfString:@" / " withString:@"-"] stringByReplacingOccurrencesOfString:@" + " withString:@"-"] stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+    button.accessibilityIdentifier = [@"demo." stringByAppendingString:identifier];
+    button.accessibilityLabel = demo[@"title"];
+    button.backgroundColor = UIColor.secondarySystemGroupedBackgroundColor;
+    button.layer.cornerRadius = 14;
+    button.layer.borderWidth = 1;
+    button.layer.borderColor = UIColor.separatorColor.CGColor;
+    button.layer.shadowColor = UIColor.blackColor.CGColor;
+    button.layer.shadowOpacity = 0.08;
+    button.layer.shadowRadius = 10;
+    button.layer.shadowOffset = CGSizeMake(0, 4);
+    button.clipsToBounds = NO;
+    [button addTarget:self action:@selector(runDemo:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIView *accentView = [[UIView alloc] init];
+    accentView.translatesAutoresizingMaskIntoConstraints = NO;
+    accentView.backgroundColor = accentColor;
+    accentView.userInteractionEnabled = NO;
+    accentView.layer.cornerRadius = 3;
+    [button addSubview:accentView];
+
+    UIView *iconContainer = [[UIView alloc] init];
+    iconContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    iconContainer.backgroundColor = [accentColor colorWithAlphaComponent:0.14];
+    iconContainer.userInteractionEnabled = NO;
+    iconContainer.layer.cornerRadius = 18;
+    [button addSubview:iconContainer];
+
+    UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage systemImageNamed:[self demoIconNameAtIndex:index]]];
+    iconView.translatesAutoresizingMaskIntoConstraints = NO;
+    iconView.tintColor = accentColor;
+    iconView.contentMode = UIViewContentModeScaleAspectFit;
+    iconView.userInteractionEnabled = NO;
+    [iconContainer addSubview:iconView];
+
+    UILabel *numberLabel = [[UILabel alloc] init];
+    numberLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    numberLabel.text = [NSString stringWithFormat:@"%02lu", (unsigned long)index + 1];
+    numberLabel.font = [UIFont monospacedDigitSystemFontOfSize:11 weight:UIFontWeightSemibold];
+    numberLabel.textColor = accentColor;
+    numberLabel.userInteractionEnabled = NO;
+    [button addSubview:numberLabel];
+
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    titleLabel.text = demo[@"title"];
+    titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    titleLabel.adjustsFontForContentSizeCategory = YES;
+    titleLabel.textColor = UIColor.labelColor;
+    titleLabel.numberOfLines = 0;
+    titleLabel.userInteractionEnabled = NO;
+    [button addSubview:titleLabel];
+
+    UILabel *detailLabel = [[UILabel alloc] init];
+    detailLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    detailLabel.text = demo[@"details"];
+    detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    detailLabel.adjustsFontForContentSizeCategory = YES;
+    detailLabel.textColor = UIColor.secondaryLabelColor;
+    detailLabel.numberOfLines = 0;
+    detailLabel.userInteractionEnabled = NO;
+    [button addSubview:detailLabel];
+
+    UIImageView *chevronView = [[UIImageView alloc] initWithImage:[UIImage systemImageNamed:@"chevron.right"]];
+    chevronView.translatesAutoresizingMaskIntoConstraints = NO;
+    chevronView.tintColor = UIColor.tertiaryLabelColor;
+    chevronView.userInteractionEnabled = NO;
+    [button addSubview:chevronView];
+
+    [NSLayoutConstraint activateConstraints:@[
+        [button.heightAnchor constraintGreaterThanOrEqualToConstant:82],
+
+        [accentView.leadingAnchor constraintEqualToAnchor:button.leadingAnchor constant:12],
+        [accentView.topAnchor constraintEqualToAnchor:button.topAnchor constant:14],
+        [accentView.bottomAnchor constraintEqualToAnchor:button.bottomAnchor constant:-14],
+        [accentView.widthAnchor constraintEqualToConstant:5],
+
+        [iconContainer.leadingAnchor constraintEqualToAnchor:accentView.trailingAnchor constant:12],
+        [iconContainer.centerYAnchor constraintEqualToAnchor:button.centerYAnchor],
+        [iconContainer.widthAnchor constraintEqualToConstant:36],
+        [iconContainer.heightAnchor constraintEqualToConstant:36],
+
+        [iconView.centerXAnchor constraintEqualToAnchor:iconContainer.centerXAnchor],
+        [iconView.centerYAnchor constraintEqualToAnchor:iconContainer.centerYAnchor],
+        [iconView.widthAnchor constraintEqualToConstant:18],
+        [iconView.heightAnchor constraintEqualToConstant:18],
+
+        [numberLabel.leadingAnchor constraintEqualToAnchor:iconContainer.trailingAnchor constant:12],
+        [numberLabel.topAnchor constraintEqualToAnchor:button.topAnchor constant:14],
+
+        [titleLabel.leadingAnchor constraintEqualToAnchor:numberLabel.leadingAnchor],
+        [titleLabel.topAnchor constraintEqualToAnchor:numberLabel.bottomAnchor constant:3],
+        [titleLabel.trailingAnchor constraintLessThanOrEqualToAnchor:chevronView.leadingAnchor constant:-12],
+
+        [detailLabel.leadingAnchor constraintEqualToAnchor:titleLabel.leadingAnchor],
+        [detailLabel.topAnchor constraintEqualToAnchor:titleLabel.bottomAnchor constant:3],
+        [detailLabel.trailingAnchor constraintEqualToAnchor:titleLabel.trailingAnchor],
+        [detailLabel.bottomAnchor constraintLessThanOrEqualToAnchor:button.bottomAnchor constant:-14],
+
+        [chevronView.trailingAnchor constraintEqualToAnchor:button.trailingAnchor constant:-14],
+        [chevronView.centerYAnchor constraintEqualToAnchor:button.centerYAnchor],
+        [chevronView.widthAnchor constraintEqualToConstant:12],
+        [chevronView.heightAnchor constraintEqualToConstant:18]
+    ]];
+
+    return button;
+}
+
+- (UIColor *)demoAccentColorAtIndex:(NSUInteger)index {
+    NSArray<UIColor *> *colors = @[
+        UIColor.systemTealColor,
+        UIColor.systemIndigoColor,
+        UIColor.systemGreenColor,
+        UIColor.systemPinkColor,
+        UIColor.systemOrangeColor,
+        UIColor.systemPurpleColor,
+        UIColor.systemBlueColor,
+        UIColor.systemMintColor,
+        UIColor.systemCyanColor,
+        UIColor.systemRedColor
+    ];
+    return colors[index % colors.count];
+}
+
+- (NSString *)demoIconNameAtIndex:(NSUInteger)index {
+    NSArray<NSString *> *icons = @[
+        @"text.bubble",
+        @"sparkles.rectangle.stack",
+        @"hand.tap",
+        @"checkmark.circle",
+        @"sparkles",
+        @"paintpalette",
+        @"clock.badge.exclamationmark",
+        @"square.stack.3d.up",
+        @"rectangle.inset.filled",
+        @"list.bullet.rectangle",
+        @"arrow.triangle.2.circlepath",
+        @"rectangle.2.swap",
+        @"waveform.path.ecg",
+        @"accessibility",
+        @"pause.circle",
+        @"arrow.up.to.line",
+        @"return"
+    ];
+    return icons[index % icons.count];
+}
+
 - (void)buildDemos {
     __weak typeof(self) weakSelf = self;
     self.demos = @[
         [self demoWithTitle:@"Basic message" details:@"Duration, margins, text styling and animation" block:^{ [weakSelf showBasicMessage]; }],
+        [self demoWithTitle:@"Animation styles" details:@"Fade, bottom, left and right transitions" block:^{ [weakSelf showAnimationStyles]; }],
         [self demoWithTitle:@"Action button" details:@"Primary action callback, separator and button styling" block:^{ [weakSelf showAction]; }],
         [self demoWithTitle:@"Two actions" details:@"Primary and secondary actions side by side" block:^{ [weakSelf showTwoActions]; }],
         [self demoWithTitle:@"Icon and action icon" details:@"SF Symbol icon plus an icon-only action" block:^{ [weakSelf showIcons]; }],
@@ -203,6 +366,27 @@ typedef void (^TTGDemoBlock)(void);
     snackbar.messageTextColor = UIColor.whiteColor;
     snackbar.messageTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     [snackbar show];
+}
+
+- (void)showAnimationStyles {
+    self.outputLabel.text = @"Queued bottom animation styles";
+
+    NSArray<NSDictionary *> *animationDemos = @[
+        @{@"title": @"Fade in / fade out", @"animation": @(TTGSnackbarAnimationTypeFadeInFadeOut), @"color": UIColor.systemIndigoColor},
+        @{@"title": @"Slide from bottom, dismiss upward", @"animation": @(TTGSnackbarAnimationTypeSlideFromBottomToTop), @"color": UIColor.systemBlueColor},
+        @{@"title": @"Slide from bottom, back to bottom", @"animation": @(TTGSnackbarAnimationTypeSlideFromBottomBackToBottom), @"color": UIColor.systemTealColor},
+        @{@"title": @"Slide from left to right", @"animation": @(TTGSnackbarAnimationTypeSlideFromLeftToRight), @"color": UIColor.systemGreenColor},
+        @{@"title": @"Slide from right to left", @"animation": @(TTGSnackbarAnimationTypeSlideFromRightToLeft), @"color": UIColor.systemOrangeColor}
+    ];
+
+    for (NSDictionary *demo in animationDemos) {
+        TTGSnackbar *snackbar = [self baseSnackbarWithMessage:demo[@"title"] duration:TTGSnackbarDurationShort];
+        snackbar.animationType = (TTGSnackbarAnimationType)[demo[@"animation"] integerValue];
+        snackbar.backgroundColor = demo[@"color"];
+        snackbar.messageTextColor = UIColor.whiteColor;
+        snackbar.messageTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+        [[TTGSnackbarManager shared] showSnackbar:snackbar policy:TTGSnackbarPresentationPolicyEnqueue];
+    }
 }
 
 - (void)showAction {
@@ -286,6 +470,7 @@ typedef void (^TTGDemoBlock)(void);
     container.layoutMargins = UIEdgeInsetsMake(12, 16, 12, 16);
     container.backgroundColor = UIColor.systemIndigoColor;
     container.layer.cornerRadius = 12;
+    container.layer.masksToBounds = YES;
 
     UILabel *title = [[UILabel alloc] init];
     title.text = @"Custom content";
@@ -301,6 +486,11 @@ typedef void (^TTGDemoBlock)(void);
 
     TTGSnackbar *snackbar = [[TTGSnackbar alloc] initWithMessage:@"" duration:TTGSnackbarDurationMiddle];
     snackbar.customContentView = container;
+    snackbar.backgroundColor = UIColor.clearColor;
+    snackbar.contentInset = UIEdgeInsetsZero;
+    snackbar.cornerRadius = 12;
+    snackbar.borderColor = UIColor.clearColor;
+    snackbar.borderWidth = 0;
     snackbar.leftMargin = 24;
     snackbar.rightMargin = 24;
     snackbar.shouldActivateLeftAndRightMarginOnCustomContentView = YES;

@@ -23,5 +23,10 @@
   "source_files": "TTGSnackbar/**/*.{h,swift}",
   "requires_arc": true,
   "swift_versions": "5.9",
+  "resource_bundles": {
+    "TTGSnackbar": [
+      "TTGSnackbar/PrivacyInfo.xcprivacy"
+    ]
+  },
   "swift_version": "5.9"
 }

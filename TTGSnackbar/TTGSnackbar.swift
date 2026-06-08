@@ -497,6 +497,7 @@ open class TTGSnackbar: UIView {
 
      - returns: TTGSnackbar instance
      */
+    @objc(initWithCustomContentView:duration:)
     public init(customContentView: UIView, duration: TTGSnackbarDuration) {
         super.init(frame: TTGSnackbar.snackbarDefaultFrame)
         self.duration = duration
@@ -514,6 +515,7 @@ open class TTGSnackbar: UIView {
 
      - returns: TTGSnackbar instance
      */
+    @objc(initWithMessage:duration:actionText:actionBlock:)
     public init(message: String, duration: TTGSnackbarDuration, actionText: String, actionBlock: @escaping TTGActionBlock) {
         super.init(frame: TTGSnackbar.snackbarDefaultFrame)
         self.duration = duration
@@ -535,6 +537,7 @@ open class TTGSnackbar: UIView {
 
      - returns: TTGSnackbar instance
      */
+    @objc(initWithMessage:duration:actionText:messageFont:actionTextFont:actionBlock:)
     public init(message: String, duration: TTGSnackbarDuration, actionText: String, messageFont: UIFont, actionTextFont: UIFont, actionBlock: @escaping TTGActionBlock) {
         super.init(frame: TTGSnackbar.snackbarDefaultFrame)
         self.duration = duration
