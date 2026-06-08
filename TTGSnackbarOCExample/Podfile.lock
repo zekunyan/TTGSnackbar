@@ -1,5 +1,5 @@
 PODS:
-  - TTGSnackbar (1.11.0)
+  - TTGSnackbar (1.12.0)
 
 DEPENDENCIES:
   - TTGSnackbar (from `../`)
