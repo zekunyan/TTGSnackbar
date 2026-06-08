@@ -44,6 +44,13 @@ You can use [CocoaPods](http://cocoapods.org) to install `TTGSnackbar` by adding
 pod "TTGSnackbar"
 ```
 
+### Swift Package Manager
+You can use [Swift Package Manager](https://swift.org/package-manager/) by adding this repository URL to Xcode:
+
+```
+https://github.com/zekunyan/TTGSnackbar.git
+```
+
 ### Carthage
 You can use [Carthage](https://github.com/Carthage/Carthage) to install `TTGSnackbar` by adding it to your `Cartfile`:
 ```
@@ -88,7 +95,7 @@ let snackbar = TTGSnackbar(
     actionBlock: { (snackbar) in
         print("Click action!")
         // Dismiss manually after 3 seconds
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Doubl(NSEC_PER_SEC)) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             snackbar.dismiss()
         }   
     }
@@ -146,7 +153,7 @@ let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
 snackbar.icon = UIImage(named: "emoji_cool_small")
 
 // Add the gesture recognizer callbacks
-ssnackbar.onTapBlock = { snackbar in
+snackbar.onTapBlock = { snackbar in
     snackbar.dismiss()
 }
 
@@ -168,30 +175,78 @@ snackbar.onSwipeBlock = { (snackbar, direction) in
 
 snackbar.show()
 ```
-## [New!] Automatic handling of Showing one Snackbar at a time 
+## Modern semantic styles
 
-`TTGSnackbarManager` can handle automatically showing and replacing the presented Snackbars at your screen.
+Use built-in semantic styles for common product states. Styles configure recommended colors, SF Symbol icons, loading state and haptic feedback.
+
+```swift
+let snackbar = TTGSnackbar(message: "Saved successfully", duration: .short)
+snackbar.style = .success
+snackbar.show()
+
+let loading = TTGSnackbar(message: "Syncing…", duration: .forever)
+loading.style = .loading
+loading.show()
+```
+
+## Configuration API
+
+For modern Swift call sites, build a snackbar from a single value-based configuration. Existing property-based APIs are still supported.
+
+```swift
+let snackbar = TTGSnackbar(configuration: .init(
+    message: "File deleted",
+    duration: .long,
+    style: .warning,
+    actionText: "Undo",
+    actionBlock: { snackbar in
+        snackbar.dismiss()
+    }
+))
+snackbar.show()
+```
+
+## Async / await presentation
+
+Swift 5.9 projects can await the first action, tap, swipe or dismiss result.
+
+```swift
+let result = await TTGSnackbar.show(configuration: .init(
+    message: "File deleted",
+    duration: .long,
+    style: .warning,
+    actionText: "Undo"
+))
+
+if case .action = result {
+    undoDelete()
+}
+```
+
+## [New!] Automatic handling of Showing one Snackbar at a time
+
+`TTGSnackbarManager` can queue, replace or deduplicate snackbars so only one managed snackbar is presented at a time.
 
 ### **Usage**:
 
 **Swift**
-```swift 
+```swift
 let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
-TTGSnackbarManager.show(snackbar)
+TTGSnackbarManager.shared.show(snackbar: snackbar, policy: .enqueue)
+
+let urgent = TTGSnackbar(message: "Network disconnected", duration: .long)
+urgent.style = .error
+TTGSnackbarManager.shared.show(snackbar: urgent, policy: .replaceCurrent)
 ```
 
 **Objective-c**
 ```objective-c
 TTGSnackbar *bar = [[TTGSnackbar alloc] initWithMessage:@"Bar1" duration:TTGSnackbarDurationMiddle];
 [bar setDismissBlock:^(TTGSnackbar * snackBar) {
-	//whatever you want for dismiss
+    // Whatever you want for dismiss.
 }];
-[[TTGSnackbarManager shared] showSnackbar: bar];
+[[TTGSnackbarManager shared] showSnackbar:bar];
 ```
-
-
-`TTGSnackbarManager` uses the `dismissBlock` property of a snackbar, it does not replace any functionality that you add to the snackbar, rather it just adds its own code to the existing block.
-
 
 # Customization
 
@@ -205,9 +260,24 @@ TTGSnackbar *bar = [[TTGSnackbar alloc] initWithMessage:@"Bar1" duration:TTGSnac
 `messageTextFont: UIFont` defines the message text font.
 
 ### Display duration
-`duration: TTGSnackbarDuration`defines the display duration.  
-`TTGSnackbarDuration` : `short`, `middle`, `long` and `forever`.
+`duration: TTGSnackbarDuration` defines the display duration.
+`TTGSnackbarDuration` : `short`, `middle`, `long`, `custom` and `forever`.
 When you set `forever`, the snackbar will show an activity indicator after user click the action button and you must dismiss the snackbar manually.
+
+### Semantic style
+`style: TTGSnackbarStyle` applies built-in visual styles: `default`, `info`, `success`, `warning`, `error` and `loading`.
+
+### Lifecycle callbacks
+`willShowBlock`, `didShowBlock`, `willDismissBlock` and `didDismissBlock` let you observe presentation transitions for analytics, queueing or custom coordination.
+
+### Accessibility and motion
+`shouldAnnounceForAccessibility` enables VoiceOver announcements, `accessibilityAnnouncement` overrides the announced text, `adjustsFontForContentSizeCategory` enables Dynamic Type scaling, and `shouldRespectReduceMotion` falls back to a fade animation when Reduce Motion is enabled.
+
+### Dismiss timer controls
+`pauseDismissTimer()` and `resumeDismissTimer()` allow manual timer control. `pausesDismissTimerOnTouch` and `pausesDismissTimerWhenAppInactive` pause timed snackbars during interaction or app lifecycle interruptions.
+
+### Haptic feedback
+`hapticFeedback` controls feedback when the snackbar appears, and `actionHapticFeedback` controls feedback when users tap action buttons.
 
 ### Action title
 `actionText: String` defines the action button title.
@@ -260,7 +330,7 @@ public typealias TTGActionBlock = (snackbar: TTGSnackbar) -> Void
 `onSwipeBlock: TTGSwipeBlock` will be called when the user swipes on the snackbar
 ```
 /// Swipe gesture callback closure
-public typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizerDirection) -> Void
+public typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizer.Direction) -> Void
 ```
 
 ### Auto Dismissal using Swipe Gestures
@@ -278,7 +348,7 @@ public var shouldDismissOnSwipe: Bool = false
 The default value of `animationType` is `slideFromBottomBackToBottom`, which is the same as Snackbar in Android.
 
 ### Animation duration
-`animationDuration: NSTimeInterval` defines the duration of show and hide animation.
+`animationDuration: TimeInterval` defines the duration of show and hide animation.
 
 ### Margins
 `leftMargin: CGFloat`, `rightMargin: CGFloat`, `topMargin: CGFloat` and `bottomMargin: CGFloat` defines the margins of snackbar
@@ -300,7 +370,7 @@ public var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
 `icon: UIImage` defines the icon image.
 
 ### Icon image content mode
-`iconContentMode: UIViewContentMode` defines the content mode of icon imageView.
+`iconContentMode: UIView.ContentMode` defines the content mode of icon imageView.
 
 ### [New!] Custom container view
 `containerView: UIView` defines the custom container(super) view for snackbar to show.
@@ -312,7 +382,7 @@ public var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
 `separateViewBackgroundColor: UIColor = UIColor.gray` defines the separator line color.
 
 ### ActivityIndicatorViewStyle
-`activityIndicatorViewStyle: UIActivityIndicatorViewStyle` defines the activityIndicatorViewStyle in snackbar.
+`activityIndicatorViewStyle: UIActivityIndicatorView.Style` defines the activityIndicatorViewStyle in snackbar.
 
 ### ActivityIndicatorView color
 `activityIndicatorViewColor: UIColor` defines the activityIndicatorView color in snackbar.
