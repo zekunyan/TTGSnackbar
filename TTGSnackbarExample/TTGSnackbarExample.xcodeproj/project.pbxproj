@@ -14,6 +14,13 @@
 		BFA488FC2169BE2D009A2265 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFA488FA2169BE2D009A2265 /* LaunchScreen.storyboard */; };
 		BFA489042169C003009A2265 /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA489032169C003009A2265 /* CustomView.xib */; };
 		BFA489082169DD9A009A2265 /* TTGSnackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA489072169DD9A009A2265 /* TTGSnackbar.swift */; };
+		D4A12CBB275CD0B9D5B01B5E /* TTGSnackbarAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20459BB4821C3CBF730D3038 /* TTGSnackbarAsync.swift */; };
+		B398CF33894B47B0C1C7A5CB /* TTGSnackbarInteractions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3010CA3C13167D6430965C0A /* TTGSnackbarInteractions.swift */; };
+		B213823319FF718A38318310 /* TTGSnackbarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38084CA4B0DB20ACA7912FC7 /* TTGSnackbarLabel.swift */; };
+		D78BEE3444DFF549D2C790FA /* TTGSnackbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A302EADD18C4FE9D6AA94 /* TTGSnackbarManager.swift */; };
+		67BC2CAE33C2FFB2F4AF2239 /* TTGSnackbarPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB553A65BA2B2FB58C7C47 /* TTGSnackbarPresentation.swift */; };
+		6A1D48BE49EAA1ED56DB3102 /* TTGSnackbarTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC8AF8431BBA5314086EA /* TTGSnackbarTypes.swift */; };
+		54668DC1B787FDCC63EB1F15 /* TTGSnackbarViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A156F92894003AAFCC2749D /* TTGSnackbarViewSetup.swift */; };
 		BFA4890A2169DEA9009A2265 /* ShowInCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA489092169DEA9009A2265 /* ShowInCustomViewController.swift */; };
 		BFA489122169E3E2009A2265 /* TTGSnackbarExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA489112169E3E2009A2265 /* TTGSnackbarExampleTests.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +46,13 @@
 		BFA489032169C003009A2265 /* CustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
 		BFA489062169DD9A009A2265 /* TTGSnackbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGSnackbar.h; sourceTree = "<group>"; };
 		BFA489072169DD9A009A2265 /* TTGSnackbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTGSnackbar.swift; sourceTree = "<group>"; };
+		20459BB4821C3CBF730D3038 /* TTGSnackbarAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTGSnackbarAsync.swift; sourceTree = "<group>"; };
+		3010CA3C13167D6430965C0A /* TTGSnackbarInteractions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTGSnackbarInteractions.swift; sourceTree = "<group>"; };
+		38084CA4B0DB20ACA7912FC7 /* TTGSnackbarLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTGSnackbarLabel.swift; sourceTree = "<group>"; };
+		376A302EADD18C4FE9D6AA94 /* TTGSnackbarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTGSnackbarManager.swift; sourceTree = "<group>"; };
+		A2EB553A65BA2B2FB58C7C47 /* TTGSnackbarPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTGSnackbarPresentation.swift; sourceTree = "<group>"; };
+		A31CC8AF8431BBA5314086EA /* TTGSnackbarTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTGSnackbarTypes.swift; sourceTree = "<group>"; };
+		4A156F92894003AAFCC2749D /* TTGSnackbarViewSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTGSnackbarViewSetup.swift; sourceTree = "<group>"; };
 		BFA489092169DEA9009A2265 /* ShowInCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInCustomViewController.swift; sourceTree = "<group>"; };
 		BFA4890F2169E3E2009A2265 /* TTGSnackbarExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TTGSnackbarExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA489112169E3E2009A2265 /* TTGSnackbarExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTGSnackbarExampleTests.swift; sourceTree = "<group>"; };
@@ -102,6 +116,13 @@
 			children = (
 				BFA489062169DD9A009A2265 /* TTGSnackbar.h */,
 				BFA489072169DD9A009A2265 /* TTGSnackbar.swift */,
+				20459BB4821C3CBF730D3038 /* TTGSnackbarAsync.swift */,
+				3010CA3C13167D6430965C0A /* TTGSnackbarInteractions.swift */,
+				38084CA4B0DB20ACA7912FC7 /* TTGSnackbarLabel.swift */,
+				376A302EADD18C4FE9D6AA94 /* TTGSnackbarManager.swift */,
+				A2EB553A65BA2B2FB58C7C47 /* TTGSnackbarPresentation.swift */,
+				A31CC8AF8431BBA5314086EA /* TTGSnackbarTypes.swift */,
+				4A156F92894003AAFCC2749D /* TTGSnackbarViewSetup.swift */,
 			);
 			name = TTGSnackbar;
 			path = ../../TTGSnackbar;
@@ -222,6 +243,13 @@
 			files = (
 				BFA488F42169BE2B009A2265 /* ViewController.swift in Sources */,
 				BFA489082169DD9A009A2265 /* TTGSnackbar.swift in Sources */,
+				D4A12CBB275CD0B9D5B01B5E /* TTGSnackbarAsync.swift in Sources */,
+				B398CF33894B47B0C1C7A5CB /* TTGSnackbarInteractions.swift in Sources */,
+				B213823319FF718A38318310 /* TTGSnackbarLabel.swift in Sources */,
+				D78BEE3444DFF549D2C790FA /* TTGSnackbarManager.swift in Sources */,
+				67BC2CAE33C2FFB2F4AF2239 /* TTGSnackbarPresentation.swift in Sources */,
+				6A1D48BE49EAA1ED56DB3102 /* TTGSnackbarTypes.swift in Sources */,
+				54668DC1B787FDCC63EB1F15 /* TTGSnackbarViewSetup.swift in Sources */,
 				BFA4890A2169DEA9009A2265 /* ShowInCustomViewController.swift in Sources */,
 				BFA488F22169BE2B009A2265 /* AppDelegate.swift in Sources */,
 			);

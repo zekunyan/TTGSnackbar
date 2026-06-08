@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Init configuration.
 
-private extension TTGSnackbar {
+extension TTGSnackbar {
 
     func configure() {
         // Clear subViews

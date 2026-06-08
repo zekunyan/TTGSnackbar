@@ -10,6 +10,13 @@
 		2AD35B120DFA4AECE564462223CEAED6 /* Pods-TTGSnackbarOCExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 658481728BCED315AFCBC00986FF80BD /* Pods-TTGSnackbarOCExample-dummy.m */; };
 		601B54A16503E4A217C9B862D6D1F390 /* Pods-TTGSnackbarOCExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EBBED500EB1FADEEBB896D228325954A /* Pods-TTGSnackbarOCExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		625F14471FA257BD7FA2E73C6B4CA4DA /* TTGSnackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BCABA5F5E761FA324AFE792FF7091 /* TTGSnackbar.swift */; };
+		0EFF34FF4939F2770BB84BA8 /* TTGSnackbarAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164F4F0A5AB3A6D4E2E77C01 /* TTGSnackbarAsync.swift */; };
+		F9EAC5515CF019B286B968FC /* TTGSnackbarInteractions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06B608CA6F1D1E6EA8E90A4 /* TTGSnackbarInteractions.swift */; };
+		6F660D09663221A23FF4A87B /* TTGSnackbarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F494E5D3EE85C5DBAC15F4 /* TTGSnackbarLabel.swift */; };
+		D67B6ADAE4A30F5C0A5B4F6D /* TTGSnackbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F6C3883B7989280AAABCA1 /* TTGSnackbarManager.swift */; };
+		C773276DE431F096FBEECC56 /* TTGSnackbarPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD20560E747523E92503DD90 /* TTGSnackbarPresentation.swift */; };
+		40ECC78389DB447815C491C8 /* TTGSnackbarTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D702B80790B1ED6FCDB5159D /* TTGSnackbarTypes.swift */; };
+		C4BEB5146107613005AFE3C9 /* TTGSnackbarViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471DF57037C751A0235B416F /* TTGSnackbarViewSetup.swift */; };
 		785AF24DC81D8A57122AE528E9138361 /* TTGSnackbar.h in Headers */ = {isa = PBXBuildFile; fileRef = A4FF58FCE26AA7C0A1FF1AE4E7A5740A /* TTGSnackbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79B269BD9700A5DCC350FDF78772FC54 /* TTGSnackbar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 852357032DC527F02814E5E0375983D8 /* TTGSnackbar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7FB7E0EC3AC5E64177C87106C64D6845 /* TTGSnackbar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C298D09937DF86E35483FEA065ABB5E /* TTGSnackbar-dummy.m */; };
@@ -31,6 +38,13 @@
 		0DD035A2804B167F73BC1835351EB4C3 /* TTGSnackbar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TTGSnackbar.release.xcconfig; sourceTree = "<group>"; };
 		1050B4137C247C26599DC245E694F8F8 /* TTGSnackbar.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = TTGSnackbar.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2E7BCABA5F5E761FA324AFE792FF7091 /* TTGSnackbar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TTGSnackbar.swift; path = TTGSnackbar/TTGSnackbar.swift; sourceTree = "<group>"; };
+		164F4F0A5AB3A6D4E2E77C01 /* TTGSnackbarAsync.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TTGSnackbarAsync.swift; path = TTGSnackbar/TTGSnackbarAsync.swift; sourceTree = "<group>"; };
+		B06B608CA6F1D1E6EA8E90A4 /* TTGSnackbarInteractions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TTGSnackbarInteractions.swift; path = TTGSnackbar/TTGSnackbarInteractions.swift; sourceTree = "<group>"; };
+		C2F494E5D3EE85C5DBAC15F4 /* TTGSnackbarLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TTGSnackbarLabel.swift; path = TTGSnackbar/TTGSnackbarLabel.swift; sourceTree = "<group>"; };
+		71F6C3883B7989280AAABCA1 /* TTGSnackbarManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TTGSnackbarManager.swift; path = TTGSnackbar/TTGSnackbarManager.swift; sourceTree = "<group>"; };
+		CD20560E747523E92503DD90 /* TTGSnackbarPresentation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TTGSnackbarPresentation.swift; path = TTGSnackbar/TTGSnackbarPresentation.swift; sourceTree = "<group>"; };
+		D702B80790B1ED6FCDB5159D /* TTGSnackbarTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TTGSnackbarTypes.swift; path = TTGSnackbar/TTGSnackbarTypes.swift; sourceTree = "<group>"; };
+		471DF57037C751A0235B416F /* TTGSnackbarViewSetup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TTGSnackbarViewSetup.swift; path = TTGSnackbar/TTGSnackbarViewSetup.swift; sourceTree = "<group>"; };
 		3064EBE299E3D60E967CC4391CDF9286 /* Pods-TTGSnackbarOCExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TTGSnackbarOCExample.debug.xcconfig"; sourceTree = "<group>"; };
 		325B71782AB8856659064504F51EE00A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		45E59C8AAA5A24199F1610246914AD88 /* TTGSnackbar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTGSnackbar-prefix.pch"; sourceTree = "<group>"; };
@@ -88,6 +102,13 @@
 			children = (
 				A4FF58FCE26AA7C0A1FF1AE4E7A5740A /* TTGSnackbar.h */,
 				2E7BCABA5F5E761FA324AFE792FF7091 /* TTGSnackbar.swift */,
+				164F4F0A5AB3A6D4E2E77C01 /* TTGSnackbarAsync.swift */,
+				B06B608CA6F1D1E6EA8E90A4 /* TTGSnackbarInteractions.swift */,
+				C2F494E5D3EE85C5DBAC15F4 /* TTGSnackbarLabel.swift */,
+				71F6C3883B7989280AAABCA1 /* TTGSnackbarManager.swift */,
+				CD20560E747523E92503DD90 /* TTGSnackbarPresentation.swift */,
+				D702B80790B1ED6FCDB5159D /* TTGSnackbarTypes.swift */,
+				471DF57037C751A0235B416F /* TTGSnackbarViewSetup.swift */,
 				3C75B869446F736ADF0BD33BF6F840F6 /* Pod */,
 				DB1550B5A7734F0E571306EDC04FFB4C /* Support Files */,
 			);
@@ -292,6 +313,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				625F14471FA257BD7FA2E73C6B4CA4DA /* TTGSnackbar.swift in Sources */,
+				0EFF34FF4939F2770BB84BA8 /* TTGSnackbarAsync.swift in Sources */,
+				F9EAC5515CF019B286B968FC /* TTGSnackbarInteractions.swift in Sources */,
+				6F660D09663221A23FF4A87B /* TTGSnackbarLabel.swift in Sources */,
+				D67B6ADAE4A30F5C0A5B4F6D /* TTGSnackbarManager.swift in Sources */,
+				C773276DE431F096FBEECC56 /* TTGSnackbarPresentation.swift in Sources */,
+				40ECC78389DB447815C491C8 /* TTGSnackbarTypes.swift in Sources */,
+				C4BEB5146107613005AFE3C9 /* TTGSnackbarViewSetup.swift in Sources */,
 				7FB7E0EC3AC5E64177C87106C64D6845 /* TTGSnackbar-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

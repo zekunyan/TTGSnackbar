@@ -198,7 +198,7 @@ open class TTGSnackbar: UIView {
     }
 
     /// Main text label
-    @objc internal(set) open dynamic var messageLabel: TTGSnackbarLabel!
+    @objc open internal(set) dynamic var messageLabel: TTGSnackbarLabel!
 
     /// Main text shown on the snackbar.
     @objc open dynamic var message: String = "" {
@@ -229,7 +229,7 @@ open class TTGSnackbar: UIView {
     }
 
     /// Action button
-    @objc internal(set) open dynamic var actionButton: UIButton!
+    @objc open internal(set) dynamic var actionButton: UIButton!
 
     /// Action button title.
     @objc open dynamic var actionText: String = "" {
@@ -246,7 +246,7 @@ open class TTGSnackbar: UIView {
     }
 
     /// Second action button
-    @objc internal(set) open dynamic var secondActionButton: UIButton!
+    @objc open internal(set) dynamic var secondActionButton: UIButton!
 
     /// Second action button title.
     @objc open dynamic var secondActionText: String = "" {
@@ -310,7 +310,7 @@ open class TTGSnackbar: UIView {
     }
 
     /// Icon imageView
-    @objc internal(set) open dynamic var iconImageView: UIImageView!
+    @objc open internal(set) dynamic var iconImageView: UIImageView!
 
     /// Icon image
     @objc open dynamic var icon: UIImage? = nil {
@@ -363,7 +363,7 @@ open class TTGSnackbar: UIView {
     }
 
     /// ActivityIndicatorView
-    @objc internal(set) open dynamic var activityIndicatorView: UIActivityIndicatorView!
+    @objc open internal(set) dynamic var activityIndicatorView: UIActivityIndicatorView!
 
     /// ActivityIndicatorViewStyle
     @objc open dynamic var activityIndicatorViewStyle: UIActivityIndicatorView.Style {
