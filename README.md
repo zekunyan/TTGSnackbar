@@ -1,199 +1,223 @@
 # TTGSnackbar
-A Swift based implementation of the Android Snackbar for iOS
 
-> Current development targets Swift 5.9 and iOS 16.0 or later.
+[简体中文](README.zh-CN.md)
+
+TTGSnackbar is a Swift implementation of an Android-style Snackbar for iOS. It presents short, actionable messages at the top or bottom of the screen, supports custom views, queue management, semantic styles, accessibility, haptics, and Swift concurrency.
+
+> Current development targets **Swift 5.9**, **Xcode 15+**, and **iOS 16.0+**.
 
 [![Build Status](https://travis-ci.org/zekunyan/TTGSnackbar.svg?branch=master)](https://travis-ci.org/zekunyan/TTGSnackbar)
 [![Version](https://img.shields.io/cocoapods/v/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
-[![Swift5.9](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://developer.apple.com/swift)
+[![Swift 5.9](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://developer.apple.com/swift)
 [![Apps Using](https://img.shields.io/badge/Apps%20Using-%3E%20787-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 [![Total Download](https://img.shields.io/badge/Total%20Download-%3E%2036,840-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 
 ![Screenshot](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/screen_shot.png)
 
-# Gif
+## Preview
 
-![Screenshot](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_example.gif)
+![Snackbar example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_example.gif)
 
-# About
-TTGSnackbar is useful for showing a brief message at bottom or top of the screen with one or two action buttons.
-It appears above all other elements on screen.  
-It disappears after a timeout or after user click the action button.
+## Features
 
-# Installation
+- Present messages at the bottom or top of the screen.
+- Add one or two action buttons, text actions, or icon-only actions.
+- Show built-in semantic styles: `default`, `info`, `success`, `warning`, `error`, and `loading`.
+- Present custom `UIView` content or display inside a custom container view.
+- Queue, replace, or deduplicate snackbars with `TTGSnackbarManager`.
+- Await action, tap, swipe, dismiss, drop, or presentation-failure results with Swift concurrency.
+- Support Dynamic Type, VoiceOver announcements, Reduce Motion, and haptic feedback.
+- Pause and resume dismiss timers manually, on touch, or during app lifecycle interruptions.
+- Include a privacy manifest for modern Apple platform requirements.
 
-### Swift 5.9
-Current version
-Xcode 15+
-iOS 16+
+## Requirements
 
-### Swift 4
-Version 1.6.0
-Xcode 9  
-iOS 8+
+| TTGSnackbar version | Swift | Xcode | iOS |
+| --- | --- | --- | --- |
+| Current | 5.9 | 15+ | 16.0+ |
+| 1.6.0 | 4.x | 9+ | 8.0+ |
+| 1.5.3 | 3.x | 8+ | 8.0+ |
 
-### Swift 3 
-Version 1.5.3
-Xcode 8  
-iOS 8+
+## Installation
+
+### Swift Package Manager
+
+Add this repository URL in Xcode:
+
+```text
+https://github.com/zekunyan/TTGSnackbar.git
+```
+
+Then import the module:
+
+```swift
+import TTGSnackbar
+```
 
 ### CocoaPods
-You can use [CocoaPods](http://cocoapods.org) to install `TTGSnackbar` by adding it to your `Podfile`:
+
+Add TTGSnackbar to your `Podfile`:
 
 ```ruby
 pod "TTGSnackbar"
 ```
 
-### Swift Package Manager
-You can use [Swift Package Manager](https://swift.org/package-manager/) by adding this repository URL to Xcode:
+Then run:
 
-```
-https://github.com/zekunyan/TTGSnackbar.git
+```sh
+pod install
 ```
 
 ### Carthage
-You can use [Carthage](https://github.com/Carthage/Carthage) to install `TTGSnackbar` by adding it to your `Cartfile`:
-```
+
+Add TTGSnackbar to your `Cartfile`:
+
+```text
 github "zekunyan/TTGSnackbar"
 ```
 
-### Import
+## Quick Start
 
-And you need to import the module.  
-```
-import TTGSnackbar
-```
+### Show a simple message
 
-# Usage
-## Show a simple message
-![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_1.png)
-```
-let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .short)
-snackbar.show()
-```
-## Show a simple message with an action button
-![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_2.png)
-```
-let snackbar = TTGSnackbar(
-    message: "TTGSnackBar !",
-    duration: .middle,
-    actionText: "Action!",
-    actionBlock: { (snackbar) in
-        print("Click action!")
-    }
-)
-snackbar.show()
-```
-
-## Show a simple message with a long running action
-![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_3.png)
-```
-let snackbar = TTGSnackbar(
-    message: "TTGSnackbar !",
-    duration: .forever,
-    actionText: "Action",
-    actionBlock: { (snackbar) in
-        print("Click action!")
-        // Dismiss manually after 3 seconds
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
-            snackbar.dismiss()
-        }   
-    }
-)
-snackbar.show()
-```
-
-## Show a simple message with two action buttons
-![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_4.png)
-```
-let snackbar = TTGSnackbar(message: "Two actions !", duration: .long)
-
-// Action 1
-snackbar.actionText = "Yes"
-snackbar.actionTextColor = UIColor.green
-snackbar.actionBlock = { (snackbar) in NSLog("Click Yes !") }
-
-// Action 2
-snackbar.secondActionText = "No"
-snackbar.secondActionTextColor = UIColor.yellow
-snackbar.secondActionBlock = { (snackbar) in NSLog("Click No !") }
-
-snackbar.show()
-```
-
-## Show a simple message with an icon image
-![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_5.jpg)
-```
-let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
-
-// Add icon image
-snackbar.icon = UIImage(named: "emoji_cool_small")
-
-snackbar.show()
-```
-
-## [Improved!] Show custom content view in snackbar
-![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_6.png)
-```
-// Instantiate the custom content view
-let customContentView = UINib(nibName: "CustomView", bundle:Bundle.main).instantiate(withOwner: nil, options: nil).first as! UIView?
-
-// Initialize the snackbar with the custom content view
-let snackbar = TTGSnackbar(customContentView: customContentView, duration: .long)
-
-snackbar.show()
-```
-
-## Make use of the Gesture recognizers in snackbar
-![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_5.jpg)
-```
-let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
-
-// Add icon image
-snackbar.icon = UIImage(named: "emoji_cool_small")
-
-// Add the gesture recognizer callbacks
-snackbar.onTapBlock = { snackbar in
-    snackbar.dismiss()
-}
-
-snackbar.onSwipeBlock = { (snackbar, direction) in
-    
-    // Change the animation type to simulate being dismissed in that direction
-    if direction == .right {
-        snackbar.animationType = .slideFromLeftToRight
-    } else if direction == .left {
-        snackbar.animationType = .slideFromRightToLeft
-    } else if direction == .up {
-        snackbar.animationType = .slideFromTopBackToTop
-    } else if direction == .down {
-        snackbar.animationType = .slideFromTopBackToTop
-    }
-    
-    snackbar.dismiss()
-}
-
-snackbar.show()
-```
-## Modern semantic styles
-
-Use built-in semantic styles for common product states. Styles configure recommended colors, SF Symbol icons, loading state and haptic feedback.
+![Simple snackbar](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_1.png)
 
 ```swift
-let snackbar = TTGSnackbar(message: "Saved successfully", duration: .short)
-snackbar.style = .success
+let snackbar = TTGSnackbar(message: "TTGSnackbar!", duration: .short)
 snackbar.show()
+```
+
+`show()` returns `false` if the snackbar cannot be presented, for example when no active window or custom container is available.
+
+```swift
+if !snackbar.show() {
+    print("Snackbar could not be presented")
+}
+```
+
+### Show an action button
+
+![Action snackbar](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_2.png)
+
+```swift
+let snackbar = TTGSnackbar(
+    message: "File deleted",
+    duration: .middle,
+    actionText: "Undo"
+) { snackbar in
+    restoreFile()
+    snackbar.dismiss()
+}
+
+snackbar.show()
+```
+
+### Show a long-running action
+
+![Long-running action](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_3.png)
+
+```swift
+let snackbar = TTGSnackbar(
+    message: "Uploading…",
+    duration: .forever,
+    actionText: "Cancel"
+) { snackbar in
+    cancelUpload()
+    snackbar.dismiss()
+}
+
+snackbar.show()
+```
+
+### Show two action buttons
+
+![Two actions](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_4.png)
+
+```swift
+let snackbar = TTGSnackbar(message: "Enable notifications?", duration: .long)
+
+snackbar.actionText = "Enable"
+snackbar.actionTextColor = .systemGreen
+snackbar.actionBlock = { snackbar in
+    enableNotifications()
+    snackbar.dismiss()
+}
+
+snackbar.secondActionText = "Not now"
+snackbar.secondActionTextColor = .systemOrange
+snackbar.secondActionBlock = { snackbar in
+    snackbar.dismiss()
+}
+
+snackbar.show()
+```
+
+### Show an icon or icon-only action
+
+![Icon snackbar](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_5.jpg)
+
+```swift
+let snackbar = TTGSnackbar(message: "Saved successfully", duration: .middle)
+snackbar.icon = UIImage(systemName: "checkmark.circle.fill")
+snackbar.iconTintColor = .systemGreen
+snackbar.show()
+```
+
+```swift
+let snackbar = TTGSnackbar(message: "Tap the icon action", duration: .middle)
+snackbar.actionIcon = UIImage(systemName: "hand.tap.fill")
+snackbar.actionBlock = { snackbar in
+    snackbar.dismiss()
+}
+snackbar.show()
+```
+
+### Show custom content
+
+![Custom content](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_6.png)
+
+```swift
+let customContentView = UINib(
+    nibName: "CustomView",
+    bundle: .main
+).instantiate(withOwner: nil).first as! UIView
+
+let snackbar = TTGSnackbar(customContentView: customContentView, duration: .long)
+snackbar.show()
+```
+
+Set `shouldActivateLeftAndRightMarginOnCustomContentView = true` when the custom content view should honor snackbar side margins.
+
+## Modern APIs
+
+### Semantic styles
+
+Use semantic styles for common product states. Styles apply recommended colors, icons, loading behavior, and haptic defaults.
+
+```swift
+let success = TTGSnackbar(message: "Saved successfully", duration: .short)
+success.style = .success
+success.show()
 
 let loading = TTGSnackbar(message: "Syncing…", duration: .forever)
 loading.style = .loading
 loading.show()
 ```
 
-## Configuration API
+Available styles:
 
-For modern Swift call sites, build a snackbar from a single value-based configuration. Existing property-based APIs are still supported.
+- `.default`
+- `.info`
+- `.success`
+- `.warning`
+- `.error`
+- `.loading`
+
+### Configuration API
+
+Use `TTGSnackbarConfiguration` to build snackbars from one value object. The property-based API remains supported.
 
 ```swift
 let snackbar = TTGSnackbar(configuration: .init(
@@ -202,15 +226,17 @@ let snackbar = TTGSnackbar(configuration: .init(
     style: .warning,
     actionText: "Undo",
     actionBlock: { snackbar in
+        undoDelete()
         snackbar.dismiss()
     }
 ))
+
 snackbar.show()
 ```
 
-## Async / await presentation
+### Async / await presentation
 
-Swift 5.9 projects can await the first action, tap, swipe, dismiss, manager drop or presentation failure result. The async helper wires action titles into result callbacks automatically; property-based presentation still needs an `actionBlock` for an action button to be visible.
+Swift concurrency callers can await the first action, tap, swipe, dismiss, manager drop, or presentation failure.
 
 ```swift
 let result = await TTGSnackbar.show(configuration: .init(
@@ -220,20 +246,28 @@ let result = await TTGSnackbar.show(configuration: .init(
     actionText: "Undo"
 ))
 
-if case .action = result {
+switch result {
+case .action:
     undoDelete()
+case .dismissed:
+    break
+case .dropped:
+    print("A manager policy dropped the snackbar")
+case .failedToPresent:
+    print("No window or container was available")
+default:
+    break
 }
 ```
 
-## [New!] Automatic handling of Showing one Snackbar at a time
+The async helper wires action titles into result callbacks automatically. With property-based presentation, provide an `actionBlock` or `secondActionBlock` for action buttons to become visible.
 
-`TTGSnackbarManager` can queue, replace or deduplicate snackbars so only one managed snackbar is presented at a time. The `show` methods return `false` when a snackbar is synchronously dropped by the selected policy or cannot be presented.
+### Queue management
 
-### **Usage**:
+`TTGSnackbarManager` ensures only one managed snackbar is visible at a time.
 
-**Swift**
 ```swift
-let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
+let snackbar = TTGSnackbar(message: "Queued message", duration: .middle)
 TTGSnackbarManager.shared.show(snackbar: snackbar, policy: .enqueue)
 
 let urgent = TTGSnackbar(message: "Network disconnected", duration: .long)
@@ -241,160 +275,143 @@ urgent.style = .error
 TTGSnackbarManager.shared.show(snackbar: urgent, policy: .replaceCurrent)
 ```
 
-**Objective-c**
-```objective-c
-TTGSnackbar *bar = [[TTGSnackbar alloc] initWithMessage:@"Bar1" duration:TTGSnackbarDurationMiddle];
-[bar setDismissBlock:^(TTGSnackbar * snackBar) {
-    // Whatever you want for dismiss.
-}];
-[[TTGSnackbarManager shared] showSnackbar:bar];
+Available policies:
+
+| Policy | Behavior |
+| --- | --- |
+| `.enqueue` | Show after the current snackbar is dismissed. |
+| `.replaceCurrent` | Dismiss the current snackbar and show this one next. |
+| `.dropIfShowingSameMessage` | Drop when the same message is already visible or queued. |
+
+`show(snackbar:policy:)` returns `false` when the snackbar is synchronously dropped or cannot be presented.
+
+```swift
+let accepted = TTGSnackbarManager.shared.show(
+    snackbar: snackbar,
+    policy: .dropIfShowingSameMessage
+)
 ```
 
-# Customization
+Objective-C callers can use the same manager:
 
-### Message
-`message: String` defines the message to display. **Supports multi line text.** **Supports updating on the fly.** 
+```objective-c
+TTGSnackbar *bar = [[TTGSnackbar alloc] initWithMessage:@"Bar" duration:TTGSnackbarDurationMiddle];
+[[TTGSnackbarManager shared] showSnackbar:bar policy:TTGSnackbarPresentationPolicyEnqueue];
+```
 
-### Message text color
-`messageTextColor: UIColor` defines the message text color.
+## Customization
 
-### Message text font
-`messageTextFont: UIFont` defines the message text font.
+### Text and actions
 
-### Display duration
-`duration: TTGSnackbarDuration` defines the display duration.
-`TTGSnackbarDuration` : `short`, `middle`, `long`, `custom` and `forever`.
-When you set `custom`, set `customDuration` to a value greater than 0 seconds; invalid values fall back to the short duration in debug builds with an assertion.
-When you set `forever`, the snackbar will show an activity indicator after the user taps the action button and you must dismiss the snackbar manually.
+| Property | Description |
+| --- | --- |
+| `message` | Main message text. Supports multiline text and runtime updates. |
+| `messageTextColor` | Message text color. |
+| `messageTextFont` | Message text font. |
+| `messageTextAlign` | Message text alignment. |
+| `messageContentInset` | Insets for the message label text. |
+| `actionText` | Primary action title. |
+| `actionIcon` | Primary action icon. |
+| `actionTextColor` | Primary action title color. |
+| `actionTextFont` | Primary action font. |
+| `actionBlock` | Primary action callback. |
+| `secondActionText` | Secondary action title. |
+| `secondActionIcon` | Secondary action icon. |
+| `secondActionTextColor` | Secondary action title color. |
+| `secondActionTextFont` | Secondary action font. |
+| `secondActionBlock` | Secondary action callback. |
+| `actionMaxWidth` | Maximum action-button width. Minimum value is 44. |
+| `actionTextNumberOfLines` | Number of action-button title lines. |
 
-### Semantic style
-`style: TTGSnackbarStyle` applies built-in visual styles: `default`, `info`, `success`, `warning`, `error` and `loading`.
+### Duration
+
+`duration` defines how long the snackbar remains visible.
+
+| Duration | Behavior |
+| --- | --- |
+| `.short` | 1 second. |
+| `.middle` | 3 seconds. |
+| `.long` | 5 seconds. |
+| `.custom` | Uses `customDuration`. Set `customDuration > 0`. Invalid values assert in debug builds and fall back to `.short`. |
+| `.forever` | Does not auto-dismiss. Dismiss manually. |
+
+### Layout
+
+| Property | Description |
+| --- | --- |
+| `animationType` | Show and dismiss animation style. |
+| `animationDuration` | Show and dismiss animation duration. |
+| `animationSpringWithDamping` | Spring damping used by animations. |
+| `animationInitialSpringVelocity` | Initial spring velocity used by animations. |
+| `leftMargin`, `rightMargin`, `topMargin`, `bottomMargin` | Snackbar margins. |
+| `contentInset` | Insets around the built-in or custom content view. |
+| `cornerRadius` | Snackbar corner radius. |
+| `snackbarMaxWidth` | Maximum snackbar width. Default is -1, which means full width. |
+| `containerView` | Custom superview used for presentation instead of the active window. |
+| `customContentView` | Custom content shown inside the snackbar. |
+| `shouldActivateLeftAndRightMarginOnCustomContentView` | Makes custom content honor side margins. |
+| `shouldHonorSafeAreaLayoutGuides` | Uses safe area layout guides when positioning the snackbar. |
+
+Available animation types:
+
+- `.fadeInFadeOut`
+- `.slideFromBottomToTop`
+- `.slideFromBottomBackToBottom`
+- `.slideFromLeftToRight`
+- `.slideFromRightToLeft`
+- `.slideFromTopToBottom`
+- `.slideFromTopBackToTop`
+
+### Icon and indicator
+
+| Property | Description |
+| --- | --- |
+| `icon` | Leading icon image. |
+| `iconContentMode` | Leading icon content mode. |
+| `iconBackgroundColor` | Leading icon background color. |
+| `iconTintColor` | Leading icon tint color. |
+| `iconImageViewWidth` | Leading icon width. |
+| `activityIndicatorViewStyle` | Loading indicator style. |
+| `activityIndicatorViewColor` | Loading indicator color. |
+
+### Gestures and dismissal
+
+| Property / Method | Description |
+| --- | --- |
+| `onTapBlock` | Called when the snackbar is tapped. |
+| `onSwipeBlock` | Called when the snackbar is swiped. |
+| `shouldDismissOnSwipe` | Automatically dismisses on swipe when enabled. |
+| `dismiss()` | Dismisses the snackbar with animation. |
+| `pauseDismissTimer()` | Pauses the auto-dismiss timer. |
+| `resumeDismissTimer()` | Resumes a paused auto-dismiss timer. |
+| `pausesDismissTimerOnTouch` | Pauses timed snackbars while users touch them. |
+| `pausesDismissTimerWhenAppInactive` | Pauses timed snackbars while the app is inactive. |
 
 ### Lifecycle callbacks
-`willShowBlock`, `didShowBlock`, `willDismissBlock` and `didDismissBlock` let you observe presentation transitions for analytics, queueing or custom coordination.
 
-### Accessibility and motion
-`shouldAnnounceForAccessibility` enables VoiceOver announcements, `accessibilityAnnouncement` overrides the announced text, `adjustsFontForContentSizeCategory` enables Dynamic Type scaling, and `shouldRespectReduceMotion` falls back to a fade animation when Reduce Motion is enabled.
+| Callback | Description |
+| --- | --- |
+| `willShowBlock` | Called before presentation animation starts. |
+| `didShowBlock` | Called after presentation animation completes. |
+| `willDismissBlock` | Called before dismissal animation starts. |
+| `didDismissBlock` | Called after the snackbar is removed from its superview. |
+| `dismissBlock` | Legacy dismiss callback kept for compatibility. |
 
-### Dismiss timer controls
-`pauseDismissTimer()` and `resumeDismissTimer()` allow manual timer control. `pausesDismissTimerOnTouch` and `pausesDismissTimerWhenAppInactive` pause timed snackbars during interaction or app lifecycle interruptions.
+### Accessibility, motion, and haptics
 
-### Haptic feedback
-`hapticFeedback` controls feedback when the snackbar appears, and `actionHapticFeedback` controls feedback when users tap action buttons.
+| Property | Description |
+| --- | --- |
+| `shouldAnnounceForAccessibility` | Posts a VoiceOver announcement when shown. |
+| `accessibilityAnnouncement` | Custom VoiceOver announcement. Defaults to `message`. |
+| `adjustsFontForContentSizeCategory` | Enables Dynamic Type scaling for built-in labels/buttons. |
+| `shouldRespectReduceMotion` | Uses a reduced fade animation when Reduce Motion is enabled. |
+| `hapticFeedback` | Feedback played when the snackbar appears. |
+| `actionHapticFeedback` | Feedback played when action buttons are tapped. |
 
-### Action title
-`actionText: String` defines the action button title.
+## Examples
 
-### Action title color
-`actionTextColor: UIColor` defines the action button title color.
+The repository includes Swift and Objective-C example apps that demonstrate the full feature gallery, including semantic styles, custom content, custom containers, manager policies, timer controls, accessibility, haptics, and async result handling.
 
-### Action title font
-`actionTextFont: UIFont` defines the action button title font.
+## License
 
-### Action max width
-`actionMaxWidth: CGFloat` defines the action button max width. Min is 44.
-
-### Action text number of lines
-`actionTextNumberOfLines: Int` defines the number of lines of action button title. Default is 1.
-
-### Action callback
-`actionBlock: TTGActionBlock?` will be called when user clicks the action button.
-```
-// TTGActionBlock definition.
-public typealias TTGActionBlock = (snackbar: TTGSnackbar) -> Void
-```
-
-### Second action title, color, font and callback
-```
-secondActionText: String  
-secondActionTextColor: UIColor  
-secondActionTextFont: UIFont  
-secondActionBlock: TTGActionBlock?
-```
-
-### Snackbar MaxWidth
-`snackbarMaxWidth: CGFloat` sets the maximum snackbar width for larger devices when you do not want a full-width snackbar. Default is -1, which denotes full width.
-
-### Dismiss callback
-`dismissBlock: TTGDismissBlock?` will be called when snackbar  dismiss automatically or when user click action button to dismiss the snackbar.
-```
-// TTGDismissBlock definition.
-public typealias TTGDismissBlock = (snackbar: TTGSnackbar) -> Void
-```
-
-### On Tap Gesture callback
-`onTapBlock: TTGActionBlock` will be called when the user taps the snackbar.
-```
-// TTGActionBlock definition.
-public typealias TTGActionBlock = (snackbar: TTGSnackbar) -> Void
-```
-
-### On Swipe Gesture callback
-`onSwipeBlock: TTGSwipeBlock` will be called when the user swipes on the snackbar
-```
-/// Swipe gesture callback closure
-public typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizer.Direction) -> Void
-```
-
-### Auto Dismissal using Swipe Gestures
-`shouldDismissOnSwipe: Bool` will determine if the snackbar will automatically be dismissed when it's swiped
-```
-/// A property to make the snackbar auto dismiss on Swipe Gesture
-public var shouldDismissOnSwipe: Bool = false
-```
-
-### Animation type
-`animationType: TTGSnackbarAnimationType` defines the style of snackbar when it show and dismiss.  
-
-`TTGSnackbarAnimationType` : `fadeInFadeOut`, `slideFromBottomToTop`, `slideFromBottomBackToBottom`, `slideFromLeftToRight`,  `slideFromRightToLeft`, `slideFromTopToBottom` and `slideFromTopBackToTop`.
-
-The default value of `animationType` is `slideFromBottomBackToBottom`, which is the same as Snackbar in Android.
-
-### Animation duration
-`animationDuration: TimeInterval` defines the duration of show and hide animation.
-
-### Margins
-`leftMargin: CGFloat`, `rightMargin: CGFloat`, `topMargin: CGFloat` and `bottomMargin: CGFloat` defines the margins of snackbar
-
-### [New!] Custom Content View to follow left and right margins
-`shouldActivateLeftAndRightMarginOnCustomContentView: Bool` will activate the left and right margins if using a `customContentView`
-```
-/// a property to enable left and right margin when using customContentView
-public var shouldActivateLeftAndRightMarginOnCustomContentView: Bool = false
-```
-
-### Padding (Content inset)
-`contentInset: UIEdgeInsets` defines the padding(content inset) of content in the snackbar. Default is `UIEdgeInsets.init(top: 0, left: 4, bottom: 0, right: 4)`.
-
-### Corner radius
-`cornerRadius: CGFloat` defines the corner radius of snackbar.
-
-### Icon image
-`icon: UIImage` defines the icon image.
-
-### Icon image content mode
-`iconContentMode: UIView.ContentMode` defines the content mode of icon imageView.
-
-### [New!] Custom container view
-`containerView: UIView` defines the custom container(super) view for snackbar to show.
-
-### [New!] Custom content view
-`customContentView: UIView?` defines the custom content view to show in the snackbar.
-
-### [New!] Separator line view background color
-`separateViewBackgroundColor: UIColor = UIColor.gray` defines the separator line color.
-
-### ActivityIndicatorViewStyle
-`activityIndicatorViewStyle: UIActivityIndicatorView.Style` defines the activityIndicatorViewStyle in snackbar.
-
-### ActivityIndicatorView color
-`activityIndicatorViewColor: UIColor` defines the activityIndicatorView color in snackbar.
-
-### Animation SpringWithDamping
-`animationSpringWithDamping: CGFloat` defines the spring animation damping value. Default is 0.7.
-
-### Animation initialSpringVelocity
-`animationInitialSpringVelocity: CGFloat` defines the spring animation initial velocity. Default is 5.
-
-# Contact me
-zekunyan@163.com
+TTGSnackbar is released under the MIT license. See [LICENSE](LICENSE) for details.
