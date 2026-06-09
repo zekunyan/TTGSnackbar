@@ -362,21 +362,24 @@
 
     .demo-stack {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 20px;
+      gap: 9px;
+      margin-top: 18px;
     }
 
     .demo-snackbar {
-      min-height: 76px;
+      min-height: 46px;
       display: grid;
-      grid-template-columns: 32px 1fr;
+      grid-template-columns: 30px minmax(0, 1fr) auto;
       align-items: center;
       gap: 10px;
-      padding: 9px 12px;
-      border-radius: 17px;
+      padding: 8px 11px;
+      border-radius: 15px;
       color: #fff;
       box-shadow: 0 12px 28px rgba(17,24,39,0.12);
+    }
+
+    .demo-snackbar.two-actions {
+      grid-template-columns: 30px minmax(0, 1fr) auto auto;
     }
 
     .demo-snackbar .demo-icon {
@@ -390,15 +393,29 @@
       font-weight: 950;
     }
 
-    .demo-snackbar b { display: block; font-size: 12px; letter-spacing: -0.01em; }
-    .demo-snackbar span { display: block; margin-top: 3px; color: rgba(255,255,255,0.76); font-size: 9px; font-weight: 780; }
-    .demo-snackbar .demo-action { grid-column: 1 / -1; width: fit-content; padding: 6px 9px; border-radius: 11px; background: rgba(255,255,255,0.20); font-size: 9px; font-weight: 950; }
+    .demo-snackbar .demo-copy {
+      min-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 12px;
+      font-weight: 920;
+      letter-spacing: -0.01em;
+    }
+
+    .demo-snackbar .demo-copy span {
+      color: rgba(255,255,255,0.74);
+      font-size: 10px;
+      font-weight: 780;
+    }
+
+    .demo-snackbar .demo-action { padding: 6px 9px; border-radius: 11px; background: rgba(255,255,255,0.20); font-size: 9px; font-weight: 950; white-space: nowrap; }
     .demo-snackbar.success { background: linear-gradient(135deg, #18b76b, #22c55e); }
     .demo-snackbar.warning { background: linear-gradient(135deg, #ff9f0a, #f6b300); color: #111827; }
-    .demo-snackbar.warning span { color: rgba(17,24,39,0.62); }
+    .demo-snackbar.warning .demo-copy span { color: rgba(17,24,39,0.62); }
     .demo-snackbar.warning .demo-icon, .demo-snackbar.warning .demo-action { background: rgba(255,255,255,0.38); }
     .demo-snackbar.error { background: linear-gradient(135deg, #ef4f7a, #ef4444); }
-    .demo-snackbar.loading { background: #111827; }
+    .demo-snackbar.loading, .demo-snackbar.dark { background: #111827; }
 
     .spinner {
       width: 18px;
@@ -459,10 +476,11 @@
           <span class="label">Live snackbar demo styles</span>
           <h3>Multiple product states, actions, and queue outcomes.</h3>
           <div class="demo-stack">
-            <div class="demo-snackbar success"><div class="demo-icon">✓</div><div><b>Saved successfully</b><span>Semantic success · icon · haptic</span></div><div class="demo-action">DONE</div></div>
-            <div class="demo-snackbar warning"><div class="demo-icon">!</div><div><b>Unsaved changes</b><span>Warning style · two-action flow</span></div><div class="demo-action">REVIEW</div></div>
-            <div class="demo-snackbar error"><div class="demo-icon">×</div><div><b>Request failed</b><span>Error style · retry callback</span></div><div class="demo-action">RETRY</div></div>
-            <div class="demo-snackbar loading"><div class="demo-icon"><span class="spinner"></span></div><div><b>Syncing library</b><span>Loading style · forever duration</span></div><div class="demo-action">CANCEL</div></div>
+            <div class="demo-snackbar success"><div class="demo-icon">✓</div><div class="demo-copy">Saved successfully <span>· success style</span></div><div class="demo-action">DONE</div></div>
+            <div class="demo-snackbar two-actions warning"><div class="demo-icon">!</div><div class="demo-copy">Unsaved changes <span>· two actions</span></div><div class="demo-action">SAVE</div><div class="demo-action">DISCARD</div></div>
+            <div class="demo-snackbar error"><div class="demo-icon">×</div><div class="demo-copy">Request failed <span>· retry callback</span></div><div class="demo-action">RETRY</div></div>
+            <div class="demo-snackbar loading"><div class="demo-icon"><span class="spinner"></span></div><div class="demo-copy">Syncing library <span>· loading forever</span></div><div class="demo-action">CANCEL</div></div>
+            <div class="demo-snackbar dark"><div class="demo-icon">↺</div><div class="demo-copy">File deleted <span>· async action result</span></div><div class="demo-action">UNDO</div></div>
           </div>
         </section>
 
