@@ -8,7 +8,6 @@
     :root {
       color-scheme: light;
       --page: #edf4fb;
-      --paper: #f8fbff;
       --ink: #111827;
       --muted: #657386;
       --line: rgba(17, 24, 39, 0.08);
@@ -17,11 +16,10 @@
       --teal: #08a9a6;
       --green: #22c55e;
       --yellow: #f6b300;
-      --orange: #ff9f0a;
       --pink: #ef4f7a;
       --purple: #635bff;
       --navy: #111827;
-      --card: rgba(255,255,255,0.9);
+      --card: rgba(255,255,255,0.92);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
     }
 
@@ -37,7 +35,7 @@
       border-radius: 30px;
       color: var(--ink);
       background:
-        radial-gradient(circle at 82% 90%, rgba(16,185,214,0.24), transparent 30%),
+        radial-gradient(circle at 82% 92%, rgba(16,185,214,0.24), transparent 30%),
         radial-gradient(circle at 6% 14%, rgba(20,126,251,0.12), transparent 25%),
         linear-gradient(135deg, #eef6ff 0%, #fbfdff 48%, #e8f7f8 100%);
       box-shadow: 0 32px 90px rgba(17, 24, 39, 0.16), inset 0 0 0 1px rgba(17, 24, 39, 0.06);
@@ -57,11 +55,11 @@
       position: absolute;
       left: 70px;
       right: 70px;
-      top: 50px;
+      top: 46px;
       display: flex;
-      justify-content: space-between;
       align-items: flex-start;
-      gap: 30px;
+      justify-content: space-between;
+      gap: 40px;
     }
 
     .eyebrow {
@@ -78,168 +76,161 @@
     }
 
     .dot { width: 9px; height: 9px; border-radius: 999px; background: var(--blue); box-shadow: 0 0 0 5px rgba(20,126,251,0.11); }
+    h1 { margin: 18px 0 0; color: var(--navy); font-size: 54px; line-height: 0.92; letter-spacing: -0.06em; }
+    .intro { margin: 12px 0 0; max-width: 780px; color: var(--muted); font-size: 17px; line-height: 1.35; font-weight: 720; }
 
-    h1 {
-      margin: 18px 0 0;
-      color: var(--navy);
-      font-size: 58px;
-      line-height: 0.92;
-      letter-spacing: -0.06em;
-    }
-
-    .intro {
-      margin: 12px 0 0;
-      max-width: 790px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.35;
-      font-weight: 700;
-    }
-
-    .legend {
-      display: grid;
-      grid-template-columns: repeat(2, auto);
-      gap: 12px 15px;
+    .result-card {
       min-width: 330px;
-      padding: 17px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.86);
-      border: 1px solid var(--line);
-      box-shadow: 0 16px 42px rgba(17,24,39,0.08);
+      padding: 18px;
+      border-radius: 22px;
+      color: #fff;
+      background: var(--navy);
+      box-shadow: 0 22px 54px rgba(17,24,39,0.20);
     }
 
-    .legend div { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 13px; font-weight: 850; white-space: nowrap; }
-    .key { width: 12px; height: 12px; border-radius: 4px; }
-    .k-api { background: var(--blue); }
-    .k-core { background: var(--navy); }
-    .k-state { background: var(--green); }
-    .k-platform { background: var(--purple); }
+    .result-card b { display: block; font-size: 16px; }
+    .result-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .result-row span { padding: 7px 10px; border-radius: 999px; font-size: 11px; font-weight: 950; background: rgba(255,255,255,0.14); }
+    .result-row span.ok { background: var(--green); }
+    .result-row span.drop { background: var(--yellow); color: var(--navy); }
+    .result-row span.fail { background: var(--pink); }
 
-    .diagram {
+    .map {
       position: absolute;
       left: 70px;
       right: 70px;
-      top: 196px;
+      top: 188px;
       bottom: 56px;
       display: grid;
-      grid-template-columns: 0.94fr 1.22fr 0.94fr;
-      grid-template-rows: 1fr auto;
+      grid-template-rows: auto auto auto auto;
       gap: 22px;
     }
 
-    .column { display: grid; align-content: start; gap: 17px; }
-    .section-label { margin-left: 4px; color: var(--blue); font-size: 13px; font-weight: 950; letter-spacing: 0.10em; text-transform: uppercase; }
-
-    .box {
-      border-radius: 20px;
-      padding: 19px;
-      background: var(--card);
+    .layer {
+      position: relative;
+      padding: 18px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.48);
       border: 1px solid var(--line);
-      box-shadow: 0 16px 40px rgba(17,24,39,0.08);
     }
 
-    .box h2, .box h3 { margin: 0; color: var(--navy); letter-spacing: -0.035em; }
-    .box h2 { font-size: 27px; }
-    .box h3 { font-size: 20px; }
-    .box p { margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.32; font-weight: 700; }
-
-    .box.api { border-top: 5px solid var(--blue); }
-    .box.state { border-top: 5px solid var(--green); }
-    .box.platform { border-top: 5px solid var(--purple); }
-
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
-    .tag { padding: 6px 9px; border-radius: 999px; color: #fff; background: var(--blue); font-size: 11px; font-weight: 900; white-space: nowrap; }
-    .tag.t { background: var(--teal); }
-    .tag.g { background: var(--green); }
-    .tag.y { background: var(--yellow); color: var(--navy); }
-    .tag.p { background: var(--pink); }
-    .tag.u { background: var(--purple); }
-    .tag.dark { background: var(--navy); }
-
-    .core-zone { position: relative; min-height: 585px; }
-
-    svg.lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-
-    .core {
+    .layer-title {
       position: absolute;
-      left: 50%;
-      top: 48%;
-      transform: translate(-50%, -50%);
-      width: 390px;
-      min-height: 360px;
-      padding: 34px;
-      border-radius: 44px;
-      text-align: center;
+      left: 22px;
+      top: -12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 24px rgba(20,126,251,0.16);
+    }
+
+    .layer.core-layer .layer-title { background: var(--navy); }
+    .layer.behavior-layer .layer-title { background: var(--green); }
+    .layer.platform-layer .layer-title { background: var(--purple); }
+
+    .cards { display: grid; gap: 14px; }
+    .cards.api { grid-template-columns: repeat(4, 1fr); }
+    .cards.core { grid-template-columns: 1.02fr 1.38fr 1.02fr; align-items: stretch; }
+    .cards.behavior { grid-template-columns: repeat(4, 1fr); }
+    .cards.platform { grid-template-columns: repeat(5, 1fr); }
+
+    .card {
+      min-height: 92px;
+      padding: 18px;
+      border-radius: 20px;
+      background: var(--card);
+      border: 1px solid rgba(17, 24, 39, 0.065);
+      box-shadow: 0 15px 36px rgba(17,24,39,0.075);
+    }
+
+    .card h2, .card h3 { margin: 0; color: var(--navy); letter-spacing: -0.035em; }
+    .card h2 { font-size: 28px; }
+    .card h3 { font-size: 17px; }
+    .card p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.28; font-weight: 720; }
+
+    .card.api { border-top: 5px solid var(--blue); }
+    .card.manager { border-top: 5px solid var(--green); }
+    .card.async { border-top: 5px solid var(--pink); }
+    .card.platform { border-top: 5px solid var(--purple); }
+
+    .core-card {
+      min-height: 160px;
       display: grid;
       place-items: center;
-      background: #111827;
+      text-align: center;
       color: #fff;
-      box-shadow: 0 34px 80px rgba(17,24,39,0.26);
-      z-index: 2;
+      background: var(--navy);
+      border: none;
+      box-shadow: 0 28px 64px rgba(17,24,39,0.22);
     }
 
-    .core h2 { margin: 0; font-size: 42px; line-height: 0.96; letter-spacing: -0.055em; color: #fff; }
-    .core p { margin: 15px 0 0; color: #cbd5e1; font-size: 16px; line-height: 1.35; font-weight: 700; }
+    .core-card h2 { color: #fff; font-size: 40px; }
+    .core-card p { color: #cbd5e1; max-width: 390px; margin-left: auto; margin-right: auto; }
 
-    .satellite {
+    .module-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; height: 100%; }
+    .module { padding: 14px; border-radius: 16px; color: #fff; box-shadow: 0 12px 30px rgba(17,24,39,0.10); }
+    .module b { display: block; font-size: 14px; }
+    .module span { display: block; margin-top: 5px; font-size: 10px; line-height: 1.2; font-weight: 760; color: rgba(255,255,255,0.78); }
+    .m-blue { background: linear-gradient(135deg, var(--blue), var(--cyan)); }
+    .m-teal { background: linear-gradient(135deg, var(--teal), var(--green)); }
+    .m-yellow { background: linear-gradient(135deg, var(--orange), var(--yellow)); color: var(--navy); }
+    .m-yellow span { color: rgba(17,24,39,0.62); }
+    .m-pink { background: linear-gradient(135deg, var(--pink), var(--purple)); }
+
+    .flow-line {
       position: absolute;
-      width: 178px;
-      padding: 15px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.94);
-      border: 1px solid var(--line);
-      box-shadow: 0 16px 40px rgba(17,24,39,0.10);
-      z-index: 3;
+      left: 50%;
+      top: 142px;
+      bottom: 182px;
+      width: 4px;
+      transform: translateX(-50%);
+      background: linear-gradient(var(--blue), var(--green), var(--purple));
+      border-radius: 999px;
+      opacity: 0.22;
+      pointer-events: none;
     }
 
-    .satellite h3 { margin: 0; color: var(--navy); font-size: 15px; letter-spacing: -0.02em; }
-    .satellite p { margin: 6px 0 0; color: var(--muted); font-size: 11px; line-height: 1.28; font-weight: 740; }
-    .s1 { left: 0; top: 64px; border-top: 5px solid var(--blue); }
-    .s2 { right: 0; top: 64px; border-top: 5px solid var(--teal); }
-    .s3 { left: 0; bottom: 68px; border-top: 5px solid var(--yellow); }
-    .s4 { right: 0; bottom: 68px; border-top: 5px solid var(--pink); }
-
-    .flow {
-      grid-column: 1 / -1;
+    .arrow {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 42px;
+      height: 42px;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 13px;
-      align-self: end;
+      place-items: center;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--navy);
+      font-weight: 950;
+      box-shadow: 0 12px 28px rgba(17,24,39,0.15);
     }
 
-    .step {
-      min-height: 88px;
-      padding: 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid var(--line);
-      box-shadow: 0 14px 34px rgba(17,24,39,0.07);
-    }
-
-    .step b { display: flex; align-items: center; gap: 8px; color: var(--navy); font-size: 14px; }
-    .num { width: 24px; height: 24px; display: inline-grid; place-items: center; border-radius: 999px; background: var(--blue); color: #fff; font-size: 12px; font-weight: 950; }
-    .step span { display: block; margin-top: 8px; color: var(--muted); font-size: 11px; line-height: 1.25; font-weight: 720; }
+    .a1 { top: 122px; }
+    .a2 { top: 318px; }
+    .a3 { top: 500px; }
 
     @media (max-width: 1100px) {
       body { padding: 0; }
       .board { width: 100vw; border-radius: 0; }
       header { left: 38px; right: 38px; top: 34px; }
-      h1 { font-size: 42px; }
-      .intro { font-size: 14px; }
-      .legend { transform: scale(0.84); transform-origin: top right; }
-      .diagram { left: 38px; right: 38px; top: 150px; bottom: 34px; gap: 14px; }
-      .box { padding: 13px; }
-      .box h2 { font-size: 21px; }
-      .box h3 { font-size: 15px; }
-      .box p { font-size: 10px; }
-      .core { width: 300px; min-height: 280px; border-radius: 34px; }
-      .core h2 { font-size: 31px; }
-      .satellite { width: 132px; padding: 10px; }
-      .satellite h3 { font-size: 12px; }
-      .satellite p { font-size: 9px; }
-      .step { min-height: 72px; padding: 10px; }
-      .step b { font-size: 11px; }
-      .step span { font-size: 9px; }
+      h1 { font-size: 40px; }
+      .intro { font-size: 13px; max-width: 560px; }
+      .result-card { transform: scale(0.82); transform-origin: top right; }
+      .map { left: 38px; right: 38px; top: 150px; bottom: 32px; gap: 14px; }
+      .layer { padding: 14px; border-radius: 20px; }
+      .card { min-height: 70px; padding: 12px; border-radius: 15px; }
+      .card h2 { font-size: 24px; }
+      .card h3 { font-size: 13px; }
+      .card p { font-size: 9px; }
+      .core-card h2 { font-size: 28px; }
+      .module { padding: 10px; }
+      .module b { font-size: 11px; }
+      .module span { font-size: 8px; }
     }
   </style>
 </head>
@@ -247,84 +238,70 @@
   <main class="board" aria-label="TTGSnackbar technical architecture diagram">
     <header>
       <div>
-        <div class="eyebrow"><span class="dot"></span> Component architecture for iOS</div>
+        <div class="eyebrow"><span class="dot"></span> Layered component architecture</div>
         <h1>TTGSnackbar Architecture</h1>
-        <p class="intro">A single UIView-centered component connects direct setup, configuration objects, manager policies, async results, presentation lifecycle, interactions, and UIKit platform services.</p>
+        <p class="intro">A small set of public APIs feeds one UIView core. The core delegates presentation, layout, interaction, and platform concerns to focused modules, while the manager controls queue policy.</p>
       </div>
-      <div class="legend" aria-label="Legend">
-        <div><span class="key k-api"></span>API entry</div>
-        <div><span class="key k-core"></span>Core view</div>
-        <div><span class="key k-state"></span>State and policy</div>
-        <div><span class="key k-platform"></span>UIKit services</div>
+      <div class="result-card">
+        <b>Presentation outcomes</b>
+        <div class="result-row"><span class="ok">accepted</span><span class="drop">dropped</span><span class="fail">failedToPresent</span></div>
       </div>
     </header>
 
-    <section class="diagram">
-      <div class="column">
-        <div class="section-label">Input APIs</div>
-        <article class="box api">
-          <h2>Call Sites</h2>
-          <p>Use classic initializers, property-based customization, configuration objects, manager presentation, or async helpers.</p>
-          <div class="tags"><span class="tag">init</span><span class="tag t">properties</span><span class="tag dark">show() → Bool</span></div>
-        </article>
-        <article class="box api">
-          <h3>Configuration API</h3>
-          <p>Bundles message, duration, style, actions, icon, and custom duration for modern Swift call sites.</p>
-          <div class="tags"><span class="tag">TTGSnackbarConfiguration</span><span class="tag u">Swift-first</span></div>
-        </article>
-        <article class="box api">
-          <h3>Async Helper</h3>
-          <p>Resumes with action, second action, tap, swipe, dismissed, dropped, or failedToPresent.</p>
-          <div class="tags"><span class="tag p">TTGSnackbarResult</span><span class="tag t">await</span></div>
-        </article>
-      </div>
+    <section class="map">
+      <div class="flow-line"></div>
+      <div class="arrow a1">↓</div>
+      <div class="arrow a2">↓</div>
+      <div class="arrow a3">↓</div>
 
-      <div class="core-zone">
-        <svg class="lines" viewBox="0 0 620 620" preserveAspectRatio="none" aria-hidden="true">
-          <defs><linearGradient id="wire" x1="0" x2="1"><stop stop-color="#147efb"/><stop offset="1" stop-color="#08a9a6"/></linearGradient></defs>
-          <path d="M88 128 C190 172 226 246 310 310" fill="none" stroke="url(#wire)" stroke-width="3" stroke-dasharray="8 9"/>
-          <path d="M532 128 C430 172 394 246 310 310" fill="none" stroke="url(#wire)" stroke-width="3" stroke-dasharray="8 9"/>
-          <path d="M88 492 C190 448 226 374 310 310" fill="none" stroke="url(#wire)" stroke-width="3" stroke-dasharray="8 9"/>
-          <path d="M532 492 C430 448 394 374 310 310" fill="none" stroke="url(#wire)" stroke-width="3" stroke-dasharray="8 9"/>
-        </svg>
-        <article class="core">
-          <div>
-            <h2>TTGSnackbar</h2>
-            <p>UIView core holding public properties, callbacks, timer state, buttons, labels, icons, custom content, and presentation constraints.</p>
-            <div class="tags" style="justify-content:center"><span class="tag">UIView</span><span class="tag t">callbacks</span><span class="tag y">state</span></div>
+      <section class="layer api-layer">
+        <div class="layer-title">API Entry</div>
+        <div class="cards api">
+          <article class="card api"><h3>Initializers</h3><p>Message, duration, action, or custom content setup.</p></article>
+          <article class="card api"><h3>Configuration</h3><p>Value-based Swift setup for modern call sites.</p></article>
+          <article class="card api async"><h3>Async Helper</h3><p>Await action, swipe, dismiss, drop, or failure.</p></article>
+          <article class="card api manager"><h3>Manager</h3><p>Enqueue, replace, or drop duplicate messages.</p></article>
+        </div>
+      </section>
+
+      <section class="layer core-layer">
+        <div class="layer-title">Core</div>
+        <div class="cards core">
+          <div class="module-list">
+            <div class="module m-blue"><b>Types</b><span>Duration, style, haptic, policy, result.</span></div>
+            <div class="module m-teal"><b>State</b><span>Timer, constraints, callbacks, actions.</span></div>
+            <div class="module m-yellow"><b>Label</b><span>Inset-aware message rendering.</span></div>
+            <div class="module m-pink"><b>Config</b><span>Maps value objects to properties.</span></div>
           </div>
-        </article>
-        <article class="satellite s1"><h3>Presentation</h3><p>Active window lookup, safe-area layout, max width, show, dismiss, animations, and timers.</p></article>
-        <article class="satellite s2"><h3>View Setup</h3><p>Message label, action buttons, secondary action, icon view, indicator, and Auto Layout.</p></article>
-        <article class="satellite s3"><h3>Interactions</h3><p>Tap, swipe, keyboard, rotation, app lifecycle, and pause/resume timer behavior.</p></article>
-        <article class="satellite s4"><h3>Types</h3><p>Duration, animation, style, haptic feedback, manager policy, and async result enums.</p></article>
-      </div>
+          <article class="card core-card"><div><h2>TTGSnackbar</h2><p>UIView core owning message, buttons, icon, custom content, lifecycle callbacks, timer state, and presentation constraints.</p></div></article>
+          <div class="module-list">
+            <div class="module m-blue"><b>Presentation</b><span>Show, dismiss, animation, max width.</span></div>
+            <div class="module m-teal"><b>View Setup</b><span>Built-in labels, buttons, icon, indicator.</span></div>
+            <div class="module m-yellow"><b>Interactions</b><span>Tap, swipe, keyboard, app lifecycle.</span></div>
+            <div class="module m-pink"><b>Styling</b><span>Semantic colors, symbols, loading state.</span></div>
+          </div>
+        </div>
+      </section>
 
-      <div class="column">
-        <div class="section-label">Behavior Systems</div>
-        <article class="box state">
-          <h2>Manager</h2>
-          <p>Coordinates one visible snackbar at a time and reports accepted, dropped, or failed presentation results.</p>
-          <div class="tags"><span class="tag g">enqueue</span><span class="tag y">replace</span><span class="tag p">drop duplicate</span></div>
-        </article>
-        <article class="box platform">
-          <h3>Accessibility and Motion</h3>
-          <p>VoiceOver announcements, Dynamic Type, and Reduce Motion-aware animation fallback.</p>
-          <div class="tags"><span class="tag u">VoiceOver</span><span class="tag">Dynamic Type</span><span class="tag t">Reduce Motion</span></div>
-        </article>
-        <article class="box platform">
-          <h3>UIKit Services</h3>
-          <p>Haptic generators, activity indicator, scene-aware windows, safe areas, and gesture handling.</p>
-          <div class="tags"><span class="tag dark">haptics</span><span class="tag t">scene</span><span class="tag y">safe area</span></div>
-        </article>
-      </div>
+      <section class="layer behavior-layer">
+        <div class="layer-title">Runtime Behavior</div>
+        <div class="cards behavior">
+          <article class="card manager"><h3>Queue Policy</h3><p>One visible snackbar, FIFO queue, replacement, duplicate drop.</p></article>
+          <article class="card manager"><h3>Lifecycle</h3><p>willShow, didShow, willDismiss, didDismiss callbacks.</p></article>
+          <article class="card manager"><h3>Timer Control</h3><p>Auto-dismiss, pause on touch, pause on app inactive.</p></article>
+          <article class="card manager"><h3>Result Flow</h3><p>Bool show result and async TTGSnackbarResult.</p></article>
+        </div>
+      </section>
 
-      <section class="flow" aria-label="Presentation flow">
-        <article class="step"><b><span class="num">1</span>Create</b><span>Build from initializer, configuration, or custom UIView content.</span></article>
-        <article class="step"><b><span class="num">2</span>Route</b><span>Manager applies enqueue, replaceCurrent, or dropIfShowingSameMessage.</span></article>
-        <article class="step"><b><span class="num">3</span>Present</b><span>Validate container, create constraints, start lifecycle, haptics, and timer.</span></article>
-        <article class="step"><b><span class="num">4</span>Interact</b><span>Handle actions, taps, swipes, keyboard shifts, and timer pause/resume.</span></article>
-        <article class="step"><b><span class="num">5</span>Resolve</b><span>Dismiss, return Bool, advance queue, or resume async result.</span></article>
+      <section class="layer platform-layer">
+        <div class="layer-title">UIKit Services</div>
+        <div class="cards platform">
+          <article class="card platform"><h3>Scenes</h3><p>Active window lookup.</p></article>
+          <article class="card platform"><h3>Safe Area</h3><p>Top and bottom positioning.</p></article>
+          <article class="card platform"><h3>Accessibility</h3><p>VoiceOver and Dynamic Type.</p></article>
+          <article class="card platform"><h3>Motion</h3><p>Reduce Motion fallback.</p></article>
+          <article class="card platform"><h3>Feedback</h3><p>Haptics and loading indicator.</p></article>
+        </div>
       </section>
     </section>
   </main>

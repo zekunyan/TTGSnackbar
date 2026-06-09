@@ -230,13 +230,13 @@
     .panel .label { display: inline-block; margin-bottom: 12px; color: var(--blue); font-weight: 950; font-size: 14px; }
 
     .floating.one {
-      right: 16px;
-      top: 58px;
-      width: 580px;
+      right: 20px;
+      top: 42px;
+      width: 610px;
       padding: 22px 24px;
     }
 
-    .floating.one h3 { font-size: 32px; }
+    .floating.one h3 { font-size: 30px; }
 
     .mode-grid {
       display: grid;
@@ -258,15 +258,15 @@
     .mini-tags span { padding: 6px 8px; border-radius: 999px; color: #fff; font-size: 10px; font-weight: 900; }
 
     .floating.two {
-      right: 56px;
-      top: 430px;
-      width: 530px;
-      padding: 22px 24px;
+      right: 64px;
+      top: 405px;
+      width: 510px;
+      padding: 20px 22px;
     }
 
-    .floating.two h3 { font-size: 30px; }
+    .floating.two h3 { font-size: 26px; }
 
-    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
     .mini-card { min-height: 104px; padding: 14px; border-radius: 17px; background: #f4f8fc; border: 1px solid rgba(17, 24, 39, 0.06); }
     .mini-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px; color: #fff; font-size: 16px; font-weight: 950; margin-bottom: 14px; }
     .mini-card b { display: block; font-size: 13px; color: var(--navy); }
@@ -274,9 +274,9 @@
 
     .darkbar {
       position: absolute;
-      right: 54px;
-      bottom: 38px;
-      width: 600px;
+      right: 76px;
+      bottom: 32px;
+      width: 500px;
       min-height: 88px;
       padding: 18px 22px;
       border-radius: 20px;
@@ -287,7 +287,7 @@
 
     .darkbar h3 { margin: 0; font-size: 18px; letter-spacing: -0.02em; }
     .bar-row { display: flex; align-items: center; gap: 18px; margin-top: 14px; color: #cbd5e1; font-size: 12px; font-weight: 750; }
-    .bar { width: 72px; height: 10px; border-radius: 999px; background: var(--cyan); display: inline-block; }
+    .bar { width: 56px; height: 10px; border-radius: 999px; background: var(--cyan); display: inline-block; }
     .bar.green { background: var(--green); }
     .bar.blue { background: var(--blue); }
 
@@ -362,14 +362,15 @@
 
     .demo-stack {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
-      margin-top: 22px;
+      margin-top: 20px;
     }
 
     .demo-snackbar {
-      min-height: 52px;
+      min-height: 76px;
       display: grid;
-      grid-template-columns: 34px 1fr auto;
+      grid-template-columns: 32px 1fr;
       align-items: center;
       gap: 10px;
       padding: 9px 12px;
@@ -391,7 +392,7 @@
 
     .demo-snackbar b { display: block; font-size: 12px; letter-spacing: -0.01em; }
     .demo-snackbar span { display: block; margin-top: 3px; color: rgba(255,255,255,0.76); font-size: 9px; font-weight: 780; }
-    .demo-snackbar .demo-action { padding: 8px 10px; border-radius: 11px; background: rgba(255,255,255,0.20); font-size: 10px; font-weight: 950; }
+    .demo-snackbar .demo-action { grid-column: 1 / -1; width: fit-content; padding: 6px 9px; border-radius: 11px; background: rgba(255,255,255,0.20); font-size: 9px; font-weight: 950; }
     .demo-snackbar.success { background: linear-gradient(135deg, #18b76b, #22c55e); }
     .demo-snackbar.warning { background: linear-gradient(135deg, #ff9f0a, #f6b300); color: #111827; }
     .demo-snackbar.warning span { color: rgba(17,24,39,0.62); }
