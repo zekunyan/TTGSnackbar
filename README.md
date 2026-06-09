@@ -1,6 +1,8 @@
 # TTGSnackbar
 A Swift based implementation of the Android Snackbar for iOS
 
+> Current development targets Swift 5.9 and iOS 16.0 or later.
+
 [![Build Status](https://travis-ci.org/zekunyan/TTGSnackbar.svg?branch=master)](https://travis-ci.org/zekunyan/TTGSnackbar)
 [![Version](https://img.shields.io/cocoapods/v/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
@@ -208,7 +210,7 @@ snackbar.show()
 
 ## Async / await presentation
 
-Swift 5.9 projects can await the first action, tap, swipe or dismiss result.
+Swift 5.9 projects can await the first action, tap, swipe, dismiss, manager drop or presentation failure result. The async helper wires action titles into result callbacks automatically; property-based presentation still needs an `actionBlock` for an action button to be visible.
 
 ```swift
 let result = await TTGSnackbar.show(configuration: .init(
@@ -225,7 +227,7 @@ if case .action = result {
 
 ## [New!] Automatic handling of Showing one Snackbar at a time
 
-`TTGSnackbarManager` can queue, replace or deduplicate snackbars so only one managed snackbar is presented at a time.
+`TTGSnackbarManager` can queue, replace or deduplicate snackbars so only one managed snackbar is presented at a time. The `show` methods return `false` when a snackbar is synchronously dropped by the selected policy or cannot be presented.
 
 ### **Usage**:
 
@@ -262,7 +264,8 @@ TTGSnackbar *bar = [[TTGSnackbar alloc] initWithMessage:@"Bar1" duration:TTGSnac
 ### Display duration
 `duration: TTGSnackbarDuration` defines the display duration.
 `TTGSnackbarDuration` : `short`, `middle`, `long`, `custom` and `forever`.
-When you set `forever`, the snackbar will show an activity indicator after user click the action button and you must dismiss the snackbar manually.
+When you set `custom`, set `customDuration` to a value greater than 0 seconds; invalid values fall back to the short duration in debug builds with an assertion.
+When you set `forever`, the snackbar will show an activity indicator after the user taps the action button and you must dismiss the snackbar manually.
 
 ### Semantic style
 `style: TTGSnackbarStyle` applies built-in visual styles: `default`, `info`, `success`, `warning`, `error` and `loading`.
@@ -310,7 +313,7 @@ secondActionBlock: TTGActionBlock?
 ```
 
 ### Snackbar MaxWidth
-`snackbarMaxWidth: CGFloat` will set the max width of the snackbar if on larger devices you don not want it full width. Default is -1 which is denotes full-width.
+`snackbarMaxWidth: CGFloat` sets the maximum snackbar width for larger devices when you do not want a full-width snackbar. Default is -1, which denotes full width.
 
 ### Dismiss callback
 `dismissBlock: TTGDismissBlock?` will be called when snackbar  dismiss automatically or when user click action button to dismiss the snackbar.

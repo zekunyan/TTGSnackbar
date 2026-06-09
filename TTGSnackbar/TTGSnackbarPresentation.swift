@@ -33,23 +33,30 @@ public extension TTGSnackbar {
     /**
      Show the snackbar.
      */
-    @objc func show() {
-        // Only show once
+    @discardableResult
+    @objc func show() -> Bool {
+        // Only show once.
         if superview != nil {
-            return
+            return true
         }
+
+        guard let finalContentView = customContentView ?? contentView else {
+            debugPrint("TTGSnackbar needs content to display.")
+            return false
+        }
+
+        guard let superView = containerView ?? TTGSnackbar.activeWindow else {
+            debugPrint("TTGSnackbar needs an active window to display.")
+            return false
+        }
+
+        NSLayoutConstraint.deactivate(presentationConstraints)
+        presentationConstraints.removeAll()
 
         isDismissing = false
-        willShowBlock?(self)
         apply(style: style)
 
-        // Determine the final display duration and create a dismiss timer when needed.
-        let timeInterval = resolvedDisplayDuration()
-        if duration != .forever {
-            scheduleDismissTimer(timeInterval: timeInterval)
-        }
-
-        // Show or hide action button
+        // Show or hide action button.
         iconImageView.isHidden = icon == nil
 
         actionButton.isHidden = actionBlock == nil || (actionText.isEmpty && actionIcon == nil)
@@ -61,96 +68,116 @@ public extension TTGSnackbar {
         actionButtonMaxWidthConstraint?.constant = actionButton.isHidden ? 0 : actionMaxWidth
         secondActionButtonMaxWidthConstraint?.constant = secondActionButton.isHidden ? 0 : actionMaxWidth
 
-        // Content View
-        let finalContentView = customContentView ?? contentView
-        finalContentView?.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(finalContentView!)
-
-        contentViewTopConstraint = NSLayoutConstraint.init(item: finalContentView!, attribute: .top, relatedBy: .equal,
-                                                           toItem: self, attribute: .top, multiplier: 1, constant: contentInset.top)
-        contentViewBottomConstraint = NSLayoutConstraint.init(item: finalContentView!, attribute: .bottom, relatedBy: .equal,
-                                                              toItem: self, attribute: .bottom, multiplier: 1, constant: -contentInset.bottom)
-        contentViewLeftConstraint = NSLayoutConstraint.init(item: finalContentView!, attribute: .leading, relatedBy: .equal,
-                                                            toItem: self, attribute: .leading, multiplier: 1, constant: contentInset.left)
-        contentViewRightConstraint = NSLayoutConstraint.init(item: finalContentView!, attribute: .trailing, relatedBy: .equal,
-                                                             toItem: self, attribute: .trailing, multiplier: 1, constant: -contentInset.right)
-
-        addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
-
-        // Get super view to show
-        if let superView = containerView ?? TTGSnackbar.activeWindow {
-            superView.addSubview(self)
-
-            let relativeToItem: Any = shouldHonorSafeAreaLayoutGuides ? superView.safeAreaLayoutGuide : superView
-
-            // Left margin constraint
-            leftMarginConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .leading, relatedBy: .equal,
-                toItem: relativeToItem, attribute: .leading, multiplier: 1, constant: leftMargin)
-
-            // Right margin constraint
-            rightMarginConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .trailing, relatedBy: .equal,
-                toItem: relativeToItem, attribute: .trailing, multiplier: 1, constant: -rightMargin)
-
-
-            // Bottom margin constraint
-            bottomMarginConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .bottom, relatedBy: .equal,
-                toItem: relativeToItem, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
-
-            // Top margin constraint
-            topMarginConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .top, relatedBy: .equal,
-                toItem: relativeToItem, attribute: .top, multiplier: 1, constant: topMargin)
-
-            // Center X constraint
-            centerXConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .centerX, relatedBy: .equal,
-                toItem: superView, attribute: .centerX, multiplier: 1, constant: 0)
-
-            // Min height constraint
-            let minHeightConstraint = NSLayoutConstraint.init(
-                item: self, attribute: .height, relatedBy: .greaterThanOrEqual,
-                toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarMinHeight)
-
-            // Avoid the "UIView-Encapsulated-Layout-Height" constraint conflicts
-            // http://stackoverflow.com/questions/25059443/what-is-nslayoutconstraint-uiview-encapsulated-layout-height-and-how-should-i
-            leftMarginConstraint?.priority = UILayoutPriority(999)
-            rightMarginConstraint?.priority = UILayoutPriority(999)
-            topMarginConstraint?.priority = UILayoutPriority(999)
-            bottomMarginConstraint?.priority = UILayoutPriority(999)
-            centerXConstraint?.priority = UILayoutPriority(999)
-
-            // Add constraints
-            if snackbarMaxWidth > 0{
-                centerXConstraint?.isActive = true
-
-            } else {
-                superView.addConstraint(leftMarginConstraint!)
-                superView.addConstraint(rightMarginConstraint!)
-                leftMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
-                rightMarginConstraint?.isActive = self.shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
-                centerXConstraint?.isActive = customContentView != nil
-            }
-
-            superView.addConstraint(bottomMarginConstraint!)
-            superView.addConstraint(topMarginConstraint!)
-            superView.addConstraint(centerXConstraint!)
-            superView.addConstraint(minHeightConstraint)
-
-            // Active or deactive
-            topMarginConstraint?.isActive = false // For top animation
-
-            // Show
-            playHapticFeedback(hapticFeedback)
-            showWithAnimation()
-
-            // Accessibility announcement.
-            announceForAccessibilityIfNeeded()
-        } else {
-            debugPrint("TTGSnackbar needs an active window to display.")
+        // Content View.
+        finalContentView.translatesAutoresizingMaskIntoConstraints = false
+        if finalContentView.superview !== self {
+            addSubview(finalContentView)
         }
+
+        contentViewTopConstraint = NSLayoutConstraint(item: finalContentView, attribute: .top, relatedBy: .equal,
+                                                       toItem: self, attribute: .top, multiplier: 1, constant: contentInset.top)
+        contentViewBottomConstraint = NSLayoutConstraint(item: finalContentView, attribute: .bottom, relatedBy: .equal,
+                                                          toItem: self, attribute: .bottom, multiplier: 1, constant: -contentInset.bottom)
+        contentViewLeftConstraint = NSLayoutConstraint(item: finalContentView, attribute: .leading, relatedBy: .equal,
+                                                        toItem: self, attribute: .leading, multiplier: 1, constant: contentInset.left)
+        contentViewRightConstraint = NSLayoutConstraint(item: finalContentView, attribute: .trailing, relatedBy: .equal,
+                                                         toItem: self, attribute: .trailing, multiplier: 1, constant: -contentInset.right)
+
+        let contentConstraints = [contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!]
+        addConstraints(contentConstraints)
+        presentationConstraints.append(contentsOf: contentConstraints)
+
+        superView.addSubview(self)
+
+        let relativeToItem: Any = shouldHonorSafeAreaLayoutGuides ? superView.safeAreaLayoutGuide : superView
+
+        // Left margin constraint.
+        leftMarginConstraint = NSLayoutConstraint(
+            item: self, attribute: .leading, relatedBy: .equal,
+            toItem: relativeToItem, attribute: .leading, multiplier: 1, constant: leftMargin)
+
+        // Right margin constraint.
+        rightMarginConstraint = NSLayoutConstraint(
+            item: self, attribute: .trailing, relatedBy: .equal,
+            toItem: relativeToItem, attribute: .trailing, multiplier: 1, constant: -rightMargin)
+
+        // Bottom margin constraint.
+        bottomMarginConstraint = NSLayoutConstraint(
+            item: self, attribute: .bottom, relatedBy: .equal,
+            toItem: relativeToItem, attribute: .bottom, multiplier: 1, constant: -bottomMargin)
+
+        // Top margin constraint.
+        topMarginConstraint = NSLayoutConstraint(
+            item: self, attribute: .top, relatedBy: .equal,
+            toItem: relativeToItem, attribute: .top, multiplier: 1, constant: topMargin)
+
+        // Center X constraint.
+        centerXConstraint = NSLayoutConstraint(
+            item: self, attribute: .centerX, relatedBy: .equal,
+            toItem: superView, attribute: .centerX, multiplier: 1, constant: 0)
+
+        // Min height constraint.
+        let minHeightConstraint = NSLayoutConstraint(
+            item: self, attribute: .height, relatedBy: .greaterThanOrEqual,
+            toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: TTGSnackbar.snackbarMinHeight)
+
+        // Avoid the "UIView-Encapsulated-Layout-Height" constraint conflicts.
+        // http://stackoverflow.com/questions/25059443/what-is-nslayoutconstraint-uiview-encapsulated-layout-height-and-how-should-i
+        leftMarginConstraint?.priority = UILayoutPriority(999)
+        rightMarginConstraint?.priority = UILayoutPriority(999)
+        topMarginConstraint?.priority = UILayoutPriority(999)
+        bottomMarginConstraint?.priority = UILayoutPriority(999)
+        centerXConstraint?.priority = UILayoutPriority(999)
+
+        if snackbarMaxWidth > 0 {
+            centerXConstraint?.isActive = true
+
+            let maxWidthConstraint = widthAnchor.constraint(lessThanOrEqualToConstant: snackbarMaxWidth)
+            maxWidthConstraint.priority = UILayoutPriority(999)
+            maxWidthConstraint.isActive = true
+
+            let leadingAnchor = shouldHonorSafeAreaLayoutGuides ? superView.safeAreaLayoutGuide.leadingAnchor : superView.leadingAnchor
+            let trailingAnchor = shouldHonorSafeAreaLayoutGuides ? superView.safeAreaLayoutGuide.trailingAnchor : superView.trailingAnchor
+            let leadingConstraint = self.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: leftMargin)
+            let trailingConstraint = self.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -rightMargin)
+            leadingConstraint.priority = UILayoutPriority(999)
+            trailingConstraint.priority = UILayoutPriority(999)
+            leadingConstraint.isActive = true
+            trailingConstraint.isActive = true
+            presentationConstraints.append(contentsOf: [maxWidthConstraint, leadingConstraint, trailingConstraint])
+        } else {
+            superView.addConstraint(leftMarginConstraint!)
+            superView.addConstraint(rightMarginConstraint!)
+            presentationConstraints.append(contentsOf: [leftMarginConstraint!, rightMarginConstraint!])
+            leftMarginConstraint?.isActive = shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
+            rightMarginConstraint?.isActive = shouldActivateLeftAndRightMarginOnCustomContentView ? true : customContentView == nil
+            centerXConstraint?.isActive = customContentView != nil
+        }
+
+        superView.addConstraint(bottomMarginConstraint!)
+        superView.addConstraint(topMarginConstraint!)
+        superView.addConstraint(centerXConstraint!)
+        superView.addConstraint(minHeightConstraint)
+        presentationConstraints.append(contentsOf: [bottomMarginConstraint!, topMarginConstraint!, centerXConstraint!, minHeightConstraint])
+
+        // Active or deactivate.
+        topMarginConstraint?.isActive = false // For top animation.
+
+        willShowBlock?(self)
+
+        // Determine the final display duration and create a dismiss timer when needed.
+        let timeInterval = resolvedDisplayDuration()
+        if duration != .forever {
+            scheduleDismissTimer(timeInterval: timeInterval)
+        }
+
+        // Show.
+        playHapticFeedback(hapticFeedback)
+        showWithAnimation()
+
+        // Accessibility announcement.
+        announceForAccessibilityIfNeeded()
+        return true
     }
 
     /**
@@ -365,8 +392,15 @@ extension TTGSnackbar {
     }
 
     func resolvedDisplayDuration() -> TimeInterval {
-        let rawDuration = duration == .custom ? customDuration : TimeInterval(duration.rawValue)
-        return max(rawDuration, TimeInterval(TTGSnackbarDuration.short.rawValue))
+        if duration == .custom {
+            guard customDuration > 0 else {
+                assertionFailure("TTGSnackbarDuration.custom requires customDuration greater than 0.")
+                return TimeInterval(TTGSnackbarDuration.short.rawValue)
+            }
+            return customDuration
+        }
+
+        return TimeInterval(duration.rawValue)
     }
 
     func scheduleDismissTimer(timeInterval: TimeInterval) {
@@ -382,13 +416,15 @@ extension TTGSnackbar {
     func apply(style: TTGSnackbarStyle) {
         guard contentView != nil else { return }
 
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.isHidden = true
+
         switch style {
         case .default:
             backgroundColor = UIColor.ttgDefaultBackground
             messageTextColor = UIColor.ttgDefaultText
             actionTextColor = UIColor.ttgDefaultText
             secondActionTextColor = UIColor.ttgDefaultText
-            activityIndicatorView.stopAnimating()
 
         case .info:
             backgroundColor = .systemBlue

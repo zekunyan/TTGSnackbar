@@ -425,6 +425,8 @@ open class TTGSnackbar: UIView {
     var contentViewTopConstraint: NSLayoutConstraint? = nil
     var contentViewBottomConstraint: NSLayoutConstraint? = nil
 
+    var presentationConstraints: [NSLayoutConstraint] = []
+
     // MARK: - Deinit
     deinit {
         NotificationCenter.default.removeObserver(self)

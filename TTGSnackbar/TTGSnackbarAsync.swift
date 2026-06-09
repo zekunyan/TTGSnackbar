@@ -60,9 +60,16 @@ public extension TTGSnackbar {
             }
 
             if let manager = manager {
-                manager.show(snackbar: snackbar, policy: policy)
-            } else {
-                snackbar.show()
+                switch manager.showResult(snackbar: snackbar, policy: policy) {
+                case .accepted:
+                    break
+                case .dropped:
+                    resume(.dropped)
+                case .failedToPresent:
+                    resume(.failedToPresent)
+                }
+            } else if !snackbar.show() {
+                resume(.failedToPresent)
             }
         }
     }

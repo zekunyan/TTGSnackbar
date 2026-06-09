@@ -65,6 +65,11 @@ final class TTGSnackbarExampleTests: XCTestCase {
         XCTAssertEqual(loading.style, .loading)
         XCTAssertFalse(loading.activityIndicatorView.isHidden)
         XCTAssertTrue(loading.activityIndicatorView.isAnimating)
+
+        loading.style = .success
+
+        XCTAssertTrue(loading.activityIndicatorView.isHidden)
+        XCTAssertFalse(loading.activityIndicatorView.isAnimating)
     }
 
     func testIconOnlyActionButtonIsVisible() {
@@ -119,13 +124,56 @@ final class TTGSnackbarExampleTests: XCTestCase {
         let duplicate = TTGSnackbar(message: "Duplicate", duration: .forever)
         duplicate.containerView = hostWindow
 
-        manager.show(snackbar: first, policy: .dropIfShowingSameMessage)
-        manager.show(snackbar: duplicate, policy: .dropIfShowingSameMessage)
+        XCTAssertTrue(manager.show(snackbar: first, policy: .dropIfShowingSameMessage))
+        XCTAssertFalse(manager.show(snackbar: duplicate, policy: .dropIfShowingSameMessage))
         RunLoop.main.run(until: Date().addingTimeInterval(0.1))
 
         XCTAssertTrue(manager.currentSnackbar === first)
         XCTAssertEqual(manager.queuedCount, 0)
         manager.dismissAll(animated: false)
         RunLoop.main.run(until: Date().addingTimeInterval(0.1))
+    }
+
+    @MainActor
+    func testAsyncPresentationReturnsDroppedWhenManagerDeduplicatesMessage() async {
+        let manager = TTGSnackbarManager.shared
+        manager.dismissAll(animated: false)
+        RunLoop.main.run(until: Date().addingTimeInterval(0.1))
+
+        let first = TTGSnackbar(message: "Async duplicate", duration: .forever)
+        first.containerView = hostWindow
+        XCTAssertTrue(manager.show(snackbar: first, policy: .dropIfShowingSameMessage))
+        RunLoop.main.run(until: Date().addingTimeInterval(0.1))
+
+        let result = await TTGSnackbar.show(
+            configuration: .init(message: "Async duplicate", duration: .short),
+            manager: manager,
+            policy: .dropIfShowingSameMessage
+        )
+
+        if case .dropped = result {
+            // Expected path.
+        } else {
+            XCTFail("Expected duplicate async snackbar to return .dropped, got \(result)")
+        }
+
+        manager.dismissAll(animated: false)
+        RunLoop.main.run(until: Date().addingTimeInterval(0.1))
+    }
+
+    func testMaxWidthAddsAWidthConstraint() {
+        let snackbar = TTGSnackbar(message: "Constrained width", duration: .middle)
+        snackbar.containerView = hostWindow
+        snackbar.snackbarMaxWidth = 200
+
+        XCTAssertTrue(snackbar.show())
+
+        XCTAssertTrue(snackbar.presentationConstraints.contains { constraint in
+            constraint.firstItem === snackbar &&
+                constraint.firstAttribute == .width &&
+                constraint.relation == .lessThanOrEqual &&
+                constraint.constant == 200
+        })
+        snackbar.dismiss()
     }
 }

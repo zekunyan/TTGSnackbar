@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum TTGSnackbarManagerShowResult {
+    case accepted
+    case dropped
+    case failedToPresent
+}
+
 // MARK: TTGSnackbarManager
 open class TTGSnackbarManager: NSObject {
     @objc public static let shared = TTGSnackbarManager()
@@ -25,15 +31,30 @@ open class TTGSnackbarManager: NSObject {
     }
 
     /// Shows and queues the passed snackbar. Defaults to FIFO queue behavior.
-    @objc(showSnackbar:) public func show(snackbar: TTGSnackbar) {
-        show(snackbar: snackbar, policy: .enqueue)
+    ///
+    /// - Returns: `false` when the snackbar was synchronously dropped or could not be presented.
+    @discardableResult
+    @objc(showSnackbar:) public func show(snackbar: TTGSnackbar) -> Bool {
+        return showResult(snackbar: snackbar, policy: .enqueue) == .accepted
     }
 
     /// Shows a snackbar with an explicit presentation policy.
-    @objc(showSnackbar:policy:) public func show(snackbar: TTGSnackbar, policy: TTGSnackbarPresentationPolicy) {
+    ///
+    /// - Returns: `false` when the snackbar was synchronously dropped or could not be presented.
+    @discardableResult
+    @objc(showSnackbar:policy:) public func show(snackbar: TTGSnackbar, policy: TTGSnackbarPresentationPolicy) -> Bool {
+        return showResult(snackbar: snackbar, policy: policy) == .accepted
+    }
+
+    func showResult(snackbar: TTGSnackbar, policy: TTGSnackbarPresentationPolicy) -> TTGSnackbarManagerShowResult {
+        if Thread.isMainThread {
+            return enqueue(snackbar, policy: policy)
+        }
+
         DispatchQueue.main.async {
             self.enqueue(snackbar, policy: policy)
         }
+        return .accepted
     }
 
     /// Dismisses the currently visible snackbar.
@@ -53,7 +74,7 @@ open class TTGSnackbarManager: NSObject {
         }
     }
 
-    private func enqueue(_ snackbar: TTGSnackbar, policy: TTGSnackbarPresentationPolicy) {
+    private func enqueue(_ snackbar: TTGSnackbar, policy: TTGSnackbarPresentationPolicy) -> TTGSnackbarManagerShowResult {
         switch policy {
         case .enqueue:
             queuedSnackbars.append(snackbar)
@@ -63,21 +84,22 @@ open class TTGSnackbarManager: NSObject {
             queuedSnackbars.append(snackbar)
             if let currentSnackbar = currentSnackbar {
                 currentSnackbar.dismiss()
-                return
+                return .accepted
             }
 
         case .dropIfShowingSameMessage:
             if currentSnackbar?.message == snackbar.message || queuedSnackbars.contains(where: { $0.message == snackbar.message }) {
-                return
+                return .dropped
             }
             queuedSnackbars.append(snackbar)
         }
 
-        showNextIfNeeded()
+        return showNextIfNeeded() ? .accepted : .failedToPresent
     }
 
-    private func showNextIfNeeded() {
-        guard currentSnackbar == nil, queuedSnackbars.isEmpty == false else { return }
+    @discardableResult
+    private func showNextIfNeeded() -> Bool {
+        guard currentSnackbar == nil, queuedSnackbars.isEmpty == false else { return true }
 
         let snackbar = queuedSnackbars.removeFirst()
         currentSnackbar = snackbar
@@ -92,6 +114,11 @@ open class TTGSnackbarManager: NSObject {
             self.showNextIfNeeded()
         }
 
-        snackbar.show()
+        if !snackbar.show() {
+            currentSnackbar = nil
+            showNextIfNeeded()
+            return false
+        }
+        return true
     }
 }

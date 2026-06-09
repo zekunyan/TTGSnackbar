@@ -33,7 +33,7 @@ import UIKit
  - fadeInFadeOut:               Fade in to show and fade out to dismiss.
  - slideFromBottomToTop:        Slide from the bottom of screen to show and slide up to dismiss.
  - slideFromBottomBackToBottom: Slide from the bottom of screen to show and slide back to bottom to dismiss.
- - slideFromLeftToRight:        Slide from the left to show and slide to rigth to dismiss.
+ - slideFromLeftToRight:        Slide from the left to show and slide to right to dismiss.
  - slideFromRightToLeft:        Slide from the right to show and slide to left to dismiss.
  - slideFromTopToBottom:        Slide from the top of screen to show and slide down to dismiss.
  - slideFromTopBackToTop:       Slide from the top of screen to show and slide back to top to dismiss.
@@ -88,6 +88,8 @@ public enum TTGSnackbarResult {
     case tapped
     case swiped(UISwipeGestureRecognizer.Direction)
     case dismissed
+    case dropped
+    case failedToPresent
 }
 
 /// Value based configuration for modern Swift call sites. Existing property-based APIs remain supported.
