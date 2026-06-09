@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TTGSnackbar · Technical Architecture Overview</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070914;
+      --panel: rgba(255,255,255,0.075);
+      --panel-2: rgba(255,255,255,0.115);
+      --line: rgba(255,255,255,0.14);
+      --ink: #f8fbff;
+      --muted: #aab5d8;
+      --blue: #5ab8ff;
+      --cyan: #40e0ff;
+      --green: #56f19a;
+      --yellow: #ffd166;
+      --orange: #ff9f45;
+      --red: #ff5b7e;
+      --violet: #a78bfa;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; min-height: 100%; margin: 0; background: #050713; }
+    body { display: grid; place-items: center; padding: 20px; }
+
+    .board {
+      width: min(96vw, 1600px);
+      aspect-ratio: 16 / 10;
+      position: relative;
+      overflow: hidden;
+      color: var(--ink);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 16% 12%, rgba(64,224,255,0.28), transparent 30%),
+        radial-gradient(circle at 88% 18%, rgba(167,139,250,0.24), transparent 31%),
+        radial-gradient(circle at 74% 92%, rgba(86,241,154,0.16), transparent 28%),
+        linear-gradient(135deg, #070914, #101734 55%, #0d1023);
+      box-shadow: 0 32px 90px rgba(0,0,0,0.54), inset 0 0 0 1px rgba(255,255,255,0.12);
+      isolation: isolate;
+    }
+
+    .board::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 54px 54px;
+      opacity: 0.48;
+      mask-image: radial-gradient(circle at center, #000 0 55%, transparent 88%);
+      z-index: -2;
+    }
+
+    header {
+      position: absolute;
+      left: 62px;
+      right: 62px;
+      top: 42px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 28px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 58px;
+      line-height: 0.92;
+      letter-spacing: -0.055em;
+    }
+
+    .title p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.35;
+      max-width: 760px;
+      font-weight: 640;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 10px 14px;
+      padding: 16px;
+      border-radius: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      min-width: 330px;
+    }
+
+    .legend div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #dfe9ff;
+      font-size: 14px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .key { width: 12px; height: 12px; border-radius: 4px; }
+    .k-api { background: var(--cyan); }
+    .k-core { background: var(--blue); }
+    .k-state { background: var(--green); }
+    .k-platform { background: var(--violet); }
+
+    .diagram {
+      position: absolute;
+      left: 60px;
+      right: 60px;
+      top: 168px;
+      bottom: 58px;
+      display: grid;
+      grid-template-columns: 1.02fr 1.22fr 1.02fr;
+      grid-template-rows: 1fr auto;
+      gap: 24px;
+    }
+
+    .column {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .section-label {
+      color: #dff7ff;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-left: 4px;
+    }
+
+    .box {
+      position: relative;
+      border-radius: 24px;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.22);
+    }
+
+    .box.strong { background: var(--panel-2); }
+    .box.api { border-color: rgba(64,224,255,0.34); }
+    .box.core { border-color: rgba(90,184,255,0.38); }
+    .box.state { border-color: rgba(86,241,154,0.34); }
+    .box.platform { border-color: rgba(167,139,250,0.34); }
+
+    .box h2, .box h3 {
+      margin: 0;
+      letter-spacing: -0.025em;
+    }
+
+    .box h2 { font-size: 28px; }
+    .box h3 { font-size: 21px; }
+
+    .box p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 620;
+    }
+
+    .tags {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #eaf4ff;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .core-wrap {
+      position: relative;
+      height: 100%;
+      min-height: 610px;
+    }
+
+    .core-card {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      transform: translate(-50%, -50%);
+      width: 390px;
+      height: 390px;
+      border-radius: 48px;
+      padding: 34px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(64,224,255,0.22), transparent 48%),
+        linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.06));
+      border: 1px solid rgba(90,184,255,0.42);
+      box-shadow: 0 34px 90px rgba(0,0,0,0.35), 0 0 80px rgba(64,224,255,0.08);
+      z-index: 2;
+    }
+
+    .core-card h2 {
+      margin: 0;
+      font-size: 43px;
+      line-height: 0.94;
+      letter-spacing: -0.055em;
+    }
+
+    .core-card p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .ring {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      width: 520px;
+      height: 520px;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      border: 1px dashed rgba(255,255,255,0.20);
+      z-index: 1;
+    }
+
+    .satellite {
+      position: absolute;
+      width: 178px;
+      padding: 15px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.14);
+      z-index: 3;
+    }
+
+    .satellite h3 { margin: 0; font-size: 16px; }
+    .satellite p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.3; font-weight: 650; }
+
+    .s1 { left: 2%; top: 18%; border-color: rgba(64,224,255,0.33); }
+    .s2 { right: 2%; top: 18%; border-color: rgba(86,241,154,0.33); }
+    .s3 { left: 0; bottom: 16%; border-color: rgba(255,209,102,0.35); }
+    .s4 { right: 0; bottom: 16%; border-color: rgba(255,91,126,0.35); }
+
+    svg.lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.78;
+    }
+
+    .flow {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      align-self: end;
+    }
+
+    .step {
+      min-height: 88px;
+      border-radius: 22px;
+      padding: 15px;
+      background: rgba(255,255,255,0.075);
+      border: 1px solid rgba(255,255,255,0.13);
+    }
+
+    .step b {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+    }
+
+    .num {
+      width: 25px;
+      height: 25px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(90,184,255,0.20);
+      color: #dbf4ff;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .step span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+      font-weight: 630;
+    }
+
+    @media (max-width: 1100px) {
+      body { padding: 0; }
+      .board { width: 100vw; border-radius: 0; }
+      header { left: 34px; right: 34px; top: 28px; }
+      .title h1 { font-size: 42px; }
+      .title p { font-size: 15px; }
+      .legend { transform: scale(0.82); transform-origin: top right; }
+      .diagram { left: 34px; right: 34px; top: 130px; bottom: 34px; gap: 14px; }
+      .box { padding: 14px; border-radius: 18px; }
+      .box h2 { font-size: 22px; }
+      .box h3 { font-size: 16px; }
+      .box p { font-size: 11px; }
+      .core-card { width: 300px; height: 300px; border-radius: 34px; }
+      .core-card h2 { font-size: 31px; }
+      .ring { width: 400px; height: 400px; }
+      .satellite { width: 135px; padding: 10px; }
+      .satellite h3 { font-size: 12px; }
+      .satellite p { font-size: 10px; }
+      .step { padding: 10px; min-height: 72px; }
+      .step b { font-size: 12px; }
+      .step span { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="board" aria-label="TTGSnackbar technical architecture diagram">
+    <header>
+      <div class="title">
+        <h1>TTGSnackbar 架构总览</h1>
+        <p>从调用 API 到展示生命周期：Configuration / Manager / Async 入口汇聚到 TTGSnackbar 核心，再由 Presentation、ViewSetup、Interactions 与平台能力协作完成展示。</p>
+      </div>
+      <div class="legend" aria-label="Legend">
+        <div><span class="key k-api"></span>API 入口</div>
+        <div><span class="key k-core"></span>核心视图</div>
+        <div><span class="key k-state"></span>状态/策略</div>
+        <div><span class="key k-platform"></span>UIKit 平台能力</div>
+      </div>
+    </header>
+
+    <section class="diagram">
+      <div class="column">
+        <div class="section-label">Input APIs</div>
+        <article class="box api strong">
+          <h2>调用入口</h2>
+          <p>保留属性式 API，同时提供配置对象、Manager 队列和 async/await 结果。</p>
+          <div class="tags"><span class="tag">init(message:duration:)</span><span class="tag">configuration</span><span class="tag">show() → Bool</span></div>
+        </article>
+        <article class="box api">
+          <h3>TTGSnackbarConfiguration</h3>
+          <p>集中描述 message、duration、style、actions、icon 和 customDuration。</p>
+          <div class="tags"><span class="tag">value object</span><span class="tag">Swift-first</span></div>
+        </article>
+        <article class="box api">
+          <h3>TTGSnackbarAsync</h3>
+          <p>等待 action、tap、swipe、dismiss、dropped 或 failedToPresent。</p>
+          <div class="tags"><span class="tag">async/await</span><span class="tag">TTGSnackbarResult</span></div>
+        </article>
+      </div>
+
+      <div class="core-wrap">
+        <svg class="lines" viewBox="0 0 620 650" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1"><stop stop-color="#40e0ff"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+          </defs>
+          <path d="M82 150 C190 200 220 250 310 325" fill="none" stroke="url(#g1)" stroke-width="3" stroke-dasharray="8 9"/>
+          <path d="M538 150 C430 200 400 250 310 325" fill="none" stroke="url(#g1)" stroke-width="3" stroke-dasharray="8 9"/>
+          <path d="M88 510 C188 456 220 410 310 325" fill="none" stroke="url(#g1)" stroke-width="3" stroke-dasharray="8 9"/>
+          <path d="M532 510 C432 456 400 410 310 325" fill="none" stroke="url(#g1)" stroke-width="3" stroke-dasharray="8 9"/>
+        </svg>
+        <div class="ring"></div>
+        <article class="core-card">
+          <div>
+            <h2>TTGSnackbar</h2>
+            <p>UIView 核心对象：承载公开属性、生命周期回调、timer 状态、布局约束、按钮与内容视图。</p>
+            <div class="tags" style="justify-content:center"><span class="tag">UIView</span><span class="tag">callbacks</span><span class="tag">state</span></div>
+          </div>
+        </article>
+        <article class="satellite s1"><h3>Presentation</h3><p>window lookup、show/dismiss、animation、maxWidth、timer。</p></article>
+        <article class="satellite s2"><h3>ViewSetup</h3><p>messageLabel、buttons、icon、indicator、Auto Layout。</p></article>
+        <article class="satellite s3"><h3>Interactions</h3><p>tap、swipe、keyboard、rotation、app lifecycle。</p></article>
+        <article class="satellite s4"><h3>Types</h3><p>duration、animation、style、haptic、policy、result。</p></article>
+      </div>
+
+      <div class="column">
+        <div class="section-label">Behavior Systems</div>
+        <article class="box state strong">
+          <h2>TTGSnackbarManager</h2>
+          <p>统一管理展示节奏：FIFO 排队、替换当前、按消息去重，并把展示失败传回调用者。</p>
+          <div class="tags"><span class="tag">enqueue</span><span class="tag">replace</span><span class="tag">drop duplicate</span></div>
+        </article>
+        <article class="box platform">
+          <h3>Accessibility & Motion</h3>
+          <p>VoiceOver announcement、Dynamic Type、Reduce Motion fallback。</p>
+          <div class="tags"><span class="tag">VoiceOver</span><span class="tag">Dynamic Type</span><span class="tag">Reduce Motion</span></div>
+        </article>
+        <article class="box platform">
+          <h3>UIKit Feedback</h3>
+          <p>Haptic feedback、activity indicator、safe area、scene-aware active window。</p>
+          <div class="tags"><span class="tag">haptics</span><span class="tag">safe area</span><span class="tag">scene</span></div>
+        </article>
+      </div>
+
+      <section class="flow" aria-label="Presentation flow">
+        <article class="step"><b><span class="num">1</span>Create</b><span>message / configuration / custom content 初始化。</span></article>
+        <article class="step"><b><span class="num">2</span>Policy</b><span>Manager 决定 enqueue、replace 或 drop。</span></article>
+        <article class="step"><b><span class="num">3</span>Present</b><span>校验 window/container，建立约束，触发生命周期。</span></article>
+        <article class="step"><b><span class="num">4</span>Interact</b><span>action、tap、swipe、timer pause、keyboard 调整。</span></article>
+        <article class="step"><b><span class="num">5</span>Resolve</b><span>dismiss、dropped、failedToPresent 或 async result。</span></article>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
