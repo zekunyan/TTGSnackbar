@@ -12,6 +12,12 @@ TTGSnackbar 是一个 Swift 实现的 iOS Snackbar 组件，风格类似 Android
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Swift 5.9](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://developer.apple.com/swift)
 
+## 视觉概览
+
+![TTGSnackbar promotional poster](Resources/ttgsnackbar-poster.svg)
+
+![TTGSnackbar architecture overview](Resources/ttgsnackbar-architecture.svg)
+
 ![截图](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/screen_shot.png)
 
 ## 预览

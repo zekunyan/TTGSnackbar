@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+<title id="title">TTGSnackbar architecture overview</title><desc id="desc">A layered architecture diagram for TTGSnackbar.</desc>
+<defs>
+  <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eef6ff"/><stop offset="0.52" stop-color="#fbfdff"/><stop offset="1" stop-color="#e8f7f8"/></linearGradient>
+  <filter id="shadow2" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#111827" flood-opacity="0.10"/></filter>
+  <pattern id="grid2" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M38 0H0V38" fill="none" stroke="#111827" stroke-opacity="0.04"/></pattern>
+</defs>
+<rect x="0" y="0" width="1600" height="1100" rx="0" fill="url(#bg2)" stroke="none" stroke-width="1" />
+<rect x="0" y="0" width="1600" height="1100" rx="0" fill="url(#grid2)" stroke="none" stroke-width="1" />
+<rect x="70" y="54" width="310" height="34" rx="17" fill="#fff" stroke="none" stroke-width="1" /><text x="225.0" y="77" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="850" fill="#147efb" text-anchor="middle" >Layered component architecture</text>
+<text x="70" y="142" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="54" font-weight="950" fill="#111827" text-anchor="start" >TTGSnackbar Architecture</text>
+<text x="70" y="178" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="70" dy="0">Public APIs feed one UIView core. Focused modules handle presentation, layout,</tspan>
+<tspan x="70" dy="22.950000000000003">interaction, style, queue policy, and UIKit platform services.</tspan>
+</text>
+<rect x="70" y="250" width="1460" height="130" rx="28" fill="rgba(255,255,255,0.52)" stroke="#111827" stroke-width="1" />
+<rect x="92" y="237" width="140" height="28" rx="14" fill="#147efb" stroke="none" stroke-width="1" />
+<text x="162" y="257" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="950" fill="#fff" text-anchor="middle" >API Entry</text>
+<rect x="70" y="408" width="1460" height="270" rx="28" fill="rgba(255,255,255,0.52)" stroke="#111827" stroke-width="1" />
+<rect x="92" y="395" width="140" height="28" rx="14" fill="#111827" stroke="none" stroke-width="1" />
+<text x="162" y="415" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="950" fill="#fff" text-anchor="middle" >Core</text>
+<rect x="70" y="725" width="1460" height="130" rx="28" fill="rgba(255,255,255,0.52)" stroke="#111827" stroke-width="1" />
+<rect x="92" y="712" width="190" height="28" rx="14" fill="#22c55e" stroke="none" stroke-width="1" />
+<text x="187" y="732" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="950" fill="#fff" text-anchor="middle" >Runtime Behavior</text>
+<rect x="70" y="905" width="1460" height="130" rx="28" fill="rgba(255,255,255,0.52)" stroke="#111827" stroke-width="1" />
+<rect x="92" y="892" width="140" height="28" rx="14" fill="#635bff" stroke="none" stroke-width="1" />
+<text x="162" y="912" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="950" fill="#fff" text-anchor="middle" >UIKit Services</text>
+<rect x="100" y="285" width="320" height="82" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="100" y="285" width="320" height="6" rx="3" fill="#147efb" stroke="none" stroke-width="1" />
+<text x="118" y="320" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Initializers</text>
+<text x="118" y="345" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="118" dy="0">Message, action, duration, or custom content.</tspan>
+</text>
+<rect x="455" y="285" width="320" height="82" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="455" y="285" width="320" height="6" rx="3" fill="#147efb" stroke="none" stroke-width="1" />
+<text x="473" y="320" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Configuration</text>
+<text x="473" y="345" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="473" dy="0">Value-based setup for modern Swift.</tspan>
+</text>
+<rect x="810" y="285" width="320" height="82" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="810" y="285" width="320" height="6" rx="3" fill="#ef4f7a" stroke="none" stroke-width="1" />
+<text x="828" y="320" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Async Helper</text>
+<text x="828" y="345" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="828" dy="0">Await action, swipe, dismiss, drop, or failure.</tspan>
+</text>
+<rect x="1165" y="285" width="320" height="82" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="1165" y="285" width="320" height="6" rx="3" fill="#22c55e" stroke="none" stroke-width="1" />
+<text x="1183" y="320" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Manager</text>
+<text x="1183" y="345" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="1183" dy="0">Enqueue, replace, or drop duplicates.</tspan>
+</text>
+<rect x="540" y="455" width="520" height="190" rx="42" fill="#111827" stroke="none" stroke-width="1" filter="url(#shadow2)"/>
+<text x="800" y="525" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="44" font-weight="950" fill="#fff" text-anchor="middle" >TTGSnackbar</text>
+<text x="800" y="566" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16" font-weight="720" fill="#cbd5e1" text-anchor="middle">
+<tspan x="800" dy="0">UIView core owning message, buttons, icon, custom content,</tspan>
+<tspan x="800" dy="21.6">callbacks, timer state, and presentation constraints.</tspan>
+</text>
+<rect x="100" y="460" width="180" height="88" rx="16" fill="#147efb" stroke="none" stroke-width="1" filter="url(#shadow2)"/>
+<text x="116" y="492" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="900" fill="#fff" text-anchor="start" >Types</text>
+<text x="116" y="515" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" font-weight="760" fill="rgba(255,255,255,0.78)" text-anchor="start">
+<tspan x="116" dy="0">Duration, style, policy, result.</tspan>
+</text>
+<rect x="310" y="460" width="180" height="88" rx="16" fill="#08a9a6" stroke="none" stroke-width="1" filter="url(#shadow2)"/>
+<text x="326" y="492" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="900" fill="#fff" text-anchor="start" >State</text>
+<text x="326" y="515" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" font-weight="760" fill="rgba(255,255,255,0.78)" text-anchor="start">
+<tspan x="326" dy="0">Timer, callbacks, constraints.</tspan>
+</text>
+<rect x="1190" y="460" width="180" height="88" rx="16" fill="#147efb" stroke="none" stroke-width="1" filter="url(#shadow2)"/>
+<text x="1206" y="492" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="900" fill="#fff" text-anchor="start" >Presentation</text>
+<text x="1206" y="515" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" font-weight="760" fill="rgba(255,255,255,0.78)" text-anchor="start">
+<tspan x="1206" dy="0">Show, dismiss, animation, max width.</tspan>
+</text>
+<rect x="1400" y="460" width="180" height="88" rx="16" fill="#08a9a6" stroke="none" stroke-width="1" filter="url(#shadow2)"/>
+<text x="1416" y="492" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="900" fill="#fff" text-anchor="start" >View Setup</text>
+<text x="1416" y="515" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" font-weight="760" fill="rgba(255,255,255,0.78)" text-anchor="start">
+<tspan x="1416" dy="0">Labels, buttons, icon, indicator.</tspan>
+</text>
+<rect x="100" y="575" width="180" height="88" rx="16" fill="#f6b300" stroke="none" stroke-width="1" filter="url(#shadow2)"/>
+<text x="116" y="607" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="900" fill="#111827" text-anchor="start" >Interactions</text>
+<text x="116" y="630" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" font-weight="760" fill="rgba(17,24,39,0.65)" text-anchor="start">
+<tspan x="116" dy="0">Tap, swipe, keyboard, lifecycle.</tspan>
+</text>
+<rect x="310" y="575" width="180" height="88" rx="16" fill="#ef4f7a" stroke="none" stroke-width="1" filter="url(#shadow2)"/>
+<text x="326" y="607" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="900" fill="#fff" text-anchor="start" >Styling</text>
+<text x="326" y="630" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" font-weight="760" fill="rgba(255,255,255,0.78)" text-anchor="start">
+<tspan x="326" dy="0">Semantic colors, symbols, loading.</tspan>
+</text>
+<rect x="100" y="760" width="320" height="90" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="100" y="760" width="320" height="6" rx="3" fill="#22c55e" stroke="none" stroke-width="1" />
+<text x="118" y="795" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Queue Policy</text>
+<text x="118" y="820" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="118" dy="0">One visible snackbar, FIFO queue, replacement, duplicate drop.</tspan>
+</text>
+<rect x="455" y="760" width="320" height="90" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="455" y="760" width="320" height="6" rx="3" fill="#22c55e" stroke="none" stroke-width="1" />
+<text x="473" y="795" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Lifecycle</text>
+<text x="473" y="820" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="473" dy="0">willShow, didShow, willDismiss, didDismiss callbacks.</tspan>
+</text>
+<rect x="810" y="760" width="320" height="90" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="810" y="760" width="320" height="6" rx="3" fill="#22c55e" stroke="none" stroke-width="1" />
+<text x="828" y="795" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Timer Control</text>
+<text x="828" y="820" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="828" dy="0">Auto-dismiss, pause on touch, pause on app inactive.</tspan>
+</text>
+<rect x="1165" y="760" width="320" height="90" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="1165" y="760" width="320" height="6" rx="3" fill="#22c55e" stroke="none" stroke-width="1" />
+<text x="1183" y="795" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Result Flow</text>
+<text x="1183" y="820" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="1183" dy="0">Bool show result and async TTGSnackbarResult.</tspan>
+</text>
+<rect x="100" y="940" width="252" height="88" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="100" y="940" width="252" height="6" rx="3" fill="#635bff" stroke="none" stroke-width="1" />
+<text x="118" y="975" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Scenes</text>
+<text x="118" y="1000" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="118" dy="0">Active window lookup.</tspan>
+</text>
+<rect x="386" y="940" width="252" height="88" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="386" y="940" width="252" height="6" rx="3" fill="#635bff" stroke="none" stroke-width="1" />
+<text x="404" y="975" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Safe Area</text>
+<text x="404" y="1000" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="404" dy="0">Top and bottom positioning.</tspan>
+</text>
+<rect x="672" y="940" width="252" height="88" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="672" y="940" width="252" height="6" rx="3" fill="#635bff" stroke="none" stroke-width="1" />
+<text x="690" y="975" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Accessibility</text>
+<text x="690" y="1000" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="690" dy="0">VoiceOver and Dynamic Type.</tspan>
+</text>
+<rect x="958" y="940" width="252" height="88" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="958" y="940" width="252" height="6" rx="3" fill="#635bff" stroke="none" stroke-width="1" />
+<text x="976" y="975" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Motion</text>
+<text x="976" y="1000" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="976" dy="0">Reduce Motion fallback.</tspan>
+</text>
+<rect x="1244" y="940" width="252" height="88" rx="20" fill="rgba(255,255,255,0.94)" stroke="#111827" stroke-width="1" filter="url(#shadow2)"/>
+<rect x="1244" y="940" width="252" height="6" rx="3" fill="#635bff" stroke="none" stroke-width="1" />
+<text x="1262" y="975" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="900" fill="#111827" text-anchor="start" >Feedback</text>
+<text x="1262" y="1000" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="720" fill="#657386" text-anchor="start">
+<tspan x="1262" dy="0">Haptics and loading indicator.</tspan>
+</text>
+</svg>

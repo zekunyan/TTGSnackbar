@@ -14,6 +14,12 @@ TTGSnackbar is a Swift implementation of an Android-style Snackbar for iOS. It p
 [![Apps Using](https://img.shields.io/badge/Apps%20Using-%3E%20787-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 [![Total Download](https://img.shields.io/badge/Total%20Download-%3E%2036,840-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 
+## Visual Overview
+
+![TTGSnackbar promotional poster](Resources/ttgsnackbar-poster.svg)
+
+![TTGSnackbar architecture overview](Resources/ttgsnackbar-architecture.svg)
+
 ![Screenshot](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/screen_shot.png)
 
 ## Preview
