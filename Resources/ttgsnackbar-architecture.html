@@ -79,27 +79,11 @@
     h1 { margin: 18px 0 0; color: var(--navy); font-size: 54px; line-height: 0.92; letter-spacing: -0.06em; }
     .intro { margin: 12px 0 0; max-width: 780px; color: var(--muted); font-size: 17px; line-height: 1.35; font-weight: 720; }
 
-    .result-card {
-      min-width: 330px;
-      padding: 18px;
-      border-radius: 22px;
-      color: #fff;
-      background: var(--navy);
-      box-shadow: 0 22px 54px rgba(17,24,39,0.20);
-    }
-
-    .result-card b { display: block; font-size: 16px; }
-    .result-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .result-row span { padding: 7px 10px; border-radius: 999px; font-size: 11px; font-weight: 950; background: rgba(255,255,255,0.14); }
-    .result-row span.ok { background: var(--green); }
-    .result-row span.drop { background: var(--yellow); color: var(--navy); }
-    .result-row span.fail { background: var(--pink); }
-
     .map {
       position: absolute;
       left: 70px;
       right: 70px;
-      top: 250px;
+      top: 230px;
       bottom: 56px;
       display: grid;
       grid-template-rows: auto auto auto auto;
@@ -220,8 +204,7 @@
       header { left: 38px; right: 38px; top: 34px; }
       h1 { font-size: 40px; }
       .intro { font-size: 13px; max-width: 560px; }
-      .result-card { transform: scale(0.82); transform-origin: top right; }
-      .map { left: 38px; right: 38px; top: 220px; bottom: 32px; gap: 14px; }
+      .map { left: 38px; right: 38px; top: 200px; bottom: 32px; gap: 14px; }
       .layer { padding: 14px; border-radius: 20px; }
       .card { min-height: 70px; padding: 12px; border-radius: 15px; }
       .card h2 { font-size: 24px; }
@@ -241,10 +224,6 @@
         <div class="eyebrow"><span class="dot"></span> Layered component architecture</div>
         <h1>TTGSnackbar Architecture</h1>
         <p class="intro">A small set of public APIs feeds one UIView core. The core delegates presentation, layout, interaction, and platform concerns to focused modules, while the manager controls queue policy.</p>
-      </div>
-      <div class="result-card">
-        <b>Presentation outcomes</b>
-        <div class="result-row"><span class="ok">accepted</span><span class="drop">dropped</span><span class="fail">failedToPresent</span></div>
       </div>
     </header>
 

@@ -85,7 +85,7 @@
       color: var(--navy);
       font-size: clamp(70px, 7vw, 118px);
       line-height: 0.86;
-      letter-spacing: -0.08em;
+      letter-spacing: -0.025em;
       font-weight: 950;
     }
 
@@ -121,7 +121,7 @@
     .footer {
       position: absolute;
       left: 80px;
-      bottom: 54px;
+      bottom: 28px;
       display: flex;
       gap: 16px;
       align-items: center;
@@ -136,10 +136,10 @@
 
     .phone {
       position: absolute;
-      left: 52px;
-      top: 18px;
-      width: 365px;
-      height: 715px;
+      left: 0;
+      top: 24px;
+      width: 345px;
+      height: 690px;
       border-radius: 48px;
       padding: 16px;
       background: #111827;
@@ -230,13 +230,13 @@
     .panel .label { display: inline-block; margin-bottom: 12px; color: var(--blue); font-weight: 950; font-size: 14px; }
 
     .floating.one {
-      right: 20px;
-      top: 42px;
-      width: 610px;
-      padding: 22px 24px;
+      right: 0;
+      top: 34px;
+      width: 430px;
+      padding: 18px 20px;
     }
 
-    .floating.one h3 { font-size: 30px; }
+    .floating.one h3 { font-size: 24px; line-height: 1.04; }
 
     .mode-grid {
       display: grid;
@@ -258,25 +258,25 @@
     .mini-tags span { padding: 6px 8px; border-radius: 999px; color: #fff; font-size: 10px; font-weight: 900; }
 
     .floating.two {
-      right: 64px;
-      top: 405px;
-      width: 510px;
-      padding: 20px 22px;
+      right: 4px;
+      top: 438px;
+      width: 420px;
+      padding: 18px 20px;
     }
 
-    .floating.two h3 { font-size: 26px; }
+    .floating.two h3 { font-size: 23px; line-height: 1.06; }
 
-    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
-    .mini-card { min-height: 104px; padding: 14px; border-radius: 17px; background: #f4f8fc; border: 1px solid rgba(17, 24, 39, 0.06); }
-    .mini-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px; color: #fff; font-size: 16px; font-weight: 950; margin-bottom: 14px; }
-    .mini-card b { display: block; font-size: 13px; color: var(--navy); }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
+    .mini-card { min-height: 92px; padding: 12px; border-radius: 16px; background: #f4f8fc; border: 1px solid rgba(17, 24, 39, 0.06); }
+    .mini-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; color: #fff; font-size: 14px; font-weight: 950; margin-bottom: 12px; }
+    .mini-card b { display: block; font-size: 11px; color: var(--navy); }
     .mini-card span { display: block; margin-top: 4px; font-size: 9px; line-height: 1.1; color: var(--muted); font-weight: 750; }
 
     .darkbar {
       position: absolute;
-      right: 76px;
-      bottom: 32px;
-      width: 500px;
+      right: 4px;
+      bottom: 44px;
+      width: 420px;
       min-height: 88px;
       padding: 18px 22px;
       border-radius: 20px;
@@ -285,9 +285,9 @@
       box-shadow: 0 24px 52px rgba(17, 24, 39, 0.28);
     }
 
-    .darkbar h3 { margin: 0; font-size: 18px; letter-spacing: -0.02em; }
-    .bar-row { display: flex; align-items: center; gap: 18px; margin-top: 14px; color: #cbd5e1; font-size: 12px; font-weight: 750; }
-    .bar { width: 56px; height: 10px; border-radius: 999px; background: var(--cyan); display: inline-block; }
+    .darkbar h3 { margin: 0; font-size: 16px; letter-spacing: -0.01em; }
+    .bar-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; color: #cbd5e1; font-size: 11px; font-weight: 750; }
+    .bar { width: 42px; height: 9px; border-radius: 999px; background: var(--cyan); display: inline-block; }
     .bar.green { background: var(--green); }
     .bar.blue { background: var(--blue); }
 
@@ -347,8 +347,8 @@
     }
 
     .phone-custom .custom-art {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 12px;
       background: rgba(255,255,255,0.22);
       display: grid;
@@ -362,17 +362,17 @@
 
     .demo-stack {
       display: grid;
-      gap: 9px;
-      margin-top: 18px;
+      gap: 8px;
+      margin-top: 16px;
     }
 
     .demo-snackbar {
-      min-height: 46px;
+      min-height: 42px;
       display: grid;
       grid-template-columns: 30px minmax(0, 1fr) auto;
       align-items: center;
-      gap: 10px;
-      padding: 8px 11px;
+      gap: 8px;
+      padding: 7px 10px;
       border-radius: 15px;
       color: #fff;
       box-shadow: 0 12px 28px rgba(17,24,39,0.12);
@@ -383,8 +383,8 @@
     }
 
     .demo-snackbar .demo-icon {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       display: grid;
       place-items: center;
       border-radius: 12px;
@@ -398,18 +398,18 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 920;
       letter-spacing: -0.01em;
     }
 
     .demo-snackbar .demo-copy span {
       color: rgba(255,255,255,0.74);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 780;
     }
 
-    .demo-snackbar .demo-action { padding: 6px 9px; border-radius: 11px; background: rgba(255,255,255,0.20); font-size: 9px; font-weight: 950; white-space: nowrap; }
+    .demo-snackbar .demo-action { padding: 5px 7px; border-radius: 11px; background: rgba(255,255,255,0.20); font-size: 9px; font-weight: 950; white-space: nowrap; }
     .demo-snackbar.success { background: linear-gradient(135deg, #18b76b, #22c55e); }
     .demo-snackbar.warning { background: linear-gradient(135deg, #ff9f0a, #f6b300); color: #111827; }
     .demo-snackbar.warning .demo-copy span { color: rgba(17,24,39,0.62); }
@@ -437,6 +437,7 @@
       .feature b { font-size: 16px; }
       .feature span { font-size: 11px; }
       .stage { transform: scale(0.76); transform-origin: center right; }
+      h1 { letter-spacing: -0.015em; }
     }
   </style>
 </head>
