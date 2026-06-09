@@ -231,12 +231,12 @@
 
     .floating.one {
       right: 16px;
-      top: 70px;
-      width: 600px;
-      padding: 28px 30px;
+      top: 58px;
+      width: 580px;
+      padding: 22px 24px;
     }
 
-    .floating.one h3 { font-size: 36px; }
+    .floating.one h3 { font-size: 32px; }
 
     .mode-grid {
       display: grid;
@@ -259,16 +259,16 @@
 
     .floating.two {
       right: 56px;
-      top: 355px;
+      top: 430px;
       width: 530px;
-      padding: 28px 30px;
+      padding: 22px 24px;
     }
 
-    .floating.two h3 { font-size: 35px; }
+    .floating.two h3 { font-size: 30px; }
 
     .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
-    .mini-card { min-height: 132px; padding: 16px; border-radius: 17px; background: #f4f8fc; border: 1px solid rgba(17, 24, 39, 0.06); }
-    .mini-icon { width: 39px; height: 39px; display: grid; place-items: center; border-radius: 12px; color: #fff; font-size: 18px; font-weight: 950; margin-bottom: 25px; }
+    .mini-card { min-height: 104px; padding: 14px; border-radius: 17px; background: #f4f8fc; border: 1px solid rgba(17, 24, 39, 0.06); }
+    .mini-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px; color: #fff; font-size: 16px; font-weight: 950; margin-bottom: 14px; }
     .mini-card b { display: block; font-size: 13px; color: var(--navy); }
     .mini-card span { display: block; margin-top: 4px; font-size: 9px; line-height: 1.1; color: var(--muted); font-weight: 750; }
 
@@ -277,8 +277,8 @@
       right: 54px;
       bottom: 38px;
       width: 600px;
-      min-height: 112px;
-      padding: 22px 26px;
+      min-height: 88px;
+      padding: 18px 22px;
       border-radius: 20px;
       background: var(--navy);
       color: #fff;
@@ -286,10 +286,127 @@
     }
 
     .darkbar h3 { margin: 0; font-size: 18px; letter-spacing: -0.02em; }
-    .bar-row { display: flex; align-items: center; gap: 18px; margin-top: 18px; color: #cbd5e1; font-size: 12px; font-weight: 750; }
+    .bar-row { display: flex; align-items: center; gap: 18px; margin-top: 14px; color: #cbd5e1; font-size: 12px; font-weight: 750; }
     .bar { width: 72px; height: 10px; border-radius: 999px; background: var(--cyan); display: inline-block; }
     .bar.green { background: var(--green); }
     .bar.blue { background: var(--blue); }
+
+
+
+    .phone-demos {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      top: 176px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .phone-snack {
+      min-height: 58px;
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 12px;
+      border-radius: 16px;
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(17, 24, 39, 0.16);
+    }
+
+    .phone-snack .snack-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.22);
+      font-size: 15px;
+      font-weight: 950;
+    }
+
+    .phone-snack b { display: block; font-size: 12px; line-height: 1.05; }
+    .phone-snack small { display: block; margin-top: 3px; color: rgba(255,255,255,0.75); font-size: 9px; font-weight: 760; }
+    .phone-snack .snack-action { padding: 7px 8px; border-radius: 10px; background: rgba(255,255,255,0.20); font-size: 9px; font-weight: 950; }
+    .phone-snack.success { background: linear-gradient(135deg, #18b76b, #22c55e); }
+    .phone-snack.error { background: linear-gradient(135deg, #ef4f7a, #ef4444); }
+    .phone-snack.info { background: linear-gradient(135deg, #147efb, #10b9d6); }
+    .phone-snack.dark { background: #111827; }
+
+    .phone-custom {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      align-items: center;
+      gap: 10px;
+      min-height: 76px;
+      padding: 13px;
+      border-radius: 18px;
+      color: #fff;
+      background: linear-gradient(135deg, #635bff, #10b9d6);
+      box-shadow: 0 14px 28px rgba(17, 24, 39, 0.16);
+    }
+
+    .phone-custom .custom-art {
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.22);
+      display: grid;
+      place-items: center;
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .phone-custom b { display: block; font-size: 12px; }
+    .phone-custom small { display: block; margin-top: 4px; color: rgba(255,255,255,0.78); font-size: 9px; line-height: 1.2; font-weight: 760; }
+
+    .demo-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .demo-snackbar {
+      min-height: 52px;
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 17px;
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(17,24,39,0.12);
+    }
+
+    .demo-snackbar .demo-icon {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.22);
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .demo-snackbar b { display: block; font-size: 12px; letter-spacing: -0.01em; }
+    .demo-snackbar span { display: block; margin-top: 3px; color: rgba(255,255,255,0.76); font-size: 9px; font-weight: 780; }
+    .demo-snackbar .demo-action { padding: 8px 10px; border-radius: 11px; background: rgba(255,255,255,0.20); font-size: 10px; font-weight: 950; }
+    .demo-snackbar.success { background: linear-gradient(135deg, #18b76b, #22c55e); }
+    .demo-snackbar.warning { background: linear-gradient(135deg, #ff9f0a, #f6b300); color: #111827; }
+    .demo-snackbar.warning span { color: rgba(17,24,39,0.62); }
+    .demo-snackbar.warning .demo-icon, .demo-snackbar.warning .demo-action { background: rgba(255,255,255,0.38); }
+    .demo-snackbar.error { background: linear-gradient(135deg, #ef4f7a, #ef4444); }
+    .demo-snackbar.loading { background: #111827; }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 3px solid rgba(255,255,255,0.30);
+      border-top-color: #fff;
+      display: inline-block;
+    }
 
     @media (max-width: 1100px) {
       body { padding: 0; }
@@ -327,19 +444,24 @@
             <div class="notch"></div>
             <div class="status"><span>9:41</span><span>●●●</span></div>
             <div class="app-title"><h2>Snackbar Feature Gallery</h2><p>Try semantic styles, queue policies, action callbacks, custom views, and async results.</p></div>
-            <div class="tag-list">
-              <span class="pill b">Bottom</span><span class="pill u">Top</span><span class="pill t">Action</span><span class="pill y">Undo</span><span class="pill g">Success</span><span class="pill p">Error</span><span class="pill b">Loading</span><span class="pill c">Custom View</span><span class="pill u">Safe Area</span>
+            <div class="phone-demos">
+              <div class="phone-snack info"><div class="snack-icon">i</div><div><b>Network restored</b><small>Top presentation · info style</small></div><div class="snack-action">OK</div></div>
+              <div class="phone-snack success"><div class="snack-icon">✓</div><div><b>Draft saved</b><small>Success style · haptic feedback</small></div><div class="snack-action">DONE</div></div>
+              <div class="phone-snack dark"><div class="snack-icon">↺</div><div><b>File deleted</b><small>Action callback · async result</small></div><div class="snack-action">UNDO</div></div>
+              <div class="phone-snack error"><div class="snack-icon">!</div><div><b>Upload failed</b><small>Error style · retry action</small></div><div class="snack-action">RETRY</div></div>
+              <div class="phone-custom"><div class="custom-art">★</div><div><b>Custom UIView content</b><small>Embed your own layout inside the snackbar.</small></div></div>
             </div>
           </div>
         </div>
 
         <section class="panel floating one">
-          <span class="label">Snackbar scenarios</span>
-          <h3>Feedback that appears exactly when the user needs it.</h3>
-          <div class="mode-grid">
-            <div class="mode"><b>Messages</b><div class="mini-tags"><span class="b">Short</span><span class="t">Middle</span><span class="y">Long</span><span class="p">Custom</span></div></div>
-            <div class="mode"><b>Styles</b><div class="mini-tags"><span class="g">Success</span><span class="b">Info</span><span class="p">Error</span><span class="u">Loading</span></div></div>
-            <div class="mode"><b>Queue</b><div class="mini-tags"><span class="b">Enqueue</span><span class="t">Replace</span><span class="y">Drop</span></div></div>
+          <span class="label">Live snackbar demo styles</span>
+          <h3>Multiple product states, actions, and queue outcomes.</h3>
+          <div class="demo-stack">
+            <div class="demo-snackbar success"><div class="demo-icon">✓</div><div><b>Saved successfully</b><span>Semantic success · icon · haptic</span></div><div class="demo-action">DONE</div></div>
+            <div class="demo-snackbar warning"><div class="demo-icon">!</div><div><b>Unsaved changes</b><span>Warning style · two-action flow</span></div><div class="demo-action">REVIEW</div></div>
+            <div class="demo-snackbar error"><div class="demo-icon">×</div><div><b>Request failed</b><span>Error style · retry callback</span></div><div class="demo-action">RETRY</div></div>
+            <div class="demo-snackbar loading"><div class="demo-icon"><span class="spinner"></span></div><div><b>Syncing library</b><span>Loading style · forever duration</span></div><div class="demo-action">CANCEL</div></div>
           </div>
         </section>
 
