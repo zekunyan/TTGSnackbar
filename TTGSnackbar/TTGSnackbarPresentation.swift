@@ -418,6 +418,7 @@ extension TTGSnackbar {
 
         activityIndicatorView.stopAnimating()
         activityIndicatorView.isHidden = true
+        activityIndicatorViewWidthConstraint?.constant = 0
 
         switch style {
         case .default:
@@ -427,14 +428,14 @@ extension TTGSnackbar {
             secondActionTextColor = UIColor.ttgDefaultText
 
         case .info:
-            backgroundColor = .systemBlue
+            backgroundColor = UIColor(red: 20 / 255, green: 126 / 255, blue: 251 / 255, alpha: 1)
             messageTextColor = .white
             actionTextColor = .white
             secondActionTextColor = .white
             hapticFeedback = .selection
 
         case .success:
-            backgroundColor = .systemGreen
+            backgroundColor = UIColor(red: 24 / 255, green: 183 / 255, blue: 107 / 255, alpha: 1)
             messageTextColor = .white
             actionTextColor = .white
             secondActionTextColor = .white
@@ -443,7 +444,7 @@ extension TTGSnackbar {
             hapticFeedback = .success
 
         case .warning:
-            backgroundColor = .systemOrange
+            backgroundColor = UIColor(red: 245 / 255, green: 158 / 255, blue: 11 / 255, alpha: 1)
             messageTextColor = .white
             actionTextColor = .white
             secondActionTextColor = .white
@@ -452,7 +453,7 @@ extension TTGSnackbar {
             hapticFeedback = .warning
 
         case .error:
-            backgroundColor = .systemRed
+            backgroundColor = UIColor(red: 239 / 255, green: 68 / 255, blue: 68 / 255, alpha: 1)
             messageTextColor = .white
             actionTextColor = .white
             secondActionTextColor = .white
@@ -465,6 +466,8 @@ extension TTGSnackbar {
             messageTextColor = UIColor.ttgDefaultText
             actionTextColor = UIColor.ttgDefaultText
             secondActionTextColor = UIColor.ttgDefaultText
+            activityIndicatorView.color = messageTextColor
+            activityIndicatorViewWidthConstraint?.constant = 24
             activityIndicatorView.isHidden = false
             activityIndicatorView.startAnimating()
             hapticFeedback = .selection
@@ -499,4 +502,3 @@ extension TTGSnackbar {
         }
     }
 }
-

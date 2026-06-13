@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TTGSnackbar · Quick Start · Icon Feedback</title>
+  <link rel="stylesheet" href="quick-start-demo.css" />
+</head>
+<body>
+  <main class="demo" style="--accent: var(--purple);">
+    <section class="content">
+      <div class="copy">
+        <div class="eyebrow"><span class="dot"></span>Quick Start</div>
+        <h1>Show an icon</h1>
+        <p class="subtitle">Add a leading SF Symbol to the default snackbar.</p>
+        <div class="section-label">Code</div>
+        <div class="code-card">
+          <pre>let snackbar = TTGSnackbar(
+  message: "New feature ready",
+  duration: .middle
+)
+snackbar.icon = UIImage(
+  systemName: "sparkles"
+)
+snackbar.show()</pre>
+        </div>
+      </div>
+      <figure class="phone-wrap">
+        <figcaption class="phone-label">Output</figcaption>
+        <img class="screenshot" src="quick-start-simulator/icon.jpg" alt="Icon snackbar output" />
+      </figure>
+    </section>
+  </main>
+</body>
+</html>

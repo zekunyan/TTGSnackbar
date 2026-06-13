@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TTGSnackbar · Quick Start · Long-Running Action</title>
+  <link rel="stylesheet" href="quick-start-demo.css" />
+</head>
+<body>
+  <main class="demo" style="--accent: var(--pink);">
+    <section class="content">
+      <div class="copy">
+        <div class="eyebrow"><span class="dot"></span>Quick Start</div>
+        <h1>Show a long-running action</h1>
+        <p class="subtitle">Keep the snackbar visible while background work is running.</p>
+        <div class="section-label">Code</div>
+        <div class="code-card">
+          <pre>let snackbar = TTGSnackbar(
+  message: "Uploading...",
+  duration: .forever
+)
+snackbar.style = .loading
+snackbar.actionText = "Cancel"
+snackbar.actionBlock = { snackbar in
+  cancelUpload()
+  snackbar.dismiss()
+}
+snackbar.show()</pre>
+        </div>
+      </div>
+      <figure class="phone-wrap">
+        <figcaption class="phone-label">Output</figcaption>
+        <img class="screenshot" src="quick-start-simulator/loading.jpg" alt="Long-running action snackbar output" />
+      </figure>
+    </section>
+  </main>
+</body>
+</html>

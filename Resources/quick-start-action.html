@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TTGSnackbar · Quick Start · Action Button</title>
+  <link rel="stylesheet" href="quick-start-demo.css" />
+</head>
+<body>
+  <main class="demo" style="--accent: var(--blue);">
+    <section class="content">
+      <div class="copy">
+        <div class="eyebrow"><span class="dot"></span>Quick Start</div>
+        <h1>Show an action button</h1>
+        <p class="subtitle">Attach one recovery action and dismiss after handling the tap.</p>
+        <div class="section-label">Code</div>
+        <div class="code-card">
+          <pre>let snackbar = TTGSnackbar(
+  message: "File deleted",
+  duration: .middle,
+  actionText: "Undo"
+) { snackbar in
+  restoreFile()
+  snackbar.dismiss()
+}
+snackbar.show()</pre>
+        </div>
+      </div>
+      <figure class="phone-wrap">
+        <figcaption class="phone-label">Output</figcaption>
+        <img class="screenshot" src="quick-start-simulator/action.jpg" alt="Action snackbar output" />
+      </figure>
+    </section>
+  </main>
+</body>
+</html>

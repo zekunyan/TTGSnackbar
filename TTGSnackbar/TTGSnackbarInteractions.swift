@@ -28,8 +28,11 @@ extension TTGSnackbar {
             actionButton.isHidden = true
             secondActionButton.isHidden = true
             separateView.isHidden = true
+            activityIndicatorView.color = messageTextColor
+            activityIndicatorViewWidthConstraint?.constant = 24
             activityIndicatorView.isHidden = false
             activityIndicatorView.startAnimating()
+            layoutIfNeeded()
         } else {
             dismissAnimated(true)
         }
@@ -127,4 +130,3 @@ extension TTGSnackbar {
         }
     }
 }
-

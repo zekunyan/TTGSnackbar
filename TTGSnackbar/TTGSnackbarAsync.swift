@@ -29,16 +29,20 @@ public extension TTGSnackbar {
                 continuation.resume(returning: result)
             }
 
-            let existingActionBlock = snackbar.actionBlock
-            snackbar.actionBlock = { snackbar in
-                existingActionBlock?(snackbar)
-                resume(.action)
+            if configuration.actionBlock != nil || configuration.actionText?.isEmpty == false {
+                let existingActionBlock = snackbar.actionBlock
+                snackbar.actionBlock = { snackbar in
+                    existingActionBlock?(snackbar)
+                    resume(.action)
+                }
             }
 
-            let existingSecondActionBlock = snackbar.secondActionBlock
-            snackbar.secondActionBlock = { snackbar in
-                existingSecondActionBlock?(snackbar)
-                resume(.secondAction)
+            if configuration.secondActionBlock != nil || configuration.secondActionText?.isEmpty == false {
+                let existingSecondActionBlock = snackbar.secondActionBlock
+                snackbar.secondActionBlock = { snackbar in
+                    existingSecondActionBlock?(snackbar)
+                    resume(.secondAction)
+                }
             }
 
             let existingTapBlock = snackbar.onTapBlock

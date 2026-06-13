@@ -14,15 +14,9 @@ TTGSnackbar 是一个 Swift 实现的 iOS Snackbar 组件，风格类似 Android
 
 ## 视觉概览
 
-![TTGSnackbar promotional poster](Resources/ttgsnackbar-poster.svg)
+![TTGSnackbar promotional poster](Resources/ttgsnackbar-poster.jpg)
 
-![TTGSnackbar architecture overview](Resources/ttgsnackbar-architecture.svg)
-
-![截图](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/screen_shot.png)
-
-## 预览
-
-![Snackbar 示例](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_example.gif)
+![TTGSnackbar architecture overview](Resources/ttgsnackbar-architecture.jpg)
 
 ## 功能特性
 
@@ -84,16 +78,26 @@ github "zekunyan/TTGSnackbar"
 
 ## 快速开始
 
-### 展示简单消息
+以下示例默认已经导入模块：
 
-![简单 Snackbar](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_1.png)
+```swift
+import TTGSnackbar
+```
+
+默认样式开箱即用。创建 Snackbar，配置需要的行为，然后调用 `show()`。
+
+### 1. 展示简单消息
+
+适合短暂的状态提示或确认信息。
 
 ```swift
 let snackbar = TTGSnackbar(message: "TTGSnackbar!", duration: .short)
 snackbar.show()
 ```
 
-`show()` 会在无法展示时返回 `false`，例如当前没有 active window，也没有传入自定义容器。
+![简单 Snackbar](Resources/snackbar_1.png)
+
+`show()` 会在无法展示时返回 `false`，例如当前没有 active window，也没有传入自定义容器：
 
 ```swift
 if !snackbar.show() {
@@ -101,9 +105,9 @@ if !snackbar.show() {
 }
 ```
 
-### 展示操作按钮
+### 2. 添加操作按钮
 
-![带按钮的 Snackbar](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_2.png)
+当消息需要提供撤销、重试等即时操作时，同时设置按钮标题和回调。
 
 ```swift
 let snackbar = TTGSnackbar(
@@ -118,16 +122,21 @@ let snackbar = TTGSnackbar(
 snackbar.show()
 ```
 
-### 展示长任务操作
+![带按钮的 Snackbar](Resources/snackbar_2.png)
 
-![长任务操作](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_3.png)
+### 3. 在任务执行期间保持显示
+
+使用 `.forever` 让 Snackbar 保持显示，直到用户取消或任务完成。`.loading` 样式会自动显示 loading 指示器。
 
 ```swift
 let snackbar = TTGSnackbar(
     message: "正在上传…",
-    duration: .forever,
-    actionText: "取消"
-) { snackbar in
+    duration: .forever
+)
+
+snackbar.style = .loading
+snackbar.actionText = "取消"
+snackbar.actionBlock = { snackbar in
     cancelUpload()
     snackbar.dismiss()
 }
@@ -135,39 +144,35 @@ let snackbar = TTGSnackbar(
 snackbar.show()
 ```
 
-### 展示两个操作按钮
+![长任务操作](Resources/snackbar_3.png)
 
-![两个按钮](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_4.png)
+### 4. 使用语义反馈
 
-```swift
-let snackbar = TTGSnackbar(message: "开启通知？", duration: .long)
-
-snackbar.actionText = "开启"
-snackbar.actionTextColor = .systemGreen
-snackbar.actionBlock = { snackbar in
-    enableNotifications()
-    snackbar.dismiss()
-}
-
-snackbar.secondActionText = "稍后"
-snackbar.secondActionTextColor = .systemOrange
-snackbar.secondActionBlock = { snackbar in
-    snackbar.dismiss()
-}
-
-snackbar.show()
-```
-
-### 展示图标或纯图标操作
-
-![图标 Snackbar](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_5.jpg)
+常见业务状态建议直接使用内置语义样式，而不是手动选择颜色。
 
 ```swift
 let snackbar = TTGSnackbar(message: "保存成功", duration: .middle)
-snackbar.icon = UIImage(systemName: "checkmark.circle.fill")
-snackbar.iconTintColor = .systemGreen
+snackbar.style = .success
 snackbar.show()
 ```
+
+![语义样式 Snackbar](Resources/snackbar_4.png)
+
+可用样式包括 `.default`、`.info`、`.success`、`.warning`、`.error` 和 `.loading`。
+
+### 5. 添加左侧图标
+
+当消息需要更紧凑的视觉提示时，可以添加 SF Symbol。
+
+```swift
+let snackbar = TTGSnackbar(message: "新功能已就绪", duration: .middle)
+snackbar.icon = UIImage(systemName: "sparkles")
+snackbar.show()
+```
+
+![图标 Snackbar](Resources/snackbar_5.png)
+
+也可以使用纯图标操作：
 
 ```swift
 let snackbar = TTGSnackbar(message: "点击图标操作", duration: .middle)
@@ -178,21 +183,27 @@ snackbar.actionBlock = { snackbar in
 snackbar.show()
 ```
 
-### 展示自定义内容
+### 6. 展示自定义内容
 
-![自定义内容](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_6.png)
+当单个文本标签不够用时，可以传入自定义 `UIView`。Snackbar 仍然负责展示、边距、安全区和关闭行为。
 
 ```swift
-let customContentView = UINib(
-    nibName: "CustomView",
-    bundle: .main
-).instantiate(withOwner: nil).first as! UIView
+let contentView = UIStackView()
+contentView.axis = .vertical
+contentView.spacing = 4
+contentView.isLayoutMarginsRelativeArrangement = true
+contentView.layoutMargins = UIEdgeInsets(top: 16, left: 18, bottom: 16, right: 18)
 
-let snackbar = TTGSnackbar(customContentView: customContentView, duration: .long)
+let titleLabel = UILabel()
+titleLabel.text = "Custom content view"
+contentView.addArrangedSubview(titleLabel)
+
+let snackbar = TTGSnackbar(customContentView: contentView, duration: .forever)
+snackbar.shouldActivateLeftAndRightMarginOnCustomContentView = true
 snackbar.show()
 ```
 
-如果希望自定义内容遵循 Snackbar 左右边距，可设置 `shouldActivateLeftAndRightMarginOnCustomContentView = true`。
+![自定义内容](Resources/snackbar_6.png)
 
 ## 现代 API
 

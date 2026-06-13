@@ -129,18 +129,22 @@ public struct TTGSnackbarConfiguration {
 
 extension UIColor {
     @objc class open dynamic var ttgDefaultText: UIColor {
-        // Meaning it's white in light mode and black in dark mode.
-        UIColor.systemBackground
+        UIColor.white
     }
 
     @objc class open dynamic var ttgDefaultBackground: UIColor {
-        // Meaning it's black in light mode and white in dark mode.
-        UIColor.label.withAlphaComponent(0.8)
+        UIColor(red: 17 / 255, green: 24 / 255, blue: 39 / 255, alpha: 1)
     }
 
     @objc class open dynamic var ttgDefaultShadow: UIColor {
-        // Meaning it's black in light mode and white in dark mode.
-        UIColor.label
+        UIColor(red: 15 / 255, green: 23 / 255, blue: 42 / 255, alpha: 1)
+    }
+
+    @objc class open dynamic var ttgDefaultActionBackground: UIColor {
+        UIColor.white.withAlphaComponent(0.18)
+    }
+
+    @objc class open dynamic var ttgDefaultIconBackground: UIColor {
+        UIColor.white.withAlphaComponent(0.18)
     }
 }
-

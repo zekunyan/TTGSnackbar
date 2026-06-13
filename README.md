@@ -16,15 +16,9 @@ TTGSnackbar is a Swift implementation of an Android-style Snackbar for iOS. It p
 
 ## Visual Overview
 
-![TTGSnackbar promotional poster](Resources/ttgsnackbar-poster.svg)
+![TTGSnackbar promotional poster](Resources/ttgsnackbar-poster.jpg)
 
-![TTGSnackbar architecture overview](Resources/ttgsnackbar-architecture.svg)
-
-![Screenshot](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/screen_shot.png)
-
-## Preview
-
-![Snackbar example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_example.gif)
+![TTGSnackbar architecture overview](Resources/ttgsnackbar-architecture.jpg)
 
 ## Features
 
@@ -86,16 +80,26 @@ github "zekunyan/TTGSnackbar"
 
 ## Quick Start
 
-### Show a simple message
+All snippets assume the module is already imported:
 
-![Simple snackbar](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_1.png)
+```swift
+import TTGSnackbar
+```
+
+The default style works out of the box. Create a snackbar, configure only the behavior you need, then call `show()`.
+
+### 1. Show a simple message
+
+Use this for short confirmation or status text that can disappear automatically.
 
 ```swift
 let snackbar = TTGSnackbar(message: "TTGSnackbar!", duration: .short)
 snackbar.show()
 ```
 
-`show()` returns `false` if the snackbar cannot be presented, for example when no active window or custom container is available.
+![Simple snackbar](Resources/snackbar_1.png)
+
+`show()` returns `false` if the snackbar cannot be presented, for example when no active window or custom container is available:
 
 ```swift
 if !snackbar.show() {
@@ -103,9 +107,9 @@ if !snackbar.show() {
 }
 ```
 
-### Show an action button
+### 2. Add an action button
 
-![Action snackbar](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_2.png)
+Use an action when the message should offer an immediate recovery path. Set both the visible title and the callback.
 
 ```swift
 let snackbar = TTGSnackbar(
@@ -120,16 +124,21 @@ let snackbar = TTGSnackbar(
 snackbar.show()
 ```
 
-### Show a long-running action
+![Action snackbar](Resources/snackbar_2.png)
 
-![Long-running action](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_3.png)
+### 3. Keep a snackbar visible while work runs
+
+Use `.forever` for work that should stay visible until the user cancels or your task finishes. The `.loading` style adds the activity indicator.
 
 ```swift
 let snackbar = TTGSnackbar(
     message: "Uploading…",
-    duration: .forever,
-    actionText: "Cancel"
-) { snackbar in
+    duration: .forever
+)
+
+snackbar.style = .loading
+snackbar.actionText = "Cancel"
+snackbar.actionBlock = { snackbar in
     cancelUpload()
     snackbar.dismiss()
 }
@@ -137,39 +146,35 @@ let snackbar = TTGSnackbar(
 snackbar.show()
 ```
 
-### Show two action buttons
+![Long-running action](Resources/snackbar_3.png)
 
-![Two actions](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_4.png)
+### 4. Use semantic feedback
 
-```swift
-let snackbar = TTGSnackbar(message: "Enable notifications?", duration: .long)
-
-snackbar.actionText = "Enable"
-snackbar.actionTextColor = .systemGreen
-snackbar.actionBlock = { snackbar in
-    enableNotifications()
-    snackbar.dismiss()
-}
-
-snackbar.secondActionText = "Not now"
-snackbar.secondActionTextColor = .systemOrange
-snackbar.secondActionBlock = { snackbar in
-    snackbar.dismiss()
-}
-
-snackbar.show()
-```
-
-### Show an icon or icon-only action
-
-![Icon snackbar](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_5.jpg)
+Use built-in styles instead of hand-picking colors for common product states.
 
 ```swift
 let snackbar = TTGSnackbar(message: "Saved successfully", duration: .middle)
-snackbar.icon = UIImage(systemName: "checkmark.circle.fill")
-snackbar.iconTintColor = .systemGreen
+snackbar.style = .success
 snackbar.show()
 ```
+
+![Semantic snackbar](Resources/snackbar_4.png)
+
+Available styles are `.default`, `.info`, `.success`, `.warning`, `.error`, and `.loading`.
+
+### 5. Add a leading icon
+
+Add an SF Symbol when the message benefits from a compact visual cue.
+
+```swift
+let snackbar = TTGSnackbar(message: "New feature ready", duration: .middle)
+snackbar.icon = UIImage(systemName: "sparkles")
+snackbar.show()
+```
+
+![Icon snackbar](Resources/snackbar_5.png)
+
+You can also use an icon-only action:
 
 ```swift
 let snackbar = TTGSnackbar(message: "Tap the icon action", duration: .middle)
@@ -180,21 +185,27 @@ snackbar.actionBlock = { snackbar in
 snackbar.show()
 ```
 
-### Show custom content
+### 6. Present custom content
 
-![Custom content](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_6.png)
+Use a custom `UIView` when a single message label is not enough. The snackbar still manages presentation, margins, safe areas, and dismissal.
 
 ```swift
-let customContentView = UINib(
-    nibName: "CustomView",
-    bundle: .main
-).instantiate(withOwner: nil).first as! UIView
+let contentView = UIStackView()
+contentView.axis = .vertical
+contentView.spacing = 4
+contentView.isLayoutMarginsRelativeArrangement = true
+contentView.layoutMargins = UIEdgeInsets(top: 16, left: 18, bottom: 16, right: 18)
 
-let snackbar = TTGSnackbar(customContentView: customContentView, duration: .long)
+let titleLabel = UILabel()
+titleLabel.text = "Custom content view"
+contentView.addArrangedSubview(titleLabel)
+
+let snackbar = TTGSnackbar(customContentView: contentView, duration: .forever)
+snackbar.shouldActivateLeftAndRightMarginOnCustomContentView = true
 snackbar.show()
 ```
 
-Set `shouldActivateLeftAndRightMarginOnCustomContentView = true` when the custom content view should honor snackbar side margins.
+![Custom content](Resources/snackbar_6.png)
 
 ## Modern APIs
 

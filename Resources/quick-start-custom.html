@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TTGSnackbar · Quick Start · Custom Content</title>
+  <link rel="stylesheet" href="quick-start-demo.css" />
+</head>
+<body>
+  <main class="demo" style="--accent: var(--purple);">
+    <section class="content">
+      <div class="copy">
+        <div class="eyebrow"><span class="dot"></span>Quick Start</div>
+        <h1>Show custom content</h1>
+        <p class="subtitle">Embed a custom UIView when message text is not enough.</p>
+        <div class="section-label">Code</div>
+        <div class="code-card">
+          <pre>let contentView = makeStatusView()
+let snackbar = TTGSnackbar(
+  customContentView: contentView,
+  duration: .forever
+)
+snackbar.shouldActivateLeftAndRightMarginOnCustomContentView = true
+snackbar.show()</pre>
+        </div>
+      </div>
+      <figure class="phone-wrap">
+        <figcaption class="phone-label">Output</figcaption>
+        <img class="screenshot" src="quick-start-simulator/custom.jpg" alt="Custom content snackbar output" />
+      </figure>
+    </section>
+  </main>
+</body>
+</html>

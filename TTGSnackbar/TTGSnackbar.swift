@@ -12,10 +12,10 @@ open class TTGSnackbar: UIView {
     // MARK: - Class property.
 
     /// Snackbar default frame
-    @objc public static var snackbarDefaultFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 44)
+    @objc public static var snackbarDefaultFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 58)
 
     /// Snackbar min height
-    @objc public static var snackbarMinHeight: CGFloat = 44
+    @objc public static var snackbarMinHeight: CGFloat = 58
 
     // MARK: - Typealias.
 
@@ -120,12 +120,12 @@ open class TTGSnackbar: UIView {
     /// Show and hide animation duration. Default is 0.3
     @objc open dynamic var animationDuration: TimeInterval = 0.3
 
-    /// Corner radius: [0, height / 2]. Default is 4
-    @objc open dynamic var cornerRadius: CGFloat = 4 {
+    /// Corner radius: [0, height / 2]. Default is 16
+    @objc open dynamic var cornerRadius: CGFloat = 16 {
         didSet {
             cornerRadius = max(cornerRadius, 0)
             layer.cornerRadius = cornerRadius
-            layer.masksToBounds = true
+            layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
         }
     }
 
@@ -139,47 +139,47 @@ open class TTGSnackbar: UIView {
         }
     }
 
-    /// Border width of snackbar. Default is 1.
-    @objc open dynamic var borderWidth: CGFloat = 1 {
+    /// Border width of snackbar. Default is 0.
+    @objc open dynamic var borderWidth: CGFloat = 0 {
         didSet {
             layer.borderWidth = borderWidth
         }
     }
 
-    /// Top margin. Default is 4, only work when snackbar is at top
-    @objc open dynamic var topMargin: CGFloat = 4 {
+    /// Top margin. Default is 16, only work when snackbar is at top
+    @objc open dynamic var topMargin: CGFloat = 16 {
         didSet {
             topMarginConstraint?.constant = topMargin
             superview?.layoutIfNeeded()
         }
     }
 
-    /// Bottom margin. Default is 4, only work when snackbar is at bottom
-    @objc open dynamic var bottomMargin: CGFloat = 4 {
+    /// Bottom margin. Default is 16, only work when snackbar is at bottom
+    @objc open dynamic var bottomMargin: CGFloat = 16 {
         didSet {
             bottomMarginConstraint?.constant = -bottomMargin
             superview?.layoutIfNeeded()
         }
     }
 
-    /// Left margin. Default is 4
-    @objc open dynamic var leftMargin: CGFloat = 4 {
+    /// Left margin. Default is 16
+    @objc open dynamic var leftMargin: CGFloat = 16 {
         didSet {
             leftMarginConstraint?.constant = leftMargin
             superview?.layoutIfNeeded()
         }
     }
 
-    /// Right margin. Default is 4
-    @objc open dynamic var rightMargin: CGFloat = 4 {
+    /// Right margin. Default is 16
+    @objc open dynamic var rightMargin: CGFloat = 16 {
         didSet {
             rightMarginConstraint?.constant = -rightMargin
             superview?.layoutIfNeeded()
         }
     }
 
-    /// Content inset. Default is (0, 4, 0, 4)
-    @objc open dynamic var contentInset: UIEdgeInsets = UIEdgeInsets.init(top: 0, left: 4, bottom: 0, right: 4) {
+    /// Content inset. Default is (11, 12, 11, 12)
+    @objc open dynamic var contentInset: UIEdgeInsets = UIEdgeInsets.init(top: 11, left: 12, bottom: 11, right: 12) {
         didSet {
             contentViewTopConstraint?.constant = contentInset.top
             contentViewBottomConstraint?.constant = -contentInset.bottom
@@ -214,8 +214,8 @@ open class TTGSnackbar: UIView {
         }
     }
 
-    /// Message text font. Default is Bold system font (14).
-    @objc open dynamic var messageTextFont: UIFont = UIFont.boldSystemFont(ofSize: 14) {
+    /// Message text font. Default is semibold system font (16).
+    @objc open dynamic var messageTextFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .semibold) {
         didSet {
             messageLabel.font = messageTextFont
         }
@@ -276,22 +276,22 @@ open class TTGSnackbar: UIView {
         }
     }
 
-    /// Action text font. Default is Bold system font (14).
-    @objc open dynamic var actionTextFont: UIFont = UIFont.boldSystemFont(ofSize: 14) {
+    /// Action text font. Default is heavy system font (13).
+    @objc open dynamic var actionTextFont: UIFont = UIFont.systemFont(ofSize: 13, weight: .heavy) {
         didSet {
             actionButton.titleLabel?.font = actionTextFont
         }
     }
 
-    /// Second action text font. Default is Bold system font (14).
-    @objc open dynamic var secondActionTextFont: UIFont = UIFont.boldSystemFont(ofSize: 14) {
+    /// Second action text font. Default is heavy system font (13).
+    @objc open dynamic var secondActionTextFont: UIFont = UIFont.systemFont(ofSize: 13, weight: .heavy) {
         didSet {
             secondActionButton.titleLabel?.font = secondActionTextFont
         }
     }
 
     /// All action button max width, min = 44
-    @objc open dynamic var actionMaxWidth: CGFloat = 64 {
+    @objc open dynamic var actionMaxWidth: CGFloat = 112 {
         didSet {
             actionMaxWidth = max(actionMaxWidth, 44)
             actionButtonMaxWidthConstraint?.constant = actionButton.isHidden ? 0 : actionMaxWidth
@@ -326,15 +326,15 @@ open class TTGSnackbar: UIView {
         }
     }
 
-    /// Icon background color. Default is clear.
-    @objc open dynamic var iconBackgroundColor: UIColor? = .clear {
+    /// Icon background color. Default is translucent white.
+    @objc open dynamic var iconBackgroundColor: UIColor? = UIColor.ttgDefaultIconBackground {
         didSet {
             iconImageView.backgroundColor = iconBackgroundColor
         }
     }
 
     /// Icon tint color
-    @objc open dynamic var iconTintColor: UIColor! = .clear {
+    @objc open dynamic var iconTintColor: UIColor! = UIColor.ttgDefaultText {
         didSet {
             iconImageView.tintColor = iconTintColor
         }
@@ -355,8 +355,22 @@ open class TTGSnackbar: UIView {
     /// Custom content view
     @objc open dynamic var customContentView: UIView?
 
+    /// Action button background color.
+    @objc open dynamic var actionButtonBackgroundColor: UIColor? = UIColor.ttgDefaultActionBackground {
+        didSet {
+            actionButton.backgroundColor = actionButtonBackgroundColor
+        }
+    }
+
+    /// Second action button background color.
+    @objc open dynamic var secondActionButtonBackgroundColor: UIColor? = UIColor.ttgDefaultActionBackground {
+        didSet {
+            secondActionButton.backgroundColor = secondActionButtonBackgroundColor
+        }
+    }
+
     /// SeparateView background color
-    @objc open dynamic var separateViewBackgroundColor: UIColor = UIColor.systemGray {
+    @objc open dynamic var separateViewBackgroundColor: UIColor = .clear {
         didSet {
             separateView.backgroundColor = separateViewBackgroundColor
         }
@@ -417,6 +431,7 @@ open class TTGSnackbar: UIView {
 
     // Content constraints.
     var iconImageViewWidthConstraint: NSLayoutConstraint? = nil
+    var activityIndicatorViewWidthConstraint: NSLayoutConstraint? = nil
     var actionButtonMaxWidthConstraint: NSLayoutConstraint? = nil
     var secondActionButtonMaxWidthConstraint: NSLayoutConstraint? = nil
 
@@ -558,6 +573,7 @@ open class TTGSnackbar: UIView {
             messageLabel.preferredMaxLayoutWidth = messageLabel.frame.size.width
             setNeedsLayout()
         }
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
     }
 
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

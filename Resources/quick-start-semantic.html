@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TTGSnackbar · Quick Start · Semantic Feedback</title>
+  <link rel="stylesheet" href="quick-start-demo.css" />
+</head>
+<body>
+  <main class="demo" style="--accent: var(--green);">
+    <section class="content">
+      <div class="copy">
+        <div class="eyebrow"><span class="dot"></span>Quick Start</div>
+        <h1>Use semantic feedback</h1>
+        <p class="subtitle">Apply built-in styles for success, warning, error, info and loading states.</p>
+        <div class="section-label">Code</div>
+        <div class="code-card">
+          <pre>let snackbar = TTGSnackbar(
+  message: "Saved successfully",
+  duration: .middle
+)
+snackbar.style = .success
+snackbar.show()</pre>
+        </div>
+      </div>
+      <figure class="phone-wrap">
+        <figcaption class="phone-label">Output</figcaption>
+        <img class="screenshot" src="quick-start-simulator/semantic.jpg" alt="Semantic snackbar output" />
+      </figure>
+    </section>
+  </main>
+</body>
+</html>

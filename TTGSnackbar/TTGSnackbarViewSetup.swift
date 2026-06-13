@@ -33,13 +33,16 @@ extension TTGSnackbar {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.ttgDefaultBackground
         layer.cornerRadius = cornerRadius
+        layer.borderWidth = borderWidth
+        layer.borderColor = borderColor?.cgColor
+        layer.masksToBounds = false
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
 
-        layer.shadowOpacity = 0.4
-        layer.shadowRadius = 2
+        layer.shadowOpacity = 0.16
+        layer.shadowRadius = 16
         layer.shadowColor = UIColor.ttgDefaultShadow.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowOffset = CGSize(width: 0, height: 10)
 
         let contentView = UIView()
         self.contentView = contentView
@@ -53,6 +56,8 @@ extension TTGSnackbar {
         iconImageView.backgroundColor = iconBackgroundColor
         iconImageView.contentMode = iconContentMode
         iconImageView.tintColor = iconTintColor
+        iconImageView.layer.cornerRadius = 10
+        iconImageView.clipsToBounds = true
         iconImageView.image = icon
         contentView.addSubview(iconImageView)
 
@@ -74,8 +79,10 @@ extension TTGSnackbar {
         self.actionButton = actionButton
         actionButton.accessibilityIdentifier = "actionButton"
         actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.backgroundColor = UIColor.clear
-        actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+        actionButton.backgroundColor = actionButtonBackgroundColor
+        actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        actionButton.layer.cornerRadius = 11
+        actionButton.clipsToBounds = true
         actionButton.titleLabel?.font = actionTextFont
         actionButton.titleLabel?.adjustsFontSizeToFitWidth = true
         actionButton.titleLabel?.numberOfLines = actionTextNumberOfLines
@@ -90,8 +97,10 @@ extension TTGSnackbar {
         self.secondActionButton = secondActionButton
         secondActionButton.accessibilityIdentifier = "secondActionButton"
         secondActionButton.translatesAutoresizingMaskIntoConstraints = false
-        secondActionButton.backgroundColor = UIColor.clear
-        secondActionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+        secondActionButton.backgroundColor = secondActionButtonBackgroundColor
+        secondActionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        secondActionButton.layer.cornerRadius = 11
+        secondActionButton.clipsToBounds = true
         secondActionButton.titleLabel?.font = secondActionTextFont
         secondActionButton.titleLabel?.adjustsFontSizeToFitWidth = true
         secondActionButton.titleLabel?.numberOfLines = actionTextNumberOfLines
@@ -118,13 +127,13 @@ extension TTGSnackbar {
 
         // Add constraints
         let hConstraints = NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-0-[iconImageView]-2-[messageLabel]-2-[seperateView(0.5)]-2-[actionButton(>=44@999)]-0-[secondActionButton(>=44@999)]-0-|",
+            withVisualFormat: "H:|-0-[iconImageView]-10-[messageLabel]-8-[seperateView(0)]-0-[activityIndicatorView]-8-[actionButton(>=44@999)]-6-[secondActionButton(>=44@999)]-0-|",
             options: NSLayoutConstraint.FormatOptions(rawValue: 0),
             metrics: nil,
-            views: ["iconImageView": iconImageView, "messageLabel": messageLabel, "seperateView": separateView, "actionButton": actionButton, "secondActionButton": secondActionButton])
+            views: ["iconImageView": iconImageView, "messageLabel": messageLabel, "seperateView": separateView, "activityIndicatorView": activityIndicatorView, "actionButton": actionButton, "secondActionButton": secondActionButton])
 
         let vConstraintsForIconImageView = NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-2-[iconImageView]-2-|",
+            withVisualFormat: "V:|-1-[iconImageView]-1-|",
             options: NSLayoutConstraint.FormatOptions(rawValue: 0),
             metrics: nil,
             views: ["iconImageView": iconImageView])
@@ -142,13 +151,13 @@ extension TTGSnackbar {
             views: ["seperateView": separateView])
 
         let vConstraintsForActionButton = NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-0-[actionButton]-0-|",
+            withVisualFormat: "V:|-3-[actionButton]-3-|",
             options: NSLayoutConstraint.FormatOptions(rawValue: 0),
             metrics: nil,
             views: ["actionButton": actionButton])
 
         let vConstraintsForSecondActionButton = NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-0-[secondActionButton]-0-|",
+            withVisualFormat: "V:|-3-[secondActionButton]-3-|",
             options: NSLayoutConstraint.FormatOptions(rawValue: 0),
             metrics: nil,
             views: ["secondActionButton": secondActionButton])
@@ -156,6 +165,10 @@ extension TTGSnackbar {
         iconImageViewWidthConstraint = NSLayoutConstraint.init(
             item: iconImageView, attribute: .width, relatedBy: .equal,
             toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: iconImageViewWidth)
+
+        activityIndicatorViewWidthConstraint = NSLayoutConstraint.init(
+            item: activityIndicatorView, attribute: .width, relatedBy: .equal,
+            toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
 
         actionButtonMaxWidthConstraint = NSLayoutConstraint.init(
             item: actionButton, attribute: .width, relatedBy: .lessThanOrEqual,
@@ -169,13 +182,8 @@ extension TTGSnackbar {
             item: activityIndicatorView, attribute: .centerY, relatedBy: .equal,
             toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
 
-        let hConstraintsForActivityIndicatorView = NSLayoutConstraint.constraints(
-            withVisualFormat: "H:[activityIndicatorView]-2-|",
-            options: NSLayoutConstraint.FormatOptions(rawValue: 0),
-            metrics: nil,
-            views: ["activityIndicatorView": activityIndicatorView])
-
         iconImageView.addConstraint(iconImageViewWidthConstraint!)
+        activityIndicatorView.addConstraint(activityIndicatorViewWidthConstraint!)
         actionButton.addConstraint(actionButtonMaxWidthConstraint!)
         secondActionButton.addConstraint(secondActionButtonMaxWidthConstraint!)
 
@@ -186,11 +194,12 @@ extension TTGSnackbar {
         contentView.addConstraints(vConstraintsForActionButton)
         contentView.addConstraints(vConstraintsForSecondActionButton)
         contentView.addConstraint(vConstraintForActivityIndicatorView)
-        contentView.addConstraints(hConstraintsForActivityIndicatorView)
 
         messageLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .vertical)
         messageLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
 
+        activityIndicatorView.setContentHuggingPriority(UILayoutPriority(999), for: .horizontal)
+        activityIndicatorView.setContentCompressionResistancePriority(UILayoutPriority(999), for: .horizontal)
         actionButton.setContentHuggingPriority(UILayoutPriority(998), for: .horizontal)
         actionButton.setContentCompressionResistancePriority(UILayoutPriority(999), for: .horizontal)
         secondActionButton.setContentHuggingPriority(UILayoutPriority(998), for: .horizontal)

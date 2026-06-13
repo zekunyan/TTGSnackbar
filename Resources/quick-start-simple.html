@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TTGSnackbar · Quick Start · Simple Message</title>
+  <link rel="stylesheet" href="quick-start-demo.css" />
+</head>
+<body>
+  <main class="demo" style="--accent: var(--blue);">
+    <section class="content">
+      <div class="copy">
+        <div class="eyebrow"><span class="dot"></span>Quick Start</div>
+        <h1>Show a simple message</h1>
+        <p class="subtitle">Present a short, transient snackbar with only a message.</p>
+        <div class="section-label">Code</div>
+        <div class="code-card">
+          <pre>let snackbar = TTGSnackbar(
+  message: "TTGSnackbar!",
+  duration: .short
+)
+snackbar.show()</pre>
+        </div>
+      </div>
+      <figure class="phone-wrap">
+        <figcaption class="phone-label">Output</figcaption>
+        <img class="screenshot" src="quick-start-simulator/simple.jpg" alt="Simple snackbar output" />
+      </figure>
+    </section>
+  </main>
+</body>
+</html>

@@ -375,11 +375,6 @@ class ViewController: UIViewController {
     private func baseSnackbar(_ message: String? = nil, duration: TTGSnackbarDuration = .middle) -> TTGSnackbar {
         let snackbar = TTGSnackbar(message: message ?? self.message, duration: duration)
         snackbar.animationType = .slideFromBottomBackToBottom
-        snackbar.contentInset = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-        snackbar.leftMargin = 12
-        snackbar.rightMargin = 12
-        snackbar.bottomMargin = 12
-        snackbar.cornerRadius = 8
         snackbar.dismissBlock = { [weak self] _ in
             self?.output.text = "Dismissed: \(message ?? self?.message ?? "Snackbar")"
         }
@@ -388,9 +383,6 @@ class ViewController: UIViewController {
 
     private func showBasicMessage() {
         let snackbar = baseSnackbar("\(message) — basic")
-        snackbar.backgroundColor = .systemTeal
-        snackbar.messageTextColor = .white
-        snackbar.messageTextFont = .preferredFont(forTextStyle: .headline)
         snackbar.show()
     }
 
@@ -422,7 +414,6 @@ class ViewController: UIViewController {
         snackbar.actionTextColor = .systemYellow
         snackbar.actionTextFont = .preferredFont(forTextStyle: .headline)
         snackbar.actionMaxWidth = 120
-        snackbar.separateViewBackgroundColor = .systemYellow
         snackbar.animationType = .slideFromBottomBackToBottom
         snackbar.show()
     }
@@ -606,8 +597,7 @@ class ViewController: UIViewController {
             let result = await TTGSnackbar.show(configuration: .init(
                 message: "Async result demo",
                 duration: .long,
-                style: .warning,
-                actionText: actionText
+                style: .warning
             ))
             output.text = "Async result: \(result)"
         }
