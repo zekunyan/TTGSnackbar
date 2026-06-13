@@ -43,7 +43,9 @@ final class TTGSnackbarExampleUITests: XCTestCase {
 
     func testManagerAndCustomContainerDemosAreReachable() {
         tapDemo("demo.custom-container")
-        XCTAssertTrue(app.staticTexts["Shown inside a custom container"].waitForExistence(timeout: 2))
+        let customContainerMessage = app.staticTexts["Shown inside a custom container"]
+        XCTAssertTrue(customContainerMessage.waitForExistence(timeout: 2))
+        XCTAssertTrue(customContainerMessage.waitForNonExistence(timeout: 5))
 
         tapDemo("demo.manager-queue")
         XCTAssertTrue(app.staticTexts["Queued 3 snackbars"].waitForExistence(timeout: 2))
@@ -52,11 +54,12 @@ final class TTGSnackbarExampleUITests: XCTestCase {
     private func tapDemo(_ identifier: String) {
         let button = app.buttons[identifier]
         var attempts = 0
-        while !button.exists && attempts < 5 {
+        while (!button.exists || !button.isHittable) && attempts < 8 {
             app.swipeUp()
             attempts += 1
         }
         XCTAssertTrue(button.waitForExistence(timeout: 3), "Expected demo button \(identifier) to exist")
+        XCTAssertTrue(button.isHittable, "Expected demo button \(identifier) to be hittable")
         button.tap()
     }
 }

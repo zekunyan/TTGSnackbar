@@ -52,7 +52,7 @@ open class TTGSnackbarManager: NSObject {
         }
 
         DispatchQueue.main.async {
-            self.enqueue(snackbar, policy: policy)
+            _ = self.enqueue(snackbar, policy: policy)
         }
         return .accepted
     }

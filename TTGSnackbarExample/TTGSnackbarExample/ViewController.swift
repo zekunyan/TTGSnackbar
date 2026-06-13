@@ -514,6 +514,7 @@ class ViewController: UIViewController {
         output.text = "Queued 3 snackbars"
         for index in 1...3 {
             let snackbar = baseSnackbar("Queued snackbar #\(index)", duration: .short)
+            snackbar.dismissBlock = nil
             snackbar.style = index == 1 ? .info : (index == 2 ? .success : .warning)
             TTGSnackbarManager.shared.show(snackbar: snackbar, policy: .enqueue)
         }

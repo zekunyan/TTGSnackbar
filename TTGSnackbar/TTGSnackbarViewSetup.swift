@@ -79,8 +79,10 @@ extension TTGSnackbar {
         self.actionButton = actionButton
         actionButton.accessibilityIdentifier = "actionButton"
         actionButton.translatesAutoresizingMaskIntoConstraints = false
+        var actionButtonConfiguration = UIButton.Configuration.plain()
+        actionButtonConfiguration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        actionButton.configuration = actionButtonConfiguration
         actionButton.backgroundColor = actionButtonBackgroundColor
-        actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         actionButton.layer.cornerRadius = 11
         actionButton.clipsToBounds = true
         actionButton.titleLabel?.font = actionTextFont
@@ -97,8 +99,10 @@ extension TTGSnackbar {
         self.secondActionButton = secondActionButton
         secondActionButton.accessibilityIdentifier = "secondActionButton"
         secondActionButton.translatesAutoresizingMaskIntoConstraints = false
+        var secondActionButtonConfiguration = UIButton.Configuration.plain()
+        secondActionButtonConfiguration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        secondActionButton.configuration = secondActionButtonConfiguration
         secondActionButton.backgroundColor = secondActionButtonBackgroundColor
-        secondActionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         secondActionButton.layer.cornerRadius = 11
         secondActionButton.clipsToBounds = true
         secondActionButton.titleLabel?.font = secondActionTextFont

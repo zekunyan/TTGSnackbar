@@ -138,12 +138,12 @@ final class TTGSnackbarExampleTests: XCTestCase {
     func testAsyncPresentationReturnsDroppedWhenManagerDeduplicatesMessage() async {
         let manager = TTGSnackbarManager.shared
         manager.dismissAll(animated: false)
-        RunLoop.main.run(until: Date().addingTimeInterval(0.1))
+        try? await Task.sleep(nanoseconds: 100_000_000)
 
         let first = TTGSnackbar(message: "Async duplicate", duration: .forever)
         first.containerView = hostWindow
         XCTAssertTrue(manager.show(snackbar: first, policy: .dropIfShowingSameMessage))
-        RunLoop.main.run(until: Date().addingTimeInterval(0.1))
+        try? await Task.sleep(nanoseconds: 100_000_000)
 
         let result = await TTGSnackbar.show(
             configuration: .init(message: "Async duplicate", duration: .short),
@@ -158,7 +158,7 @@ final class TTGSnackbarExampleTests: XCTestCase {
         }
 
         manager.dismissAll(animated: false)
-        RunLoop.main.run(until: Date().addingTimeInterval(0.1))
+        try? await Task.sleep(nanoseconds: 100_000_000)
     }
 
     func testMaxWidthAddsAWidthConstraint() {
