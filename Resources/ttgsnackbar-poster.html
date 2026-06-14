@@ -3,45 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TTGSnackbar · iOS Snackbar Component Poster</title>
+  <title>TTGSnackbar · UIKit Snackbar Component</title>
   <style>
     :root {
       color-scheme: light;
-      --page: #edf4fb;
+      --ink: #101820;
+      --muted: #5c6b7a;
       --paper: #f7fbff;
-      --ink: #111827;
-      --muted: #657386;
-      --soft: #dfeaf3;
-      --line: rgba(17, 24, 39, 0.08);
+      --line: rgba(16, 24, 32, 0.1);
       --blue: #147efb;
-      --cyan: #10b9d6;
-      --teal: #08a9a6;
-      --green: #22c55e;
-      --yellow: #f6b300;
-      --orange: #ff9f0a;
-      --pink: #ef4f7a;
-      --purple: #635bff;
-      --navy: #111827;
-      --card: rgba(255, 255, 255, 0.86);
+      --green: #20c46b;
+      --pink: #ff3366;
+      --violet: #6f57ff;
+      --amber: #f5a400;
+      --cyan: #10a8c8;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; }
-    html, body { width: 100%; min-height: 100%; margin: 0; background: var(--page); }
-    body { display: grid; place-items: center; padding: 20px; }
+    html, body { margin: 0; min-height: 100%; background: #dfe9f2; }
+    body { display: grid; place-items: center; padding: 22px; }
 
     .poster {
-      width: min(96vw, 1600px);
-      aspect-ratio: 16 / 10;
       position: relative;
+      width: min(96vw, 1680px);
+      aspect-ratio: 16 / 10;
       overflow: hidden;
-      border-radius: 30px;
+      border-radius: 32px;
       color: var(--ink);
       background:
-        radial-gradient(circle at 80% 92%, rgba(16, 185, 214, 0.28), transparent 30%),
-        radial-gradient(circle at 4% 12%, rgba(20, 126, 251, 0.10), transparent 24%),
-        linear-gradient(135deg, #eef6ff 0%, #f9fbff 48%, #e8f7f8 100%);
-      box-shadow: 0 32px 90px rgba(17, 24, 39, 0.16), inset 0 0 0 1px rgba(17, 24, 39, 0.06);
+        linear-gradient(126deg, rgba(255,255,255,0.96) 0 36%, rgba(236,248,255,0.95) 36% 69%, rgba(240,244,255,0.98) 69% 100%),
+        #f8fbff;
+      box-shadow: 0 32px 90px rgba(16, 24, 32, 0.18), inset 0 0 0 1px rgba(255,255,255,0.75);
     }
 
     .poster::before {
@@ -49,460 +42,310 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(17, 24, 39, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(17, 24, 39, 0.035) 1px, transparent 1px);
-      background-size: 38px 38px;
-      mask-image: linear-gradient(90deg, #000 0 82%, transparent 100%);
+        linear-gradient(rgba(16,24,32,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,24,32,0.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(90deg, #000 0 58%, transparent 86%);
     }
 
     .content {
       position: absolute;
-      inset: 66px 80px;
+      inset: 62px 72px 76px;
       display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 58px;
-      align-items: center;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 46px;
+      align-items: stretch;
+    }
+
+    .story {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
+      width: fit-content;
       gap: 10px;
-      padding: 11px 18px;
+      padding: 10px 15px;
       border-radius: 999px;
       background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 28px rgba(20, 126, 251, 0.12);
       color: var(--blue);
-      font-size: 17px;
-      font-weight: 850;
-      box-shadow: 0 12px 30px rgba(20, 126, 251, 0.13);
-      width: fit-content;
+      font-size: 16px;
+      font-weight: 860;
     }
 
-    .spark { width: 10px; height: 10px; border-radius: 999px; background: var(--blue); box-shadow: 0 0 0 5px rgba(20,126,251,0.11); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 5px rgba(20,126,251,0.12); }
 
     h1 {
       margin: 34px 0 0;
-      color: var(--navy);
-      font-size: clamp(70px, 7vw, 118px);
+      max-width: 640px;
+      font-size: 102px;
       line-height: 0.86;
-      letter-spacing: -0.025em;
+      letter-spacing: 0;
       font-weight: 950;
     }
 
     .subtitle {
-      margin: 28px 0 0;
-      max-width: 690px;
+      margin: 30px 0 0;
+      max-width: 640px;
       color: var(--muted);
-      font-size: clamp(24px, 2vw, 34px);
-      line-height: 1.28;
-      font-weight: 760;
+      font-size: 26px;
+      line-height: 1.22;
+      font-weight: 730;
     }
 
-    .features {
-      margin-top: 42px;
+    .proof-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+      max-width: 650px;
+    }
+
+    .proof {
+      min-height: 58px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 22px rgba(16,24,32,0.07);
+    }
+
+    .proof strong { display: block; color: var(--ink); font-size: 16px; line-height: 1; }
+    .proof span { display: block; margin-top: 6px; color: var(--muted); font-size: 9px; line-height: 1.18; font-weight: 760; }
+
+    .feature-list {
+      margin-top: 28px;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      gap: 14px;
       max-width: 650px;
     }
 
     .feature {
-      min-height: 120px;
-      border-radius: 18px;
-      padding: 22px 22px 20px;
-      background: var(--card);
-      border: 1px solid rgba(17, 24, 39, 0.06);
-      box-shadow: 0 16px 40px rgba(17, 24, 39, 0.08);
-    }
-
-    .feature b { display: block; color: var(--navy); font-size: 21px; letter-spacing: -0.02em; }
-    .feature span { display: block; margin-top: 9px; color: var(--muted); font-size: 14px; line-height: 1.32; font-weight: 700; }
-
-    .footer {
-      position: absolute;
-      left: 80px;
-      bottom: 28px;
-      display: flex;
-      gap: 16px;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 13px;
       align-items: center;
-      color: var(--navy);
-      font-size: 16px;
-      font-weight: 900;
+      min-height: 114px;
+      padding: 15px 15px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 38px rgba(16,24,32,0.1);
     }
 
-    .footer i { width: 7px; height: 7px; border-radius: 999px; background: var(--blue); display: inline-block; margin-left: 2px; }
+    .mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: #fff;
+      font-weight: 950;
+      font-size: 22px;
+    }
 
-    .stage { position: relative; height: 780px; }
+    .feature b { display: block; font-size: 19px; letter-spacing: 0; }
+    .feature small { display: block; margin-top: 6px; color: var(--muted); font-size: 12px; line-height: 1.24; font-weight: 720; }
+    .blue { background: var(--blue); }
+    .green { background: var(--green); }
+    .pink { background: var(--pink); }
+    .violet { background: var(--violet); }
+
+    .gallery {
+      position: relative;
+      z-index: 2;
+      min-width: 0;
+    }
 
     .phone {
       position: absolute;
-      left: 0;
-      top: 24px;
-      width: 345px;
-      height: 690px;
-      border-radius: 48px;
-      padding: 16px;
+      width: 278px;
+      aspect-ratio: 1206 / 2622;
+      border-radius: 42px;
+      padding: 9px;
       background: #111827;
-      box-shadow: 0 32px 70px rgba(17, 24, 39, 0.25), 0 0 0 1px rgba(255,255,255,0.5) inset;
+      box-shadow: 0 34px 74px rgba(16,24,32,0.24), inset 0 0 0 1px rgba(255,255,255,0.35);
     }
 
-    .screen {
-      position: relative;
+    .phone img {
+      display: block;
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      object-fit: cover;
       border-radius: 34px;
-      background: #f8fbff;
-      border: 1px solid rgba(17, 24, 39, 0.08);
+      background: #d7ebfb;
     }
 
-    .notch {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      width: 116px;
-      height: 26px;
-      border-radius: 0 0 18px 18px;
-      background: #111827;
-      z-index: 2;
+    .phone-main {
+      left: 292px;
+      top: 18px;
+      width: 302px;
+      transform: rotate(0.8deg);
+      z-index: 5;
     }
 
-    .status {
+    .phone-left {
+      left: 0;
+      top: 132px;
+      width: 252px;
+      transform: rotate(-3deg);
+      z-index: 3;
+      opacity: 0.98;
+    }
+
+    .phone-right {
+      right: 0;
+      top: 132px;
+      width: 252px;
+      transform: rotate(3deg);
+      z-index: 4;
+      opacity: 0.98;
+    }
+
+    .label {
       position: absolute;
-      left: 28px;
-      right: 28px;
-      top: 38px;
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(16,24,32,0.08);
+      box-shadow: 0 20px 44px rgba(16,24,32,0.13);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 860;
+      backdrop-filter: blur(14px);
+    }
+
+    .label i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+    .label.action { left: 18px; top: 74px; }
+    .label.semantic { right: 18px; top: 74px; }
+    .label.multi { left: 338px; top: 0; }
+
+    .code-panel {
+      position: absolute;
+      left: 60px;
+      right: 60px;
+      bottom: 24px;
+      z-index: 7;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 13px 16px;
+      border-radius: 8px;
+      background: #101820;
+      color: #fff;
+      box-shadow: 0 28px 58px rgba(16,24,32,0.28);
+    }
+
+    .code-panel b { font-size: 16px; line-height: 1; }
+    .code-panel code {
+      min-width: 0;
+      color: #d4e4f4;
+      font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .install {
+      display: inline-flex;
+      gap: 8px;
+      color: #b9f7d3;
+      font-size: 13px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .footer {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      bottom: 16px;
+      z-index: 4;
       display: flex;
       justify-content: space-between;
-      color: var(--navy);
-      font-size: 12px;
-      font-weight: 900;
+      color: #3e4b58;
+      font-size: 13px;
+      font-weight: 850;
     }
 
-    .app-title {
-      position: absolute;
-      left: 28px;
-      right: 28px;
-      top: 86px;
-    }
-
-    .app-title h2 { margin: 0; color: var(--navy); font-size: 26px; line-height: 0.95; letter-spacing: -0.045em; }
-    .app-title p { margin: 6px 0 0; color: var(--muted); font-size: 11px; line-height: 1.25; font-weight: 700; }
-
-    .tag-list {
-      position: absolute;
-      left: 28px;
-      right: 28px;
-      top: 176px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .pill {
-      padding: 8px 12px;
-      border-radius: 999px;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 900;
-      box-shadow: 0 8px 18px rgba(17,24,39,0.10);
-    }
-
-    .b { background: var(--blue); }
-    .c { background: var(--cyan); }
-    .t { background: var(--teal); }
-    .g { background: var(--green); }
-    .y { background: var(--yellow); color: var(--navy); }
-    .p { background: var(--pink); }
-    .u { background: var(--purple); }
-
-    .panel {
-      position: absolute;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.95);
-      border: 1px solid rgba(17, 24, 39, 0.06);
-      box-shadow: 0 24px 60px rgba(17, 24, 39, 0.13);
-    }
-
-    .panel h3 { margin: 0; color: var(--navy); letter-spacing: -0.04em; line-height: 1; }
-    .panel p { margin: 8px 0 0; color: var(--muted); font-weight: 700; line-height: 1.25; }
-    .panel .label { display: inline-block; margin-bottom: 12px; color: var(--blue); font-weight: 950; font-size: 14px; }
-
-    .floating.one {
-      right: 0;
-      top: 34px;
-      width: 430px;
-      padding: 18px 20px;
-    }
-
-    .floating.one h3 { font-size: 24px; line-height: 1.04; }
-
-    .mode-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .mode {
-      min-height: 104px;
-      border-radius: 16px;
-      background: #f3f7fb;
-      border: 1px solid rgba(17, 24, 39, 0.06);
-      padding: 14px;
-    }
-
-    .mode b { display: block; margin-bottom: 12px; color: var(--muted); font-size: 12px; }
-    .mini-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .mini-tags span { padding: 6px 8px; border-radius: 999px; color: #fff; font-size: 10px; font-weight: 900; }
-
-    .floating.two {
-      right: 4px;
-      top: 438px;
-      width: 420px;
-      padding: 18px 20px;
-    }
-
-    .floating.two h3 { font-size: 23px; line-height: 1.06; }
-
-    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
-    .mini-card { min-height: 92px; padding: 12px; border-radius: 16px; background: #f4f8fc; border: 1px solid rgba(17, 24, 39, 0.06); }
-    .mini-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; color: #fff; font-size: 14px; font-weight: 950; margin-bottom: 12px; }
-    .mini-card b { display: block; font-size: 11px; color: var(--navy); }
-    .mini-card span { display: block; margin-top: 4px; font-size: 9px; line-height: 1.1; color: var(--muted); font-weight: 750; }
-
-    .darkbar {
-      position: absolute;
-      right: 4px;
-      bottom: 44px;
-      width: 420px;
-      min-height: 88px;
-      padding: 18px 22px;
-      border-radius: 20px;
-      background: var(--navy);
-      color: #fff;
-      box-shadow: 0 24px 52px rgba(17, 24, 39, 0.28);
-    }
-
-    .darkbar h3 { margin: 0; font-size: 16px; letter-spacing: -0.01em; }
-    .bar-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; color: #cbd5e1; font-size: 11px; font-weight: 750; }
-    .bar { width: 42px; height: 9px; border-radius: 999px; background: var(--cyan); display: inline-block; }
-    .bar.green { background: var(--green); }
-    .bar.blue { background: var(--blue); }
-
-
-
-    .phone-demos {
-      position: absolute;
-      left: 20px;
-      right: 20px;
-      top: 176px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .phone-snack {
-      min-height: 58px;
-      display: grid;
-      grid-template-columns: 34px 1fr auto;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 12px;
-      border-radius: 16px;
-      color: #fff;
-      box-shadow: 0 14px 28px rgba(17, 24, 39, 0.16);
-    }
-
-    .phone-snack .snack-icon {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.22);
-      font-size: 15px;
-      font-weight: 950;
-    }
-
-    .phone-snack b { display: block; font-size: 12px; line-height: 1.05; }
-    .phone-snack small { display: block; margin-top: 3px; color: rgba(255,255,255,0.75); font-size: 9px; font-weight: 760; }
-    .phone-snack .snack-action { padding: 7px 8px; border-radius: 10px; background: rgba(255,255,255,0.20); font-size: 9px; font-weight: 950; }
-    .phone-snack.success { background: linear-gradient(135deg, #18b76b, #22c55e); }
-    .phone-snack.error { background: linear-gradient(135deg, #ef4f7a, #ef4444); }
-    .phone-snack.info { background: linear-gradient(135deg, #147efb, #10b9d6); }
-    .phone-snack.dark { background: #111827; }
-
-    .phone-custom {
-      display: grid;
-      grid-template-columns: 36px 1fr;
-      align-items: center;
-      gap: 10px;
-      min-height: 76px;
-      padding: 13px;
-      border-radius: 18px;
-      color: #fff;
-      background: linear-gradient(135deg, #635bff, #10b9d6);
-      box-shadow: 0 14px 28px rgba(17, 24, 39, 0.16);
-    }
-
-    .phone-custom .custom-art {
-      width: 28px;
-      height: 28px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.22);
-      display: grid;
-      place-items: center;
-      font-size: 17px;
-      font-weight: 950;
-    }
-
-    .phone-custom b { display: block; font-size: 12px; }
-    .phone-custom small { display: block; margin-top: 4px; color: rgba(255,255,255,0.78); font-size: 9px; line-height: 1.2; font-weight: 760; }
-
-    .demo-stack {
-      display: grid;
-      gap: 8px;
-      margin-top: 16px;
-    }
-
-    .demo-snackbar {
-      min-height: 42px;
-      display: grid;
-      grid-template-columns: 30px minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 10px;
-      border-radius: 15px;
-      color: #fff;
-      box-shadow: 0 12px 28px rgba(17,24,39,0.12);
-    }
-
-    .demo-snackbar.two-actions {
-      grid-template-columns: 30px minmax(0, 1fr) auto auto;
-    }
-
-    .demo-snackbar .demo-icon {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.22);
-      font-size: 17px;
-      font-weight: 950;
-    }
-
-    .demo-snackbar .demo-copy {
-      min-width: 0;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      font-size: 11px;
-      font-weight: 920;
-      letter-spacing: -0.01em;
-    }
-
-    .demo-snackbar .demo-copy span {
-      color: rgba(255,255,255,0.74);
-      font-size: 9px;
-      font-weight: 780;
-    }
-
-    .demo-snackbar .demo-action { padding: 5px 7px; border-radius: 11px; background: rgba(255,255,255,0.20); font-size: 9px; font-weight: 950; white-space: nowrap; }
-    .demo-snackbar.success { background: linear-gradient(135deg, #18b76b, #22c55e); }
-    .demo-snackbar.warning { background: linear-gradient(135deg, #ff9f0a, #f6b300); color: #111827; }
-    .demo-snackbar.warning .demo-copy span { color: rgba(17,24,39,0.62); }
-    .demo-snackbar.warning .demo-icon, .demo-snackbar.warning .demo-action { background: rgba(255,255,255,0.38); }
-    .demo-snackbar.error { background: linear-gradient(135deg, #ef4f7a, #ef4444); }
-    .demo-snackbar.loading, .demo-snackbar.dark { background: #111827; }
-
-    .spinner {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      border: 3px solid rgba(255,255,255,0.30);
-      border-top-color: #fff;
-      display: inline-block;
-    }
-
-    @media (max-width: 1100px) {
+    @media (max-width: 1180px) {
       body { padding: 0; }
       .poster { width: 100vw; border-radius: 0; }
-      .content { inset: 42px; grid-template-columns: 0.95fr 1.05fr; gap: 20px; }
-      h1 { font-size: 70px; }
-      .subtitle { font-size: 20px; }
-      .features { gap: 10px; }
-      .feature { min-height: 90px; padding: 15px; }
-      .feature b { font-size: 16px; }
-      .feature span { font-size: 11px; }
-      .stage { transform: scale(0.76); transform-origin: center right; }
-      h1 { letter-spacing: -0.015em; }
+      .content { inset: 42px; grid-template-columns: 0.85fr 1.15fr; gap: 24px; }
+      h1 { font-size: 76px; }
+      .subtitle { font-size: 21px; }
+      .proof-row { grid-template-columns: 1fr; gap: 8px; margin-top: 24px; }
+      .proof { min-height: 70px; padding: 12px; }
+      .proof strong { font-size: 20px; }
+      .feature-list { display: none; }
+      .gallery { transform: scale(0.78); transform-origin: center right; }
+      .footer { display: none; }
     }
   </style>
 </head>
 <body>
-  <main class="poster" aria-label="TTGSnackbar iOS component promotional poster">
+  <main class="poster" aria-label="TTGSnackbar UIKit snackbar component promotional poster">
     <section class="content">
-      <div>
-        <div class="eyebrow"><span class="spark"></span> Android-style snackbar feedback for iOS</div>
+      <div class="story">
+        <div class="eyebrow"><span class="dot"></span> Actionable feedback for UIKit apps</div>
         <h1>TTG<br />Snackbar</h1>
-        <p class="subtitle">A polished UIKit snackbar component for transient messages, action recovery, semantic status feedback, custom content, and managed presentation queues.</p>
+        <p class="subtitle">A lightweight UIKit snackbar for actionable feedback, semantic states, long-running progress, custom UIView content, and managed presentation queues.</p>
 
-        <div class="features">
-          <article class="feature"><b>Actionable Messages</b><span>Show short feedback with primary and secondary actions, icons, or icon-only buttons.</span></article>
-          <article class="feature"><b>Managed Presentation</b><span>Queue, replace the current snackbar, or drop duplicate messages with TTGSnackbarManager.</span></article>
-          <article class="feature"><b>Product States</b><span>Use default, info, success, warning, error, and loading styles with haptics and SF Symbols.</span></article>
-          <article class="feature"><b>Custom UIKit Content</b><span>Embed any UIView, constrain max width, present in a custom container, and respect safe areas.</span></article>
+        <div class="feature-list">
+          <div class="feature"><span class="mark blue">↩️</span><div><b>Action recovery</b><small>Primary and secondary callbacks, icon actions, separators, and result handling.</small></div></div>
+          <div class="feature"><span class="mark green">✅</span><div><b>Semantic feedback</b><small>Success, warning, error, info, default, and loading styles with haptics.</small></div></div>
+          <div class="feature"><span class="mark pink">🧭</span><div><b>Presentation manager</b><small>Queue, replace the current item, or drop duplicates for predictable UX.</small></div></div>
+          <div class="feature"><span class="mark violet">🧩</span><div><b>Custom UIView content</b><small>Embed your own hierarchy, tune margins, width, radius, and layout.</small></div></div>
+        </div>
+
+        <div class="proof-row">
+          <div class="proof"><strong>Async result</strong><span>Await action, dismiss, drop, or failure.</span></div>
+          <div class="proof"><strong>Flexible placement</strong><span>Bottom, top, window, or inline region.</span></div>
+          <div class="proof"><strong>Visual control</strong><span>Icons, colors, fonts, radius, and margins.</span></div>
         </div>
       </div>
 
-      <div class="stage" aria-hidden="true">
-        <div class="phone">
-          <div class="screen">
-            <div class="notch"></div>
-            <div class="status"><span>9:41</span><span>●●●</span></div>
-            <div class="app-title"><h2>Snackbar Feature Gallery</h2><p>Try semantic styles, queue policies, action callbacks, custom views, and async results.</p></div>
-            <div class="phone-demos">
-              <div class="phone-snack info"><div class="snack-icon">i</div><div><b>Network restored</b><small>Top presentation · info style</small></div><div class="snack-action">OK</div></div>
-              <div class="phone-snack success"><div class="snack-icon">✓</div><div><b>Draft saved</b><small>Success style · haptic feedback</small></div><div class="snack-action">DONE</div></div>
-              <div class="phone-snack dark"><div class="snack-icon">↺</div><div><b>File deleted</b><small>Action callback · async result</small></div><div class="snack-action">UNDO</div></div>
-              <div class="phone-snack error"><div class="snack-icon">!</div><div><b>Upload failed</b><small>Error style · retry action</small></div><div class="snack-action">RETRY</div></div>
-              <div class="phone-custom"><div class="custom-art">★</div><div><b>Custom UIView content</b><small>Embed your own layout inside the snackbar.</small></div></div>
-            </div>
-          </div>
-        </div>
+      <div class="gallery" aria-hidden="true">
+        <div class="label action"><i class="blue"></i> Action recovery</div>
+        <div class="label semantic"><i class="green"></i> Semantic states</div>
+        <div class="label multi"><i class="pink"></i> Multiple forms</div>
 
-        <section class="panel floating one">
-          <span class="label">Live snackbar demo styles</span>
-          <h3>Multiple product states, actions, and queue outcomes.</h3>
-          <div class="demo-stack">
-            <div class="demo-snackbar success"><div class="demo-icon">✓</div><div class="demo-copy">Saved successfully <span>· success style</span></div><div class="demo-action">DONE</div></div>
-            <div class="demo-snackbar two-actions warning"><div class="demo-icon">!</div><div class="demo-copy">Unsaved changes <span>· two actions</span></div><div class="demo-action">SAVE</div><div class="demo-action">DISCARD</div></div>
-            <div class="demo-snackbar error"><div class="demo-icon">×</div><div class="demo-copy">Request failed <span>· retry callback</span></div><div class="demo-action">RETRY</div></div>
-            <div class="demo-snackbar loading"><div class="demo-icon"><span class="spinner"></span></div><div class="demo-copy">Syncing library <span>· loading forever</span></div><div class="demo-action">CANCEL</div></div>
-            <div class="demo-snackbar dark"><div class="demo-icon">↺</div><div class="demo-copy">File deleted <span>· async action result</span></div><div class="demo-action">UNDO</div></div>
-          </div>
-        </section>
+        <figure class="phone phone-left">
+          <img src="poster-simulator/action.png" alt="" />
+        </figure>
+        <figure class="phone phone-main">
+          <img src="poster-simulator/multi.png" alt="" />
+        </figure>
+        <figure class="phone phone-right">
+          <img src="poster-simulator/semantic.png" alt="" />
+        </figure>
 
-        <section class="panel floating two">
-          <span class="label">Built for UIKit apps</span>
-          <h3>Bottom bars, top alerts, inline containers, and custom content.</h3>
-          <div class="cards">
-            <div class="mini-card"><div class="mini-icon b">M</div><b>Message</b><span>Multiline transient feedback</span></div>
-            <div class="mini-card"><div class="mini-icon t">A</div><b>Actions</b><span>Primary and secondary callbacks</span></div>
-            <div class="mini-card"><div class="mini-icon y">C</div><b>Custom</b><span>Embed any UIView hierarchy</span></div>
-            <div class="mini-card"><div class="mini-icon p">R</div><b>Results</b><span>Await action, dismiss, drop, or failure</span></div>
-          </div>
-        </section>
-
-        <div class="darkbar">
-          <h3>Modern snackbar behavior in one lightweight component</h3>
-          <div class="bar-row"><span>VoiceOver</span><span class="bar"></span><span>Haptics</span><span class="bar green"></span><span>Async Result</span><span class="bar blue"></span></div>
+        <div class="code-panel">
+          <b>Snackbar toolkit</b>
+          <code>messages · actions · loading · errors · custom views</code>
+          <span class="install"><span>Recover</span><span>Inform</span><span>Extend</span></span>
         </div>
       </div>
     </section>
-    <footer class="footer">Swift Package Manager <i></i> CocoaPods <i></i> Objective-C Compatible</footer>
+
+    <footer class="footer">
+      <span>Lightweight UIKit · Swift + Objective-C · SPM + CocoaPods</span>
+      <span>Actions · Icons · Loading · Custom Views · Queues</span>
+    </footer>
   </main>
 </body>
 </html>

@@ -16,6 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        if ProcessInfo.processInfo.arguments.contains("--poster-demo"),
+           ProcessInfo.processInfo.arguments.contains("multi") {
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            window.rootViewController = PosterMultiSnackbarViewController()
+            window.makeKeyAndVisible()
+            self.window = window
+            return true
+        }
+
         guard let demo = QuickStartScreenshotDemo.fromLaunchArguments() else {
             return true
         }
@@ -25,6 +34,252 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         self.window = window
         return true
+    }
+}
+
+private final class PosterMultiSnackbarViewController: UIViewController {
+    private let dashboardStackView = UIStackView()
+    private var containerViews: [UIView] = []
+    private var hasShownSnackbars = false
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        buildInterface()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard !hasShownSnackbars else { return }
+        hasShownSnackbars = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) { [weak self] in
+            self?.showSnackbars()
+        }
+    }
+
+    private func buildInterface() {
+        view.backgroundColor = .systemGroupedBackground
+
+        let gradient = CAGradientLayer()
+        gradient.colors = [
+            UIColor.systemBackground.cgColor,
+            UIColor.systemBlue.withAlphaComponent(0.10).cgColor,
+            UIColor.systemPurple.withAlphaComponent(0.08).cgColor
+        ]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
+        gradient.frame = UIScreen.main.bounds
+        view.layer.addSublayer(gradient)
+
+        let contentStackView = UIStackView()
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 18
+        view.addSubview(contentStackView)
+
+        let badge = UILabel()
+        badge.text = "Multi Container Demo"
+        badge.textColor = .systemBlue
+        badge.font = .systemFont(ofSize: 15, weight: .bold)
+        badge.backgroundColor = .systemBackground
+        badge.textAlignment = .center
+        badge.layer.cornerRadius = 17
+        badge.layer.masksToBounds = true
+        badge.widthAnchor.constraint(equalToConstant: 190).isActive = true
+        badge.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        contentStackView.addArrangedSubview(badge)
+
+        let titleLabel = UILabel()
+        titleLabel.text = "Snackbars inside multiple UIViews"
+        titleLabel.font = .systemFont(ofSize: 31, weight: .heavy)
+        titleLabel.textColor = .label
+        titleLabel.numberOfLines = 0
+        contentStackView.addArrangedSubview(titleLabel)
+
+        let subtitleLabel = UILabel()
+        subtitleLabel.text = "Each card is an independent containerView, so several forever snackbars can be visible at the same time."
+        subtitleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        subtitleLabel.textColor = .secondaryLabel
+        subtitleLabel.numberOfLines = 0
+        contentStackView.addArrangedSubview(subtitleLabel)
+
+        dashboardStackView.axis = .vertical
+        dashboardStackView.spacing = 12
+        contentStackView.addArrangedSubview(dashboardStackView)
+
+        [
+            ("Checkout", "Action recovery", UIColor.systemBlue),
+            ("Sync Center", "Loading forever", UIColor.systemPink),
+            ("API Monitor", "Failure feedback", UIColor.systemRed),
+            ("Inspector", "Custom UIView content", UIColor.systemIndigo)
+        ].forEach { title, subtitle, color in
+            let container = makeContainer(title: title, subtitle: subtitle, color: color)
+            containerViews.append(container)
+            dashboardStackView.addArrangedSubview(container)
+        }
+
+        NSLayoutConstraint.activate([
+            contentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 22),
+            contentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -22),
+            contentStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24)
+        ])
+    }
+
+    private func makeContainer(title: String, subtitle: String, color: UIColor) -> UIView {
+        let container = UIView()
+        container.backgroundColor = .secondarySystemGroupedBackground
+        container.layer.cornerRadius = 22
+        container.layer.borderWidth = 1
+        container.layer.borderColor = UIColor.separator.cgColor
+        container.layer.shadowColor = UIColor.black.cgColor
+        container.layer.shadowOpacity = 0.07
+        container.layer.shadowRadius = 16
+        container.layer.shadowOffset = CGSize(width: 0, height: 8)
+        container.clipsToBounds = false
+        container.heightAnchor.constraint(equalToConstant: 126).isActive = true
+
+        let accentView = UIView()
+        accentView.translatesAutoresizingMaskIntoConstraints = false
+        accentView.backgroundColor = color
+        accentView.layer.cornerRadius = 5
+        container.addSubview(accentView)
+
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = title
+        titleLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        titleLabel.textColor = .label
+        container.addSubview(titleLabel)
+
+        let subtitleLabel = UILabel()
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.text = subtitle
+        subtitleLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        subtitleLabel.textColor = .secondaryLabel
+        container.addSubview(subtitleLabel)
+
+        let placeholderView = UIView()
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.backgroundColor = color.withAlphaComponent(0.10)
+        placeholderView.layer.cornerRadius = 12
+        container.addSubview(placeholderView)
+
+        NSLayoutConstraint.activate([
+            accentView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
+            accentView.topAnchor.constraint(equalTo: container.topAnchor, constant: 18),
+            accentView.widthAnchor.constraint(equalToConstant: 8),
+            accentView.heightAnchor.constraint(equalToConstant: 38),
+
+            titleLabel.leadingAnchor.constraint(equalTo: accentView.trailingAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 17),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: container.trailingAnchor, constant: -16),
+
+            subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            subtitleLabel.trailingAnchor.constraint(lessThanOrEqualTo: titleLabel.trailingAnchor),
+
+            placeholderView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            placeholderView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
+            placeholderView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 10),
+            placeholderView.heightAnchor.constraint(equalToConstant: 28)
+        ])
+
+        return container
+    }
+
+    private func showSnackbars() {
+        guard containerViews.count == 4 else { return }
+
+        let action = TTGSnackbar(message: "Card declined", duration: .forever, actionText: "Retry") { snackbar in
+            snackbar.dismiss()
+        }
+        action.containerView = containerViews[0]
+        action.icon = UIImage(systemName: "creditcard.fill")
+        action.iconTintColor = .systemYellow
+        action.actionTextColor = .systemYellow
+        action.animationType = .fadeInFadeOut
+        styleContainedSnackbar(action)
+        action.show()
+
+        let loading = TTGSnackbar(message: "Syncing library", duration: .forever)
+        loading.containerView = containerViews[1]
+        loading.style = .loading
+        loading.actionText = "Stop"
+        loading.actionTextColor = .white
+        loading.animationType = .fadeInFadeOut
+        styleContainedSnackbar(loading)
+        loading.show()
+
+        let error = TTGSnackbar(message: "Request failed", duration: .forever)
+        error.containerView = containerViews[2]
+        error.style = .error
+        error.actionText = "Retry"
+        error.actionTextColor = .white
+        error.animationType = .fadeInFadeOut
+        styleContainedSnackbar(error)
+        error.show()
+
+        let customContentView = makeCustomSnackbarContent()
+        let custom = TTGSnackbar(customContentView: customContentView, duration: .forever)
+        custom.containerView = containerViews[3]
+        custom.backgroundColor = .clear
+        custom.contentInset = .zero
+        custom.cornerRadius = 18
+        custom.borderWidth = 0
+        custom.shouldActivateLeftAndRightMarginOnCustomContentView = true
+        custom.animationType = .fadeInFadeOut
+        custom.leftMargin = 12
+        custom.rightMargin = 12
+        custom.bottomMargin = 12
+        custom.show()
+    }
+
+    private func styleContainedSnackbar(_ snackbar: TTGSnackbar) {
+        snackbar.leftMargin = 12
+        snackbar.rightMargin = 12
+        snackbar.bottomMargin = 12
+        snackbar.cornerRadius = 18
+        snackbar.messageTextFont = .systemFont(ofSize: 15, weight: .bold)
+        snackbar.actionTextFont = .systemFont(ofSize: 14, weight: .heavy)
+        snackbar.actionMaxWidth = 82
+        snackbar.shouldHonorSafeAreaLayoutGuides = false
+    }
+
+    private func makeCustomSnackbarContent() -> UIView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 13, left: 14, bottom: 13, right: 14)
+        stackView.backgroundColor = UIColor.ttgDefaultBackground
+        stackView.layer.cornerRadius = 18
+        stackView.layer.masksToBounds = true
+
+        let iconView = UIImageView(image: UIImage(systemName: "sparkles"))
+        iconView.tintColor = .systemPurple
+        iconView.contentMode = .scaleAspectFit
+        iconView.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        iconView.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        stackView.addArrangedSubview(iconView)
+
+        let labelStackView = UIStackView()
+        labelStackView.axis = .vertical
+        labelStackView.spacing = 2
+        stackView.addArrangedSubview(labelStackView)
+
+        let titleLabel = UILabel()
+        titleLabel.text = "Custom campaign"
+        titleLabel.textColor = UIColor.ttgDefaultText
+        titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
+        labelStackView.addArrangedSubview(titleLabel)
+
+        let detailLabel = UILabel()
+        detailLabel.text = "Any UIView hierarchy"
+        detailLabel.textColor = UIColor.ttgDefaultText.withAlphaComponent(0.70)
+        detailLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        labelStackView.addArrangedSubview(detailLabel)
+
+        return stackView
     }
 }
 
