@@ -1,18 +1,28 @@
+import { access } from 'node:fs/promises';
+import { homedir } from 'node:os';
+import { pathToFileURL } from 'node:url';
+
 let playwright;
 try {
   playwright = await import('playwright');
 } catch {
-  playwright = await import('/Users/tutuge/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs');
+  const bundledPlaywrightPath = `${homedir()}/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs`;
+  try {
+    await access(bundledPlaywrightPath);
+    playwright = await import(pathToFileURL(bundledPlaywrightPath).href);
+  } catch {
+    throw new Error('Install playwright in this project, or run inside the Codex desktop runtime with bundled dependencies.');
+  }
 }
 
 const { chromium } = playwright;
 
-const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const resourcesUrl = process.env.RESOURCE_BASE_URL ?? 'http://127.0.0.1:8088/';
+const googleChromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const resourcesUrl = process.env.RESOURCE_BASE_URL ?? new URL('../Resources/', import.meta.url).href;
 
 const jobs = [
   {
-    url: `${resourcesUrl}ttgsnackbar-poster.html`,
+    url: new URL('ttgsnackbar-poster.html', resourcesUrl).href,
     selector: '.poster',
     path: 'Resources/ttgsnackbar-poster.jpg',
     viewport: { width: 1800, height: 1200 },
@@ -28,7 +38,7 @@ const jobs = [
     ['quick-start-icon.html', 'Resources/snackbar_5.png'],
     ['quick-start-custom.html', 'Resources/snackbar_6.png']
   ].map(([html, path]) => ({
-    url: `${resourcesUrl}${html}`,
+    url: new URL(html, resourcesUrl).href,
     selector: '.demo',
     path,
     viewport: { width: 1440, height: 900 },
@@ -37,10 +47,16 @@ const jobs = [
   }))
 ];
 
-const browser = await chromium.launch({
-  headless: true,
-  executablePath: chromePath
-});
+const executablePath = process.env.CHROME_PATH ?? googleChromePath;
+const launchOptions = { headless: true };
+try {
+  await access(executablePath);
+  launchOptions.executablePath = executablePath;
+} catch {
+  // Fall back to Playwright's configured browser when system Chrome is unavailable.
+}
+
+const browser = await chromium.launch(launchOptions);
 
 try {
   for (const job of jobs) {
@@ -49,6 +65,14 @@ try {
       deviceScaleFactor: job.scale
     });
     await page.goto(job.url, { waitUntil: 'load' });
+    await page.evaluate(async () => {
+      await Promise.all(
+        Array.from(document.images)
+          .filter((image) => !image.complete || image.naturalWidth === 0)
+          .map((image) => image.decode().catch(() => undefined))
+      );
+      await document.fonts?.ready;
+    });
     await page.locator(job.selector).screenshot({
       path: job.path,
       type: job.type,
